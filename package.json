@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-stag": "ng serve --host 0.0.0.0 --disableHostCheck --port=4200 --open",
+    "start-stag": "ng serve --host 0.0.0.0 --disableHostCheck -c=stag-local --port=4200 -o",
+    "start-prod": "ng serve --host 0.0.0.0 --disableHostCheck -c=prod-local --port=4200 -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

@@ -1,8 +1,8 @@
 declare function require(moduleName: any): any;
 
 export const environment = {
-  production: true,
-  prefix: 'prod',
+  production: false,
+  prefix: 'stag',
   apiUrl: '',
   baseUrl: '',
   version: require('../../package.json').version,
@@ -13,7 +13,6 @@ export const environment = {
     projectId: 'fpgr-tcc',
     storageBucket: 'fpgr-tcc.appspot.com',
     messagingSenderId: '456482136613',
-    appId: '1:456482136613:web:1311813644a656750295cc',
-    measurementId: 'G-9HL9LYQ05S'
+    appId: '1:456482136613:web:1311813644a656750295cc'
   }
 };

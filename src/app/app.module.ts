@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { ProfileModule } from './profile/profile.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { UrlService } from './services/url.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    ProfileModule,
     AngularFirestoreModule,
     SessionsModule
   ],

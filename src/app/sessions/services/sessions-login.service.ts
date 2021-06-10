@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class SessionsLoginService {
+  private user: object;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -20,15 +21,25 @@ export class SessionsLoginService {
     return this.angularFirestore.collection(collectionPath, ref => ref.where('email', '==', email)).valueChanges();
   }
 
-  signIn(email, password): void{
+  signIn(email, password): void {
     this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        this.user = userCredential.user;
+        // TODO: navegação para a Home do Usuário
         // this.router.navigate(['/home']);
       })
       .catch((error) => {
         // TODO: show error dialog
       });
+  }
+
+  getUserLogged(): object | false {
+    if (this.user) {
+      return this.user;
+    } else {
+      // TODO: retornar mensagem de erro (usuário não logado)
+      return false;
+    }
   }
 }
 

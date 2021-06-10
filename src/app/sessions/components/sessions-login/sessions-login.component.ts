@@ -3,6 +3,7 @@ import { SessionsLoginService } from '../../services/sessions-login.service';
 import { FormControl } from '@angular/forms';
 import { noop, Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 
 @Component({
   selector: 'sessions-login',
@@ -15,9 +16,11 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   email = new FormControl('');
   password: string;
   formControl: FormControl;
-  userData: [];
+  userData;
+
   constructor(
     private loginService: SessionsLoginService,
+    private sessionsLoginPage: SessionsLoginPageComponent
   ) {
   }
 
@@ -38,7 +41,11 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
         if (response2 && response2.length > 0) {
           // TODO: mandar usuário para o fluxo de cadastro
         } else if (this.userData) {
+          // Se o usuário já está cadastrado, pede-se a senha.
           // TODO: mandar usuário para digitar a senha
+          this.sessionsLoginPage.setEmail(this.email.value);
+          this.sessionsLoginPage.setUserName(this.userData.firstName);
+          this.sessionsLoginPage.setShowInputPassword(true);
         } else {
           // TODO: mostrar aviso
         }

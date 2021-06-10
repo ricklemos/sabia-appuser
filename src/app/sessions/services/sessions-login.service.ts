@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +15,22 @@ export class SessionsLoginService {
     private router: Router
   ) {
   }
-  verifyEmail(email): Observable<any> {
-    return this.angularFirestore.collection('userData', ref => ref.where('email', '==', email)).valueChanges();
+
+  verifyEmail(email, collectionPath): Observable<any> {
+    return this.angularFirestore.collection(collectionPath, ref => ref.where('email', '==', email)).valueChanges();
+  }
+
+  signIn(email, password): void{
+    this.angularFireAuth.signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // this.router.navigate(['/home']);
+      })
+      .catch((error) => {
+        // TODO: show error dialog
+      });
   }
 }
 
 
-// this.auth.signInWithEmailAndPassword(email, password)
-//   .then((userCredential) => {
-//     const user = userCredential.user;
-//     console.log(user);
-//     console.log(user.uid);
-//     this.router.navigate(['/sessions/login']);
-//   })
-//   .catch((error) => {
-//     console.log(error.code);
-//     console.log(error.message);
-//   });
+

@@ -8,6 +8,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { SessionsModule } from './sessions/sessions.module';
+import { UrlService } from './services/url.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { SessionsModule } from './sessions/sessions.module';
     AngularFirestoreModule,
     SessionsModule
   ],
-  providers: [],
+  providers: [
+    UrlService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

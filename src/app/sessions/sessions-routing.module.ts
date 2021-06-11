@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { SessionsLoginPageComponent } from './containers/sessions-login-page/sessions-login-page.component';
 import { SessionsLoggedPageComponent } from './containers/sessions-logged-page/sessions-logged-page.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 export const SessionsRoutes: Routes = [
   {
@@ -12,7 +13,8 @@ export const SessionsRoutes: Routes = [
       },
       {
         path: 'logged',
-        component: SessionsLoggedPageComponent
+        component: SessionsLoggedPageComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

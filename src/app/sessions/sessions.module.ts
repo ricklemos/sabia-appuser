@@ -9,6 +9,7 @@ import { SessionsLoginComponent } from './components/sessions-login/sessions-log
 import { ReactiveFormsModule } from '@angular/forms';
 import { SessionsLoginService } from './services/sessions-login.service';
 import { SessionsPasswordComponent } from './components/sessions-password/sessions-password.component';
+import { SessionsLoggedPageComponent } from './containers/sessions-logged-page/sessions-logged-page.component';
 
 
 
@@ -18,6 +19,7 @@ import { SessionsPasswordComponent } from './components/sessions-password/sessio
     LayoutSessionsComponent,
     SessionsLoginComponent,
     SessionsPasswordComponent,
+    SessionsLoggedPageComponent,
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { noop, Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sessions-login',
@@ -20,11 +21,17 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private loginService: SessionsLoginService,
-    private sessionsLoginPage: SessionsLoginPageComponent
+    private sessionsLoginPage: SessionsLoginPageComponent,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('firebaseJWT')) {
+      const token = JSON.parse(localStorage.getItem('firebaseJWT'));
+      // TODO: navegar para a home do usuário (outra url)
+      this.router.navigate(['sessions/logged']);
+    }
   }
 
   ngOnDestroy(): void {
@@ -32,7 +39,7 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   }
 
   verifyEmail(): void {
-    const fetchUserData = this.loginService.verifyEmail(this.email.value, 'userData').pipe(
+    const fetchUserData = this.loginService.verifyEmail(this.email.value, 'registeredUsers').pipe(
       switchMap(response => {
         [this.userData] = response;
         return this.fetchPendingUsers();
@@ -44,7 +51,6 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           // Se o usuário já está cadastrado, pede-se a senha.
           // TODO: mandar usuário para digitar a senha
           this.sessionsLoginPage.setEmail(this.email.value);
-          this.sessionsLoginPage.setUserName(this.userData.firstName);
           this.sessionsLoginPage.setShowInputPassword(true);
         } else {
           // TODO: mostrar aviso

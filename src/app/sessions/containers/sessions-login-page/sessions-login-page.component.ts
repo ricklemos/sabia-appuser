@@ -42,7 +42,7 @@ export class SessionsLoginPageComponent implements OnInit {
     this.password = password;
   }
 
-  signIn(): void {
-    this.sessionsLoginService.signIn(this.email, this.password);
+  signIn(autoLogin?: boolean): void {
+    this.sessionsLoginService.signIn(this.email, this.password, autoLogin);
   }
 }

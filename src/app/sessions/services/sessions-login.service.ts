@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { UrlService } from '../../services/url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class SessionsLoginService {
     private angularFireAuth: AngularFireAuth,
     private angularFirestore: AngularFirestore,
     private router: Router,
+    private urlService: UrlService
   ) {
   }
 
@@ -28,8 +30,7 @@ export class SessionsLoginService {
         if (autoLogin) {
           localStorage.setItem('firebaseJWT', JSON.stringify(this.user['refreshToken']));
         }
-        // TODO: navegação para a Home do Usuário
-        this.router.navigate(['sessions/logged']);
+        this.router.navigate([this.urlService.getHomeUrl()]);
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {

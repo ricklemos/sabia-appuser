@@ -5,6 +5,7 @@ import { noop, Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'sessions-login',
@@ -22,15 +23,15 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: SessionsLoginService,
     private sessionsLoginPage: SessionsLoginPageComponent,
-    private router: Router
+    private router: Router,
+    private urlService: UrlService
   ) {
   }
 
   ngOnInit(): void {
     if (localStorage.getItem('firebaseJWT')) {
       const token = JSON.parse(localStorage.getItem('firebaseJWT'));
-      // TODO: navegar para a home do usuário (outra url)
-      this.router.navigate(['sessions/logged']);
+      this.router.navigate([this.urlService.getHomeUrl()]);
     }
   }
 

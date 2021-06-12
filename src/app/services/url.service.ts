@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 })
 export class UrlService {
 
-  constructor() { }
+  constructor() {
+  }
 
   public getBaseUrl(): string {
     return environment.baseUrl;
@@ -18,11 +19,16 @@ export class UrlService {
 
   public getLoginUrl(): string {
     const url = this.getSessionsBaseUrl();
-    return `${url}/login`;
+    return `${ url }/login`;
+  }
+
+  public getHomeUrl(): string {
+    const url = this.getSessionsBaseUrl();
+    return `${ url }/logged`;
   }
 
   public getSignUpUrl(): string {
     const url = this.getSessionsBaseUrl();
-    return `${url}/cadastro`;
+    return `${ url }/cadastro`;
   }
 }

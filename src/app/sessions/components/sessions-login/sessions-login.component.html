@@ -1,1 +1,7 @@
-<p>sessions-login works!</p>
+<div class="login__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
+  fxLayoutGap.lt-sm="8px"
+>
+  <h2 class="login__title">Comece com o seu e-mail</h2>
+  <input type="email" placeholder="email@dominio.com" [formControl]="email" name="email">
+  <button class="login__button" (click)="verifyEmail()">Entrar</button>
+</div>

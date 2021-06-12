@@ -26,7 +26,6 @@ export class SessionsLoginService {
     this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         this.user = userCredential.user;
-        console.log(this.user);
         if (autoLogin) {
           localStorage.setItem('firebaseJWT', JSON.stringify(this.user['refreshToken']));
         }
@@ -34,7 +33,7 @@ export class SessionsLoginService {
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {
-          // TODO: show error dialog
+          // TODO: show error snackBar
           alert('Senha Incorreta');
         } else {
           // TODO: unknown error dialog

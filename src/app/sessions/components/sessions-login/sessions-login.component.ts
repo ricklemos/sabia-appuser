@@ -51,11 +51,9 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
         } else if (this.userData) {
           // vai pro primeiro login (cadastro)
           // TODO: mandar usuário para o fluxo de cadastro
-          console.log('banana');
         } else {
           // emite mensagem de erro
           // TODO: mostrar aviso
-          console.log('caju');
         }
       })
     ).subscribe(noop);

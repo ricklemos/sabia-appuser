@@ -4,6 +4,7 @@ import { SessionsLoginPageComponent } from './containers/sessions-login-page/ses
 import { LayoutSessionsComponent } from './layout/layout-sessions/layout-sessions.component';
 import { RouterModule } from '@angular/router';
 import { SessionsRoutes } from './sessions-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -16,6 +17,7 @@ import { SessionsRoutes } from './sessions-routing.module';
     CommonModule,
     RouterModule,
     RouterModule.forChild(SessionsRoutes),
+    FlexLayoutModule,
   ]
 })
 export class SessionsModule { }

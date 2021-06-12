@@ -6,6 +6,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'sessions-login',
@@ -24,7 +25,8 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
     private loginService: SessionsLoginService,
     private sessionsLoginPage: SessionsLoginPageComponent,
     private router: Router,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private angularFirestore: AngularFirestore
   ) {
   }
 
@@ -40,32 +42,23 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   }
 
   verifyEmail(): void {
-    const fetchUserData = this.loginService.verifyEmail(this.email.value, 'registeredUsers').pipe(
-      switchMap(response => {
-        [this.userData] = response;
-        return this.fetchPendingUsers();
-      }),
-      tap((response2) => {
-        if (response2 && response2.length > 0) {
-          // TODO: mandar usuário para o fluxo de cadastro
-        } else if (this.userData) {
-          // Se o usuário já está cadastrado, pede-se a senha.
-          // TODO: mandar usuário para digitar a senha
+    const fetchUsers = this.loginService.verifyEmail(this.email.value, 'users').pipe(
+      tap(user => {
+        [this.userData] = user;
+        if (this.userData && this.userData.firstLogin) {
           this.sessionsLoginPage.setEmail(this.email.value);
           this.sessionsLoginPage.setShowInputPassword(true);
+        } else if (this.userData) {
+          // vai pro primeiro login (cadastro)
+          // TODO: mandar usuário para o fluxo de cadastro
+          console.log('banana');
         } else {
+          // emite mensagem de erro
           // TODO: mostrar aviso
+          console.log('caju');
         }
       })
     ).subscribe(noop);
-    this.unsubscriptions.push(fetchUserData);
-  }
-
-  fetchPendingUsers(): Observable<any> {
-    if (!this.userData) {
-      return this.loginService.verifyEmail(this.email.value, 'pendingUsers');
-    } else {
-      return of(undefined);
-    }
+    this.unsubscriptions.push(fetchUsers);
   }
 }

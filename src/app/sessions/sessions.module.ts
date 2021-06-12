@@ -4,12 +4,12 @@ import { SessionsLoginPageComponent } from './containers/sessions-login-page/ses
 import { LayoutSessionsComponent } from './layout/layout-sessions/layout-sessions.component';
 import { RouterModule } from '@angular/router';
 import { SessionsRoutes } from './sessions-routing.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { SessionsLoginComponent } from './components/sessions-login/sessions-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SessionsLoginService } from './services/sessions-login.service';
 import { SessionsPasswordComponent } from './components/sessions-password/sessions-password.component';
 import { SessionsLoggedPageComponent } from './containers/sessions-logged-page/sessions-logged-page.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 

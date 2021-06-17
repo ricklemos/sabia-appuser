@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SessionsInvalidEmailDialogComponent } from './components/sessions-invalid-email-dialog/sessions-invalid-email-dialog.component';
 import { SessionsSignupPageComponent } from './containers/sessions-signup-page/sessions-signup-page.component';
 import { SessionsSignupFirstNameComponent } from './components/sessions-signup-first-name/sessions-signup-first-name.component';
+import { SessionsSignupLastNameComponent } from './components/sessions-signup-last-name/sessions-signup-last-name.component';
 
 
 
@@ -31,6 +32,7 @@ import { SessionsSignupFirstNameComponent } from './components/sessions-signup-f
     SessionsInvalidEmailDialogComponent,
     SessionsSignupPageComponent,
     SessionsSignupFirstNameComponent,
+    SessionsSignupLastNameComponent,
   ],
   imports: [
     CommonModule,

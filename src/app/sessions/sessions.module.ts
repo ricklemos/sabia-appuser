@@ -19,6 +19,7 @@ import { SessionsSignupPageComponent } from './containers/sessions-signup-page/s
 import { SessionsSignupFirstNameComponent } from './components/sessions-signup-first-name/sessions-signup-first-name.component';
 import { SessionsSignupLastNameComponent } from './components/sessions-signup-last-name/sessions-signup-last-name.component';
 import { SessionsSignupGenderComponent } from './components/sessions-signup-gender/sessions-signup-gender.component';
+import { SessionsSignupPasswordComponent } from './components/sessions-signup-password/sessions-signup-password.component';
 
 
 
@@ -35,6 +36,7 @@ import { SessionsSignupGenderComponent } from './components/sessions-signup-gend
     SessionsSignupFirstNameComponent,
     SessionsSignupLastNameComponent,
     SessionsSignupGenderComponent,
+    SessionsSignupPasswordComponent,
   ],
   imports: [
     CommonModule,

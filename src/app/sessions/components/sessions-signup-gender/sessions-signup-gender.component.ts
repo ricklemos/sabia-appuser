@@ -23,7 +23,8 @@ export class SessionsSignupGenderComponent implements OnInit {
 
   submitGender(): void {
     if (!this.formGroup.invalid) {
-      this.sessionsSignupService.gender = this.formGroup.value;
+      const { gender } = this.formGroup.value;
+      this.sessionsSignupService.gender = gender;
       this.sessionsSignupService.nextStep('PASSWORD');
     }
   }

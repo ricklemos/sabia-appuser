@@ -18,6 +18,7 @@ import { SessionsInvalidEmailDialogComponent } from './components/sessions-inval
 import { SessionsSignupPageComponent } from './containers/sessions-signup-page/sessions-signup-page.component';
 import { SessionsSignupFirstNameComponent } from './components/sessions-signup-first-name/sessions-signup-first-name.component';
 import { SessionsSignupLastNameComponent } from './components/sessions-signup-last-name/sessions-signup-last-name.component';
+import { SessionsSignupGenderComponent } from './components/sessions-signup-gender/sessions-signup-gender.component';
 
 
 
@@ -33,6 +34,7 @@ import { SessionsSignupLastNameComponent } from './components/sessions-signup-la
     SessionsSignupPageComponent,
     SessionsSignupFirstNameComponent,
     SessionsSignupLastNameComponent,
+    SessionsSignupGenderComponent,
   ],
   imports: [
     CommonModule,

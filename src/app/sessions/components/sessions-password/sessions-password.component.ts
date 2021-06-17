@@ -43,4 +43,14 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
     this.sessionsLoginService.setPassword(this.password.value);
     this.sessionsLoginService.signIn(this.autoLogin.value);
   }
+
+  forgotPassword(): void {
+    const email = this.sessionsLoginService.getEmail();
+    this.sessionsLoginService.forgotPassword(email)
+      .then((response) => {
+        // TODO: Mensagem de sucesso
+      }).catch((error) => {
+      // TODO: Mensagem de erro
+      });
+  }
 }

@@ -92,6 +92,12 @@ export class SessionsLoginService {
     }
     this.stepObservable.next({ step });
   }
+
+  forgotPassword(email): Promise<any> {
+    return this.angularFireAuth.sendPasswordResetEmail(email);
+  }
+
+
 }
 
 export interface StepObservable {

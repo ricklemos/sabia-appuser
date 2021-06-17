@@ -10,6 +10,9 @@ import { SessionsLoginService } from './services/sessions-login.service';
 import { SessionsPasswordComponent } from './components/sessions-password/sessions-password.component';
 import { SessionsLoggedPageComponent } from './containers/sessions-logged-page/sessions-logged-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SessionsHeaderComponent } from './components/sessions-header/sessions-header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -20,13 +23,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SessionsLoginComponent,
     SessionsPasswordComponent,
     SessionsLoggedPageComponent,
+    SessionsHeaderComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     RouterModule.forChild(SessionsRoutes),
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [
     SessionsLoginService

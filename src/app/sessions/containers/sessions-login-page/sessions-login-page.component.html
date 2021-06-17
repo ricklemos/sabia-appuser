@@ -1,2 +1,5 @@
-<sessions-login *ngIf="!showInputPassword"></sessions-login>
-<sessions-password *ngIf="showInputPassword"></sessions-password>
+<div class="loginpagecontainer">
+  <sessions-header></sessions-header>
+  <sessions-login *ngIf="!showInputPassword"></sessions-login>
+  <sessions-password *ngIf="showInputPassword"></sessions-password>
+</div>

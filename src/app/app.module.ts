@@ -19,7 +19,7 @@ import { UrlService } from './services/url.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    SessionsModule
+    SessionsModule,
   ],
   providers: [
     UrlService

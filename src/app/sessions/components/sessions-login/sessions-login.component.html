@@ -2,6 +2,6 @@
   fxLayoutGap.lt-sm="8px"
 >
   <h2 class="login__title">Comece com o seu e-mail</h2>
-  <input type="email" placeholder="email@dominio.com" [formControl]="email" name="email">
-  <button class="login__button" (click)="verifyEmail()">Entrar</button>
+  <input type="email" placeholder="e-mail" [formControl]="email" class="login__input" name="email">
+  <button class="login__button" (click)="verifyEmail()" [disabled]="emailInvalid">Continuar</button>
 </div>

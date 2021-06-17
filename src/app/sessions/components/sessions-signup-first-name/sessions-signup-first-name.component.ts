@@ -16,13 +16,10 @@ export class SessionsSignupFirstNameComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.firstNameForm);
   }
 
   submitFirstName(): void {
-    if (this.firstNameForm.invalid) {
-      console.log('Invalid');
-    } else {
+    if (!this.firstNameForm.invalid) {
       this.sessionsSignupService.firstName = this.firstNameForm.value;
       this.sessionsSignupService.nextStep('LAST_NAME');
     }

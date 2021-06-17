@@ -38,16 +38,23 @@ export class SessionsLoginService {
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {
-          // TODO: show error snackBar
           this.snackBar.open('Senha Incorreta', 'OK', {
             duration: 3000,
             verticalPosition: 'bottom',
             horizontalPosition: 'center'
           });
         } else if (error.code === 'auth/too-many-requests') {
-          // TODO: aguarde um tempo para logar ou recupere a senha
+          this.snackBar.open('Muitas requisições, tente mais tarde', 'OK', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'center'
+          });
         } else {
-          // TODO: unknown error dialog
+          this.snackBar.open('Erro desconhecido', 'OK', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'center'
+          });
         }
       });
   }

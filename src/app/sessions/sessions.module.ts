@@ -13,6 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SessionsHeaderComponent } from './components/sessions-header/sessions-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SessionsInvalidEmailDialogComponent } from './components/sessions-invalid-email-dialog/sessions-invalid-email-dialog.component';
 
 
 
@@ -24,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SessionsPasswordComponent,
     SessionsLoggedPageComponent,
     SessionsHeaderComponent,
+    SessionsInvalidEmailDialogComponent
   ],
   imports: [
     CommonModule,
@@ -32,8 +35,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FlexLayoutModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
+  entryComponents: [
+    SessionsInvalidEmailDialogComponent
+  ],
+
   providers: [
     SessionsLoginService
   ]

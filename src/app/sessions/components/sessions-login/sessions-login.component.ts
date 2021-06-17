@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionsLoginService } from '../../services/sessions-login.service';
 import { FormControl, Validators } from '@angular/forms';
-import { noop, Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { noop } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { SessionsInvalidEmailDialogComponent } from '../sessions-invalid-email-dialog/sessions-invalid-email-dialog.component';
 
 @Component({
   selector: 'sessions-login',
@@ -28,7 +29,7 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
     private sessionsLoginService: SessionsLoginService,
     private router: Router,
     private urlService: UrlService,
-    private angularFirestore: AngularFirestore
+    private matDialog: MatDialog,
   ) {
   }
 
@@ -62,7 +63,7 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           // TODO: mandar usuário para o fluxo de cadastro
         } else {
           // emite mensagem de erro
-          // TODO: mostrar aviso
+          this.matDialog.open(SessionsInvalidEmailDialogComponent);
         }
       })
     ).subscribe(noop);

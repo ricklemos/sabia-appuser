@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SessionsInvalidEmailDialogComponent } from './components/sessions-invalid-email-dialog/sessions-invalid-email-dialog.component';
+import { SessionsSignupPageComponent } from './containers/sessions-signup-page/sessions-signup-page.component';
+import { SessionsSignupFirstNameComponent } from './components/sessions-signup-first-name/sessions-signup-first-name.component';
 
 
 
@@ -26,7 +28,9 @@ import { SessionsInvalidEmailDialogComponent } from './components/sessions-inval
     SessionsPasswordComponent,
     SessionsLoggedPageComponent,
     SessionsHeaderComponent,
-    SessionsInvalidEmailDialogComponent
+    SessionsInvalidEmailDialogComponent,
+    SessionsSignupPageComponent,
+    SessionsSignupFirstNameComponent,
   ],
   imports: [
     CommonModule,

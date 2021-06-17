@@ -3,10 +3,13 @@ import { SessionsLoginService } from '../../services/sessions-login.service';
 import { FormControl, Validators } from '@angular/forms';
 import { noop } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SessionsInvalidEmailDialogComponent } from '../sessions-invalid-email-dialog/sessions-invalid-email-dialog.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { SessionsSignupService } from '../../services/sessions-signup.service';
 
 @Component({
   selector: 'sessions-login',
@@ -26,6 +29,8 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private urlService: UrlService,
     private matDialog: MatDialog,
+    private angularFirestore: AngularFirestore,
+    private sessionsSignupService: SessionsSignupService,
   ) {
   }
 
@@ -52,6 +57,7 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           this.sessionsLoginService.nextStep('PASSWORD');
         } else if (user) {
           // vai pro primeiro login (cadastro)
+          this.sessionsSignupService.email = this.email.value;
           const url = this.urlService.getSignUpUrl();
           this.router.navigate([url]);
         } else {

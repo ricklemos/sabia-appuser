@@ -1,5 +1,5 @@
 <div class="loginpagecontainer">
   <sessions-header></sessions-header>
-  <sessions-login *ngIf="!showInputPassword"></sessions-login>
-  <sessions-password *ngIf="showInputPassword"></sessions-password>
+  <sessions-login *ngIf="showPage === 'EMAIL'"></sessions-login>
+  <sessions-password *ngIf="showPage === 'PASSWORD'"></sessions-password>
 </div>

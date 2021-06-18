@@ -18,14 +18,12 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
 
   unsubscriptions = [];
   email = new FormControl('', [Validators.required]);
-  password: string;
   formControl: FormControl;
-  userData;
+  user;
   emailInvalid: boolean;
 
   constructor(
     private loginService: SessionsLoginService,
-    private sessionsLoginPage: SessionsLoginPageComponent,
     private sessionsLoginService: SessionsLoginService,
     private router: Router,
     private urlService: UrlService,
@@ -54,11 +52,11 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   verifyEmail(): void {
     const fetchUsers = this.loginService.verifyEmail(this.email.value, 'users').pipe(
       tap(user => {
-        [this.userData] = user;
-        if (this.userData && this.userData.firstLogin) {
+        [this.user] = user;
+        if (this.user && this.user.firstLogin) {
           this.sessionsLoginService.setEmail(this.email.value);
-          this.sessionsLoginPage.setShowInputPassword(true);
-        } else if (this.userData) {
+          this.sessionsLoginService.nextStep('PASSWORD');
+        } else if (this.user) {
           // vai pro primeiro login (cadastro)
           // TODO: mandar usuário para o fluxo de cadastro
         } else {

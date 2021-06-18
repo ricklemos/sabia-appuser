@@ -17,7 +17,6 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   passwordIncomplete = true;
 
   constructor(
-    private sessionsLoginPage: SessionsLoginPageComponent,
     private sessionsLoginService: SessionsLoginService
   ) {
   }
@@ -37,7 +36,7 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   }
 
   changeEmailForLogin(): void {
-    this.sessionsLoginPage.setShowInputPassword(false);
+    this.sessionsLoginService.nextStep('EMAIL');
   }
 
   setPasswordAndSignIn(): void {

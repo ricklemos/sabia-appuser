@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UrlService } from '../../services/url.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,6 +13,7 @@ export class SessionsLoginService {
   private user;
   private email: string;
   private password: string;
+  stepObservable: Subject<StepObservable> = new Subject<StepObservable>();
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -92,6 +93,26 @@ export class SessionsLoginService {
   getEmail(): string {
     return this.email;
   }
+  public getStep(): Observable<StepObservable> {
+    return this.stepObservable.asObservable();
+  }
+
+  public nextStep(step: Step['step'], data?): void {
+    if (data) {
+      this.stepObservable.next({step, data});
+      return;
+    }
+    this.stepObservable.next({step});
+  }
+}
+
+export interface StepObservable {
+  data?: any;
+  step: Step['step'];
+}
+
+export interface Step {
+  step: 'EMAIL' | 'PASSWORD';
 }
 
 

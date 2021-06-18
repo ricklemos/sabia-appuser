@@ -58,9 +58,10 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           this.sessionsLoginService.nextStep('PASSWORD');
         } else if (this.user) {
           // vai pro primeiro login (cadastro)
-          // TODO: mandar usuário para o fluxo de cadastro
+          const url = this.urlService.getSignUpUrl();
+          this.router.navigate([url]);
         } else {
-          // emite mensagem de erro
+          // emite dialog de erro
           this.matDialog.open(SessionsInvalidEmailDialogComponent);
         }
       })

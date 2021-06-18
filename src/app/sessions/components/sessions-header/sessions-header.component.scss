@@ -1,8 +1,11 @@
 .login {
   &__header {
-    width: auto;
+    width: 100vw;
     height: 144px;
     background-color: #2E3037;
+  }
+  &__logo {
+    height: 50%;
   }
 }
 

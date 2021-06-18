@@ -3,7 +3,6 @@ import { SessionsLoginService } from '../../services/sessions-login.service';
 import { FormControl, Validators } from '@angular/forms';
 import { noop } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,7 +18,6 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   unsubscriptions = [];
   email = new FormControl('', [Validators.required]);
   formControl: FormControl;
-  user;
   emailInvalid: boolean;
 
   constructor(
@@ -32,10 +30,6 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('firebaseJWT')) {
-      const token = JSON.parse(localStorage.getItem('firebaseJWT'));
-      this.router.navigate([this.urlService.getHomeUrl()]);
-    }
     this.emailInvalid = true;
     const listenEmail = this.email.valueChanges.pipe(
       tap(email => {
@@ -51,12 +45,12 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
 
   verifyEmail(): void {
     const fetchUsers = this.loginService.verifyEmail(this.email.value, 'users').pipe(
-      tap(user => {
-        [this.user] = user;
-        if (this.user && this.user.firstLogin) {
+      tap(userArray => {
+        const user = userArray[0];
+        if (user && user.firstLogin) {
           this.sessionsLoginService.setEmail(this.email.value);
           this.sessionsLoginService.nextStep('PASSWORD');
-        } else if (this.user) {
+        } else if (user) {
           // vai pro primeiro login (cadastro)
           const url = this.urlService.getSignUpUrl();
           this.router.navigate([url]);

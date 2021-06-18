@@ -65,23 +65,10 @@ export class SessionsLoginService {
     return this.angularFirestore.doc(`userData/${ uid }`).valueChanges();
   }
 
-  getUserLogged(): object | false {
-    if (this.user) {
-      return this.user;
-    } else {
-      // TODO: retornar mensagem de erro (usuário não logado)
-      return false;
-    }
+  fetchAuthUser(): Observable<any> {
+    return this.angularFireAuth.user;
   }
 
-  getUserId(): string | false {
-    if (this.user) {
-      return this.user.uid;
-    } else {
-      // TODO: retornar mensagem de erro (usuário não logado)
-      return false;
-    }
-  }
   setEmail(email: string): void {
     this.email = email;
   }
@@ -93,16 +80,17 @@ export class SessionsLoginService {
   getEmail(): string {
     return this.email;
   }
+
   public getStep(): Observable<StepObservable> {
     return this.stepObservable.asObservable();
   }
 
   public nextStep(step: Step['step'], data?): void {
     if (data) {
-      this.stepObservable.next({step, data});
+      this.stepObservable.next({ step, data });
       return;
     }
-    this.stepObservable.next({step});
+    this.stepObservable.next({ step });
   }
 }
 

@@ -22,13 +22,25 @@ export class UrlService {
     return `${ url }/login`;
   }
 
-  public getHomeUrl(): string {
-    const url = this.getSessionsBaseUrl();
-    return `${ url }/logged`;
-  }
+  // public getHomeUrl(): string {
+  //   const url = this.getSessionsBaseUrl();
+  //   return `${ url }/logged`;
+  // }
 
   public getSignUpUrl(): string {
     const url = this.getSessionsBaseUrl();
     return `${ url }/cadastro`;
+  }
+
+  public getHomeUrl(): string {
+    return '/profile';
+  }
+
+  public getEditUrl(): string{
+    return '/profile/edit';
+  }
+
+  public getProfileUrl(): string {
+    return '/profile';
   }
 }

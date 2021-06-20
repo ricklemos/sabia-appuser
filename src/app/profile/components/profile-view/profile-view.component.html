@@ -1,18 +1,24 @@
 <div fxLayout="column" fxLayoutAlign="center center" padding="12px">
-<div class="toolbar">
-  <button color="white">
-    <p>&larr</p>
-  </button>
-  <span>Perfil</span>
-</div>
+<!--  <div class="toolbar">-->
+<!--    <button color="white">-->
+<!--      <p>voltar</p>-->
+<!--    </button>-->
+<!--    <span>Perfil</span>-->
+<!--  </div>-->
 
-<div class="container" fxLayout="column" fxLayoutAlign="start center">
-  <h2 class="name">Fábio Levy</h2>
-  <div dsCard class="info-card" fxLayout="column" fxLayoutGap="16px">
-    <div class="info-box" label="E-mail" large>levy.siqueira@usp.br</div>
-    <div class="info-box" label="Genero" large>Masculino</div>
-    <button class="ds-button">Editar</button>
-    <button class="ds-button">Trocar Senha</button>
+  <div class="container" fxLayout="column" fxLayoutAlign="start center">
+    <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>
+    <div dsCard class="info-card" fxLayout="column" fxLayoutGap="16px">
+      <div>
+        <div class="text3">E-mail</div>
+        <div class="info-box" label="Email" large>{{ email }}</div>
+      </div>
+      <div>
+        <div class="text3">Gênero</div>
+        <div class="info-box" label="Genero" large>{{ gender }}</div>
+      </div>
+      <button class="ds-button" (click)="goEditPage()">Editar</button>
+      <button class="ds-button">Trocar Senha</button>
+    </div>
   </div>
-</div>
 </div>

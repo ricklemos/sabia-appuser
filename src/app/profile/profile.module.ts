@@ -10,6 +10,8 @@ import { ProfileViewPageComponent } from './containers/profile-view-page/profile
 import { LayoutProfileComponent } from './layout/layout-profile.component';
 import { RouterModule } from '@angular/router';
 import { ProfileRoutes } from './profile-routing.module';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ChangePasswordPageComponent } from './containers/change-password-page/change-password-page.component';
 
 
 
@@ -19,7 +21,9 @@ import { ProfileRoutes } from './profile-routing.module';
     ProfileViewComponent,
     ProfileEditPageComponent,
     ProfileViewPageComponent,
-    LayoutProfileComponent
+    LayoutProfileComponent,
+    ChangePasswordComponent,
+    ChangePasswordPageComponent
   ],
   imports: [
     CommonModule,

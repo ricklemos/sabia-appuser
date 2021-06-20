@@ -43,4 +43,10 @@ export class ProfileViewComponent implements OnInit {
     const url = this.urlService.getEditUrl();
     this.router.navigate([url]);
   }
+
+  goChangePasswordPage(): void {
+    const url = this.urlService.getChangePasswordUrl();
+    this.router.navigate([url]);
+
+  }
 }

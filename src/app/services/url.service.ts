@@ -40,4 +40,7 @@ export class UrlService {
     return '/profile';
   }
 
+  public getChangePasswordUrl(): string {
+    return '/profile/change-password';
+  }
 }

@@ -15,13 +15,13 @@ export class SessionsLoggedPageComponent implements OnInit {
   constructor(
     private sessionsLoginService: SessionsLoginService
   ) {
+  }
+
+  ngOnInit(): void {
     this.sessionsLoginService.fetchUserData().pipe(
       take(1),
       tap(data => this.firstName = data.firstName)
     ).subscribe(noop);
-  }
-
-  ngOnInit(): void {
   }
 
 }

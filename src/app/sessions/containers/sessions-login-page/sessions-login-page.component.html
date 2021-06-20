@@ -1,2 +1,5 @@
-<sessions-login *ngIf="!showInputPassword"></sessions-login>
-<sessions-password *ngIf="showInputPassword"></sessions-password>
+<div class="loginpagecontainer" fxLayout="column" fxLayoutAlign="start center">
+  <sessions-header></sessions-header>
+  <sessions-login *ngIf="showPage === 'EMAIL'" id="sessions__login"></sessions-login>
+  <sessions-password *ngIf="showPage === 'PASSWORD'"></sessions-password>
+</div>

@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     const user = await this.angularFireAuth.currentUser;
     const isAuthenticated = user ? true : false;
     if (!isAuthenticated) {
-      await this.router.navigate([this.urlService.getLoginUrl()], { queryParams: { returnUrl: state.url }});
+      await this.router.navigate([this.urlService.getLoginUrl()]);
     }
     return isAuthenticated;
   }

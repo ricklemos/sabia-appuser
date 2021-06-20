@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionsLoginService } from '../../services/sessions-login.service';
 
 @Component({
@@ -7,42 +7,26 @@ import { SessionsLoginService } from '../../services/sessions-login.service';
   templateUrl: './sessions-login-page.component.html',
   styleUrls: ['./sessions-login-page.component.scss']
 })
-export class SessionsLoginPageComponent implements OnInit {
+export class SessionsLoginPageComponent implements OnInit, OnDestroy {
 
-  showInputPassword = false;
-  private userName: string;
-  private email: string;
-  private password: string;
+  showPage;
+  subscriptions = [];
 
   constructor(
     private sessionsLoginService: SessionsLoginService
   ) {
+    const subNextStep = this.sessionsLoginService.getStep().subscribe(response => {
+      const { step: nextStep } = response;
+      this.showPage = nextStep;
+    });
+    this.subscriptions.push(subNextStep);
+    this.sessionsLoginService.nextStep('EMAIL');
   }
 
   ngOnInit(): void {
   }
 
-  setShowInputPassword(inputPasswordStatus: boolean): void {
-    this.showInputPassword = inputPasswordStatus;
-  }
-
-  setUserName(userName: string): void {
-    this.userName = userName;
-  }
-
-  getUserName(): string {
-    return this.userName;
-  }
-
-  setEmail(email: string): void {
-    this.email = email;
-  }
-
-  setPassword(password: string): void {
-    this.password = password;
-  }
-
-  signIn(autoLogin?: boolean): void {
-    this.sessionsLoginService.signIn(this.email, this.password, autoLogin);
+  ngOnDestroy(): void {
+    this.subscriptions.map(u => u.unsubscribe);
   }
 }

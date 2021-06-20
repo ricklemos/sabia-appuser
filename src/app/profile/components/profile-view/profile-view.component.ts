@@ -30,11 +30,12 @@ export class ProfileViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.sessionService.fetchUserData().pipe(
-      take(1),
-      tap(data => this.firstName = data.firstName),
-      tap(data => this.lastName = data.lastName),
-      tap(data => this.gender = data.gender),
-      tap(data => this.email = data.email)
+      tap(data => {
+        this.firstName = data.firstName;
+        this.lastName = data.lastName;
+        this.gender = data.gender;
+        this.email = data.email;
+      })
     ).subscribe(noop);
 
   }

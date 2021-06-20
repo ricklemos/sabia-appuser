@@ -8,25 +8,25 @@ import { ProfileEditPageComponent } from '../../containers/profile-edit-page/pro
 
 @Component({
   selector: 'app-edit-data',
-  templateUrl: './edit-data.component.html',
-  styleUrls: ['./edit-data.component.scss']
+  templateUrl: '../../components/edit-data/edit-data.component.html',
+  styleUrls: ['../../components/edit-data/edit-data.component.scss']
 })
 export class EditDataComponent implements OnInit {
 
-  email = new FormControl("");
-  gender = new FormControl("");
-  firstName = new FormControl("");
-  lastName = new FormControl("");
+  email = new FormControl('');
+  gender = new FormControl('');
+  firstName = new FormControl('');
+  lastName = new FormControl('');
+
   constructor(
     private modifyUserDataService: ModifyUserDataService,
     private router: Router,
     private urlService: UrlService,
     private profileEditPageComponent: ProfileEditPageComponent,
-) { }
+  ) {
+  }
 
   ngOnInit(): void {
-
-
   }
 
   edit(): void{

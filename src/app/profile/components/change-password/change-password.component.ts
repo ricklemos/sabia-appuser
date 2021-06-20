@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import firebase from 'firebase';
@@ -12,7 +12,7 @@ import { ChangePasswordPageComponent } from '../../containers/change-password-pa
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-  newPassword = new FormControl('');
+  newPassword = new FormControl('', [Validators.required]);
 
   constructor(
     private modifyUserDataService: ModifyUserDataService,
@@ -23,6 +23,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   changePassword(): void {

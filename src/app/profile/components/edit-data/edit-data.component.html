@@ -1,2 +1,30 @@
-<p>edit-data works!</p>
-<button (click)="test()">teste</button>
+<div fxLayout="column" fxLayoutAlign="center center" padding="12px">
+<!--  <div class="toolbar">-->
+<!--    <button color="white">-->
+<!--      <p>&larr</p>-->
+<!--    </button>-->
+<!--    <span>Perfil</span>-->
+<!--  </div>-->
+
+  <div class="container" fxLayout="column" fxLayoutAlign="start center">
+    <div dsCard class="info-card" fxLayout="column" fxLayoutGap="16px">
+      <div>
+        <div class="text3">Nome</div>
+        <input class="info-box" label="Nome" [formControl]="firstName" type="firstName">
+      </div>
+      <div>
+        <div class="text3">Sobrenome</div>
+        <input class="info-box" label="Sobrenome" [formControl]="lastName" type="lastName">
+      </div>
+      <div>
+        <div class="text3">Gênero</div>
+        <input class="info-box" label="Genero" [formControl]="gender" type="gender">
+      </div>
+      <div>
+        <div class="text3">E-mail</div>
+        <input class="info-box" label="E-mail" [formControl]="email" type="email">
+      </div>
+      <button class="ds-button" (click)="edit()">Salvar</button>
+    </div>
+  </div>
+</div>

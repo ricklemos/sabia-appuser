@@ -92,6 +92,10 @@ export class SessionsLoginService {
     }
     this.stepObservable.next({ step });
   }
+
+  public getUserId(): string {
+    return this.user.uid;
+  }
 }
 
 export interface StepObservable {

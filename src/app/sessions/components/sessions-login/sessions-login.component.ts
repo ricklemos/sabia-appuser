@@ -3,7 +3,6 @@ import { SessionsLoginService } from '../../services/sessions-login.service';
 import { FormControl, Validators } from '@angular/forms';
 import { noop } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -35,13 +34,6 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.emailInvalid = true;
-    const listenEmail = this.email.valueChanges.pipe(
-      tap(email => {
-        this.emailInvalid = !this.email.valid;
-      })
-    ).subscribe(noop);
-    this.unsubscriptions.push(listenEmail);
   }
 
   ngOnDestroy(): void {
@@ -58,8 +50,8 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
         } else if (user) {
           // vai pro primeiro login (cadastro)
           this.sessionsSignupService.email = this.email.value;
-          this.sessionsSignupService.isAdmin = this.userData.isAdmin;
-          this.sessionsSignupService.docId = this.userData.uid;
+          this.sessionsSignupService.isAdmin = user.isAdmin;
+          this.sessionsSignupService.docId = user.docId;
           const url = this.urlService.getSignUpUrl();
           this.router.navigate([url]);
         } else {

@@ -4,6 +4,7 @@ import { SessionsLoginPageComponent } from '../../containers/sessions-login-page
 import { SessionsLoginService } from '../../services/sessions-login.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'sessions-password',
@@ -17,7 +18,8 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   passwordIncomplete = true;
 
   constructor(
-    private sessionsLoginService: SessionsLoginService
+    private sessionsLoginService: SessionsLoginService,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -48,9 +50,9 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
     const email = this.sessionsLoginService.getEmail();
     this.sessionsLoginService.forgotPassword(email)
       .then((response) => {
-        // TODO: Mensagem de sucesso
+        this.snackBar.open('Recuperação de senha enviada', 'OK', {duration: 5000});
       }).catch((error) => {
-      // TODO: Mensagem de erro
+        this.snackBar.open('Problema no envio de recuperação de senha', 'OK', {duration: 5000});
       });
   }
 }

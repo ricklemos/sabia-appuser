@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import { UrlService } from '../../services/url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +11,23 @@ import { Observable, Subject } from 'rxjs';
 export class SessionsSignupService {
   nextStepObservable: Subject<NextStepObservable> = new Subject<NextStepObservable>();
 
+  docId: string;
+  uid: string;
+  isAdmin: string;
   email: string;
   firstName: string;
   lastName: string;
   gender: string;
   password: string;
+  firstLogin: string;
 
-  constructor() { }
+  constructor(
+    private angularFirestore: AngularFirestore,
+    private angularFireAuth: AngularFireAuth,
+    private router: Router,
+    private urlService: UrlService,
+  ) {
+  }
 
   public getNextStep(): Observable<NextStepObservable> {
     return this.nextStepObservable.asObservable();
@@ -21,11 +35,45 @@ export class SessionsSignupService {
 
   public nextStep(step: NextStep['step'], data?): void {
     if (data) {
-      this.nextStepObservable.next({step, data});
+      this.nextStepObservable.next({ step, data });
       return;
     }
-    this.nextStepObservable.next({step});
+    this.nextStepObservable.next({ step });
   }
+
+  public createUser(password: string): void {
+    this.angularFireAuth.createUserWithEmailAndPassword(this.email, password)
+      .then(userData => {
+        const { user } = userData;
+        this.uid = user.uid;
+        this.firstLogin = user.metadata.creationTime;
+        return this.angularFireAuth.signInWithEmailAndPassword(this.email, password);
+      })
+      .then(() => {
+        const body = {
+          email: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          gender: this.gender
+        };
+        return this.angularFirestore.doc(`userData/${ this.uid }`).set(body);
+      })
+      .then(() => {
+        return this.angularFirestore.doc(`users/${ this.docId }`).delete();
+      })
+      .then(() => {
+        const body = {
+          email: this.email,
+          firstLogin: this.firstLogin,
+          isAdmin: !!this.isAdmin,
+        };
+        return this.angularFirestore.doc(`users/${ this.uid }`).set(body);
+      }).then(() => {
+      this.router.navigate([this.urlService.getHomeUrl()]);
+    })
+      .catch(error => console.log(error));
+  }
+
 }
 
 export interface NextStepObservable {

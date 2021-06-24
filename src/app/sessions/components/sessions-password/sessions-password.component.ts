@@ -16,6 +16,7 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   password = new FormControl('', [Validators.required, Validators.minLength(3)]);
   autoLogin = new FormControl(true);
   passwordIncomplete = true;
+  forgotPasswordClicked = false;
 
   constructor(
     private sessionsLoginService: SessionsLoginService,
@@ -47,12 +48,19 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   }
 
   forgotPassword(): void {
+    if (this.forgotPasswordClicked === true) {
+      this.snackBar.open('Recuperação de senha já foi enviada', 'OK', { duration: 5000 });
+      return;
+    }
+    this.forgotPasswordClicked = true;
     const email = this.sessionsLoginService.getEmail();
     this.sessionsLoginService.forgotPassword(email)
-      .then((response) => {
-        this.snackBar.open('Recuperação de senha enviada', 'OK', {duration: 5000});
-      }).catch((error) => {
-        this.snackBar.open('Problema no envio de recuperação de senha', 'OK', {duration: 5000});
+      .then(() => {
+        this.snackBar.open('Recuperação de senha enviada', 'OK', { duration: 5000 });
+      })
+      .catch(() => {
+        this.snackBar.open('Problema no envio de recuperação de senha', 'OK', { duration: 5000 });
+        this.forgotPasswordClicked = false;
       });
   }
 }

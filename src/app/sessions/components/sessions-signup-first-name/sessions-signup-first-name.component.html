@@ -1,0 +1,7 @@
+<div class="login__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
+     fxLayoutGap.lt-sm="8px"
+>
+  <h2 class="login__title">Qual é seu primeiro nome?</h2>
+  <input type="text" placeholder="nome" [formControl]="firstNameForm" name="firstName">
+  <button class="login__button" (click)="submitFirstName()" [disabled]="firstNameForm.invalid">Continuar</button>
+</div>

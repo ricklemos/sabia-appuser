@@ -25,7 +25,7 @@ export class SessionsLoginService {
   }
 
   verifyEmail(email, collectionPath): Observable<any> {
-    return this.angularFirestore.collection(collectionPath, ref => ref.where('email', '==', email)).valueChanges();
+    return this.angularFirestore.collection(collectionPath, ref => ref.where('email', '==', email)).valueChanges({ idField: 'docId' });
   }
 
   signIn(autoLogin?: boolean): void {
@@ -33,7 +33,7 @@ export class SessionsLoginService {
       .then((userCredential) => {
         this.user = userCredential.user;
         if (autoLogin) {
-          localStorage.setItem('firebaseJWT', JSON.stringify(this.user['refreshToken']));
+          localStorage.setItem('firebaseJWT', JSON.stringify(this.user.refreshToken));
         }
         this.router.navigate([this.urlService.getHomeUrl()]);
       })

@@ -9,7 +9,8 @@ import { noop } from 'rxjs';
   providedIn: 'root'
 })
 export class ModifyUserDataService {
-  uId: string
+  uId: string;
+
   constructor(private firestore: AngularFirestore,
               private sessionService: SessionsLoginService,
               private angularFireAuth: AngularFireAuth) {

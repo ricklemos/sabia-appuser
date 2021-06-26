@@ -3,8 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import { ProfileViewPageComponent } from '../../containers/profile-view-page/profile-view-page.component';
-import { take, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 
 @Component({
@@ -22,8 +21,7 @@ export class ProfileViewComponent implements OnInit {
     private sessionService: SessionsLoginService,
     private firestore: AngularFirestore,
     private router: Router,
-    private urlService: UrlService,
-    private profileViewPageComponent: ProfileViewPageComponent
+    private urlService: UrlService
   ) {
 
   }

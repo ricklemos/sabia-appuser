@@ -1,10 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { FormControl } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
-import { Router } from '@angular/router';
-import { UrlService } from '../../../services/url.service';
 
 
 @Component({
@@ -13,14 +7,12 @@ import { UrlService } from '../../../services/url.service';
   styleUrls: ['./profile-view-page.component.scss']
 })
 export class ProfileViewPageComponent implements OnInit {
-  constructor(
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {
 
   }
-
 
 
 }

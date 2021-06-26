@@ -12,7 +12,9 @@ import { RouterModule } from '@angular/router';
 import { ProfileRoutes } from './profile-routing.module';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ChangePasswordPageComponent } from './containers/change-password-page/change-password-page.component';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ProfileToolbarComponent } from './components/profile-toolbar/profile-toolbar.component';
 
 
 @NgModule({
@@ -23,17 +25,21 @@ import { ChangePasswordPageComponent } from './containers/change-password-page/c
     ProfileViewPageComponent,
     LayoutProfileComponent,
     ChangePasswordComponent,
-    ChangePasswordPageComponent
+    ChangePasswordPageComponent,
+    ProfileToolbarComponent
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     RouterModule,
-    RouterModule.forChild(ProfileRoutes)
+    RouterModule.forChild(ProfileRoutes),
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     ModifyUserDataService
   ],
 })
-export class ProfileModule { }
+export class ProfileModule {
+}

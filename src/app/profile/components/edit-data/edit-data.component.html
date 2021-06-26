@@ -1,32 +1,23 @@
 <div fxLayout="column" fxLayoutAlign="center center" padding="12px">
-  <!--  <div class="toolbar">-->
-  <!--    <button color="white">-->
-  <!--      <p>&larr</p>-->
-  <!--    </button>-->
-  <!--    <span>Perfil</span>-->
-  <!--  </div>-->
-
-  <div class="container" fxLayout="column" fxLayoutAlign="start center">
-    <div dsCard class="info-card" fxLayout="column" fxLayoutGap="16px">
-      <form [formGroup]="formGroup">
-        <div>
-          <div class="text3">Nome</div>
-          <input class="info-box" label="Nome" formControlName="firstName" type="firstName">
-        </div>
-        <div>
-          <div class="text3">Sobrenome</div>
-          <input class="info-box" label="Sobrenome" formControlName="lastName" type="lastName">
-        </div>
-        <div>
-          <div class="text3">Gênero</div>
-          <input class="info-box" label="Genero" formControlName="gender" type="gender">
-        </div>
-        <div>
-          <div class="text3">E-mail</div>
-          <input class="info-box" label="E-mail" formControlName="email" type="email">
-        </div>
-      </form>
-      <button class="ds-button" (click)="edit()" [disabled]="formGroup.invalid">Salvar</button>
-    </div>
+  <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="303px">
+    <form [formGroup]="formGroup">
+      <div>
+        <div class="text3">Nome</div>
+        <input class="info-box" label="Nome" formControlName="firstName" type="firstName">
+      </div>
+      <div>
+        <div class="text3">Sobrenome</div>
+        <input class="info-box" label="Sobrenome" formControlName="lastName" type="lastName">
+      </div>
+      <div>
+        <div class="text3">Gênero</div>
+        <input class="info-box" label="Genero" formControlName="gender" type="gender">
+      </div>
+      <div>
+        <div class="text3">E-mail</div>
+        <input class="info-box" label="E-mail" formControlName="email" type="email">
+      </div>
+    </form>
+    <button class="ds-button" (click)="edit()" [disabled]="formGroup.invalid">Salvar</button>
   </div>
 </div>

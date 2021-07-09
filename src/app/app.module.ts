@@ -9,7 +9,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { SessionsModule } from './sessions/sessions.module';
 import { UrlService } from './services/url.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TextMaskModule } from 'angular2-text-mask';
+import { CollactDesignSystemModule } from 'collact-design-system';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    SessionsModule
+    SessionsModule,
+    CollactDesignSystemModule,
+    TextMaskModule,
   ],
   providers: [
     UrlService

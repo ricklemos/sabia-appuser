@@ -17,13 +17,19 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sabia-appuser",
+            "preserveSymlinks": true,
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/collact-components-svg",
+                "output": "/assets/svg"
+              },
               "src/favicon.ico",
               "src/assets"
             ],

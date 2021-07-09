@@ -67,6 +67,13 @@
     width: 100%;
   }
 
+  &__forgot{
+    text-decoration: underline;
+    color: rgba(0, 0, 0, 0.5);
+    font-family:  Roboto, "Helvetica Neue", sans-serif;
+    cursor: pointer;
+  }
+
   &__radio {
     /* Customize the label (the container) */
     .container {

@@ -1,7 +1,7 @@
-<div class="login__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
+<div class="sessions__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
      fxLayoutGap.lt-sm="8px"
 >
-  <h2 class="login__title">Qual é seu sobrenome?</h2>
-  <input type="text" placeholder="nome" [formControl]="lastNameForm" name="firstName">
-  <button class="login__button" (click)="submitLastName()" [disabled]="lastNameForm.invalid">Continuar</button>
+  <h2 class="sessions__title">Qual é seu sobrenome?</h2>
+  <input class="sessions__input" type="text" placeholder="nome" [formControl]="lastNameForm" name="firstName">
+  <button class="sessions__button" (click)="submitLastName()" [disabled]="lastNameForm.invalid">Continuar</button>
 </div>

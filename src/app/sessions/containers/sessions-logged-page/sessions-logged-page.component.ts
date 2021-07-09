@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionsLoginService } from '../../services/sessions-login.service';
 import { take, tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
+import { SessionsUserData } from '../../models/sessions-models';
 
 @Component({
   selector: 'app-sessions-logged-page',
@@ -10,7 +11,7 @@ import { noop } from 'rxjs';
 })
 export class SessionsLoggedPageComponent implements OnInit {
 
-  firstName: string;
+  userData: SessionsUserData;
 
   constructor(
     private sessionsLoginService: SessionsLoginService
@@ -20,7 +21,7 @@ export class SessionsLoggedPageComponent implements OnInit {
   ngOnInit(): void {
     this.sessionsLoginService.fetchUserData().pipe(
       take(1),
-      tap(data => this.firstName = data.firstName)
+      tap(data => this.userData = data)
     ).subscribe(noop);
   }
 

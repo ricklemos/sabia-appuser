@@ -1,7 +1,7 @@
-<div class="login__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
+<div class="sessions__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
   fxLayoutGap.lt-sm="8px"
 >
-  <h2 class="login__title">Comece com o seu e-mail</h2>
-  <input type="email" placeholder="e-mail" [formControl]="email" class="login__input" name="email">
-  <button class="login__button" (click)="verifyEmail()" [disabled]="email.invalid">Continuar</button>
+  <h2 class="sessions__title">Comece com o seu e-mail</h2>
+  <input type="email" placeholder="e-mail" [formControl]="email" class="sessions__input" name="email">
+  <button class="sessions__button" (click)="verifyEmail()" [disabled]="email.invalid">Continuar</button>
 </div>

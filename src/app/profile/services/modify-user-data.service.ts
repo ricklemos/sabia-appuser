@@ -3,7 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { tap } from 'rxjs/operators';
-import { noop } from 'rxjs';
+import { noop, Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class ModifyUserDataService {
 
   constructor(private firestore: AngularFirestore,
               private sessionService: SessionsLoginService,
-              private angularFireAuth: AngularFireAuth) {
+              private angularFireAuth: AngularFireAuth,
+              private angularFireStorage: AngularFireStorage
+  ) {
   }
 
   editAll(newFirstName: string, newLastName: string, newGender: string, newEmail: string): void {
@@ -34,6 +37,15 @@ export class ModifyUserDataService {
       user.updateEmail(newEmail);
     });
 
+  }
+
+  fetchProfilePic(): Observable<any> {
+    return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`).getDownloadURL();
+  }
+
+  updateProfilePic(file): void{
+    const filePath = `profilePics/${ this.sessionService.getUserId() }`;
+    const task = this.angularFireStorage.upload(filePath, file);
   }
 }
 

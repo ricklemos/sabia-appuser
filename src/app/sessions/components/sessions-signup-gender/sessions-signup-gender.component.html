@@ -1,20 +1,20 @@
-<div class="login__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
+<div class="sessions__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
      fxLayoutGap.lt-sm="8px"
 >
-  <h2 class="login__title">Qual é seu gênero?</h2>
-  <form [formGroup]="formGroup">
-    <label>
+  <h2 class="sessions__title">Qual é seu gênero?</h2>
+  <form [formGroup]="formGroup" class="sessions__radio">
+    <label class="container"> Masculino
       <input type="radio" value="MALE" formControlName="gender">
-      <span>Masculino</span>
+      <span class="checkmark"></span>
     </label>
-    <label>
+    <label class="container"> Feminino
       <input type="radio" value="FEMALE" formControlName="gender">
-      <span>Feminino</span>
+      <span class="checkmark"></span>
     </label>
-    <label>
+    <label class="container"> Outro
       <input type="radio" value="OTHER" formControlName="gender">
-      <span>Outro</span>
+      <span class="checkmark"></span>
     </label>
   </form>
-  <button class="login__button" (click)="submitGender()" [disabled]="formGroup.invalid">Continuar</button>
+  <button class="sessions__button" (click)="submitGender()" [disabled]="formGroup.invalid">Continuar</button>
 </div>

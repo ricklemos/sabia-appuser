@@ -25,7 +25,13 @@
     "@angular/platform-browser": "~11.2.13",
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
+    "angular2-text-mask": "^9.0.0",
+    "collact-components": "^2.5.20",
+    "collact-components-svg": "^1.0.56",
+    "collact-design-system": "^2.6.1",
+    "collact-utils-style": "^1.0.6",
     "firebase": "^7.0 || ^8.0",
+    "ngx-file-drop": "^10.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

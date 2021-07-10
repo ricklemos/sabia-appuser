@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
+import { ModifyUserDataService } from '../../services/modify-user-data.service';
 
 @Component({
   selector: 'profile-view',
@@ -17,11 +18,17 @@ export class ProfileViewComponent implements OnInit {
   gender: string;
   email: string;
 
+  uploadProgress: number;
+  uploading: boolean;
+
+  fr = new FileReader();
+
   constructor(
     private sessionService: SessionsLoginService,
     private firestore: AngularFirestore,
     private router: Router,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private modifyUserDataService: ModifyUserDataService,
   ) {
 
   }
@@ -46,6 +53,22 @@ export class ProfileViewComponent implements OnInit {
   goChangePasswordPage(): void {
     const url = this.urlService.getChangePasswordUrl();
     this.router.navigate([url]);
+  }
 
+  updatePic(event): void {
+    this.uploading = true;
+    this.uploadProgress = 0;
+    const file = event.target.files[0];
+    const task = this.modifyUserDataService.updateProfilePic(file);
+    task.percentageChanges().pipe(
+      tap((percentage) => {
+        console.log('Atualizando Foto', percentage);
+        this.uploadProgress = percentage;
+        if (percentage === 100) {
+          console.log('Sucesso', percentage);
+          this.uploading = false;
+        }
+      }),
+    ).subscribe(noop);
   }
 }

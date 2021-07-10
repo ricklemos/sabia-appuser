@@ -1,6 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="center center" padding="12px">
   <div class="container" fxLayout="column" fxLayoutAlign="start center">
-    <profile-pic></profile-pic>
+
+    <div>
+      <label for="updatePicInput">
+        <profile-pic *ngIf="!uploading"></profile-pic>
+      </label>
+      <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
+      <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>
+    </div>
+
     <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>
     <div dsCard class="info-card" fxLayout="column">
       <div>

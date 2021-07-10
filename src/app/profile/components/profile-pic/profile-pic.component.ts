@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
@@ -9,19 +9,16 @@ import { noop } from 'rxjs';
   styleUrls: ['./profile-pic.component.scss'],
 })
 export class ProfilePicComponent implements OnInit {
-  src;
+  pictureLink: string;
+
   constructor(
     private modifyUserDataService: ModifyUserDataService,
-    private host: ElementRef<HTMLInputElement>
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.modifyUserDataService.fetchProfilePic().subscribe(ref => this.src = ref);
+    this.modifyUserDataService.fetchProfilePic().pipe(
+      tap(ref => this.pictureLink = ref)
+    ).subscribe(noop);
   }
-
-  updatePic(event): void{
-    const file = event.target.files[0];
-    this.modifyUserDataService.updateProfilePic(file);
-  }
-
 }

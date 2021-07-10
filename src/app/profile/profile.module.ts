@@ -15,6 +15,7 @@ import { ChangePasswordPageComponent } from './containers/change-password-page/c
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileToolbarComponent } from './components/profile-toolbar/profile-toolbar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ProfileToolbarComponent } from './components/profile-toolbar/profile-to
     RouterModule,
     RouterModule.forChild(ProfileRoutes),
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [
     ModifyUserDataService

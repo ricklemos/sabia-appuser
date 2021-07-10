@@ -8,6 +8,8 @@ import { SessionsLoginService } from '../../../sessions/services/sessions-login.
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { error } from '@angular/compiler/src/util';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-change-password',
@@ -17,6 +19,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class ChangePasswordComponent implements OnInit {
   formGroup: FormGroup;
   passwordIsEqual = false;
+  newEqualsOld = true;
+  user;
+
 
   constructor(
     private modifyUserDataService: ModifyUserDataService,
@@ -24,16 +29,29 @@ export class ChangePasswordComponent implements OnInit {
     private urlService: UrlService,
     private formBuilder: FormBuilder,
     private sessionService: SessionsLoginService,
+    private snackBar: MatSnackBar,
     private angularFireAuth: AngularFireAuth
   ) {
     this.formGroup = formBuilder.group({
-      newPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
       oldPassword: ['', Validators.required],
       repeatNewPassword: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
+    const fetchUser = this.sessionService.fetchAuthUser().pipe(
+      tap(user => this.user = user)
+    ).subscribe(noop);
+    this.formGroup.get('newPassword').valueChanges.pipe(
+      tap(data => {
+        if (data === this.formGroup.value.oldPassword) {
+          this.newEqualsOld = true;
+        } else {
+          this.newEqualsOld = false;
+        }
+      })
+    ).subscribe(noop);
     this.formGroup.get('repeatNewPassword').valueChanges.pipe(
       tap(data => {
         if (data === this.formGroup.value.newPassword) {
@@ -43,21 +61,22 @@ export class ChangePasswordComponent implements OnInit {
         }
       })
     ).subscribe(noop);
-
   }
 
-  changePassword(): void {
-    // const user = firebase.auth().currentUser;
-    // const credential = this.angularFireAuth.credential(withEmail: 'nandaparodi@gmail.com');
-    const fetchUser = this.sessionService.fetchAuthUser().pipe(
-      tap(user => {
-        user.updatePassword(this.formGroup.value.newPassword);
-      })
-      // tap(user => {
-      //   user.reauthenticateWithCredential(email: , password: this.formGroup.value.oldPassword);
-      // })
-    ).subscribe(noop);
 
-    this.router.navigate([this.urlService.getProfileUrl()]);
+  changePassword(): void {
+    const credential = firebase.auth.EmailAuthProvider.credential(this.sessionService.getEmail(), this.formGroup.value.oldPassword);
+    this.user.reauthenticateWithCredential(credential).then((data) => {
+      this.user.updatePassword(this.formGroup.value.newPassword);
+      this.router.navigate([this.urlService.getProfileUrl()]);
+      this.snackBar.open('Senha alterada com sucesso', 'OK', {
+        duration: 3000
+      });
+    }).catch(error => {
+      console.log(error);
+      this.snackBar.open('Senha antiga incorreta', 'OK', {
+        duration: 3000
+      });
+    });
   }
 }

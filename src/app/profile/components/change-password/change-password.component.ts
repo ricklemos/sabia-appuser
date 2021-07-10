@@ -22,7 +22,6 @@ export class ChangePasswordComponent implements OnInit {
   newEqualsOld = true;
   user;
 
-
   constructor(
     private modifyUserDataService: ModifyUserDataService,
     private router: Router,
@@ -52,6 +51,7 @@ export class ChangePasswordComponent implements OnInit {
         }
       })
     ).subscribe(noop);
+
     this.formGroup.get('repeatNewPassword').valueChanges.pipe(
       tap(data => {
         if (data === this.formGroup.value.newPassword) {

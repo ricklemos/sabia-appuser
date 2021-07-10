@@ -10,6 +10,21 @@ body {
 @import "~collact-design-system/styles/styles";
 @import "~collact-components/styles/styles";
 
+.bg-sabia-blue {
+  &-500 {
+    background-color: #2E3037;
+    span {
+      color: white;
+    }
+  }
+}
+
+.width{
+  &-100{
+    width: 100%;
+  }
+}
+
 
 @font-face {
   font-family: "ProximaNova";

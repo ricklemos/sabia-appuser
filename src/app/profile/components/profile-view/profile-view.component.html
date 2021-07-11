@@ -1,12 +1,13 @@
 <div fxLayout="column" fxLayoutAlign="center center" padding="12px">
   <div class="container" fxLayout="column" fxLayoutAlign="start center">
 
-    <div>
+    <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
       <label for="updatePicInput">
         <img [src]="photo | async" onerror="this.src='./../../../assets/img/profile-user.png'" *ngIf="!uploading">
       </label>
       <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
       <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>
+      <p *ngIf="uploading">{{ uploadProgress }} %</p>
     </div>
 
     <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>

@@ -19,7 +19,7 @@ export class ProfileViewComponent implements OnInit {
   gender: string;
   email: string;
 
-  uploadProgress: number;
+  uploadProgress: string;
   uploading: boolean;
 
   photo: Observable<string | null>;
@@ -59,16 +59,12 @@ export class ProfileViewComponent implements OnInit {
 
   updatePic(event): void {
     this.uploading = true;
-    this.uploadProgress = 0;
+    this.uploadProgress = '0';
     const file = event.target.files[0];
     const task = this.modifyUserDataService.updateProfilePic(file);
     task.percentageChanges().pipe(
       tap((percentage) => {
-        console.log('Atualizando Foto', percentage);
-        this.uploadProgress = percentage;
-        if (percentage === 100) {
-          console.log('Sucesso', percentage);
-        }
+        this.uploadProgress = ((Math.round(percentage * 100) / 100).toFixed(0));
       }),
     ).subscribe(noop);
     const filePath = `profilePics/${ this.sessionService.getUserId() }`;

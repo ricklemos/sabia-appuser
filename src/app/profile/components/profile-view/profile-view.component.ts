@@ -3,9 +3,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import { tap } from 'rxjs/operators';
-import { noop } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
+import { noop, Observable } from 'rxjs';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'profile-view',
@@ -21,14 +22,14 @@ export class ProfileViewComponent implements OnInit {
   uploadProgress: number;
   uploading: boolean;
 
-  fr = new FileReader();
-
+  photo: Observable<string | null>;
   constructor(
     private sessionService: SessionsLoginService,
     private firestore: AngularFirestore,
     private router: Router,
     private urlService: UrlService,
     private modifyUserDataService: ModifyUserDataService,
+    private angularFireStorage: AngularFireStorage
   ) {
 
   }
@@ -42,6 +43,7 @@ export class ProfileViewComponent implements OnInit {
         this.email = data.email;
       })
     ).subscribe(noop);
+    this.photo = this.modifyUserDataService.fetchProfilePicture().getDownloadURL();
 
   }
 
@@ -66,9 +68,16 @@ export class ProfileViewComponent implements OnInit {
         this.uploadProgress = percentage;
         if (percentage === 100) {
           console.log('Sucesso', percentage);
-          this.uploading = false;
         }
       }),
+    ).subscribe(noop);
+    const filePath = `profilePics/${ this.sessionService.getUserId() }`;
+    const fileRef = this.angularFireStorage.ref(filePath);
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        this.photo = fileRef.getDownloadURL();
+        this.uploading = false;
+      })
     ).subscribe(noop);
   }
 }

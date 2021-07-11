@@ -3,7 +3,7 @@
 
     <div>
       <label for="updatePicInput">
-        <profile-pic *ngIf="!uploading"></profile-pic>
+        <img [src]="photo | async" onerror="this.src='./../../../assets/img/profile-user.png'" *ngIf="!uploading">
       </label>
       <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
       <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>

@@ -2,23 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { tap } from 'rxjs/operators';
-import { noop, Observable } from 'rxjs';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { UploadTaskSnapshot } from '@angular/fire/storage/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModifyUserDataService {
   uId: string;
-
   constructor(private firestore: AngularFirestore,
               private sessionService: SessionsLoginService,
               private angularFireAuth: AngularFireAuth,
               private angularFireStorage: AngularFireStorage,
-              private router: Router
   ) {
   }
 
@@ -42,14 +38,19 @@ export class ModifyUserDataService {
 
   }
 
-  fetchProfilePic(): Observable<any> {
+  fetchProfilePictureUrl(): Observable<any> {
     return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`).getDownloadURL();
+  }
+
+  fetchProfilePicture(): AngularFireStorageReference{
+    return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`);
   }
 
   updateProfilePic(file): AngularFireUploadTask{
     const filePath = `profilePics/${ this.sessionService.getUserId() }`;
     return this.angularFireStorage.upload(filePath, file);
   }
+
 }
 
 

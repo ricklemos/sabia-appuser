@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
 import { tap } from 'rxjs/operators';
-import { noop } from 'rxjs';
+import { noop, Observable } from 'rxjs';
 
 @Component({
   selector: 'profile-pic',
@@ -9,16 +9,13 @@ import { noop } from 'rxjs';
   styleUrls: ['./profile-pic.component.scss'],
 })
 export class ProfilePicComponent implements OnInit {
-  pictureLink: string;
-
+  pictureLink: Observable<string | null>;
   constructor(
     private modifyUserDataService: ModifyUserDataService,
   ) {
   }
 
   ngOnInit(): void {
-    this.modifyUserDataService.fetchProfilePic().pipe(
-      tap(ref => this.pictureLink = ref)
-    ).subscribe(noop);
+    this.pictureLink = this.modifyUserDataService.fetchProfilePicture().getDownloadURL();
   }
 }

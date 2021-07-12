@@ -97,7 +97,9 @@ export class SessionsLoginService {
     return this.angularFireAuth.sendPasswordResetEmail(email);
   }
 
-
+  public getUserId(): string {
+    return this.user.uid;
+  }
 }
 
 export interface StepObservable {

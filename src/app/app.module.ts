@@ -7,10 +7,13 @@ import { AppComponent } from './app.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { ProfileModule } from './profile/profile.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { UrlService } from './services/url.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CollactDesignSystemModule } from 'collact-design-system';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { CollactDesignSystemModule } from 'collact-design-system';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    ProfileModule,
     SessionsModule,
     CollactDesignSystemModule,
     TextMaskModule,

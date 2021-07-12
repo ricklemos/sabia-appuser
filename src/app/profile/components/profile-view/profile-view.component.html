@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center center" padding="12px">
+  <div class="container" fxLayout="column" fxLayoutAlign="start center">
+    <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>
+    <div dsCard class="info-card" fxLayout="column">
+      <div>
+        <p class="nomeCampo__margin-left">E-mail</p>
+        <div class="info-box" label="Email" large>{{ email }}</div>
+      </div>
+      <div>
+        <p class="nomeCampo__margin-left">Gênero</p>
+        <div class="info-box" label="Genero" large>{{ gender }}</div>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <button class="ds-button" (click)="goEditPage()" margin->Editar</button>
+        <button class="ds-button" (click)="goChangePasswordPage()">Trocar Senha</button>
+      </div>
+    </div>
+  </div>
+</div>

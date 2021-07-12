@@ -31,4 +31,16 @@ export class UrlService {
     const url = this.getSessionsBaseUrl();
     return `${ url }/cadastro`;
   }
+
+  public getProfileEditUrl(): string{
+    return '/profile/edit';
+  }
+
+  public getProfileUrl(): string {
+    return '/profile';
+  }
+
+  public getChangePasswordUrl(): string {
+    return '/profile/change-password';
+  }
 }

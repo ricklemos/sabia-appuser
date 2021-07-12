@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ModifyUserDataService {
   uId: string;
+
   constructor(private firestore: AngularFirestore,
               private sessionService: SessionsLoginService,
               private angularFireAuth: AngularFireAuth,
@@ -56,15 +57,19 @@ export class ModifyUserDataService {
 
   // Retorna a referência da foto de perfil do usuário logado (Assim é possível realizar uploads ou downloads)
   // Mais informações em https://github.com/angular/angularfire/blob/master/docs/storage/storage.md
-  fetchUserProfilePicture(): AngularFireStorageReference{
+  fetchUserProfilePicture(): AngularFireStorageReference {
     return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`);
   }
 
   // Atualiza o arquivo da foto de perfil a partir do arquivo file
   // O caminho no storage é "profilePics/UID"
-  updateProfilePic(file): AngularFireUploadTask{
+  updateProfilePic(file): AngularFireUploadTask {
     const filePath = `profilePics/${ this.sessionService.getUserId() }`;
     return this.angularFireStorage.upload(filePath, file);
+  }
+
+  deleteProfilePic(): Observable<any> {
+    return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`).delete();
   }
 
 }

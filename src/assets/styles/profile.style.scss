@@ -88,3 +88,13 @@
   margin: 0px;
   background-color: #F7F7F7;
 }
+
+profile-pic{
+  img{
+    height: 130px;
+    border-radius: 100%;
+  }
+  mat-progress-spinner{
+    height: 130px;
+  }
+}

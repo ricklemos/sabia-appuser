@@ -56,40 +56,4 @@ export class ProfileViewComponent implements OnInit {
     const url = this.urlService.getChangePasswordUrl();
     this.router.navigate([url]);
   }
-
-  // Função que é chamada quando o usário escolhe uma foto para fazer upload
-  updatePic(event): void {
-    // Foto que irá subir
-    const file = event.target.files[0];
-    // Testa se o arquivo é menor que 2MB antes de subir
-    if (file.size <= 2000000) {
-      // Testa se o arquivo é jpeg ou png antes de subir
-      if (file.type === 'image/jpeg' || file.type === 'image/png') {
-        // Coloca o estado "uploading" em true para dar feedback de uplaod para o usuário
-        this.uploading = true;
-        this.uploadProgress = '1';
-        // Chama a função de upload
-        const task = this.modifyUserDataService.updateProfilePic(file);
-        // Apresenta a porcentagem de conclusão do upload da foto que entra como valor do "mat-progress"
-        task.percentageChanges().pipe(
-          tap((percentage) => {
-            this.uploadProgress = Math.round(percentage).toFixed(0);
-          }),
-        ).subscribe(noop);
-        // A foto só pode voltar a ser mostrada se o upload tiver sido concluído no firebase
-        // Esse trecho garante que o HTML só irá voltar a mostrar a foto quando o upload é concluído
-        task.snapshotChanges().pipe(
-          finalize(() => this.uploading = false)
-        ).subscribe(noop);
-      } else {
-        this.snackBar.open('Utilize um arquivo jpeg ou png', 'OK', {
-          duration: 5000
-        });
-      }
-    } else {
-      this.snackBar.open('Utilize um arquivo menor que 2MB', 'OK', {
-        duration: 5000
-      });
-    }
-  }
 }

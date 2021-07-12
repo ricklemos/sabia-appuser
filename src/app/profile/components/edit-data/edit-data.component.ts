@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,9 +13,10 @@ import { SessionsLoginService } from '../../../sessions/services/sessions-login.
   templateUrl: '../../components/edit-data/edit-data.component.html',
   styleUrls: ['../../components/edit-data/edit-data.component.scss']
 })
-export class EditDataComponent implements OnInit {
+export class EditDataComponent implements OnInit, OnDestroy {
 
   formGroup: FormGroup;
+  unsubscribe = [];
 
   constructor(
     private modifyUserDataService: ModifyUserDataService,
@@ -33,7 +34,7 @@ export class EditDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sessionService.fetchUserData().pipe(
+    const subFetchUserData = this.sessionService.fetchUserData().pipe(
       tap(data => {
         this.formGroup.setValue({
           firstName: data.firstName,
@@ -41,10 +42,13 @@ export class EditDataComponent implements OnInit {
           gender: data.gender,
           email: data.email
         });
-        console.log(data);
       })
     ).subscribe(noop);
+    this.unsubscribe.push(subFetchUserData);
+  }
 
+  ngOnDestroy(): void {
+    this.unsubscribe.map(u => u.unsubscribe);
   }
 
   edit(): void {

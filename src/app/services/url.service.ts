@@ -32,7 +32,7 @@ export class UrlService {
     return `${ url }/cadastro`;
   }
 
-  public getEditUrl(): string{
+  public getProfileEditUrl(): string{
     return '/profile/edit';
   }
 

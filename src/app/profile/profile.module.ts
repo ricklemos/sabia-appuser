@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileToolbarComponent } from './components/profile-toolbar/profile-toolbar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CollactDesignSystemModule } from 'collact-design-system';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RouterModule.forChild(ProfileRoutes),
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CollactDesignSystemModule
   ],
   providers: [
     ModifyUserDataService

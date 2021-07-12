@@ -39,7 +39,7 @@ export class ProfileViewComponent implements OnInit {
   }
 
   goEditPage(): void {
-    const url = this.urlService.getEditUrl();
+    const url = this.urlService.getProfileEditUrl();
     this.router.navigate([url]);
   }
 

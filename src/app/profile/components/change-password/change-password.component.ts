@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,11 +16,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   passwordIsEqual = false;
   newEqualsOld = true;
   user;
+  unsubscribe = [];
 
   constructor(
     private modifyUserDataService: ModifyUserDataService,
@@ -39,10 +40,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const fetchUser = this.sessionService.fetchAuthUser().pipe(
+    const subFetchUser = this.sessionService.fetchAuthUser().pipe(
       tap(user => this.user = user)
     ).subscribe(noop);
-    this.formGroup.get('newPassword').valueChanges.pipe(
+    this.unsubscribe.push(subFetchUser);
+
+    const subNewPassword = this.formGroup.get('newPassword').valueChanges.pipe(
       tap(data => {
         if (data === this.formGroup.value.oldPassword) {
           this.newEqualsOld = true;
@@ -51,8 +54,9 @@ export class ChangePasswordComponent implements OnInit {
         }
       })
     ).subscribe(noop);
+    this.unsubscribe.push(subNewPassword);
 
-    this.formGroup.get('repeatNewPassword').valueChanges.pipe(
+    const subRepeatPassword = this.formGroup.get('repeatNewPassword').valueChanges.pipe(
       tap(data => {
         if (data === this.formGroup.value.newPassword) {
           this.passwordIsEqual = true;
@@ -61,8 +65,12 @@ export class ChangePasswordComponent implements OnInit {
         }
       })
     ).subscribe(noop);
+    this.unsubscribe.push(subRepeatPassword);
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribe.map(u => u.unsubscribe);
+  }
 
   changePassword(): void {
     const credential = firebase.auth.EmailAuthProvider.credential(this.sessionService.getEmail(), this.formGroup.value.oldPassword);
@@ -73,7 +81,6 @@ export class ChangePasswordComponent implements OnInit {
         duration: 3000
       });
     }).catch(error => {
-      console.log(error);
       this.snackBar.open('Senha antiga incorreta', 'OK', {
         duration: 3000
       });

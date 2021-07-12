@@ -68,7 +68,7 @@ export class ModifyUserDataService {
     return this.angularFireStorage.upload(filePath, file);
   }
 
-  deleteProfilePic(): Observable<any> {
+  deleteUserProfilePic(): Observable<any> {
     return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`).delete();
   }
 

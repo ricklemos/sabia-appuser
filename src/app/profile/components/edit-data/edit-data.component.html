@@ -4,7 +4,7 @@
     <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
       <label for="updatePicInput">
         <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
-        <profile-pic [uid]="uid" *ngIf="!uploading && !deleting"></profile-pic>
+        <profile-pic *ngIf="!uploading && !deleting"></profile-pic>
       </label>
       <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
 

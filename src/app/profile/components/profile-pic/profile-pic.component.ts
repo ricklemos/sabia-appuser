@@ -12,12 +12,17 @@ import { SessionsLoginService } from '../../../sessions/services/sessions-login.
 export class ProfilePicComponent implements OnInit {
   pictureLink: Observable<string | null>;
   @Input() uid: string;
+
   constructor(
     private modifyUserDataService: ModifyUserDataService,
   ) {
   }
 
   ngOnInit(): void {
-    this.pictureLink = this.modifyUserDataService.fetchProfilePicture(this.uid).getDownloadURL();
+    if (this.uid) {
+      this.pictureLink = this.modifyUserDataService.fetchProfilePicture(this.uid).getDownloadURL();
+    } else {
+      this.pictureLink = this.modifyUserDataService.fetchUserProfilePicture().getDownloadURL();
+    }
   }
 }

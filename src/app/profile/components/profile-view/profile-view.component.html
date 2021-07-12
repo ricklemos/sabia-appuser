@@ -2,13 +2,9 @@
   <div class="container" fxLayout="column" fxLayoutAlign="start center">
 
     <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
-      <label for="updatePicInput">
-        <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
-        <profile-pic [uid]="uid" *ngIf="!uploading"></profile-pic>
-      </label>
-      <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
-      <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>
-      <p *ngIf="uploading">{{ uploadProgress }} %</p>
+      <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
+      <!--Caso queira carregar somente a foto do usuário logado, não é necessário passar nenhum parâmetro -->
+      <profile-pic></profile-pic>
     </div>
 
     <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>

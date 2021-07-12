@@ -73,8 +73,9 @@ export class EditDataComponent implements OnInit, OnDestroy {
   }
 
   deletePic(): void {
+    // TODO: Show MatDialog asking the user before deleting
     this.deleting = true;
-    const deletePic = this.modifyUserDataService.deleteProfilePic().pipe(
+    const deletePic = this.modifyUserDataService.deleteUserProfilePic().pipe(
       tap(data => this.deleting = false)
     ).subscribe(noop);
     this.subscriptions.push(deletePic);

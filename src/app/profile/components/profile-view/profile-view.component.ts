@@ -3,8 +3,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import { tap } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
+import { ModifyUserDataService } from '../../services/modify-user-data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'profile-view',
@@ -17,13 +19,21 @@ export class ProfileViewComponent implements OnInit {
   gender: string;
   email: string;
 
+  uploadProgress: string;
+  uploading: boolean;
+
+  uid: string;
+
   constructor(
     private sessionService: SessionsLoginService,
     private firestore: AngularFirestore,
     private router: Router,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private modifyUserDataService: ModifyUserDataService,
+    private snackBar: MatSnackBar
   ) {
-
+    // Necessário colocar o uid neste componente para passar para o componente "profile pic"
+    this.uid = this.sessionService.getUserId();
   }
 
   ngOnInit(): void {
@@ -35,7 +45,6 @@ export class ProfileViewComponent implements OnInit {
         this.email = data.email;
       })
     ).subscribe(noop);
-
   }
 
   goEditPage(): void {
@@ -46,6 +55,5 @@ export class ProfileViewComponent implements OnInit {
   goChangePasswordPage(): void {
     const url = this.urlService.getChangePasswordUrl();
     this.router.navigate([url]);
-
   }
 }

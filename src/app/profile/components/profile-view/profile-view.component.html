@@ -1,5 +1,12 @@
 <div fxLayout="column" fxLayoutAlign="center center" padding="12px">
   <div class="container" fxLayout="column" fxLayoutAlign="start center">
+
+    <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
+      <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
+      <!--Caso queira carregar somente a foto do usuário logado, não é necessário passar nenhum parâmetro -->
+      <profile-pic></profile-pic>
+    </div>
+
     <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>
     <div dsCard class="info-card" fxLayout="column">
       <div>

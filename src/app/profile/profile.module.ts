@@ -15,6 +15,8 @@ import { ChangePasswordPageComponent } from './containers/change-password-page/c
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileToolbarComponent } from './components/profile-toolbar/profile-toolbar.component';
+import { ProfilePicComponent } from './components/profile-pic/profile-pic.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CollactDesignSystemModule } from 'collact-design-system';
 
@@ -28,7 +30,8 @@ import { CollactDesignSystemModule } from 'collact-design-system';
     LayoutProfileComponent,
     ChangePasswordComponent,
     ChangePasswordPageComponent,
-    ProfileToolbarComponent
+    ProfileToolbarComponent,
+    ProfilePicComponent
   ],
   imports: [
     CommonModule,
@@ -38,11 +41,12 @@ import { CollactDesignSystemModule } from 'collact-design-system';
     RouterModule.forChild(ProfileRoutes),
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatSnackBarModule,
     CollactDesignSystemModule
   ],
   providers: [
-    ModifyUserDataService
+    ModifyUserDataService,
   ],
 })
 export class ProfileModule {

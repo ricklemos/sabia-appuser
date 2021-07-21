@@ -32,6 +32,7 @@
     "collact-utils-style": "^1.0.6",
     "firebase": "^7.0 || ^8.0",
     "ngx-file-drop": "^10.1.1",
+    "postcss": "^8.3.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

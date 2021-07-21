@@ -1,8 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { tap } from 'rxjs/operators';
-import { noop, Observable } from 'rxjs';
-import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'profile-pic',

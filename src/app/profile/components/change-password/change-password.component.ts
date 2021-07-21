@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import firebase from 'firebase';
+// TODO: Repensar forma de fazer o import do firebase, há mesmo necessidade?
+import firebase from 'firebase/app';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { error } from '@angular/compiler/src/util';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -30,7 +30,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private sessionService: SessionsLoginService,
     private snackBar: MatSnackBar,
-    private angularFireAuth: AngularFireAuth
   ) {
     this.formGroup = formBuilder.group({
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -47,22 +46,14 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
     const subNewPassword = this.formGroup.get('newPassword').valueChanges.pipe(
       tap(data => {
-        if (data === this.formGroup.value.oldPassword) {
-          this.newEqualsOld = true;
-        } else {
-          this.newEqualsOld = false;
-        }
+        this.newEqualsOld = data === this.formGroup.value.oldPassword;
       })
     ).subscribe(noop);
     this.unsubscribe.push(subNewPassword);
 
     const subRepeatPassword = this.formGroup.get('repeatNewPassword').valueChanges.pipe(
       tap(data => {
-        if (data === this.formGroup.value.newPassword) {
-          this.passwordIsEqual = true;
-        } else {
-          this.passwordIsEqual = false;
-        }
+        this.passwordIsEqual = data === this.formGroup.value.newPassword;
       })
     ).subscribe(noop);
     this.unsubscribe.push(subRepeatPassword);
@@ -74,13 +65,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   changePassword(): void {
     const credential = firebase.auth.EmailAuthProvider.credential(this.sessionService.getEmail(), this.formGroup.value.oldPassword);
-    this.user.reauthenticateWithCredential(credential).then((data) => {
+    this.user.reauthenticateWithCredential(credential).then(() => {
       this.user.updatePassword(this.formGroup.value.newPassword);
       this.router.navigate([this.urlService.getProfileUrl()]);
       this.snackBar.open('Senha alterada com sucesso', 'OK', {
         duration: 3000
       });
-    }).catch(error => {
+    }).catch(() => {
       this.snackBar.open('Senha antiga incorreta', 'OK', {
         duration: 3000
       });

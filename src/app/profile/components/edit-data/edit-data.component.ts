@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import { finalize, take, tap } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';

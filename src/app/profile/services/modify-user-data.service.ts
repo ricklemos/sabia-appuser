@@ -4,7 +4,6 @@ import { SessionsLoginService } from '../../sessions/services/sessions-login.ser
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

@@ -31,7 +31,7 @@ export class UrlService {
     return `${ url }/cadastro`;
   }
 
-  public getProfileEditUrl(): string{
+  public getProfileEditUrl(): string {
     return '/profile/edit';
   }
 
@@ -41,5 +41,9 @@ export class UrlService {
 
   public getChangePasswordUrl(): string {
     return '/profile/change-password';
+  }
+
+  public getQuestionary(questionaryId): string {
+    return `/questionary/${ questionaryId }`;
   }
 }

@@ -1,0 +1,39 @@
+h1 {
+  font-size: 24px;
+  font-family: ProximaNova, sans-serif;
+}
+h2 {
+  font-size: 20px;
+  font-family: ProximaNova, sans-serif;
+}
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+}
+
+
+
+.questionary-header{
+
+  mat-progress-bar {
+    height: 5px;
+    border-radius: 2px;
+  }
+}
+
+.questionary-body {
+  padding: 8px;
+}
+
+.alternatives {
+  width: 100%;
+  &__button{
+    width: 100%;
+  }
+}
+
+.questionary-question-page {
+  background-color: #F7F7F7;
+  padding: 16px;
+  height: 100vh;
+}

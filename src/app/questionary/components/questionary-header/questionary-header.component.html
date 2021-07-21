@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="questionary-header">
+  <button clButtonIcon fxFlexAlign="end">
+    <i clIcon name="cl-close"></i>
+  </button>
+  <h2 class="semi-bold">{{ questionaryName }}</h2>
+  <mat-progress-bar [value]="progress"></mat-progress-bar>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexAlign="stretch">
+    <h2>Questão {{ questionNumber }}</h2>
+    <h2>{{ questionNumber }} / {{ nQuestions }}</h2>
+  </div>
+</div>
+
+
+

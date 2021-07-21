@@ -12,7 +12,7 @@ import { SessionsModule } from './sessions/sessions.module';
 import { UrlService } from './services/url.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CollactDesignSystemModule } from 'collact-design-system';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuestionaryModule } from './questionary/questionary.module';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SessionsModule,
     CollactDesignSystemModule,
     TextMaskModule,
+    QuestionaryModule
   ],
   providers: [
     UrlService

@@ -7,10 +7,6 @@ export const QuestionaryRoutes: Routes = [
     path: 'questionary',
     children: [
       {
-        path: 'question',
-        component: QuestionaryQuestionPageComponent
-      },
-      {
         path: ':questionaryId',
         component: QuestionaryQuestionPageComponent
       }

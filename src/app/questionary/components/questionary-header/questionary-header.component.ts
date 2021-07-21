@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionaryService } from '../../services/questionary.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'questionary-header',
@@ -12,13 +14,16 @@ export class QuestionaryHeaderComponent implements OnInit {
   progress: number;
   questionaryName: string;
 
-  constructor() {
+  constructor(
+    private questionaryService: QuestionaryService
+  ) {
   }
 
   ngOnInit(): void {
-    this.questionaryName = 'Teste Final';
-    this.nQuestions = 10;
-    this.questionNumber = 5;
+    console.log('Iniciou o Header');
+    this.questionaryName = this.questionaryService.getQuestionary().questionaryName;
+    this.nQuestions = this.questionaryService.getNumberOfQuestions();
+    this.questionNumber = this.questionaryService.getCurrentQuestionNumber();
     this.progress = (this.questionNumber / this.nQuestions) * 100;
   }
 

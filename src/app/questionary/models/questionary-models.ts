@@ -3,8 +3,8 @@ export interface QuestionaryAnswer {
   questionaryId: string;
   questionaryName: string;
   questions: Question[];
-  score: number;
-  tentatives: number;
+  score?: number;
+  tentatives?: number;
 }
 
 export interface Question {

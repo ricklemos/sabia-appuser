@@ -9,6 +9,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { QuestionaryBodyComponent } from './components/questionary-body/questionary-body.component';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -25,7 +26,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     RouterModule.forChild(QuestionaryRoutes),
     MatProgressBarModule,
     CollactDesignSystemModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatProgressSpinnerModule
   ]
 })
 export class QuestionaryModule { }

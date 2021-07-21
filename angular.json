@@ -30,7 +30,7 @@
                 "input": "node_modules/collact-components-svg",
                 "output": "/assets/svg"
               },
-              "src/favicon.ico",
+              "src/sabiaIcon.png",
               "src/assets"
             ],
             "styles": [

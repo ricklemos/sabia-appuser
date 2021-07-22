@@ -1,4 +1,4 @@
-<div class="questionary-question-page"  fxLayoutAlign="center center" *ngIf="loadingQuestionary">
+<div class="questionary-question-page"  fxLayoutAlign="center center" *ngIf="loadingQuestionary && !done">
   <mat-spinner></mat-spinner>
 </div>
 <div
@@ -6,8 +6,12 @@
   fxLayoutAlign="start stretch"
   fxLayoutGap="16px"
   class="questionary-question-page"
-  *ngIf="!loadingQuestionary">
+  *ngIf="!loadingQuestionary && !done">
   <questionary-header [questionNumber]="currentQuestionNumber"></questionary-header>
   <questionary-body [question]="currentQuestion" (answerEvent)="nextQuestion($event)"></questionary-body>
 </div>
+<div class="questionary-question-page" *ngIf="!loadingQuestionary && done">
+  <questionary-done [nQuestions]="questions.length" [score]="score"></questionary-done>
+</div>
+
 

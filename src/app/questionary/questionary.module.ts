@@ -10,6 +10,7 @@ import { QuestionaryBodyComponent } from './components/questionary-body/question
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { QuestionaryDoneComponent } from './components/questionary-done/questionary-done.component';
 
 
 
@@ -18,7 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LayoutQuestionaryComponent,
     QuestionaryQuestionPageComponent,
     QuestionaryHeaderComponent,
-    QuestionaryBodyComponent
+    QuestionaryBodyComponent,
+    QuestionaryDoneComponent
   ],
   imports: [
     CommonModule,

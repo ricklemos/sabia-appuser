@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { QuestionaryAnswer } from '../models/questionary-models';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({

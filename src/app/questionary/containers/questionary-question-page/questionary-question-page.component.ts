@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionaryService } from '../../services/questionary.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
@@ -19,12 +19,14 @@ export class QuestionaryQuestionPageComponent implements OnInit {
   currentQuestion: Question;
   currentQuestionNumber: number;
   score: number;
+  done: boolean;
 
   constructor(
     private questionaryService: QuestionaryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.score = 0;
+    this.done = false;
   }
 
   ngOnInit(): void {
@@ -55,8 +57,9 @@ export class QuestionaryQuestionPageComponent implements OnInit {
       } else {
         this.questionary.tentatives = 1;
       }
+      this.questionaryService.setQuestionary(this.questionary);
       this.questionaryService.updateQuestionary(this.questionaryId, this.questionary)
-        .then(() => console.log('Ir pra página de questionário concluído'))
+        .then(() => this.done = true)
         .catch((error) => console.log(error));
     } else {
       this.currentQuestionNumber += 1;

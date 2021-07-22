@@ -43,6 +43,10 @@ p {
 .questionary-done {
   height: calc((100vh) - (32px));
 
+  .score {
+    color: #39C0BA;
+  }
+
   p {
     width: 70%;
     text-align: center;

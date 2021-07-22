@@ -1,8 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Alternative, Question } from '../../models/questionary-models';
-import { QuestionaryService } from '../../services/questionary.service';
-import { noop } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'questionary-body',
@@ -12,23 +9,26 @@ import { tap } from 'rxjs/operators';
 export class QuestionaryBodyComponent implements OnInit {
 
   @Input() question: Question;
-  @Output() answerEvent = new EventEmitter<boolean>();
+  @Output() answerEvent = new EventEmitter<Alternative>();
+  alternativeSelected: Alternative;
+  showBottomSheet: boolean;
 
-  constructor(
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {
+    this.showBottomSheet = false;
   }
 
   selectAlternative(alternative: Alternative): void {
-    if (alternative.isRight) {
-      console.log('ACERTOU!');
-      this.answerEvent.emit(true);
-    } else {
-      console.log('ERROU');
-      this.answerEvent.emit(false);
-    }
+    this.alternativeSelected = alternative;
+    this.showBottomSheet = true;
+    console.log('mostrar bottom sheet');
+  }
+
+  goToNextQuestion(): void {
+    this.showBottomSheet = false;
+    this.answerEvent.emit(this.alternativeSelected);
   }
 
 }

@@ -38,10 +38,12 @@ export class QuestionaryQuestionPageComponent implements OnInit {
     ).subscribe(noop);
   }
 
-  nextQuestion($event): void {
-    console.log($event);
-    console.log('NextQuestion');
-    this.currentQuestionNumber += 1;
-    this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
+  nextQuestion(alternative): void {
+    if (this.currentQuestionNumber === this.questions.length) {
+      console.log('Ir pra página de questionário concluído');
+    } else {
+      this.currentQuestionNumber += 1;
+      this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
+    }
   }
 }

@@ -1,5 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { QuestionaryService } from '../../services/questionary.service';
+import { QuestionaryDialogService } from '../../services/questionary-dialog.service';
+import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'questionary-header',
@@ -15,12 +18,12 @@ export class QuestionaryHeaderComponent implements OnInit, OnChanges {
   questionaryName: string;
 
   constructor(
-    private questionaryService: QuestionaryService
+    private questionaryService: QuestionaryService,
+    private questionaryDialogService: QuestionaryDialogService,
   ) {
   }
 
   ngOnInit(): void {
-    console.log('Iniciou o Header');
     this.questionaryName = this.questionaryService.getQuestionary().questionaryName;
     this.nQuestions = this.questionaryService.getQuestionary().questions.length;
     this.progress = (this.questionNumber / this.nQuestions) * 100;
@@ -28,6 +31,10 @@ export class QuestionaryHeaderComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.progress = (this.questionNumber / this.nQuestions) * 100;
+  }
+
+  openCloseDialog(): void {
+    this.questionaryDialogService.openQuestionaryClose();
   }
 
 }

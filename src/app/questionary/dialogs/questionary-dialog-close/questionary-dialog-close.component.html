@@ -1,0 +1,16 @@
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutGap="16px">
+      <h3>Tem certeza que deseja sair do teste?</h3>
+      <p>Qualquer progresso será perdido!</p>
+    </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <button clButtonContained class="bg-red-700" (click)="closeQuestionary()">
+        <span color="white">Sair</span>
+      </button>
+      <button clButtonContained class="bg-sabia-blue-500" (click)="continueQuestionary()">
+        <span>Continuar</span>
+      </button>
+    </div>
+  </div>
+</div>

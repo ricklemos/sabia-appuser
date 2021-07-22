@@ -12,7 +12,6 @@ export class QuestionaryBodyComponent implements OnInit {
   @Input() question: Question;
   @Output() answerEvent = new EventEmitter<Alternative>();
   alternativeSelected: Alternative;
-  showBottomSheet: boolean;
 
   constructor(
     private questionaryDialogService: QuestionaryDialogService
@@ -20,13 +19,10 @@ export class QuestionaryBodyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showBottomSheet = false;
-    console.log(this.question.explanationText);
   }
 
   selectAlternative(alternative: Alternative): void {
     this.alternativeSelected = alternative;
-    this.showBottomSheet = true;
     const data = {
       isRight: alternative.isRight,
       explanationText: this.question.explanationText
@@ -36,7 +32,6 @@ export class QuestionaryBodyComponent implements OnInit {
   }
 
   goToNextQuestion(): void {
-    this.showBottomSheet = false;
     // Esse evento dispara uma função no container para passar para a próxima pergunta (nextQuestion)
     this.answerEvent.emit(this.alternativeSelected);
   }

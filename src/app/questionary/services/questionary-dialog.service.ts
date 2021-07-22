@@ -4,6 +4,7 @@ import { QuestionaryDialogAnswerComponent } from '../dialogs/questionary-dialog-
 import { Observable } from 'rxjs';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { QuestionaryBottomSheetAnswerComponent } from '../bottom-sheets/questionary-bottom-sheet-answer/questionary-bottom-sheet-answer.component';
+import { QuestionaryDialogCloseComponent } from '../dialogs/questionary-dialog-close/questionary-dialog-close.component';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,12 @@ export class QuestionaryDialogService {
       });
       return dialogRef.afterClosed();
     }
-
-
   }
 
+  openQuestionaryClose(): Observable<any> {
+    const dialogRef = this.dialog.open(QuestionaryDialogCloseComponent, {
+      width: '512px',
+    });
+    return dialogRef.afterClosed();
+  }
 }

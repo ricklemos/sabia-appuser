@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuestionaryService } from '../../services/questionary.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
-import { QuestionaryAnswer } from '../../models/questionary-models';
+import { Question, QuestionaryAnswer } from '../../models/questionary-models';
 
 @Component({
   selector: 'app-questionary-question-page',
@@ -14,6 +14,9 @@ export class QuestionaryQuestionPageComponent implements OnInit {
 
   questionaryId: string;
   loadingQuestionary: boolean;
+  questions: Question[];
+  currentQuestion: Question;
+  currentQuestionNumber: number;
 
   constructor(
     private questionaryService: QuestionaryService,
@@ -22,13 +25,23 @@ export class QuestionaryQuestionPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentQuestionNumber = 1;
     this.loadingQuestionary = true;
     this.questionaryId = this.route.snapshot.paramMap.get('questionaryId');
     this.questionaryService.fetchQuestionary(this.questionaryId).pipe(
       tap((questionary) => {
         this.questionaryService.setQuestionary(questionary);
+        this.questions = questionary.questions;
         this.loadingQuestionary = false;
+        this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
       })
     ).subscribe(noop);
+  }
+
+  nextQuestion($event): void {
+    console.log($event);
+    console.log('NextQuestion');
+    this.currentQuestionNumber += 1;
+    this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
   }
 }

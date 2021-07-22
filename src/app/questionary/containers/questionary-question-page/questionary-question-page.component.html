@@ -7,7 +7,7 @@
   fxLayoutGap="16px"
   class="questionary-question-page"
   *ngIf="!loadingQuestionary">
-  <questionary-header></questionary-header>
-  <questionary-body></questionary-body>
+  <questionary-header [questionNumber]="currentQuestionNumber"></questionary-header>
+  <questionary-body [question]="currentQuestion" (answerEvent)="nextQuestion($event)"></questionary-body>
 </div>
 

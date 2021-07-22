@@ -10,7 +10,7 @@ export interface QuestionaryAnswer {
 export interface Question {
   questionText: string;
   alternatives: Alternative[];
-  gotRight: boolean;
+  gotRight?: boolean;
   explanationText: string;
 }
 

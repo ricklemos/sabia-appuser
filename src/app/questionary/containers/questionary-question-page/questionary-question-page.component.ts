@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuestionaryService } from '../../services/questionary.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
-import { Question, QuestionaryAnswer } from '../../models/questionary-models';
+import { Alternative, Question, QuestionaryAnswer } from '../../models/questionary-models';
 
 @Component({
   selector: 'app-questionary-question-page',
@@ -14,14 +14,17 @@ export class QuestionaryQuestionPageComponent implements OnInit {
 
   questionaryId: string;
   loadingQuestionary: boolean;
+  questionary: QuestionaryAnswer;
   questions: Question[];
   currentQuestion: Question;
   currentQuestionNumber: number;
+  score: number;
 
   constructor(
     private questionaryService: QuestionaryService,
     private route: ActivatedRoute
   ) {
+    this.score = 0;
   }
 
   ngOnInit(): void {
@@ -31,16 +34,30 @@ export class QuestionaryQuestionPageComponent implements OnInit {
     this.questionaryService.fetchQuestionary(this.questionaryId).pipe(
       tap((questionary) => {
         this.questionaryService.setQuestionary(questionary);
+        this.questionary = questionary;
         this.questions = questionary.questions;
-        this.loadingQuestionary = false;
         this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
+        this.loadingQuestionary = false;
       })
     ).subscribe(noop);
   }
 
-  nextQuestion(alternative): void {
+  nextQuestion(alternative: Alternative): void {
+    this.questions[this.currentQuestionNumber - 1].gotRight = alternative.isRight;
+    if (alternative.isRight) {
+      this.score += 1;
+    }
     if (this.currentQuestionNumber === this.questions.length) {
-      console.log('Ir pra página de questionário concluído');
+      this.questionary.questions = this.questions;
+      this.questionary.score = this.score;
+      if (this.questionary.tentatives) {
+        this.questionary.tentatives += 1;
+      } else {
+        this.questionary.tentatives = 1;
+      }
+      this.questionaryService.updateQuestionary(this.questionaryId, this.questionary)
+        .then(() => console.log('Ir pra página de questionário concluído'))
+        .catch((error) => console.log(error));
     } else {
       this.currentQuestionNumber += 1;
       this.currentQuestion = this.questions[this.currentQuestionNumber - 1];

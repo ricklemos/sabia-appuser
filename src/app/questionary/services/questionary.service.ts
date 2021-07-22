@@ -23,6 +23,10 @@ export class QuestionaryService {
     return this.angularFirestore.doc(`questionaryAnswers/${ questionaryId }`).valueChanges();
   }
 
+  updateQuestionary(questionaryId: string, questionary: QuestionaryAnswer): Promise<any> {
+    return this.angularFirestore.doc(`questionaryAnswers/${ questionaryId }`).update(questionary);
+  }
+
   setQuestionary(questionary: QuestionaryAnswer): void {
     this.questionaryAnswer = questionary;
   }

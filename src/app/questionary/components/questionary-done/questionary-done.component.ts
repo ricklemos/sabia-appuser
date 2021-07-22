@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'questionary-done',
@@ -10,9 +12,17 @@ export class QuestionaryDoneComponent implements OnInit {
   @Input() score: number;
   @Input() nQuestions;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private urlService: UrlService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  closeQuestionary(): void {
+    // TODO: go back to module progress
+    this.router.navigate([this.urlService.getHomeUrl()]);
   }
 
 }

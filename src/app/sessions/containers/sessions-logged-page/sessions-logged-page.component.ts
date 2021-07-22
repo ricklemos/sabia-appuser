@@ -34,4 +34,10 @@ export class SessionsLoggedPageComponent implements OnInit {
     this.router.navigate([url]);
   }
 
+  goQuestionaryPage(): void {
+    // TODO : Fetch questionaryId to answer.
+    const url = this.urlService.getQuestionary('123');
+    this.router.navigate([url]);
+  }
+
 }

@@ -10,7 +10,7 @@
   <questionary-header [questionNumber]="currentQuestionNumber"></questionary-header>
   <questionary-body [question]="currentQuestion" (answerEvent)="nextQuestion($event)"></questionary-body>
 </div>
-<div class="questionary-question-page" *ngIf="!loadingQuestionary && done">
+<div class="questionary-question-page" *ngIf="done">
   <questionary-done [nQuestions]="questions.length" [score]="score"></questionary-done>
 </div>
 

@@ -6,7 +6,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'questionary'
+    redirectTo: 'sessions/login'
   },
   {
     path: 'questionary',

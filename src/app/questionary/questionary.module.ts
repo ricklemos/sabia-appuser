@@ -11,6 +11,13 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QuestionaryDoneComponent } from './components/questionary-done/questionary-done.component';
+import { QuestionaryDialogAnswerComponent } from './dialogs/questionary-dialog-answer/questionary-dialog-answer.component';
+import { QuestionaryAnswerComponent } from './components/questionary-answer/questionary-answer.component';
+import { QuestionaryBottomSheetAnswerComponent } from './bottom-sheets/questionary-bottom-sheet-answer/questionary-bottom-sheet-answer.component';
+import { QuestionaryService } from './services/questionary.service';
+import { QuestionaryDialogService } from './services/questionary-dialog.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 
 
@@ -20,7 +27,10 @@ import { QuestionaryDoneComponent } from './components/questionary-done/question
     QuestionaryQuestionPageComponent,
     QuestionaryHeaderComponent,
     QuestionaryBodyComponent,
-    QuestionaryDoneComponent
+    QuestionaryDoneComponent,
+    QuestionaryDialogAnswerComponent,
+    QuestionaryAnswerComponent,
+    QuestionaryBottomSheetAnswerComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +39,17 @@ import { QuestionaryDoneComponent } from './components/questionary-done/question
     MatProgressBarModule,
     CollactDesignSystemModule,
     FlexLayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatBottomSheetModule
+  ],
+  entryComponents: [
+    QuestionaryBottomSheetAnswerComponent,
+    QuestionaryDialogAnswerComponent
+  ],
+  providers: [
+    QuestionaryService,
+    QuestionaryDialogService
   ]
 })
 export class QuestionaryModule { }

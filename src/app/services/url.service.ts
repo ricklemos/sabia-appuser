@@ -46,4 +46,9 @@ export class UrlService {
   public getQuestionary(questionaryId): string {
     return `/questionary/${ questionaryId }`;
   }
+
+  public getModule(moduleId): string {
+    return `/module/${ moduleId }`;
+  }
+
 }

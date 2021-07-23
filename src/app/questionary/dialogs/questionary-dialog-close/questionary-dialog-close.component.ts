@@ -22,7 +22,8 @@ export class QuestionaryDialogCloseComponent implements OnInit {
 
   closeQuestionary(): void {
     this.dialog.closeAll();
-    this.router.navigate([this.urlService.getHomeUrl()]);
+    // TODO: Fetch moduleId for correct navigation
+    this.router.navigate([this.urlService.getModule('0001')]);
   }
 
   continueQuestionary(): void {

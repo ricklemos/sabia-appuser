@@ -13,6 +13,7 @@ import { UrlService } from './services/url.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { QuestionaryModule } from './questionary/questionary.module';
+import { ModuleModule } from './module/module.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { QuestionaryModule } from './questionary/questionary.module';
     SessionsModule,
     CollactDesignSystemModule,
     TextMaskModule,
-    QuestionaryModule
+    QuestionaryModule,
+    ModuleModule
   ],
   providers: [
     UrlService

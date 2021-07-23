@@ -28,7 +28,6 @@ export class QuestionaryBodyComponent implements OnInit {
       explanationText: this.question.explanationText
     };
     this.questionaryDialogService.openQuestionaryAnswer(data).subscribe(() => this.goToNextQuestion());
-    console.log('mostrar bottom sheet');
   }
 
   goToNextQuestion(): void {

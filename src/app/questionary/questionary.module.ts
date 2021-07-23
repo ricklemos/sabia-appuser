@@ -32,7 +32,7 @@ import { QuestionaryDialogCloseComponent } from './dialogs/questionary-dialog-cl
     QuestionaryDialogAnswerComponent,
     QuestionaryAnswerComponent,
     QuestionaryBottomSheetAnswerComponent,
-    QuestionaryDialogCloseComponent
+    QuestionaryDialogCloseComponent,
   ],
   imports: [
     CommonModule,

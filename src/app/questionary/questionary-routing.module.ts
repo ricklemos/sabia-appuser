@@ -8,7 +8,8 @@ export const QuestionaryRoutes: Routes = [
     children: [
       {
         path: ':questionaryId',
-        component: QuestionaryQuestionPageComponent
+        component: QuestionaryQuestionPageComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

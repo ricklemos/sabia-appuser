@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { QuestionaryService } from '../../services/questionary.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
@@ -49,6 +49,7 @@ export class QuestionaryQuestionPageComponent implements OnInit {
     if (alternative.isRight) {
       this.score += 1;
     }
+    // Caso tenha sido a última pergunta, atualiza o questionário com as respostas
     if (this.currentQuestionNumber === this.questions.length) {
       this.questionary.questions = this.questions;
       this.questionary.score = this.score;
@@ -61,7 +62,7 @@ export class QuestionaryQuestionPageComponent implements OnInit {
       this.questionaryService.updateQuestionary(this.questionaryId, this.questionary)
         .then(() => this.done = true)
         .catch((error) => console.log(error));
-    } else {
+    } else { // Caso não tenha sido a última pergunta, passa para a próxima
       this.currentQuestionNumber += 1;
       this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
     }

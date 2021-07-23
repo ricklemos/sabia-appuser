@@ -8,7 +8,8 @@ export const ModuleRoutes: Routes = [
     children: [
       {
         path: ':moduleId',
-        component: ModuleProgressPageComponent
+        component: ModuleProgressPageComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

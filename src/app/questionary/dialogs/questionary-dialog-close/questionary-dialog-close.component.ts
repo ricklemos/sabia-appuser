@@ -22,7 +22,7 @@ export class QuestionaryDialogCloseComponent implements OnInit {
 
   closeQuestionary(): void {
     this.dialog.closeAll();
-    // TODO: Fetch moduleId for correct navigation
+    // TODO: Posteriormente devemos buscar o módulo no banco de dados para fazer a referência
     this.router.navigate([this.urlService.getModule('0001')]);
   }
 

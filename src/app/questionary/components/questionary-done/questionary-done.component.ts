@@ -30,11 +30,12 @@ export class QuestionaryDoneComponent implements OnInit {
     // TODO: Este código abaixo, na verdade, deveria ser uma cloud function (podemos implementar na próxima sprint)
     // Atualizar módulo
     const module = this.moduleService.getModule();
-    const nLessons = module.lessons.length;
-    const lastPercentage = module.moduleProgressPercentage;
-    const lessonsCompleted = lastPercentage * nLessons / 100 + 1;
-    const newPercentage = lessonsCompleted / nLessons * 100;
-    module.moduleProgressPercentage = newPercentage;
+    if (!this.questionaryService.getQuestionary().tentatives) {
+      const nLessons = module.lessons.length;
+      const lastPercentage = module.moduleProgressPercentage;
+      const lessonsCompleted = lastPercentage * nLessons / 100 + 1;
+      module.moduleProgressPercentage = lessonsCompleted / nLessons * 100;
+    }
     module.lessons.map(lesson => {
       if (lesson.questionary === this.questionaryService.getQuestionary().questionaryId) {
         lesson.complete = true;
@@ -42,7 +43,7 @@ export class QuestionaryDoneComponent implements OnInit {
     });
     this.moduleService.setModule(module);
     this.moduleService.updateModule()
-      .then(() => console.log('Atualizou lição do módulo'))
+      .then()
       .catch((error) => console.log(error));
   }
 

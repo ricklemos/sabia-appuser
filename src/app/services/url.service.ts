@@ -23,8 +23,7 @@ export class UrlService {
   }
 
   public getHomeUrl(): string {
-    const url = this.getSessionsBaseUrl();
-    return `${ url }/logged`;
+    return `sessions`;
   }
 
   public getSignUpUrl(): string {

@@ -8,12 +8,12 @@ export const environment = {
   version: require('../../package.json').version,
   build: require('../../package.json').build,
   firebaseConfig: {
-    apiKey: 'AIzaSyDPBGUz1OUUDuZ9tEK28ALTE8697s79foM',
-    authDomain: 'fpgr-tcc.firebaseapp.com',
-    projectId: 'fpgr-tcc',
-    storageBucket: 'fpgr-tcc.appspot.com',
-    messagingSenderId: '456482136613',
-    appId: '1:456482136613:web:1311813644a656750295cc',
+    apiKey: 'AIzaSyCRih45Esxu-1A2DdUXXBqjBZj4kMfD5DA',
+    authDomain: 'sabia-app-user.firebaseapp.com',
+    projectId: 'sabia-app-user',
+    storageBucket: 'sabia-app-user.appspot.com',
+    messagingSenderId: '685552252667',
+    appId: '1:685552252667:web:d1bdbf07dd6027665de25e',
     measurementId: 'G-9HL9LYQ05S'
   }
 };

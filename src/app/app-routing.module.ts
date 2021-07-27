@@ -9,11 +9,7 @@ const routes: Routes = [
 
   {
     path: '',
-    component: LayoutSessionsComponent,
-  },
-  {
-    path: '',
-    component: LayoutProfileComponent,
+    redirectTo: 'sessions'
   }
 ];
 

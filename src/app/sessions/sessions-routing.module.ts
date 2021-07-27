@@ -17,7 +17,7 @@ export const SessionsRoutes: Routes = [
         component: SessionsSignupPageComponent
       },
       {
-        path: 'logged',
+        path: '',
         component: SessionsLoggedPageComponent,
         canActivate: [AuthGuard]
       }

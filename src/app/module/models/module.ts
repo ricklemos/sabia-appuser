@@ -10,7 +10,6 @@ export interface ModuleProgress {
 export interface Lesson {
   complete: boolean;
   lessonName: string;
-  // TODO: adicionar outros tipos de lição
   lessonType: 'QUESTIONARY' | 'TEXT';
-  questionary?: string; // questionary reference ou questionary id? -> por enquanto está sendo usado o Id
+  questionaryId?: string; // usar o Id do questionário para acessá-lo
 }

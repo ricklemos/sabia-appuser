@@ -37,7 +37,7 @@ export class QuestionaryDoneComponent implements OnInit {
       module.moduleProgressPercentage = lessonsCompleted / nLessons * 100;
     }
     module.lessons.map(lesson => {
-      if (lesson.questionary === this.questionaryService.getQuestionary().questionaryId) {
+      if (lesson.questionaryId === this.questionaryService.getQuestionary().questionaryId) {
         lesson.complete = true;
       }
     });

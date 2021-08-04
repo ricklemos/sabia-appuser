@@ -1,0 +1,14 @@
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <div *ngIf="data.isRight">
+      <h2 class="green-700">Certo, é isso aí!</h2>
+    </div>
+    <div *ngIf="!data.isRight" fxLayout="column" fxLayoutGap="16px">
+      <h2 class="red-700">Não foi dessa vez, a correta era:</h2>
+      <p>{{ data.explanationText }}</p>
+    </div>
+    <button clButtonContained class="bg-sabia-blue-500" (click)="close()">
+      <span>Continuar</span>
+    </button>
+  </div>
+</div>

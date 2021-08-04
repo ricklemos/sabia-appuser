@@ -34,4 +34,10 @@ export class SessionsLoggedPageComponent implements OnInit {
     this.router.navigate([url]);
   }
 
+  goModulePage(): void {
+    // TODO : Fetch moduleId to answer.
+    const url = this.urlService.getModule('0001');
+    this.router.navigate([url]);
+  }
+
 }

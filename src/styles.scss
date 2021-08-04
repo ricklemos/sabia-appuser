@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 body {
   margin: 0;
   padding: 0;
   font-family: ProximaNova, sans-serif;
+}
+
+.semi-bold {
+  font-family: ProximaNovaSemiBold, sans-serif;
 }
 
 @import "~collact-design-system/styles/colors";
@@ -13,16 +18,27 @@ body {
 .bg-sabia-blue {
   &-500 {
     background-color: #2E3037;
+
     span {
       color: white;
     }
   }
 }
 
-.width{
-  &-100{
+.width {
+  &-100 {
     width: 100%;
   }
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 8px;
+}
+
+.mat-bottom-sheet-container {
+  padding: 0 !important;
+  border-radius: 8px 8px 0 0;
 }
 
 

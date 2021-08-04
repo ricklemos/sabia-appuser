@@ -2,6 +2,7 @@ export interface ModuleProgress {
   lessons: Lesson[];
   moduleId: string;
   moduleName: string;
+  schoolName?: string;
   started?: any;
   userId: string;
   moduleProgressPercentage?: number; // um número de 0 a 100 que representa a porcentagem de conclusão do módulo

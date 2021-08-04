@@ -13,4 +13,5 @@ export interface Lesson {
   lessonName: string;
   lessonType: 'QUESTIONARY' | 'TEXT';
   questionaryId?: string; // usar o Id do questionário para acessá-lo
+  lessonId?: string;
 }

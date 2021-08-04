@@ -42,9 +42,17 @@ export class UrlService {
   public getChangePasswordUrl(): string {
     return '/profile/change-password';
   }
+  // TODO: Lesson Module (Task da Pri)
+  public getLesson(lessonId): string {
+    return `/lesson/${ lessonId }`;
+  }
 
   public getQuestionary(questionaryId): string {
     return `/questionary/${ questionaryId }`;
+  }
+
+  public getQuestionaryReview(questionaryId): string {
+    return `/questionary/${ questionaryId }/review`;
   }
 
   public getModule(moduleId): string {

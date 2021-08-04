@@ -15,6 +15,7 @@ export class ModuleBodyComponent implements OnInit {
 
   moduleProgress: ModuleProgress;
   lessons: Lesson[];
+  loading: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +23,7 @@ export class ModuleBodyComponent implements OnInit {
     private urlService: UrlService,
     private moduleService: ModuleService
   ) {
+    this.loading = true;
   }
 
   ngOnInit(): void {
@@ -32,12 +34,25 @@ export class ModuleBodyComponent implements OnInit {
         this.moduleService.setModuleId(this.moduleProgress.moduleId);
         // Guarda o módulo obtido como um atributo do ModuleService
         this.moduleService.setModule(moduleProgress);
+        this.loading = false;
       })
     ).subscribe(noop);
   }
 
   startLesson(lesson: Lesson): void {
-    this.router.navigate([this.urlService.getQuestionary(lesson.questionaryId)]);
+    if (lesson.questionaryId) {
+      if (lesson.complete) {
+        // Revisa o questionário
+        this.router.navigate([this.urlService.getQuestionaryReview(lesson.questionaryId)]);
+      } else {
+        // Começa a responder o questionário
+        this.router.navigate([this.urlService.getQuestionary(lesson.questionaryId)]);
+      }
+    } else if (lesson.lessonId) {
+      // Vai pra página de conteúdo teórico
+      this.router.navigate([this.urlService.getLesson(lesson.lessonId)]);
+    }
+
   }
 
 }

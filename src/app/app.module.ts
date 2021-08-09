@@ -14,6 +14,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
+import { RankingsModule } from './rankings/rankings.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ModuleModule } from './module/module.module';
     CollactDesignSystemModule,
     TextMaskModule,
     QuestionaryModule,
-    ModuleModule
+    ModuleModule,
+    RankingsModule
   ],
   providers: [
     UrlService

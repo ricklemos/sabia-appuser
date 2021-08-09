@@ -7,7 +7,7 @@ export const RankingsRoutes: Routes = [
     path: 'rankings',
     children: [
       {
-        path: ':class',
+        path: ':classroomId',
         component: RankingsClassPageComponent
       }
     ]

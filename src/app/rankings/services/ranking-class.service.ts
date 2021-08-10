@@ -9,10 +9,15 @@ export class RankingClassService {
 
   constructor(
     private afs: AngularFirestore
-  ) { }
+  ) {
+  }
 
-  fetchClassRanking(classroomId: string): Observable<any>{
+  fetchClassRanking(classroomId: string): Observable<any> {
     return this.afs.doc(`classRankings/${ classroomId }`).valueChanges();
+  }
+
+  fetchAvailableClasses(uId: string): Observable<any> {
+    return this.afs.collection('enrollments', ref => ref.where('userId', '==', uId)).valueChanges();
   }
 
 }

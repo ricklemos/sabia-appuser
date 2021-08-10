@@ -5,13 +5,15 @@ import { LayoutRankingsComponent } from './layout/layout-rankings/layout-ranking
 import { RouterModule } from '@angular/router';
 import { RankingsRoutes } from '../rankings/rankings-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RankingsPageComponent } from './containers/rankings-page/rankings-page.component';
 
 
 
 @NgModule({
   declarations: [
     LayoutRankingsComponent,
-    RankingsClassPageComponent
+    RankingsClassPageComponent,
+    RankingsPageComponent
   ],
   imports: [
     CommonModule,

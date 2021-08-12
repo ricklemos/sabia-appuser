@@ -16,18 +16,15 @@
   <div class="module__path" fxLayout="column" fxLayoutAlign="space-around start">
     <div *ngFor="let lesson of lessons; let i = index">
       <div *ngIf="i != 0" class="trackline"></div>
-      <label [for]="lesson.lessonName">
-        <div class="button_container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <div clBadgeOutline [diameter]="40" bgColor="#2E3037" *ngIf="lesson.complete">
-            <i clIcon name="cl-correct-focus"></i>
-          </div>
-          <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete">
-            <i clIcon name="cl-menu-food"></i>
-          </div>
-          <p>{{ lesson.lessonName }}</p>
+      <div (click)="startLesson(lesson)" class="button_container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <div clBadgeOutline [diameter]="40" bgColor="#2E3037" *ngIf="lesson.complete">
+          <i clIcon name="cl-correct-focus"></i>
         </div>
-      </label>
-      <button [id]="lesson.lessonName" hidden (click)="startLesson(lesson)"></button>
+        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete">
+          <i clIcon name="cl-menu-food"></i>
+        </div>
+        <p>{{ lesson.lessonName }}</p>
+      </div>
     </div>
   </div>
 </div>

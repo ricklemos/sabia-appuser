@@ -19,6 +19,8 @@ import { QuestionaryDialogService } from './services/questionary-dialog.service'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { QuestionaryDialogCloseComponent } from './dialogs/questionary-dialog-close/questionary-dialog-close.component';
+import { QuestionaryReviewPageComponent } from './containers/questionary-review-page/questionary-review-page.component';
+import { QuestionaryReviewComponent } from './components/questionary-review/questionary-review.component';
 
 
 
@@ -33,6 +35,8 @@ import { QuestionaryDialogCloseComponent } from './dialogs/questionary-dialog-cl
     QuestionaryAnswerComponent,
     QuestionaryBottomSheetAnswerComponent,
     QuestionaryDialogCloseComponent,
+    QuestionaryReviewPageComponent,
+    QuestionaryReviewComponent,
   ],
   imports: [
     CommonModule,

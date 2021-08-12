@@ -37,7 +37,10 @@ export class ModuleBodyComponent implements OnInit {
   }
 
   startLesson(lesson: Lesson): void {
-    this.router.navigate([this.urlService.getQuestionary(lesson.questionaryId)]);
+    if (lesson.complete) {
+      this.router.navigate([this.urlService.getQuestionaryReview(lesson.questionaryId)]);
+    } else {
+      this.router.navigate([this.urlService.getQuestionary(lesson.questionaryId)]);
+    }
   }
-
 }

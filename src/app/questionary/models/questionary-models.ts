@@ -12,6 +12,7 @@ export interface Question {
   alternatives: Alternative[];
   gotRight?: boolean;
   explanationText: string;
+  selectedAlternative?: Alternative;
 }
 
 export interface Alternative {

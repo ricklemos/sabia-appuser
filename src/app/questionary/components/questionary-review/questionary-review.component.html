@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <p class="question__number">Questão {{ index+1 }}</p>
+    <p>{{ question.questionText }}</p>
+  </div>
+  <div fxLayout="column" fxLayoutGap="8px">
+    <div *ngIf="question.gotRight">
+      <div fxLayout="column" fxLayoutGap="8px">
+        <p class="answer-title">SUA RESPOSTA</p>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <i clIcon name="cl-correct-focus" class="bg-green-700-force"></i>
+          <p class="answer__right">{{ question.selectedAlternative.alternativeText }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!question.gotRight" fxLayout="column" fxLayoutGap="16px">
+      <div fxLayout="column" fxLayoutGap="8px">
+        <p class="answer-title">SUA RESPOSTA</p>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <i clIcon name="cl-close" class="bg-red-700-force"></i>
+          <p class="answer__wrong red-700">{{ question.selectedAlternative.alternativeText }}</p>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="8px">
+        <p class="answer-title">RESPOSTA CORRETA</p>
+        <div *ngFor="let alternative of question.alternatives">
+          <p class="answer" *ngIf="alternative.isRight">{{ alternative.alternativeText }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="question__explanation">{{ question.explanationText }}</p>
+  <div class="divider"></div>
+</div>

@@ -49,14 +49,15 @@ export class QuestionaryQuestionPageComponent implements OnInit {
     if (alternative.isRight) {
       this.score += 1;
     }
+    this.questions[this.currentQuestionNumber -1].selectedAlternative = alternative;
     // Caso tenha sido a última pergunta, atualiza o questionário com as respostas
     if (this.currentQuestionNumber === this.questions.length) {
       this.questionary.questions = this.questions;
-      this.questionary.score = this.score;
       if (this.questionary.tentatives) {
         this.questionary.tentatives += 1;
       } else {
         this.questionary.tentatives = 1;
+        this.questionary.score = this.score;
       }
       this.questionaryService.setQuestionary(this.questionary);
       this.questionaryService.updateQuestionary(this.questionaryId, this.questionary)

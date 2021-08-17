@@ -1,0 +1,16 @@
+@import "~collact-design-system/styles/colors";
+
+.my-courses {
+  &__header {
+    color: $black-alpha-700;
+    font-size: 20px;
+    font-family: ProximaNova, sans-serif;
+  }
+
+  &__background {
+    width: 100vw;
+    height: 100vh;
+    padding: 16px;
+    background-color: #F7F7F7;
+  }
+}

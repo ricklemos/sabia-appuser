@@ -1,0 +1,21 @@
+<div clCard class="courses-box__container">
+  <div clCardContent fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+
+    <div fxLayout="column" fxLayoutGap="8px">
+      <h3>{{enrollment.courseName}}</h3>
+      <p>{{enrollment.courseDescription}}</p>
+    </div>
+
+    <div class="courses-box__buttons" fxLayout="row" fxLayoutGap="8px">
+
+      <a [href]="enrollment.courseLink" clButtonContainedSecondary target="_blank">
+        <span>Visitar</span><i clIcon name="cl-external-links"></i>
+      </a>
+
+      <button clButtonContained class="bg-sabia-blue-500">
+        <span>Ver mais</span>
+      </button>
+
+    </div>
+  </div>
+</div>

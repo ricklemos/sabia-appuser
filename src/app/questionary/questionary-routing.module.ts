@@ -8,8 +8,22 @@ export const QuestionaryRoutes: Routes = [
     children: [
       {
         path: ':questionaryId',
-        component: QuestionaryQuestionPageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+          // To Merge: Questionary Review está sendo feito em outra branch pela Fer
+          // {
+          //   path: 'review',
+          //   component: QuestionaryReviewPageComponent
+          // },
+          {
+            path: 'review',
+            component: QuestionaryQuestionPageComponent
+          },
+          {
+            path: '',
+            component: QuestionaryQuestionPageComponent
+          }
+        ]
       }
     ]
   }

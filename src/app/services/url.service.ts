@@ -59,8 +59,4 @@ export class UrlService {
     return `/module/${ moduleId }`;
   }
 
-  public getQuestionaryReview(questionaryId): string {
-    return `/questionary/${ questionaryId }/review`;
-  }
-
 }

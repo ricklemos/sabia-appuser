@@ -18,7 +18,7 @@ export const QuestionaryRoutes: Routes = [
           // },
           {
             path: 'review',
-            component: QuestionaryQuestionPageComponent
+            component: QuestionaryReviewPageComponent
           },
           {
             path: '',

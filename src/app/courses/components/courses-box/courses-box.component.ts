@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Enrollment } from '../../models/enrollment';
+import { CoursesService } from '../../services/courses.service';
+import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'courses-box',
@@ -9,14 +12,19 @@ import { Enrollment } from '../../models/enrollment';
 export class CoursesBoxComponent implements OnInit {
   @Input() enrollment: Enrollment;
 
-  constructor() {
+  constructor(
+    private coursesService: CoursesService,
+    private router: Router,
+    private urlService: UrlService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
-  seeMore(): void {
-    //TODO: fazer botão direcionar para página de detalhes do curso
+  goToCourseDetails(): void {
+    this.coursesService.setCourse(this.enrollment);
+    this.router.navigate([this.urlService.getCoursesDetails(this.enrollment.courseId)]);
   }
 
 }

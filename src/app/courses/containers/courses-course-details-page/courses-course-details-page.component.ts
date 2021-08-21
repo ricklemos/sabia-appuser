@@ -11,44 +11,23 @@ import { noop } from 'rxjs';
   styleUrls: ['./courses-course-details-page.component.scss']
 })
 export class CoursesCourseDetailsPageComponent implements OnInit {
-  enrollment$: Enrollment;
-  modules = [{
-    name: 'Renda fixa',
-    progress: 0.9,
-  },
-    {
-      name: 'Renda fixa',
-      progress: 0.9,
-    },
-    {
-      name: 'Renda fixa',
-      progress: 0.9,
-    }
-  ];
+  enrollment: Enrollment;
+  modulesList = [];
 
   constructor(
     private route: ActivatedRoute,
     private coursesServices: CoursesService
   ) {
-    const courseId = this.route.snapshot.paramMap.get('courseId');
-    // TODO: PUXAR O CURSO DIREITO
-    this.enrollment$ = {
-      classroomId: '',
-      classroomName: '',
-      courseName: 'General Business Program (GBP)',
-      courseDescription: 'Qualquer coisa',
-      courseId: '01',
-      userId: '',
-      courseLink: 'https://tburleson-layouts-demos.firebaseapp.com/#/docs'
-    };
   }
 
   ngOnInit(): void {
     const courseId = this.route.snapshot.paramMap.get('courseId');
-    this.coursesServices.fetchCoursesDetails(courseId).pipe(
+    this.coursesServices.fetchModules(courseId).pipe(
       tap(data => {
-        console.log(data);
+        this.modulesList = data;
       })
     ).subscribe(noop);
+
+    this.enrollment = this.coursesServices.getCourse();
   }
 }

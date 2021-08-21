@@ -2,11 +2,11 @@
   <div clCardContent fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
 
     <div fxLayout="column" fxLayoutGap="8px">
-      <h3>Renda Fixa</h3>
-      <p>BTC</p>
+      <h3>{{ moduleProgress.moduleName }}</h3>
+      <p>{{moduleProgress.schoolName}}</p>
     </div>
 
-    <mat-progress-spinner [diameter]="50" [value]="50"></mat-progress-spinner>
+    <mat-progress-spinner [diameter]="50" [value]=moduleProgress.moduleProgressPercentage></mat-progress-spinner>
 
     <button class="link">Começar</button>
 

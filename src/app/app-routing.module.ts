@@ -17,6 +17,7 @@ const routes: Routes = [
     path: 'module',
     component: LayoutModuleComponent
   }
+
 ];
 
 

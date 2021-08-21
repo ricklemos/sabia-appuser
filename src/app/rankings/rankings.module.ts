@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { RankingsRoutes } from '../rankings/rankings-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RankingsPageComponent } from './containers/rankings-page/rankings-page.component';
+import { ClassAvailableComponent } from './components/class-available/class-available.component';
+import { CollactDesignSystemModule } from 'collact-design-system';
 
 
 
@@ -13,13 +15,15 @@ import { RankingsPageComponent } from './containers/rankings-page/rankings-page.
   declarations: [
     LayoutRankingsComponent,
     RankingsClassPageComponent,
-    RankingsPageComponent
+    RankingsPageComponent,
+    ClassAvailableComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     RouterModule.forChild(RankingsRoutes),
     FlexLayoutModule,
+    CollactDesignSystemModule,
   ]
 })
 export class RankingsModule { }

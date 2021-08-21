@@ -5,16 +5,18 @@ import { RankingsPageComponent } from './containers/rankings-page/rankings-page.
 
 export const RankingsRoutes: Routes = [
   {
-    path: 'rankings',
-    component: RankingsPageComponent,
+    path: 'ranking',
+    // component: RankingsPageComponent,
     children: [
       {
-        path: 'courses',
-        component: RankingsPageComponent
+        path: '',
+        component: RankingsPageComponent,
+        // canActivate: [AuthGuard]
       },
       {
-        path: ':classroomId',
-        component: RankingsClassPageComponent
+        path: 'class',
+        component: RankingsClassPageComponent,
+        // canActivate: [AuthGuard]
       }
     ]
   }

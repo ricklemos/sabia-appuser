@@ -15,7 +15,6 @@ export class RankingsPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('entrou na página');
     this.rankingService.fetchAvailableClasses('82JoYs8CBcY2JCsa5PLTgMwxr2E2').pipe(
       tap(data => console.log(data))
     ).subscribe(noop);

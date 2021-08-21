@@ -1,0 +1,165 @@
+@import '../../../node_modules/@angular/material/theming';
+
+//Paletas de cores
+$md-sabiaprimary: (
+  50 : #e6e6e7,
+  100 : #c0c1c3,
+  200 : #97989b,
+  300 : #6d6e73,
+  400 : #4d4f55,
+  500 : #2e3037,
+  600 : #292b31,
+  700 : #23242a,
+  800 : #1d1e23,
+  900 : #121316,
+  A100 : #5c95ff,
+  A200 : #2974ff,
+  A400 : #0052f6,
+  A700 : #0049dc,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$md-sabiasecondary: (
+  50 : #e7f7f7,
+  100 : #c4ecea,
+  200 : #9ce0dd,
+  300 : #74d3cf,
+  400 : #57c9c4,
+  500 : #39c0ba,
+  600 : #33bab3,
+  700 : #2cb2ab,
+  800 : #24aaa3,
+  900 : #179c94,
+  A100 : #d1fffc,
+  A200 : #9efff8,
+  A400 : #6bfff5,
+  A700 : #52fff3,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$md-sabiawarn: (
+  50 : #fde0e8,
+  100 : #fab3c5,
+  200 : #f7809f,
+  300 : #f34d78,
+  400 : #f1265b,
+  500 : #ee003e,
+  600 : #ec0038,
+  700 : #e90030,
+  800 : #e70028,
+  900 : #e2001b,
+  A100 : #ffffff,
+  A200 : #ffd6d9,
+  A400 : #ffa3a9,
+  A700 : #ff8a92,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$md-sabiabackground: (
+  50 : #fefefe,
+  100 : #fdfdfd,
+  200 : #fbfbfb,
+  300 : #f9f9f9,
+  400 : #f8f8f8,
+  500 : #f7f7f7,
+  600 : #f6f6f6,
+  700 : #f5f5f5,
+  800 : #f3f3f3,
+  900 : #f1f1f1,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #ffffff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$sabia-app-primary: mat-palette($md-sabiaprimary);
+$sabia-app-accent: mat-palette($md-sabiasecondary);
+
+// The warn palette is optional (defaults to red).
+$sabia-app-warn: mat-palette($md-sabiawarn);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$sabia-app-theme: mat-light-theme((
+  color: (
+    primary: $sabia-app-primary,
+    accent: $sabia-app-accent,
+    warn: $sabia-app-warn
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($sabia-app-theme);

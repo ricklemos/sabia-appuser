@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { Observable } from 'rxjs';
 export class RankingClassService {
 
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private sessionsLoginService: SessionsLoginService
   ) {
   }
 
@@ -16,7 +18,8 @@ export class RankingClassService {
     return this.afs.doc(`classRankings/${ classroomId }`).valueChanges();
   }
 
-  fetchAvailableClasses(uId: string): Observable<any> {
+  fetchAvailableClasses(): Observable<any> {
+    const uId = this.sessionsLoginService.getUserId();
     return this.afs.collection('enrollments', ref => ref.where('userId', '==', uId)).valueChanges();
   }
 

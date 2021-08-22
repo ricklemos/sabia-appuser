@@ -1,4 +1,6 @@
 <div fxLayout="column" fxLayoutGap="16px" style="padding: 16px">
   <h1>Rankings</h1>
-  <class-available></class-available>
+  <div *ngFor="let enrollment of enrollments"><!--    ngfor-->
+    <class-available [enrollment]="enrollment"></class-available>
+  </div>
 </div>

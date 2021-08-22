@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
+import { RankingsEnrollments } from '../../models/rankings-models';
 
 @Component({
   selector: 'class-available',
@@ -6,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./class-available.component.scss']
 })
 export class ClassAvailableComponent implements OnInit {
+  @Input() enrollment: RankingsEnrollments;
+  constructor(
+    private router: Router,
+    private urlService: UrlService
+  ) {
 
-  constructor() { }
+  }
 
   ngOnInit(): void {
   }
 
-  goToRanking(): void{
-
+  goToRanking(): void {
+    const url = this.urlService.getClassroomRanking(this.enrollment.classroomId);
+    this.router.navigate([url]);
   }
 }

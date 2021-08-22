@@ -6,17 +6,16 @@ import { RankingsPageComponent } from './containers/rankings-page/rankings-page.
 export const RankingsRoutes: Routes = [
   {
     path: 'ranking',
-    // component: RankingsPageComponent,
     children: [
       {
         path: '',
         component: RankingsPageComponent,
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
       },
       {
-        path: 'class',
+        path: ':classroomId',
         component: RankingsClassPageComponent,
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
       }
     ]
   }

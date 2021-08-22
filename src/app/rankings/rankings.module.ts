@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RankingsClassPageComponent } from './containers/rankings-class-page/rankings-class-page.component';
 import { LayoutRankingsComponent } from './layout/layout-rankings/layout-rankings.component';
 import { RouterModule } from '@angular/router';
-import { RankingsRoutes } from '../rankings/rankings-routing.module';
+import { RankingsRoutes } from './rankings-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RankingsPageComponent } from './containers/rankings-page/rankings-page.component';
 import { ClassAvailableComponent } from './components/class-available/class-available.component';
 import { CollactDesignSystemModule } from 'collact-design-system';
+import { RankingUserDataComponent } from './components/ranking-user-data/ranking-user-data.component';
 
 
 
@@ -16,7 +17,8 @@ import { CollactDesignSystemModule } from 'collact-design-system';
     LayoutRankingsComponent,
     RankingsClassPageComponent,
     RankingsPageComponent,
-    ClassAvailableComponent
+    ClassAvailableComponent,
+    RankingUserDataComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
-export interface ClassRanking {
-  classroomID: string;
-  courseID: string;
+export interface RankingsClassRanking {
+  classroomId: string;
+  courseId: string;
   courseName: string;
   classroomName: string;
   schoolName: string;
@@ -9,4 +9,16 @@ export interface ClassRanking {
     userName: string,
     userScore: number
   }];
+}
+
+export interface RankingsEnrollments {
+  userId : string;
+  classroomId : string;
+  courseId : string;
+  courseName : string;
+  classroomName : string;
+  courseDescription: string;
+  schoolName : string;
+  score?: string;
+  courseLink : string;
 }

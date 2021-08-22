@@ -8,19 +8,19 @@ export interface RankingsClassRanking {
 }
 
 export interface RankingsUser {
-  userID: string;
+  userId: string;
   userName: string;
   userScore: number;
 }
 
 export interface RankingsEnrollments {
-  userId : string;
-  classroomId : string;
-  courseId : string;
-  courseName : string;
-  classroomName : string;
+  userId: string;
+  classroomId: string;
+  courseId: string;
+  courseName: string;
+  classroomName: string;
   courseDescription: string;
-  schoolName : string;
+  schoolName: string;
   score?: string;
-  courseLink : string;
+  courseLink: string;
 }

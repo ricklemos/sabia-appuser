@@ -14,5 +14,23 @@ p{
 }
 
 .itsMeDiv{
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.1);
+}
+
+.position {
+  border-radius: 100%;
+  height: 24px;
+  width: 24px;
+  text-align: center;
+  &__gold{
+    background-color: #F6D177;
+  }
+  &__silver{
+    background-color: #D6D6D6;
+  }
+  &__bronze{
+    background-color: #C08147;
+  }
+
+
 }

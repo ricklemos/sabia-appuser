@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 export class ProfilePicComponent implements OnInit {
   pictureLink: Observable<string | null>;
   @Input() uid: string;
+  @Input() width: number;
+  @Input() borderRadius: number;
 
   constructor(
     private modifyUserDataService: ModifyUserDataService,

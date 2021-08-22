@@ -1,21 +1,47 @@
-<div *ngIf="itsMe" class="itsMeDiv" fxLayout="row" fxLayoutGap="16px" fxFlexAlign="center left">
-  <div> <!--  ngif podium-->
-    <p>{{ index }}</p>
-  </div>
-<!--  <profile-pic [uid]="user.userID"></profile-pic>-->
-  <div fxLayout="column" fxLayoutGap="4px">
-    <p class="userName">{{ user.userName }}</p>
-    <p class="userScore">{{ user.userScore }} pontos</p>
+<div *ngIf="itsMe" class="itsMeDiv">
+  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" style="padding-left: 16px">
+    <div *ngIf="index == 1" class="position position__gold">
+      <p>{{ index }}</p>
+    </div>
+    <div *ngIf="index == 2" class="position position__silver">
+      <p>{{ index }}</p>
+    </div>
+    <div *ngIf="index == 3" class="position position__bronze">
+      <p>{{ index }}</p>
+    </div>
+    <div *ngIf="index !== 1 && index !== 2 && index !== 3" class="position">
+      <p>{{ index }}</p>
+    </div>
+    <div>
+      <profile-pic [uid]="user.userId" [width]="48" [borderRadius]="4"></profile-pic>
+    </div>
+    <div fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="center start">
+      <p class="userName">{{ user.userName }}</p>
+      <p class="userScore">{{ user.userScore }} pontos</p>
+    </div>
   </div>
 </div>
 
-<div *ngIf="!itsMe" fxLayout="row" fxLayoutGap="16px" fxFlexAlign="center left">
-  <div> <!--  ngif podium-->
-    <p>{{ index }}</p>
-  </div>
-  <!--  <profile-pic [uid]="user.userID"></profile-pic>-->
-  <div fxLayout="column" fxLayoutGap="4px">
-    <p class="userName">{{ user.userName }}</p>
-    <p class="userScore">{{ user.userScore }} pontos</p>
+<div *ngIf="!itsMe" >
+  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" style="padding-left: 16px">
+    <div *ngIf="index == 1" class="position position__gold">
+      <p>{{ index }}</p>
+    </div>
+    <div *ngIf="index == 2" class="position position__silver">
+      <p>{{ index }}</p>
+    </div>
+    <div *ngIf="index == 3" class="position position__bronze">
+      <p>{{ index }}</p>
+    </div>
+    <div *ngIf="index !== 1 && index !== 2 && index !== 3" class="position">
+      <p>{{ index }}</p>
+    </div>
+    <div>
+      <profile-pic [uid]="user.userId" [width]="48" [borderRadius]="4" fxFlexAlign="center"></profile-pic>
+    </div>
+    <div fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="center start">
+      <p class="userName">{{ user.userName }}</p>
+      <p class="userScore">{{ user.userScore }} pontos</p>
+    </div>
   </div>
 </div>

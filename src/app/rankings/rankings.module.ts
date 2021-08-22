@@ -10,6 +10,7 @@ import { ClassAvailableComponent } from './components/class-available/class-avai
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { RankingUserDataComponent } from './components/ranking-user-data/ranking-user-data.component';
 import { ProfileModule } from '../profile/profile.module';
+import { CollactComponentsModule } from 'collact-components';
 
 
 
@@ -28,6 +29,7 @@ import { ProfileModule } from '../profile/profile.module';
     FlexLayoutModule,
     CollactDesignSystemModule,
     ProfileModule,
+    CollactComponentsModule,
   ]
 })
 export class RankingsModule { }

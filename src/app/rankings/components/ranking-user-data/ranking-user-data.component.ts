@@ -17,7 +17,7 @@ export class RankingUserDataComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.itsMe = this.user.userID === this.sessionsLoginService.getUserId();
+    this.itsMe = this.user.userId === this.sessionsLoginService.getUserId();
   }
 
 }

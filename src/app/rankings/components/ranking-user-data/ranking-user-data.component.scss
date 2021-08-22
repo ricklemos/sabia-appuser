@@ -1,0 +1,18 @@
+@import "~collact-design-system/styles/colors";
+
+p{
+  font-family:  ProximaNova, sans-serif;
+  font-size: 16px;
+}
+
+.userName{
+  color: $black-alpha-700;
+}
+
+.userScore{
+  color: $black-alpha-500;
+}
+
+.itsMeDiv{
+  background-color: rgba(0,0,0,0.5);
+}

@@ -48,6 +48,9 @@ import { CollactDesignSystemModule } from 'collact-design-system';
   providers: [
     ModifyUserDataService,
   ],
+  exports: [
+    ProfilePicComponent
+  ]
 })
 export class ProfileModule {
 }

@@ -23,4 +23,13 @@ export class RankingClassService {
     return this.afs.collection('enrollments', ref => ref.where('userId', '==', uId)).valueChanges();
   }
 
+  compareRanking(a, b) {
+    let comparison = 0;
+    if (a.userScore < b.userScore) {
+      comparison = 1;
+    } else if (a.userScore > b.userScore) {
+      comparison = -1;
+    }
+    return comparison;
+  }
 }

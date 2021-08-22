@@ -3,7 +3,7 @@ import { RankingClassService } from '../../services/ranking-class.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { ClassRanking } from '../../models/rankings-models';
+import { RankingsClassRanking } from '../../models/rankings-models';
 
 @Component({
   selector: 'rankings-class-page',
@@ -12,7 +12,7 @@ import { ClassRanking } from '../../models/rankings-models';
 })
 export class RankingsClassPageComponent implements OnInit, OnDestroy {
 
-  classRanking: ClassRanking;
+  classRanking: RankingsClassRanking;
   unsubscribe = [];
 
   constructor(
@@ -25,8 +25,8 @@ export class RankingsClassPageComponent implements OnInit, OnDestroy {
     const classroomId = this.route.snapshot.paramMap.get('classroomId');
     const fetchClassRanking = this.rankingClassService.fetchClassRanking(classroomId).pipe(
       tap((data) => {
+        data.ranking.sort(this.rankingClassService.compareRanking);
         this.classRanking = data;
-        console.log(this.classRanking);
       })
     ).subscribe(noop);
     this.unsubscribe.push(fetchClassRanking);

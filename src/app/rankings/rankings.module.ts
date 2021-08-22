@@ -9,6 +9,7 @@ import { RankingsPageComponent } from './containers/rankings-page/rankings-page.
 import { ClassAvailableComponent } from './components/class-available/class-available.component';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { RankingUserDataComponent } from './components/ranking-user-data/ranking-user-data.component';
+import { ProfileModule } from '../profile/profile.module';
 
 
 
@@ -26,6 +27,7 @@ import { RankingUserDataComponent } from './components/ranking-user-data/ranking
     RouterModule.forChild(RankingsRoutes),
     FlexLayoutModule,
     CollactDesignSystemModule,
+    ProfileModule,
   ]
 })
 export class RankingsModule { }

@@ -1,1 +1,12 @@
-<p>achou</p>
+<div fxLayout="column" fxLayoutGap="16px" style="padding: 16px">
+  <div fxLayout="column" fxLayoutGap="8px">
+    <h1>{{ classRanking.courseName }}</h1>
+    <h2>{{ classRanking.schoolName }}</h2>
+    <p>Turma {{ classRanking.classroomName }}</p>
+  </div>
+  <div clCard>
+    <div clCardContent *ngFor="let user of classRanking.ranking; let i=index" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+      <ranking-user-data [user]="user" [index]="i+1"></ranking-user-data>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div *ngIf="itsMe" class="itsMeDiv" fxLayout="row" fxLayoutGap="16px" fxFlexAlign="center left">
+  <div> <!--  ngif podium-->
+    <p>{{ index }}</p>
+  </div>
+<!--  <profile-pic [uid]="user.userID"></profile-pic>-->
+  <div fxLayout="column" fxLayoutGap="4px">
+    <p class="userName">{{ user.userName }}</p>
+    <p class="userScore">{{ user.userScore }} pontos</p>
+  </div>
+</div>
+
+<div *ngIf="!itsMe" fxLayout="row" fxLayoutGap="16px" fxFlexAlign="center left">
+  <div> <!--  ngif podium-->
+    <p>{{ index }}</p>
+  </div>
+  <!--  <profile-pic [uid]="user.userID"></profile-pic>-->
+  <div fxLayout="column" fxLayoutGap="4px">
+    <p class="userName">{{ user.userName }}</p>
+    <p class="userScore">{{ user.userScore }} pontos</p>
+  </div>
+</div>

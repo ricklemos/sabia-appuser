@@ -4,11 +4,13 @@ export interface RankingsClassRanking {
   courseName: string;
   classroomName: string;
   schoolName: string;
-  ranking: [{
-    userID: string,
-    userName: string,
-    userScore: number
-  }];
+  ranking: RankingsUser[];
+}
+
+export interface RankingsUser {
+  userID: string;
+  userName: string;
+  userScore: number;
 }
 
 export interface RankingsEnrollments {

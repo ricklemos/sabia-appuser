@@ -6,7 +6,11 @@
       <p>{{moduleProgress.schoolName}}</p>
     </div>
 
-    <mat-progress-spinner [diameter]="50" [value]=moduleProgress.moduleProgressPercentage></mat-progress-spinner>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <p>{{ moduleProgress.moduleProgressPercentage }}%</p>
+      <mat-progress-spinner [diameter]="50" [value]=moduleProgress.moduleProgressPercentage></mat-progress-spinner>
+      <!--      TODO: fazer gráfico bonito (obs: usar Chart.js)-->
+    </div>
 
     <button class="link">Começar</button>
 

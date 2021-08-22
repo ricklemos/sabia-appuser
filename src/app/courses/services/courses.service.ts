@@ -19,7 +19,7 @@ export class CoursesService {
   }
 
   fetchCourses(): Observable<any> {
-    // TODO: revisar essa funçao
+    // TODO: revisar essa funçao (sera feito apos um merge em develop)
     // const uId = this.sessionsLogin.getUserID();
     return this.angularFirestore.collection('enrollments', ref => ref.where('userId', '==', '82JoYs8CBcY2JCsa5PLTgMwxr2E2')).valueChanges();
   }

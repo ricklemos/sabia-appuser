@@ -19,9 +19,10 @@ export class CoursesService {
   }
 
   fetchCourses(): Observable<any> {
-    // TODO: revisar essa funçao (sera feito apos um merge em develop)
     const uId = this.sessionsLogin.getUserId();
-    return this.angularFirestore.collection('enrollments', ref => ref.where('userId', '==', uId)).valueChanges();
+    return this.angularFirestore.collection('enrollments', ref => ref
+      .where('userId', '==', uId))
+      .valueChanges();
   }
 
   setCourse(data: Enrollment): void {
@@ -34,8 +35,10 @@ export class CoursesService {
 
   fetchModules(courseId): Observable<any> {
     const uId = this.sessionsLogin.getUserId();
-    // tslint:disable-next-line:max-line-length
-    return this.angularFirestore.collection('moduleProgress', ref => ref.where('userId', '==', uId).where('courseId', '==', courseId)).valueChanges();
+    return this.angularFirestore.collection('moduleProgress', ref => ref
+      .where('userId', '==', uId)
+      .where('courseId', '==', courseId))
+      .valueChanges();
   }
 
   fetchCoursesDetails(courseId): Observable<any> {

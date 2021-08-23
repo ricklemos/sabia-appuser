@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
@@ -8,9 +8,10 @@ import { noop } from 'rxjs';
   templateUrl: './courses-mycourses-page.component.html',
   styleUrls: ['./courses-mycourses-page.component.scss']
 })
-export class CoursesMycoursesPageComponent implements OnInit {
+export class CoursesMycoursesPageComponent implements OnInit, OnDestroy {
 
   coursesList = [];
+  subscriptions = [];
 
   constructor(
     private coursesServices: CoursesService
@@ -18,13 +19,15 @@ export class CoursesMycoursesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.coursesServices.fetchCourses().pipe(
+    const fetchCourses = this.coursesServices.fetchCourses().pipe(
       tap(data => {
         this.coursesList = data;
       })
     ).subscribe(noop);
-
+    this.subscriptions.push(fetchCourses);
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.map(u => u.unsubscribe);
+  }
 }

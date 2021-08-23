@@ -1,20 +1,26 @@
 @import "~collact-design-system/styles/colors";
 
-p{
-  font-family:  ProximaNova, sans-serif;
+p {
+  font-family: ProximaNova, sans-serif;
   font-size: 16px;
 }
 
-.userName{
+.user-box {
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.user-name {
   color: $black-alpha-700;
 }
 
-.userScore{
+.user-score {
   color: $black-alpha-500;
 }
 
-.itsMeDiv{
-  background-color: rgba(0,0,0,0.1);
+.its-me-div {
+  background-color: $black-alpha-200;
 }
 
 .position {
@@ -22,13 +28,16 @@ p{
   height: 24px;
   width: 24px;
   text-align: center;
-  &__gold{
+
+  &__gold {
     background-color: #F6D177;
   }
-  &__silver{
+
+  &__silver {
     background-color: #D6D6D6;
   }
-  &__bronze{
+
+  &__bronze {
     background-color: #C08147;
   }
 

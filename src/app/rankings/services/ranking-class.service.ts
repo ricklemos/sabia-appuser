@@ -9,18 +9,18 @@ import { SessionsLoginService } from '../../sessions/services/sessions-login.ser
 export class RankingClassService {
 
   constructor(
-    private afs: AngularFirestore,
+    private angularFirestore: AngularFirestore,
     private sessionsLoginService: SessionsLoginService
   ) {
   }
 
   fetchClassRanking(classroomId: string): Observable<any> {
-    return this.afs.doc(`classRankings/${ classroomId }`).valueChanges();
+    return this.angularFirestore.doc(`classRankings/${ classroomId }`).valueChanges();
   }
 
   fetchAvailableClasses(): Observable<any> {
     const uId = this.sessionsLoginService.getUserId();
-    return this.afs.collection('enrollments', ref => ref.where('userId', '==', uId)).valueChanges();
+    return this.angularFirestore.collection('enrollments', ref => ref.where('userId', '==', uId)).valueChanges();
   }
 
   compareRanking(a, b) {

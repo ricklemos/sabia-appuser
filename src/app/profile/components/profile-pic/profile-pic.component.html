@@ -1,10 +1,12 @@
-<img [src]="pictureLink | async"
-     [style.width.px]="width"
-     [style.height.px]="width"
-     [style.border-radius.px]="borderRadius"
-     alt="foto de perfil"
-     onerror="this.src='./../../../assets/img/profile-pic-std.png'"
->
+<div fxLayout="column" fxLayoutAlign="center center">
+  <img [src]="pictureLink | async"
+       [style.width.px]="width"
+       [style.height.px]="width"
+       [style.border-radius.px]="borderRadius"
+       alt="foto de perfil"
+       onerror="this.src='./../../../assets/img/profile-pic-std.png'"
+  >
+</div>
 
 
 

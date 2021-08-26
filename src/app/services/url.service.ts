@@ -59,4 +59,12 @@ export class UrlService {
     return `/module/${ moduleId }`;
   }
 
+
+  public getCourses(): string {
+    return '/courses';
+  }
+
+  public getCoursesDetails(courseId): string {
+    return `/courses/${ courseId }`;
+  }
 }

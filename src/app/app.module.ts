@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { ProfileModule } from './profile/profile.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { UrlService } from './services/url.service';
+import { CoursesModule } from './courses/courses.module';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { QuestionaryModule } from './questionary/questionary.module';
@@ -30,7 +31,8 @@ import { ModuleModule } from './module/module.module';
     CollactDesignSystemModule,
     TextMaskModule,
     QuestionaryModule,
-    ModuleModule
+    ModuleModule,
+    CoursesModule
   ],
   providers: [
     UrlService

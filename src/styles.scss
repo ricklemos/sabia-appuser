@@ -86,3 +86,13 @@ body {
   font-weight: 100;
   font-style: normal;
 }
+
+.bg-sabia-blue {
+  &-500 {
+    background-color: #2E3037;
+
+    span {
+      color: white;
+    }
+  }
+}

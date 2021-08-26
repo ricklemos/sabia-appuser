@@ -1,0 +1,23 @@
+@import "~collact-design-system/styles/colors";
+
+h3 {
+  font-size: 16px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+  color: $black-alpha-700;
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}
+
+button.link {
+  background: none;
+  border: none;
+  color: #009688;
+}
+
+.courses-module-box__container {
+  width: 200px;
+}

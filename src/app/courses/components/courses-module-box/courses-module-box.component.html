@@ -1,0 +1,19 @@
+<div clCard class="courses-module-box__container">
+  <div (click)="goToModule()" clCardContent fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+
+    <div fxLayout="column" fxLayoutGap="8px">
+      <h3>{{ moduleProgress.moduleName }}</h3>
+      <p>{{moduleProgress.schoolName}}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="8px">
+      <p>{{ moduleProgress.moduleProgressPercentage }}%</p>
+      <mat-progress-spinner [diameter]="50" [value]=moduleProgress.moduleProgressPercentage
+                            color="accent"></mat-progress-spinner>
+      <!--      TODO: fazer gráfico bonito (obs: usar Chart.js)-->
+    </div>
+
+    <button class="link">Começar</button>
+
+  </div>
+</div>

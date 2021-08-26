@@ -1,0 +1,10 @@
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutGap="8px">
+      <h1>{{ enrollment.courseName }}</h1>
+      <h2>{{ enrollment.schoolName }}</h2>
+      <p>Turma {{ enrollment.classroomName }}</p>
+    </div>
+    <button clButtonContainedSecondary class="bg-sabia-blue-force" (click)="goToRanking()">Ver ranking</button>
+  </div>
+</div>

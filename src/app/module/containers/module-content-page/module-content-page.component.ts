@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModuleContentPageComponent implements OnInit, OnDestroy {
 
-  moduleContent: Lesson;
+  lesson: Lesson;
   moduleProgress: ModuleProgress;
 
   subscriptions = [];
@@ -28,7 +28,7 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const fetchModule = this.moduleContentService.fetchLesson(this.route.snapshot.paramMap.get('lessonId')).pipe(
       tap(data => {
-        this.moduleContent = data;
+        this.lesson = data;
       })
     ).subscribe(noop);
     this.subscriptions.push(fetchModule);

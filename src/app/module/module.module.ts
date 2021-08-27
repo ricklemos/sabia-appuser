@@ -10,6 +10,7 @@ import { ModuleBodyComponent } from './components/module-body/module-body.compon
 import { ModuleService } from './services/module.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModuleContentPageComponent } from './containers/module-content-page/module-content-page.component';
+import { AttachmentBoxComponent } from './components/attachment-box/attachment-box.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ModuleContentPageComponent } from './containers/module-content-page/mod
     LayoutModuleComponent,
     ModuleProgressPageComponent,
     ModuleBodyComponent,
-    ModuleContentPageComponent
+    ModuleContentPageComponent,
+    AttachmentBoxComponent
   ],
   imports: [
     CommonModule,

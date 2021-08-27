@@ -20,10 +20,11 @@ export interface Lesson {
   lessonId: string;
   lessonDescription: string;
   lessonName: string;
-  attachments?: Attachments[];
+  attachments?: Attachment[];
 }
 
-export interface Attachments {
+export interface Attachment {
   attachmentType: 'PDF' | 'VIDEO';
-  link: string;
+  attachmentLink: string;
+  attachmentName: string;
 }

@@ -1,5 +1,5 @@
 export interface ModuleProgress {
-  lessons: Lesson[];
+  lessons: ModuleLesson[];
   moduleId: string;
   moduleName: string;
   schoolName?: string;
@@ -8,7 +8,7 @@ export interface ModuleProgress {
   moduleProgressPercentage?: number; // um número de 0 a 100 que representa a porcentagem de conclusão do módulo
 }
 
-export interface Lesson {
+export interface ModuleLesson {
   complete: boolean;
   lessonName: string;
   lessonType: 'QUESTIONARY' | 'TEXT';
@@ -16,9 +16,14 @@ export interface Lesson {
   lessonId?: string;
 }
 
-export interface ModuleContent {
-  contentId: string;
-  topicComplete: boolean;
-  topicDescription: string;
-  topicName: string;
+export interface Lesson {
+  lessonId: string;
+  lessonDescription: string;
+  lessonName: string;
+  attachments?: Attachments[];
+}
+
+export interface Attachments {
+  attachmentType: 'PDF' | 'VIDEO';
+  link: string;
 }

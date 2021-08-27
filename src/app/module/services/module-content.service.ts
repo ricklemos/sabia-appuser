@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModuleContent } from '../models/module';
+import { Lesson } from '../models/module';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class ModuleContentService {
 
-  moduleContent: ModuleContent;
+  lesson: Lesson;
 
   constructor(
     private angularFirestore: AngularFirestore,
   ) {
   }
 
-  fetchModuleContent(contentId): Observable<any> {
-    return this.angularFirestore.doc(`moduleContent/${ contentId }`)
+  fetchLesson(lessonId): Observable<any> {
+    return this.angularFirestore.doc(`lessons/${ lessonId }`)
       .valueChanges();
   }
 }

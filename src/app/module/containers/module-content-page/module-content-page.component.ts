@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { ModuleContentService } from '../../services/module-content.service';
-import { ModuleContent, ModuleProgress } from '../../models/module';
+import { Lesson, ModuleProgress } from '../../models/module';
 import { ModuleService } from '../../services/module.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModuleContentPageComponent implements OnInit, OnDestroy {
 
-  moduleContent: ModuleContent;
+  moduleContent: Lesson;
   moduleProgress: ModuleProgress;
 
   subscriptions = [];
@@ -26,7 +26,7 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const fetchModule = this.moduleContentService.fetchModuleContent(this.route.snapshot.paramMap.get('lessonId')).pipe(
+    const fetchModule = this.moduleContentService.fetchLesson(this.route.snapshot.paramMap.get('lessonId')).pipe(
       tap(data => {
         this.moduleContent = data;
       })

@@ -15,3 +15,10 @@ export interface Lesson {
   questionaryId?: string; // usar o Id do questionário para acessá-lo
   lessonId?: string;
 }
+
+export interface ModuleContent {
+  contentId: string;
+  topicComplete: boolean;
+  topicDescription: string;
+  topicName: string;
+}

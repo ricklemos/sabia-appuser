@@ -13,7 +13,7 @@ export const ModuleRoutes: Routes = [
       },
 
       {
-        path: ':moduleId/1',
+        path: ':moduleId/lesson/:lessonId',
         component: ModuleContentPageComponent,
         // canActivate: [AuthGuard]
       }

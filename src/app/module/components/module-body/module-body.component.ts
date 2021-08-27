@@ -62,7 +62,7 @@ export class ModuleBodyComponent implements OnInit {
       }
     } else if (lesson.lessonId) {
       // Vai pra página de conteúdo teórico
-      this.router.navigate([this.urlService.getLesson(lesson.lessonId)]);
+      this.router.navigate([this.urlService.getLesson(this.moduleProgress.moduleId, lesson.lessonId)]);
     }
 
   }

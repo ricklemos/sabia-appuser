@@ -1,36 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { ModuleContentService } from '../../services/module-content.service';
 import { ModuleContent, ModuleProgress } from '../../models/module';
+import { ModuleService } from '../../services/module.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'module-content-page',
   templateUrl: './module-content-page.component.html',
   styleUrls: ['./module-content-page.component.scss']
 })
-export class ModuleContentPageComponent implements OnInit {
+export class ModuleContentPageComponent implements OnInit, OnDestroy {
 
   moduleContent: ModuleContent;
   moduleProgress: ModuleProgress;
 
+  subscriptions = [];
+
   constructor(
     private moduleContentService: ModuleContentService,
+    private moduleService: ModuleService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.moduleContentService.fetchModuleContent('1').pipe(
+    const fetchModule = this.moduleContentService.fetchModuleContent(this.route.snapshot.paramMap.get('lessonId')).pipe(
       tap(data => {
         this.moduleContent = data;
       })
     ).subscribe(noop);
-    //   this.moduleService.fetchModuleProgress('0001').pipe(
-    //     tap(data => {
-    //       this.moduleProgress = data;
-    //     })).subscribe(noop);
-    // TODO: trazer informações do nome do Modulo pelo ModuleProgress
+    this.subscriptions.push(fetchModule);
+
+    this.moduleProgress = this.moduleService.getModule();
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.map(u => u.unsubscribe);
+  }
+
 }
 
 

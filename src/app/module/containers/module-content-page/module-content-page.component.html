@@ -8,14 +8,17 @@
 
   <h2 class="module-content__header2">Anexos</h2>
 
-  <div *ngFor="let attachment of lesson.attachments" fxLayout="row" fxLayoutGap="16px">
-    <!--    TODO: fazer as caixas ficarem em linha-->
-    <attachment-box [attachment]="attachment"></attachment-box>
+  <div fxLayout="row" fxLayoutGap="16px">
+    <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>
   </div>
 
-  <a clButtonContainedSecondary>
-    <span>Marcar como concluído</span>
-  </a>
+  <div (click)="concluirLicao()" *ngIf="!lessonDone" clButtonContainedSecondary>
+    Marcar como concluído
+  </div>
+  <div (click)="concluirLicao()" *ngIf="lessonDone" clButtonContained class="bg-sabia-blue-500">
+    <span>Lição concluída</span>
+  </div>
+
   <!--  TODO: lessonComplete = TRUE when button clicked-->
 
 </div>

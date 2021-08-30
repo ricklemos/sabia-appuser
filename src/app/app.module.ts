@@ -17,6 +17,7 @@ import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
 import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
+import { HomeModule } from './home/home.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
     ModuleModule,
     RankingsModule,
     CoursesModule,
+    HomeModule,
     InstructorDashModule
   ],
   providers: [

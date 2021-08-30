@@ -12,13 +12,10 @@
     <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>
   </div>
 
-  <div (click)="concluirLicao()" *ngIf="!lessonDone" clButtonContainedSecondary>
-    Marcar como concluído
+  <div (click)="markAsDone()" *ngIf="!lessonDone" clButtonContainedSecondary>
+    <span>Marcar como concluído</span>
   </div>
-  <div (click)="concluirLicao()" *ngIf="lessonDone" clButtonContained class="bg-sabia-blue-500">
+  <div (click)="markAsDone()" *ngIf="lessonDone" clButtonContained class="bg-sabia-blue-500">
     <span>Lição concluída</span>
   </div>
-
-  <!--  TODO: lessonComplete = TRUE when button clicked-->
-
 </div>

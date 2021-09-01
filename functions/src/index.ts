@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { error } from 'firebase-functions/lib/logger';
-import { UserRanking } from './models';
 
 admin.initializeApp();
 
@@ -18,6 +17,9 @@ export const createSingleEnrollment = functions.firestore
     const before = change.before.data();
     console.log('after', after);
     console.log('before', before);
+    // Atualizar vetor de estudantes do classroom (feito no front).
+    // Criar Enrollment
+    // Atualizar ranking
   });
 
 export const createEnrollmentWhenCreateClassroom = functions.firestore
@@ -29,7 +31,14 @@ export const createEnrollmentWhenCreateClassroom = functions.firestore
       const students = data.students;
       const classroomId = data.classroomId;
       const classroom = data;
-      const ranking: UserRanking[] = [];
+      // Cria o Ranking da turma com array vazio
+      admin.firestore().doc(`/classRankings/${ classroomId }`)
+        .create({
+          courseId: classroom.courseId,
+          courseName: classroom.courseName,
+          classroomName: classroom.classroomName,
+          schoolName: classroom.institutionName,
+        }).then(() => console.log(`criou o ranking da turma ${ classroomId }`));
       // Itera no array de students dos dados para criar as matrículas de cada aluno
       students.map((studentEmail: any, index: number) => {
         admin.firestore().collection('userData')
@@ -40,6 +49,7 @@ export const createEnrollmentWhenCreateClassroom = functions.firestore
               querySnapshot.forEach((user: any) => {
                 const userData = user.data();
                 const userId = user.id;
+                // Cria o enrollment do aluno
                 admin.firestore().doc(`/enrollments/${ userId + '-' + classroomId }`)
                   .create({
                     courseId: classroom.courseId,
@@ -51,33 +61,26 @@ export const createEnrollmentWhenCreateClassroom = functions.firestore
                     userId,
                   })
                   .then(() => {
-                    // Adiciona os dados desse usuário no vetor do ranking
-                    ranking.push({
-                      userId,
-                      userName: userData.firstName + ' ' + userData.lastName,
-                      userScore: 0
-                    });
-                    return ranking;
-                  })
-                  .then((userRanking) => {
-                    // Se for o último aluno para cadastro, cria-se o ranking
-                    if (index === students.length - 1) {
-                      console.log('ranking final:', userRanking);
-                      admin.firestore().doc(`/classRankings/${ classroomId }`)
-                        .create({
-                          courseId: classroom.courseId,
-                          courseName: classroom.courseName,
-                          classroomName: classroom.classroomName,
-                          schoolName: classroom.institutionName,
-                          userRanking
-                        }).then(() => console.log('criou o ranking'));
-                    }
+                    // Atualiza o ranking com o aluno novo
+                    admin.firestore().doc(`/classRankings/${ classroomId }`)
+                      .update({
+                        ranking: admin.firestore.FieldValue.arrayUnion({
+                          userId,
+                          userName: userData.firstName + ' ' + userData.lastName,
+                          userScore: 0
+                        })
+                      });
                   })
                   .catch((err) => console.log('erro:', err));
               });
             } else {
-              // Aluno não é um usuário (adiciona em users sem conta)
-              admin.firestore().collection('users').add({ email: studentEmail })
+              // Aluno não é um usuário (adiciona em users sem conta com pre-enrollment: classroomId)
+              admin.firestore().collection('users').add(
+                {
+                  email: studentEmail,
+                  preEnrollments: admin.firestore.FieldValue.arrayUnion(classroomId)
+                }
+              )
                 .then(() => console.log('adicionou um novo usuário'))
                 .catch((err) => console.log(err));
             }
@@ -172,6 +175,15 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.fires
         .info('Dados do moduleProgress não existem', { structuredData: true });
     }
   });
+
+// Dá pra melhorar as funções de atualizar o score sem pegar o score velho usando o seguinte código:
+
+// var washingtonRef = db.collection('cities').doc('DC');
+//
+// // Atomically increment the population of the city by 50.
+// washingtonRef.update({
+//   population: firebase.firestore.FieldValue.increment(50)
+// });
 
 export const questionaryUpdated = functions.firestore.document('/questionnaireAnswers/{questionnaireId}')
   .onUpdate((snap) => {

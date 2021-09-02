@@ -9,23 +9,10 @@ import * as tests from './tests';
 export const createMockupData = tests.createMockupData;
 export const createClassroom = tests.createClassroom;
 
-
-export const createSingleEnrollment = functions.firestore
+export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
   .document('classrooms/{classroomId}')
-  .onUpdate((change) => {
-    const after = change.after.data();
-    const before = change.before.data();
-    console.log('after', after);
-    console.log('before', before);
-    // Atualizar vetor de estudantes do classroom (feito no front).
-    // Criar Enrollment
-    // Atualizar ranking
-  });
-
-export const createEnrollmentWhenCreateClassroom = functions.firestore
-  .document('classrooms/{classroomId}')
-  .onCreate((snap) => {
-    const data = snap.data();
+  .onWrite((change) => {
+    const data = change.after.data();
     // Verifica se os dados existem
     if (data) {
       const students = data.students;
@@ -75,12 +62,12 @@ export const createEnrollmentWhenCreateClassroom = functions.firestore
               });
             } else {
               // Aluno não é um usuário (adiciona em users sem conta com pre-enrollment: classroomId)
-              admin.firestore().collection('users').add(
+              admin.firestore().collection('users').doc(studentEmail).set(
                 {
                   email: studentEmail,
                   preEnrollments: admin.firestore.FieldValue.arrayUnion(classroomId)
                 }
-              )
+              , {merge: true})
                 .then(() => console.log('adicionou um novo usuário'))
                 .catch((err) => console.log(err));
             }
@@ -91,8 +78,7 @@ export const createEnrollmentWhenCreateClassroom = functions.firestore
       functions.logger
         .info('Dados da classe não existem', { structuredData: true });
     }
-  })
-;
+  });
 
 export const createmoduleProgressWhenCreateEnrollment = functions.firestore
   .document('enrollments/{enrollmentId}')
@@ -116,7 +102,8 @@ export const createmoduleProgressWhenCreateEnrollment = functions.firestore
                         moduleName: moduleData.moduleName,
                         schoolName: enrollment.schoolName,
                         lessons: moduleData.lessons,
-                        score: 0
+                        score: 0,
+                        classroomId: enrollment.classroomId
                       });
                   } else {
                     throw Error('No Module Data');
@@ -160,7 +147,9 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.fires
                         userId: moduleProgress.userId,
                         questionnaireId,
                         questionnaireName: questionnaireTemplate.questionnaireName,
-                        questions
+                        questions,
+                        classroomId: moduleProgress.classroomId,
+                        moduleId: moduleProgress.moduleId
                       });
                   })
                   .catch(err => console.log('erro:', err));
@@ -176,37 +165,22 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.fires
     }
   });
 
-// Dá pra melhorar as funções de atualizar o score sem pegar o score velho usando o seguinte código:
-
-// var washingtonRef = db.collection('cities').doc('DC');
-//
-// // Atomically increment the population of the city by 50.
-// washingtonRef.update({
-//   population: firebase.firestore.FieldValue.increment(50)
-// });
-
-export const questionaryUpdated = functions.firestore.document('/questionnaireAnswers/{questionnaireId}')
+// Atualiza o Score do enrollment e do moduleProgress quando termina de responder o questionário pela primeira vez
+export const questionnaireUpdated = functions.firestore.document('/questionnaireAnswers/{questionnaireId}')
   .onUpdate((snap) => {
     const data = snap.after.data();
     if (data) {
       const userId = data.userId;
       const classroomId = data.classroomId;
+      const moduleId = data.moduleId;
       const score = data.score;
       if (data.tentatives === 1) {
-        admin.firestore().doc(`/enrollments/${ userId + '-' + classroomId }`).get()
-          .then((enrollment) => {
-            const enrollmentData = enrollment.data();
-            if (enrollmentData) {
-              const actualScore = enrollmentData.score;
-              const newScore = actualScore + score;
-              return admin.firestore().doc(`/enrollments/${ userId + '-' + classroomId }`).update({ score: newScore });
-            } else {
-              return Promise.reject('não há dados');
-            }
-          })
-          .then((res) => {
-            console.log(res);
-          })
+        // Incrementa o valor do score tanto em enrollments quanto no moduleProgress
+        admin.firestore().doc(`/enrollments/${ userId + '-' + classroomId }`)
+          .update({score: admin.firestore.FieldValue.increment(score)})
+          .catch((err) => console.log(err));
+        admin.firestore().doc(`/moduleProgress/${ userId + '-' + moduleId }`)
+          .update({score: admin.firestore.FieldValue.increment(score)})
           .catch((err) => console.log(err));
       } else {
         console.log('não foi a primeira tentativa');
@@ -216,6 +190,7 @@ export const questionaryUpdated = functions.firestore.document('/questionnaireAn
     }
   });
 
+// Atualiza o Score do Ranking quando atualiza o enrollment
 export const updateRanking = functions.firestore.document('/enrollments/{enrollmentId}')
   .onUpdate((snap) => {
     const data = snap.after.data();

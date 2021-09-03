@@ -1,0 +1,8 @@
+<p>classrooms-page works!</p>
+<input type="file" class="upload" (change)="getCSV($event)">
+
+<div>
+  <div *ngFor="let student of students">
+    <p>{{ student }}</p>
+  </div>
+</div>

@@ -51,4 +51,9 @@ export class SessionsLoggedPageComponent implements OnInit {
     this.router.navigate([url]);
   }
 
+  goToClassroomPage(): void {
+    const url = this.urlService.getInstructorClassroomPage();
+    this.router.navigate([url]);
+  }
+
 }

@@ -16,6 +16,7 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
+import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { RankingsModule } from './rankings/rankings.module';
     QuestionaryModule,
     ModuleModule,
     RankingsModule,
-    CoursesModule
+    CoursesModule,
+    InstructorDashModule
   ],
   providers: [
     UrlService

@@ -78,4 +78,8 @@ export class UrlService {
     return `/courses/${ courseId }`;
 
   }
+
+  public getInstructorClassroomPage(): string {
+    return `/instructor/classroom`;
+  }
 }

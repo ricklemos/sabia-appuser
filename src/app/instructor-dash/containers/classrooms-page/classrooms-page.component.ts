@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InstructorDashClassroom } from '../../models/instructor-dash-models';
+import { InstructorDashUploadClassroomService } from '../../services/instructor-dash-upload-classroom.service';
 
 @Component({
   selector: 'classrooms-page',
@@ -8,8 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class ClassroomsPageComponent implements OnInit {
 
   students: string[] = [];
+  classroom: InstructorDashClassroom;
 
-  constructor() {
+  constructor(
+    private instructorDashUploadClassroomService: InstructorDashUploadClassroomService
+  ) {
+    this.classroom = {
+      classroomName: 'Teste da classe no front',
+      institutionName: 'institutionName',
+      classroomId: '03',
+      courseId: 'courseId',
+      courseName: 'courseName',
+      modules: ['01', '02'],
+      startDate: new Date(),
+      students: []
+    };
   }
 
   ngOnInit(): void {
@@ -31,6 +46,8 @@ export class ClassroomsPageComponent implements OnInit {
   }
 
   uploadClassroom(): void {
-
+    this.classroom.students = this.students;
+    this.instructorDashUploadClassroomService.uploadClassroom(this.classroom)
+      .then((data) => console.log('fez o upload', data));
   }
 }

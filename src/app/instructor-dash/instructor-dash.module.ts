@@ -7,13 +7,18 @@ import { LayoutInstructorDashComponent } from './layout/layout-instructor-dash/l
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InstructorDashUploadClassroomService } from './services/instructor-dash-upload-classroom.service';
+import { ClassroomPageComponent } from './containers/classroom-page/classroom-page.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CreateNewClassroomPageComponent } from './containers/create-new-classroom-page/create-new-classroom-page.component';
 
 
 
 @NgModule({
   declarations: [
     LayoutInstructorDashComponent,
-    ClassroomsPageComponent
+    ClassroomsPageComponent,
+    ClassroomPageComponent,
+    CreateNewClassroomPageComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +26,7 @@ import { InstructorDashUploadClassroomService } from './services/instructor-dash
     RouterModule.forChild(InstructorDashRoutes),
     CollactDesignSystemModule,
     FlexLayoutModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     InstructorDashUploadClassroomService

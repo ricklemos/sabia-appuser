@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-progress-spinner *ngIf="loadingClassroom"></mat-progress-spinner>
+</div>
+
+<div *ngIf="!loadingClassroom" class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+    <h1>{{ classroom.courseName }}</h1>
+    <h3>{{ classroom.institutionName }}</h3>
+    <h3>{{ classroom.classroomName }}</h3>
+    <button clButtonContained (click)="goToRanking()">
+<!--      <i *ngIf="hasIcon && !iconRight" clIcon name="cl-delete"></i>-->
+      <span>Ranking da Turma</span>
+    </button>
+    <h2>Alunos</h2>
+    <div *ngFor="let student of classroom.students" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+      <p>{{ student }}</p>
+    </div>
+    <input type="file" class="upload" (change)="getCSV($event)">
+    <button *ngIf="students" (click)="addStudents()">Add students!</button>
+</div>

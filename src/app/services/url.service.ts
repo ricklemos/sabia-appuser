@@ -79,7 +79,11 @@ export class UrlService {
 
   }
 
-  public getInstructorClassroomPage(): string {
-    return `/instructor/classroom`;
+  public getInstructorClassroomsPage(): string {
+    return `/instructor/classrooms`;
+  }
+
+  public getInstructorClassroomPage(classroomId): string {
+    return `/instructor/classrooms/${ classroomId }`;
   }
 }

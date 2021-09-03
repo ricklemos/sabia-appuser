@@ -1,0 +1,10 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+  <h1>Criar nova classe</h1>
+  <input type="file" class="upload" (change)="getCSV($event)">
+  <div>
+    <div *ngFor="let student of classroom.students">
+      <p>{{ student }}</p>
+    </div>
+    <button *ngIf="students" (click)="createClassroom()">Create Classroom</button>
+  </div>
+</div>

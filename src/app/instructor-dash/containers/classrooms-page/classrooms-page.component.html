@@ -1,10 +1,21 @@
-<p>classrooms-page works!</p>
-<input type="file" class="upload" (change)="getCSV($event)">
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
 
-<div>
-  <div *ngFor="let student of students">
-    <p>{{ student }}</p>
+  <h1>Turmas</h1>
+
+  <button clButton routerLink="create">
+    <span>Adicionar Turma</span>
+    <i clIcon name="cl-plus"></i>
+  </button>
+
+  <div *ngFor="let classroom of classrooms" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+    <div clCard (click)="goToClassroomPage(classroom)">
+      <h2 clCardTitle>{{ classroom.courseName }}</h2>
+      <h2 clCardSubTitle>{{ classroom.institutionName }}</h2>
+      <div clCardContent>
+        <p>{{ classroom.classroomName }}</p>
+      </div>
+    </div>
   </div>
+
 </div>
 
-<button (click)="uploadClassroom()">Upload!</button>

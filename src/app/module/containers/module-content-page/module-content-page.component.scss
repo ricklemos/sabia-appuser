@@ -1,13 +1,13 @@
 @import "~collact-design-system/styles/colors";
 
 .module-content {
-  &__header2 {
+  &__title {
     color: $black-alpha-700;
     font-size: 20px;
     font-family: ProximaNovaSemiBold, sans-serif;
   }
 
-  &__header3 {
+  &__subtitle {
     color: $black-alpha-500;
     font-size: 20px;
     font-family: ProximaNovaSemiBold, sans-serif;

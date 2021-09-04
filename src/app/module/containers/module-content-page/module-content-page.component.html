@@ -1,12 +1,12 @@
 <div class="module-content__background" fxLayout="column" fxLayoutGap="16px">
 
-  <h2 class="module-content__header2">{{moduleProgress.moduleName}}</h2>
+  <h2 class="module-content__title">{{moduleProgress.moduleName}}</h2>
 
-  <h3 class="module-content__header3">{{lesson.lessonName}}</h3>
+  <h3 class="module-content__subtitle">{{lesson.lessonName}}</h3>
 
   <p class="module-content__description">{{ lesson.lessonDescription }}</p>
 
-  <h2 class="module-content__header2">Anexos</h2>
+  <h2 class="module-content__title">Anexos</h2>
 
   <div fxLayout="row" fxLayoutGap="16px">
     <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>

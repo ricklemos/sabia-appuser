@@ -17,11 +17,13 @@ import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
 import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
+import { StudentsFormComponent } from './instructors-dash/components/students-form/students-form.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StudentsFormComponent
   ],
   imports: [
     BrowserModule,

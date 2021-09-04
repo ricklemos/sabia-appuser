@@ -13,28 +13,32 @@ export class CreateNewClassroomPageComponent implements OnInit {
 
   students: string[] = [];
   classroom: InstructorDashClassroom;
+  isCourseCheck = false;
+  isStudentsCheck = false;
+  submitDisabled = false;
 
   constructor(
     private instructorDashUploadClassroomService: InstructorDashUploadClassroomService,
     private router: Router,
     private urlService: UrlService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.classroom = {
-      classroomName: 'Teste da classe no front 2',
-      institutionName: 'institutionName2',
-      classroomId: '04',
-      courseId: 'courseId',
-      courseName: 'courseName',
-      modules: ['01', '02'],
-      startDate: new Date(),
-      students: []
-    };
+    // this.classroom = {
+    //   classroomName: 'Teste da classe no front 2',
+    //   institutionName: 'institutionName2',
+    //   classroomId: '04',
+    //   courseId: 'courseId',
+    //   courseName: 'courseName',
+    //   modules: ['01', '02'],
+    //   startDate: new Date(),
+    //   students: []
+    // };
   }
 
   createClassroom(): void {
-    this.classroom.students = this.students;
+    console.log('clicou pra criar a classe');
     this.instructorDashUploadClassroomService.createClassroom(this.classroom)
       .then((data) => {
         console.log('fez o upload', data);
@@ -43,18 +47,18 @@ export class CreateNewClassroomPageComponent implements OnInit {
       .catch((error) => console.log(error));
   }
 
-  getCSV($event): void {
-    const files = $event.target.files;
-    if (files && files.length > 0) {
-      const file: File = files.item(0);
-      const reader: FileReader = new FileReader();
-      reader.readAsText(file);
-      reader.onload = ((e) => {
-        const csv: string = reader.result as string;
-        // TODO: Show error message if CSV is wrong
-        this.students = this.students.concat(csv.split('\n'));
-      });
-    }
+  courseCheck($event): void{
+    this.classroom = $event;
+    console.log('pré-final', this.classroom);
+    this.isCourseCheck = true;
+    this.submitDisabled = this.isStudentsCheck ? false : true;
+  }
+
+  studentsCheck($event): void {
+    this.classroom.students = $event;
+    console.log('final', this.classroom);
+    this.isStudentsCheck = true;
+    this.submitDisabled = this.isCourseCheck ? false : true;
   }
 
 }

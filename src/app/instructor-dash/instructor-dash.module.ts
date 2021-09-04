@@ -10,6 +10,11 @@ import { InstructorDashUploadClassroomService } from './services/instructor-dash
 import { ClassroomPageComponent } from './containers/classroom-page/classroom-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CreateNewClassroomPageComponent } from './containers/create-new-classroom-page/create-new-classroom-page.component';
+import { CreateClassroomFormComponent } from './components/create-classroom-form/create-classroom-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '../forms/forms.module';
+import { CollactComponentsModule } from 'collact-components';
+import { StudentsFormComponent } from './components/students-form/students-form.component';
 
 
 
@@ -18,7 +23,9 @@ import { CreateNewClassroomPageComponent } from './containers/create-new-classro
     LayoutInstructorDashComponent,
     ClassroomsPageComponent,
     ClassroomPageComponent,
-    CreateNewClassroomPageComponent
+    CreateNewClassroomPageComponent,
+    CreateClassroomFormComponent,
+    StudentsFormComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +34,9 @@ import { CreateNewClassroomPageComponent } from './containers/create-new-classro
     CollactDesignSystemModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CollactComponentsModule,
   ],
   providers: [
     InstructorDashUploadClassroomService

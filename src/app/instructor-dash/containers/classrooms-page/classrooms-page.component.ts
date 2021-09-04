@@ -14,6 +14,7 @@ import { UrlService } from '../../../services/url.service';
 export class ClassroomsPageComponent implements OnInit {
 
   classrooms: InstructorDashClassroom[] = [];
+  loadingClassrooms = true;
 
   constructor(
     private instructorDashUploadClassroomService: InstructorDashUploadClassroomService,
@@ -27,6 +28,7 @@ export class ClassroomsPageComponent implements OnInit {
       tap((classroomsQuery) => {
         classroomsQuery.forEach((classroomDoc) => {
           this.classrooms.push(classroomDoc.data());
+          this.loadingClassrooms = false;
         });
       })
     ).subscribe(noop);

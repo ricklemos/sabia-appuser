@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ClFieldConfig } from 'collact-components';
 
@@ -8,14 +8,13 @@ import { ClFieldConfig } from 'collact-components';
   styleUrls: ['./students-form.component.scss']
 })
 export class StudentsFormComponent implements OnInit {
-
+  @Input() title = 'Alunos';
   @Output() formDone: EventEmitter<any> = new EventEmitter<any>();
 
   students: string[] = [];
   validStudents = false;
   addDisabled = true;
   textStudents: string[] = [];
-
   formStudents: ClFieldConfig[] = [
     {
       type: 'textArea',
@@ -44,7 +43,7 @@ export class StudentsFormComponent implements OnInit {
       const file: File = files.item(0);
       const reader: FileReader = new FileReader();
       reader.readAsText(file);
-      reader.onload = ((e) => {
+      reader.onload = (() => {
         const csv: string = reader.result as string;
         // TODO: Show error message if CSV is wrong
         this.students = this.students.concat(csv.split('\n'));

@@ -1,5 +1,5 @@
 <div clCard>
-  <h1 clCardTitle>Alunos</h1>
+  <h1 clCardTitle>{{ title }}</h1>
   <div clCardContent fxLayout="column" fxLayoutGap="8px">
     <p>Adicionar com CSV</p>
     <input type="file" class="upload" (change)="getCSV($event)">

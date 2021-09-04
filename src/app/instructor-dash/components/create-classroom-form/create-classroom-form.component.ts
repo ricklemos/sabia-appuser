@@ -75,7 +75,6 @@ export class CreateClassroomFormComponent implements OnInit {
             value: course.courseId,
             label: course.courseName
           });
-          console.log('fetchedCourses', this.courses);
         });
       })
     ).subscribe(noop);
@@ -95,7 +94,7 @@ export class CreateClassroomFormComponent implements OnInit {
   }
 
   checkIfFormIsValid($event): void {
-    this.submitDisabled = $event ? false : true;
+    this.submitDisabled = !$event;
     if ($event) {
       this.formDone.emit(this.newClassroom);
     }

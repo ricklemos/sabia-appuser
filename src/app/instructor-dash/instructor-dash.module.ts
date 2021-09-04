@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '../forms/forms.module';
 import { CollactComponentsModule } from 'collact-components';
 import { StudentsFormComponent } from './components/students-form/students-form.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -34,6 +35,7 @@ import { StudentsFormComponent } from './components/students-form/students-form.
     CollactDesignSystemModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
     CollactComponentsModule,

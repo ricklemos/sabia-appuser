@@ -31,8 +31,8 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
       tap(data => {
         this.lesson = data;
         this.moduleProgress = this.moduleService.getModule();
-        const fetchLesson = this.moduleProgress.lessons.filter(lesson => lesson.lessonId === this.lesson.lessonId);
-        this.lessonDone = fetchLesson[0].complete;
+        const [fetchLesson] = this.moduleProgress.lessons.filter(lesson => lesson.lessonId === this.lesson.lessonId);
+        this.lessonDone = fetchLesson.complete;
       })
     ).subscribe(noop);
     this.subscriptions.push(fetchModule);
@@ -46,8 +46,8 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
 
   markAsDone(): void {
     this.lessonDone = !this.lessonDone;
-    const filteredLesson = this.moduleProgress.lessons.filter(lesson => lesson.lessonId === this.lesson.lessonId);
-    filteredLesson[0].complete = this.lessonDone;
+    const [filteredLesson] = this.moduleProgress.lessons.filter(lesson => lesson.lessonId === this.lesson.lessonId);
+    filteredLesson.complete = this.lessonDone;
   }
 
 }

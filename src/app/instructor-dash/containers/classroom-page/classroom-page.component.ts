@@ -18,6 +18,7 @@ export class ClassroomPageComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   loadingClassroom = true;
   isAddingStudents = false;
+  addStudents = false;
 
   constructor(
     private instructorDashUploadClassroomService: InstructorDashUploadClassroomService,
@@ -44,27 +45,18 @@ export class ClassroomPageComponent implements OnInit, OnDestroy {
     this.subscriptions.map(u => u.unsubscribe);
   }
 
-  getCSV($event): void {
-    const files = $event.target.files;
-    if (files && files.length > 0) {
-      const file: File = files.item(0);
-      const reader: FileReader = new FileReader();
-      reader.readAsText(file);
-      reader.onload = (() => {
-        const csv: string = reader.result as string;
-        // TODO: Show error message if CSV is wrong
-        this.students = this.students.concat(csv.split('\n'));
-      });
-    }
+  openAddStudentsForm(): void {
+    this.addStudents = true;
   }
 
-  addedStudents($event): void{
+  addedStudents($event): void {
     this.students = this.students.concat($event);
     this.isAddingStudents = true;
   }
 
   uploadStudents(): void {
     this.isAddingStudents = false;
+    this.addStudents = false;
     this.instructorDashUploadClassroomService.addStudents(this.students);
   }
 

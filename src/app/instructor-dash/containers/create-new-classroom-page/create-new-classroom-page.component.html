@@ -2,7 +2,7 @@
   <h1>Criar nova classe</h1>
   <create-classroom-form (formDone)="courseCheck($event)"></create-classroom-form>
   <students-form (formDone)="studentsCheck($event)"></students-form>
-  <button clButtonContainedSecondary [disabled]="submitDisabled" (click)="createClassroom()" class="bg-sabia-blue">
+  <button clButton [disabled]="submitDisabled" (click)="createClassroom()">
     <span>Criar nova classe</span>
   </button>
 </div>

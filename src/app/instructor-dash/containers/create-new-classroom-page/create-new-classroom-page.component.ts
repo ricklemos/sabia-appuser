@@ -16,7 +16,7 @@ export class CreateNewClassroomPageComponent implements OnInit {
   classroom: InstructorDashClassroom;
   isCourseCheck = false;
   isStudentsCheck = false;
-  submitDisabled = false;
+  submitDisabled = true;
 
   constructor(
     private instructorDashUploadClassroomService: InstructorDashUploadClassroomService,
@@ -30,6 +30,7 @@ export class CreateNewClassroomPageComponent implements OnInit {
   }
 
   createClassroom(): void {
+    this.classroom.students = this.students;
     this.instructorDashUploadClassroomService.createClassroom(this.classroom)
       .then(() => {
         this.matSnackBar.open('Turma criada', 'OK', {
@@ -42,14 +43,12 @@ export class CreateNewClassroomPageComponent implements OnInit {
 
   courseCheck($event): void{
     this.classroom = $event;
-    console.log('pré-final', this.classroom);
     this.isCourseCheck = true;
     this.submitDisabled = !this.isStudentsCheck;
   }
 
   studentsCheck($event): void {
-    this.classroom.students = $event;
-    console.log('final', this.classroom);
+    this.students = $event;
     this.isStudentsCheck = true;
     this.submitDisabled = !this.isCourseCheck;
   }

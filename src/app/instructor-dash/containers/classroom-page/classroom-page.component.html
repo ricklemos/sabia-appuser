@@ -21,7 +21,10 @@
         </div>
       </div>
     </div>
-    <students-form [title]="'Adicionar Alunos'" (formDone)="addedStudents($event)"></students-form>
+    <button *ngIf="!addStudents" clButtonContainedSecondary (click)="openAddStudentsForm()">
+      <span>Adicionar alunos</span>
+    </button>
+    <students-form *ngIf="addStudents" [title]="'Adicionar Alunos'" (formDone)="addedStudents($event)"></students-form>
     <button *ngIf="isAddingStudents" clButtonContainedSecondary (click)="uploadStudents()">
       <span>Concluir</span>
     </button>

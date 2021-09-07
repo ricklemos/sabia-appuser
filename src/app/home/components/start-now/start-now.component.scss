@@ -1,0 +1,38 @@
+@import '~collact-design-system/styles/colors';
+
+p {
+  font-family: ProximaNovaSemiBold, sans-serif;
+  font-size: 16px;
+  color: $black-alpha-700;
+}
+
+.title {
+  font-family: ProximaNovaBold, sans-serif;
+  font-size: 20px;
+}
+
+.text {
+  color: white;
+}
+
+.start-now {
+  position: relative;
+}
+
+.circle {
+  width: 230px;
+  height: 230px;
+  background-color: #2cb2ab;
+  border-radius: 100%;
+}
+
+.start-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  background-color: white;
+}
+
+.start-button-icon {
+  color: #2cb2ab;
+}

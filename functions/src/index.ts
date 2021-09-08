@@ -2,6 +2,7 @@ import * as admin from 'firebase-admin';
 import * as tests from './tests';
 import * as createEnrollments from './create-enrollments';
 import * as updateRankingScore from './update-ranking-score';
+import * as authentication from './authentication';
 
 admin.initializeApp();
 
@@ -18,4 +19,8 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = createEnrollmen
 // Funções de atualização do score do aluno nos documentos
 export const questionnaireUpdated = updateRankingScore.questionnaireUpdated;
 export const updateRanking = updateRankingScore.updateRanking;
+
+// Funções de autenticação
+export const setStudentRole = authentication.setStudentRoleOnCreate;
+export const setRole = authentication.setRole;
 

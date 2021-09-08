@@ -24,6 +24,10 @@ import { SessionsSignupService } from './services/sessions-signup.service';
 import { SessionsRolesService } from './services/sessions-roles.service';
 import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/functions';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SessionsEditRolePageComponent } from './containers/sessions-edit-role-page/sessions-edit-role-page.component';
+import { FormsModule } from '../forms/forms.module';
+import { CollactComponentsModule } from 'collact-components';
+import { CollactDesignSystemModule } from 'collact-design-system';
 
 
 
@@ -41,6 +45,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SessionsSignupLastNameComponent,
     SessionsSignupGenderComponent,
     SessionsSignupPasswordComponent,
+    SessionsEditRolePageComponent,
   ],
   imports: [
     CommonModule,
@@ -52,7 +57,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     MatDialogModule,
     AngularFireFunctionsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule,
+    CollactComponentsModule,
+    CollactDesignSystemModule,
   ],
   entryComponents: [
     SessionsInvalidEmailDialogComponent

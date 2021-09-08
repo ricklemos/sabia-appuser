@@ -77,13 +77,9 @@ export class SessionsLoggedPageComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  callCloudFunction(): void {
-    console.log('clicou no botão');
-    this.sessionsRolesService.setRole('gmduarte96@gmail.com', 'MASTER').pipe(
-      tap((data) => {
-        console.log('dados subscribe', data);
-      })
-    ).subscribe(noop);
+  editRoles(): void {
+    const url = this.urlService.getEditRolePage();
+    this.router.navigate([url]);
   }
 
 }

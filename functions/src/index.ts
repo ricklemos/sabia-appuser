@@ -20,7 +20,7 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = createEnrollmen
 export const questionnaireUpdated = updateRankingScore.questionnaireUpdated;
 export const updateRanking = updateRankingScore.updateRanking;
 
-// Funções de autenticação
+// Funções de administração de papéis
 export const setStudentRole = authentication.setStudentRoleOnCreate;
 export const setRole = authentication.setRole;
 

@@ -1,17 +1,17 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
+// Essa função atribui o papel de estudante para todos os novos usuários
 export const setStudentRoleOnCreate = functions.auth.user().onCreate((user) => {
   return admin.auth().setCustomUserClaims(user.uid, {
     role: 'STUDENT'
   });
 });
 
+// Essa função atribui o papel enviado pela rquisição para o email enviado pela requisição se o usuário tiver o correto privilégio.
 export const setRole = functions.https.onCall((data, context) => {
-  // console.log('data', data);
-  // console.log('context auth', context.auth);
   if (context.auth){
-    if (context.auth.token.role !== 'SCHOOL_ADMIN' && context.auth.token.email !== 'gmduarte96@gmail.com'){
+    if (context.auth.token.role !== 'SCHOOL_ADMIN' && context.auth.token.role !== 'MASTER'){
       return {
         error: 'Não autorizado: Usuário deve ser um administrador.'
       };
@@ -35,7 +35,6 @@ export const setRole = functions.https.onCall((data, context) => {
 });
 
 async function grantRole(email: string, role: string): Promise<void> {
-  console.log('chamou o grantRole');
   const user = await admin.auth().getUserByEmail(email);
   return admin.auth().setCustomUserClaims(user.uid, { role });
 }

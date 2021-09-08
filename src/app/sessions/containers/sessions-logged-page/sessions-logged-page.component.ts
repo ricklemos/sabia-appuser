@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionsLoginService } from '../../services/sessions-login.service';
-import { take, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { UrlService } from '../../../services/url.service';
 import { Router } from '@angular/router';
@@ -15,6 +15,14 @@ import { SessionsRolesService } from '../../services/sessions-roles.service';
 export class SessionsLoggedPageComponent implements OnInit {
 
   userData: SessionsUserData;
+  // TODO: Definir home pages corretas
+  rolePage = {
+    STUDENT: this.urlService.getModule('0001'),
+    SCHOOL_ADMIN: this.urlService.getInstructorClassroomsPage(),
+    INSTRUCTOR: this.urlService.getInstructorClassroomsPage(),
+    MASTER: 'sessions'
+  };
+  loading = true;
 
   constructor(
     private sessionsLoginService: SessionsLoginService,
@@ -25,16 +33,13 @@ export class SessionsLoggedPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sessionsLoginService.fetchUserData().pipe(
-      take(1),
-      tap(data => this.userData = data)
-    ).subscribe(noop);
     this.sessionsRolesService.fetchRoleByIdToken().pipe(
       tap((idToken) => {
         const role = idToken.claims.role;
-        console.log('role', idToken.claims.role);
-        if (role === 'STUDENT'){
-          console.log('goToStudentPage');
+        if (role !== 'MASTER') {
+          this.router.navigate([this.rolePage[role]]);
+        } else {
+          this.loading = false;
         }
       })
     ).subscribe(noop);

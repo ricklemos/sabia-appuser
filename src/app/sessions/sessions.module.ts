@@ -23,6 +23,7 @@ import { SessionsSignupPasswordComponent } from './components/sessions-signup-pa
 import { SessionsSignupService } from './services/sessions-signup.service';
 import { SessionsRolesService } from './services/sessions-roles.service';
 import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/functions';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -50,7 +51,8 @@ import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatDialogModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     SessionsInvalidEmailDialogComponent
@@ -60,6 +62,7 @@ import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/
     SessionsLoginService,
     SessionsSignupService,
     SessionsRolesService,
+    // Caso teste funções HTTP do cloud functions localmente, usar provider USE_EMULATOR e ajustar porta
     // { provide: USE_EMULATOR, useValue: ['localhost', 5001] }
     { provide: REGION, useValue: 'us-central1' }
   ]

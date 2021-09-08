@@ -15,7 +15,6 @@ export class SessionsRolesService {
   ) { }
 
   setRole(email: string, role: SessionsRole): Observable<any> {
-    console.log('chamou o serviço!');
     const callable = this.angularFireFunctions.httpsCallable('setRole');
     return callable({ email , role });
   }

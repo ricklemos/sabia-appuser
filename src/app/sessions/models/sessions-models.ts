@@ -10,3 +10,6 @@ export interface SessionsUserData {
   lastName: string;
   gender: 'MALE' | 'FEMALE' | 'OTHER';
 }
+
+export type SessionsRole = 'SCHOOL_ADMIN' | 'INSTRUCTOR' | 'STUDENT' | 'MASTER';
+

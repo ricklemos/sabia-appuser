@@ -5,6 +5,7 @@ import { noop } from 'rxjs';
 import { UrlService } from '../../../services/url.service';
 import { Router } from '@angular/router';
 import { SessionsUserData } from '../../models/sessions-models';
+import { SessionsRolesService } from '../../services/sessions-roles.service';
 
 @Component({
   selector: 'app-sessions-logged-page',
@@ -18,7 +19,8 @@ export class SessionsLoggedPageComponent implements OnInit {
   constructor(
     private sessionsLoginService: SessionsLoginService,
     private urlService: UrlService,
-    private router: Router
+    private router: Router,
+    private sessionsRolesService: SessionsRolesService
   ) {
   }
 
@@ -26,6 +28,15 @@ export class SessionsLoggedPageComponent implements OnInit {
     this.sessionsLoginService.fetchUserData().pipe(
       take(1),
       tap(data => this.userData = data)
+    ).subscribe(noop);
+    this.sessionsRolesService.fetchRoleByIdToken().pipe(
+      tap((idToken) => {
+        const role = idToken.claims.role;
+        console.log('role', idToken.claims.role);
+        if (role === 'STUDENT'){
+          console.log('goToStudentPage');
+        }
+      })
     ).subscribe(noop);
   }
 
@@ -59,6 +70,15 @@ export class SessionsLoggedPageComponent implements OnInit {
   goToClassroomPage(): void {
     const url = this.urlService.getInstructorClassroomsPage();
     this.router.navigate([url]);
+  }
+
+  callCloudFunction(): void {
+    console.log('clicou no botão');
+    this.sessionsRolesService.setRole('gmduarte96@gmail.com', 'MASTER').pipe(
+      tap((data) => {
+        console.log('dados subscribe', data);
+      })
+    ).subscribe(noop);
   }
 
 }

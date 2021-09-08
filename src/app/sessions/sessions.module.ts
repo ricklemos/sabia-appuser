@@ -20,6 +20,9 @@ import { SessionsSignupFirstNameComponent } from './components/sessions-signup-f
 import { SessionsSignupLastNameComponent } from './components/sessions-signup-last-name/sessions-signup-last-name.component';
 import { SessionsSignupGenderComponent } from './components/sessions-signup-gender/sessions-signup-gender.component';
 import { SessionsSignupPasswordComponent } from './components/sessions-signup-password/sessions-signup-password.component';
+import { SessionsSignupService } from './services/sessions-signup.service';
+import { SessionsRolesService } from './services/sessions-roles.service';
+import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/functions';
 
 
 
@@ -46,14 +49,19 @@ import { SessionsSignupPasswordComponent } from './components/sessions-signup-pa
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireFunctionsModule
   ],
   entryComponents: [
     SessionsInvalidEmailDialogComponent
   ],
 
   providers: [
-    SessionsLoginService
+    SessionsLoginService,
+    SessionsSignupService,
+    SessionsRolesService,
+    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] }
+    { provide: REGION, useValue: 'us-central1' }
   ]
 })
 export class SessionsModule { }

@@ -78,8 +78,9 @@ export class UrlService {
     return `/courses/${ courseId }`;
 
   }
+
   public getHome(): string {
-    return `/home/uId`;
+    return `/home/1`;
   }
 
   public getInstructorClassroomsPage(): string {

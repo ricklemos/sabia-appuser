@@ -5,7 +5,16 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="24px">
     <p>{{ module.moduleProgressPercentage }}%</p>
-    <p>GRÁFICO</p>
+    <div class="chart">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [chartType]="pieChartType"
+        [colors]="lineChartColors"
+        [options]="pieChartOptions"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
   </div>
   <button clButtonContainedSecondary class="module-button" (click)="goToModule()">Começar</button>
 </div>

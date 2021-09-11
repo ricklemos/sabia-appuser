@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 
@@ -21,5 +21,4 @@ export class HomeService {
     const uId = this.sessionsService.getUserId();
     return this.angularFirestore.collection('moduleProgress', ref => ref.where('moduleProgressPercentage', '!=', '100').where('userId', '==', uId)).valueChanges();
   }
-
 }

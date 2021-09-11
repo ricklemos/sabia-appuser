@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { HomeService } from '../../services/home.service';
@@ -14,6 +14,7 @@ export class HomePageComponent implements OnInit {
   recentModules: HomeModuleProgress[] = [];
   startNowModules: HomeModuleProgress[] = [];
   startNowModule: HomeModuleProgress;
+  unsubscribe = [];
 
   constructor(
     private homeService: HomeService
@@ -21,18 +22,22 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.homeService.fetchModules().pipe(
+    const fetchModules = this.homeService.fetchModules().pipe(
       tap(query => {
         this.recentModules = query.filter(module => module.moduleProgressPercentage != 0);
         this.startNowModules = query.filter(module => module.moduleProgressPercentage == 0);
         this.loading = false;
-        if (this.startNowModules.length == 0){
+        if (this.startNowModules.length == 0) {
           this.startNowModule = this.recentModules[0];
         } else {
           this.startNowModule = this.startNowModules[0];
         }
       })
     ).subscribe(noop);
+    this.unsubscribe.push(fetchModules);
   }
 
+  OnDestroy(): void {
+    this.unsubscribe.map(u => u.unsubscribe);
+  }
 }

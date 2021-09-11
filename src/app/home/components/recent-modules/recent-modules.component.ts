@@ -8,11 +8,10 @@ import { HomeModuleProgress } from '../../models/module';
 })
 export class RecentModulesComponent implements OnInit {
 
-  @Input() userModules : HomeModuleProgress[]
+  @Input() userModules: HomeModuleProgress[];
 
-  constructor(
-
-  ) {}
+  constructor() {
+  }
 
   ngOnInit(): void {
 

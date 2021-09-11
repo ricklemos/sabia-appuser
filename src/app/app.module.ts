@@ -18,6 +18,7 @@ import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
 import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
 import { HomeModule } from './home/home.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -38,11 +39,13 @@ import { HomeModule } from './home/home.module';
     RankingsModule,
     CoursesModule,
     HomeModule,
-    InstructorDashModule
+    InstructorDashModule,
+    ChartsModule
   ],
   providers: [
     UrlService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

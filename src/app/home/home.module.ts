@@ -13,6 +13,7 @@ import { StartNowComponent } from './components/start-now/start-now.component';
 import { RecentModulesComponent } from './components/recent-modules/recent-modules.component';
 import { HomeModuleComponent } from './components/home-module/home-module.component';
 import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -32,11 +33,11 @@ import { CommonModule } from '@angular/common';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     CollactDesignSystemModule,
-    CommonModule
+    CommonModule,
+    ChartsModule
   ],
-  providers: [
-  ],
-  exports: [
-  ]
+  providers: [],
+  exports: []
 })
-export class HomeModule { }
+export class HomeModule {
+}

@@ -7,7 +7,7 @@ export const HomeRoutes: Routes = [
     path: 'home',
     children: [
       {
-        path: 'uId',
+        path: '1',
         component: HomePageComponent,
         canActivate: [AuthGuard]
       }

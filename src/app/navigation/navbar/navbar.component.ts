@@ -43,6 +43,24 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
       url: this.urlService.getHomeUrl(),
       external: false,
     });
+    this.menuList.push({
+      icon: 'cl-univerity',
+      label: 'Meus cursos',
+      url: this.urlService.getCourses(),
+      external: false,
+    });
+    this.menuList.push({
+      icon: 'cl-crown',
+      label: 'Rankings',
+      url: this.urlService.getRankings(),
+      external: false,
+    });
+    this.menuList.push({
+      icon: 'cl-user',
+      label: 'Perfil',
+      url: this.urlService.getProfileUrl(),
+      external: false,
+    });
   }
 
   ngOnInit(): void {

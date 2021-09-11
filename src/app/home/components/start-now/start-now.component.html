@@ -1,13 +1,14 @@
 <div class="start-now">
   <div class="circle" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-    <i clIconXBig name="cl-calendar"></i>
+    <i clIconXBig name="cl-graph"></i>
     <div fxLayout="column" fxLayoutAlign="center center">
-      <p class="title">Renda Fixa</p>
-      <p>BTC</p>
+      <p class="title">{{ startNowModule.moduleName }}</p>
+      <p>{{ startNowModule.institutionName }}</p>
     </div>
-    <p class="text">Comece agora</p>
+    <p *ngIf="startNowModule.moduleProgressPercentage == 0" class="text">Comece agora</p>
+    <p *ngIf="startNowModule.moduleProgressPercentage != 0" class="text">Continue agora</p>
   </div>
-  <button mat-mini-fab class="start-button">
+  <button mat-mini-fab class="start-button" (click)="goToModule()">
     <mat-icon class="start-button-icon">play_arrow</mat-icon>
   </button>
 </div>

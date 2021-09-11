@@ -12,6 +12,7 @@ import { LayoutHomeComponent } from './layout/layout-home.component';
 import { StartNowComponent } from './components/start-now/start-now.component';
 import { RecentModulesComponent } from './components/recent-modules/recent-modules.component';
 import { HomeModuleComponent } from './components/home-module/home-module.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HomeModuleComponent } from './components/home-module/home-module.compon
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    CollactDesignSystemModule
+    CollactDesignSystemModule,
+    CommonModule
   ],
   providers: [
   ],

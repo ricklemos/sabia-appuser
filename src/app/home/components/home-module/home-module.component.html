@@ -1,11 +1,11 @@
 <div class="module-box" fxLayout="column" fxLayoutGap="16px">
   <div>
-    <p class="module-title">Renda Fixa</p>
-    <p>BTC</p>
+    <p class="module-title">{{ module.moduleName }}</p>
+    <p>{{ module.institutionName }}</p>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="24px">
-    <p>90%</p>
+    <p>{{ module.moduleProgressPercentage }}%</p>
     <p>GRÁFICO</p>
   </div>
-  <button clButtonContainedSecondary class="module-button">Começar</button>
+  <button clButtonContainedSecondary class="module-button" (click)="goToModule()">Começar</button>
 </div>

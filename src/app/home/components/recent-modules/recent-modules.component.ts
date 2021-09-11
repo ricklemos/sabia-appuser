@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { HomeModuleProgress } from '../../models/module';
 
 @Component({
   selector: 'recent-modules',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentModulesComponent implements OnInit {
 
-  constructor() { }
+  @Input() userModules : HomeModuleProgress[]
+
+  constructor(
+
+  ) {}
 
   ngOnInit(): void {
+
   }
 
 }

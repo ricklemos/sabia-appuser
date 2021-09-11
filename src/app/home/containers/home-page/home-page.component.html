@@ -1,4 +1,7 @@
 <div class="page" fxLayout="column" fxLayoutAlign="center center">
-  <start-now></start-now>
+  <start-now [startNowModule]="startNowModule"></start-now>
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
-<recent-modules></recent-modules>
+<div *ngIf="!loading">
+  <recent-modules [userModules]="recentModules"></recent-modules>
+</div>

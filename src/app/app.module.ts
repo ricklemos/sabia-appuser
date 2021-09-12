@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -17,7 +16,6 @@ import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
 import { HomeModule } from './home/home.module';
-import { ChartsModule } from 'ng2-charts';
 import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
 
 
@@ -38,9 +36,8 @@ import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
     ModuleModule,
     RankingsModule,
     CoursesModule,
-    ClassroomsDashModule
+    ClassroomsDashModule,
     HomeModule,
-    ChartsModule
   ],
   providers: [
     UrlService

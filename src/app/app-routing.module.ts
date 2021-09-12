@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutQuestionaryComponent } from './questionary/layout/layout-questionary/layout-questionary.component';
 import { LayoutModuleComponent } from './module/layout/layout-module/layout-module.component';
 import { LayoutRankingsComponent } from './rankings/layout/layout-rankings/layout-rankings.component';
+import { LayoutClassroomsDashComponent } from './classrooms-dash/layout/layout-classrooms-dash/layout-classrooms-dash.component';
 import { LayoutHomeComponent } from './home/layout/layout-home.component';
-import { LayoutInstructorDashComponent } from './instructor-dash/layout/layout-instructor-dash/layout-instructor-dash.component';
 
 const routes: Routes = [
 
@@ -25,20 +25,20 @@ const routes: Routes = [
     component: LayoutRankingsComponent
   },
   {
+    path: 'painel-classes',
+    component: LayoutClassroomsDashComponent
+  },
+  {
     path: 'home',
     component: LayoutHomeComponent
   },
-  {
-    path: 'instrutor',
-    component: LayoutInstructorDashComponent
-  }
 
 ];
+
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

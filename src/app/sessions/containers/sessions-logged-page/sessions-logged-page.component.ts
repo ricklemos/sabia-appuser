@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionsLoginService } from '../../services/sessions-login.service';
-import { take, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { UrlService } from '../../../services/url.service';
 import { Router } from '@angular/router';
 import { SessionsUserData } from '../../models/sessions-models';
+import { SessionsRolesService } from '../../services/sessions-roles.service';
 
 @Component({
   selector: 'app-sessions-logged-page',
@@ -14,18 +15,33 @@ import { SessionsUserData } from '../../models/sessions-models';
 export class SessionsLoggedPageComponent implements OnInit {
 
   userData: SessionsUserData;
+  // TODO: Definir home pages corretas
+  rolePage = {
+    STUDENT: this.urlService.getModule('0001'),
+    SCHOOL_ADMIN: this.urlService.getClassroomsDashPage(),
+    INSTRUCTOR: this.urlService.getClassroomsDashPage(),
+    MASTER: 'sessions'
+  };
+  loading = true;
 
   constructor(
     private sessionsLoginService: SessionsLoginService,
     private urlService: UrlService,
-    private router: Router
+    private router: Router,
+    private sessionsRolesService: SessionsRolesService
   ) {
   }
 
   ngOnInit(): void {
-    this.sessionsLoginService.fetchUserData().pipe(
-      take(1),
-      tap(data => this.userData = data)
+    this.sessionsRolesService.fetchRoleByIdToken().pipe(
+      tap((idToken) => {
+        const role = idToken.claims.role;
+        if (role !== 'MASTER') {
+          this.router.navigate([this.rolePage[role]]);
+        } else {
+          this.loading = false;
+        }
+      })
     ).subscribe(noop);
   }
 
@@ -57,7 +73,12 @@ export class SessionsLoggedPageComponent implements OnInit {
   }
 
   goToClassroomPage(): void {
-    const url = this.urlService.getInstructorClassroomsPage();
+    const url = this.urlService.getClassroomsDashPage();
+    this.router.navigate([url]);
+  }
+
+  editRoles(): void {
+    const url = this.urlService.getEditRolePage();
     this.router.navigate([url]);
   }
 

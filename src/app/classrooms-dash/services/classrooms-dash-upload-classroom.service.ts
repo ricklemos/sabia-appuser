@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { InstructorDashClassroom } from '../models/instructor-dash-models';
+import { ClassroomsDashClassroom } from '../models/classrooms-dash-models';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InstructorDashUploadClassroomService {
+export class ClassroomsDashUploadClassroomService {
 
-  classroom: InstructorDashClassroom;
-  classrooms: InstructorDashClassroom[];
+  classroom: ClassroomsDashClassroom;
+  classrooms: ClassroomsDashClassroom[];
 
   constructor(
     private angularFirestore: AngularFirestore,
@@ -35,11 +35,11 @@ export class InstructorDashUploadClassroomService {
     return this.angularFirestore.collection('classrooms').get();
   }
 
-  setClassroom(classroom: InstructorDashClassroom): void {
+  setClassroom(classroom: ClassroomsDashClassroom): void {
     this.classroom = classroom;
   }
 
-  getClassroom(): InstructorDashClassroom {
+  getClassroom(): ClassroomsDashClassroom {
     return this.classroom;
   }
 

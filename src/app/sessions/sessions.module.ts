@@ -20,6 +20,14 @@ import { SessionsSignupFirstNameComponent } from './components/sessions-signup-f
 import { SessionsSignupLastNameComponent } from './components/sessions-signup-last-name/sessions-signup-last-name.component';
 import { SessionsSignupGenderComponent } from './components/sessions-signup-gender/sessions-signup-gender.component';
 import { SessionsSignupPasswordComponent } from './components/sessions-signup-password/sessions-signup-password.component';
+import { SessionsSignupService } from './services/sessions-signup.service';
+import { SessionsRolesService } from './services/sessions-roles.service';
+import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/functions';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SessionsEditRolePageComponent } from './containers/sessions-edit-role-page/sessions-edit-role-page.component';
+import { FormsModule } from '../forms/forms.module';
+import { CollactComponentsModule } from 'collact-components';
+import { CollactDesignSystemModule } from 'collact-design-system';
 
 
 
@@ -37,6 +45,7 @@ import { SessionsSignupPasswordComponent } from './components/sessions-signup-pa
     SessionsSignupLastNameComponent,
     SessionsSignupGenderComponent,
     SessionsSignupPasswordComponent,
+    SessionsEditRolePageComponent,
   ],
   imports: [
     CommonModule,
@@ -46,14 +55,24 @@ import { SessionsSignupPasswordComponent } from './components/sessions-signup-pa
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireFunctionsModule,
+    MatProgressSpinnerModule,
+    FormsModule,
+    CollactComponentsModule,
+    CollactDesignSystemModule,
   ],
   entryComponents: [
     SessionsInvalidEmailDialogComponent
   ],
 
   providers: [
-    SessionsLoginService
+    SessionsLoginService,
+    SessionsSignupService,
+    SessionsRolesService,
+    // Caso teste funções HTTP do cloud functions localmente, usar provider USE_EMULATOR e ajustar porta
+    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] }
+    { provide: REGION, useValue: 'us-central1' }
   ]
 })
 export class SessionsModule { }

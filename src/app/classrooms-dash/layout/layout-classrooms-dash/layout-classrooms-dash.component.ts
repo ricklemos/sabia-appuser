@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <router-outlet></router-outlet>
   `
 })
-export class LayoutInstructorDashComponent implements OnInit {
+export class LayoutClassroomsDashComponent implements OnInit {
 
   constructor() { }
 

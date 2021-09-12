@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -16,9 +15,8 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
-import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
 import { HomeModule } from './home/home.module';
-import { ChartsModule } from 'ng2-charts';
+import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
 
 
 @NgModule({
@@ -38,14 +36,12 @@ import { ChartsModule } from 'ng2-charts';
     ModuleModule,
     RankingsModule,
     CoursesModule,
+    ClassroomsDashModule,
     HomeModule,
-    InstructorDashModule,
-    ChartsModule
   ],
   providers: [
     UrlService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

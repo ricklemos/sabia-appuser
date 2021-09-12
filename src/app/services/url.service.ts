@@ -82,11 +82,15 @@ export class UrlService {
     return `/home/1`;
   }
 
-  public getInstructorClassroomsPage(): string {
-    return `/instrutor/classes`;
+  public getClassroomsDashPage(): string {
+    return `/painel-classes/classes`;
   }
 
-  public getInstructorClassroomPage(classroomId): string {
-    return `/instrutor/classes/${ classroomId }`;
+  public getClassroomsDashClassroomPage(classroomId): string {
+    return `/painel-classes/${ classroomId }`;
+  }
+
+  public getEditRolePage(): string {
+    return `/sessions/edit-role`;
   }
 }

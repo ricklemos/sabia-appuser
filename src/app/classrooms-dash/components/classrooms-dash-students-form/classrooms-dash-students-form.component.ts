@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ClFieldConfig } from 'collact-components';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { StudentsForm } from '../../models/instructor-dash-forms';
+import { StudentsForm } from '../../models/classrooms-dash-forms';
 
 @Component({
-  selector: 'students-form',
-  templateUrl: './students-form.component.html',
-  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
+  selector: 'classrooms-dash-students-form',
+  templateUrl: './classrooms-dash-students-form.component.html',
+  styleUrls: ['../../../../assets/styles/classrooms-dash.scss']
 })
-export class StudentsFormComponent implements OnInit {
+export class ClassroomsDashStudentsFormComponent implements OnInit {
   @Input() title = 'Alunos';
   @Output() formDone: EventEmitter<any> = new EventEmitter<any>();
 

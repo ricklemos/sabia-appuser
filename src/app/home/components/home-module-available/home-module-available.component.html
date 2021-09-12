@@ -1,0 +1,20 @@
+<div class="module-box" fxLayout="column" fxLayoutGap="16px">
+  <div>
+    <p class="module-title">{{ module.moduleName }}</p>
+    <p>{{ module.institutionName }}</p>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="24px">
+    <p>{{ module.moduleProgressPercentage }}%</p>
+    <div class="chart">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [chartType]="pieChartType"
+        [colors]="pieChartColors"
+        [options]="pieChartOptions"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </div>
+  <button clButtonContainedSecondary class="module-button" (click)="goToModule()">Começar</button>
+</div>

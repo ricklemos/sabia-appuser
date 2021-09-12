@@ -4,7 +4,6 @@ import { LayoutQuestionaryComponent } from './questionary/layout/layout-question
 import { LayoutModuleComponent } from './module/layout/layout-module/layout-module.component';
 import { LayoutRankingsComponent } from './rankings/layout/layout-rankings/layout-rankings.component';
 import { LayoutClassroomsDashComponent } from './classrooms-dash/layout/layout-classrooms-dash/layout-classrooms-dash.component';
-import { LayoutHomeComponent } from './home/layout/layout-home.component';
 
 const routes: Routes = [
 
@@ -27,18 +26,14 @@ const routes: Routes = [
   {
     path: 'painel-classes',
     component: LayoutClassroomsDashComponent
-  },
-  {
-    path: 'home',
-    component: LayoutHomeComponent
-  },
+  }
 
 ];
-
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

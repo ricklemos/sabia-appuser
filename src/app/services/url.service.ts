@@ -79,7 +79,7 @@ export class UrlService {
   }
 
   public getHome(): string {
-    return `/home/1`;
+    return `/home`;
   }
 
   public getClassroomsDashPage(): string {

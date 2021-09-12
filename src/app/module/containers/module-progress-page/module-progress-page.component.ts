@@ -10,10 +10,15 @@ import { Router } from '@angular/router';
 export class ModuleProgressPageComponent implements OnInit {
 
   constructor(
+    private router: Router,
+    private urlService: UrlService
   ) { }
 
   ngOnInit(): void {
   }
 
 
+  goBack(): void {
+    this.router.navigate([this.urlService.getHome()]);
+  }
 }

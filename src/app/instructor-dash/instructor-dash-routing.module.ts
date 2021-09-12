@@ -10,7 +10,7 @@ export const InstructorDashRoutes: Routes = [
     children: [
       {
         path: 'classrooms',
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
         children: [
           {
             path: 'create',

@@ -11,7 +11,7 @@ import { HomePageComponent } from './containers/home-page/home-page.component';
 import { LayoutHomeComponent } from './layout/layout-home.component';
 import { HomeStartNowComponent } from './components/home-start-now/home-start-now.component';
 import { HomeRecentModulesComponent } from './components/home-recent-modules/home-recent-modules.component';
-import { HomeModuleComponent } from './components/home-module/home-module.component';
+import { HomeModuleAvailableComponent } from './components/home-module-available/home-module-available.component';
 import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { HomeService } from './services/home.service';
@@ -23,7 +23,7 @@ import { HomeService } from './services/home.service';
     LayoutHomeComponent,
     HomeStartNowComponent,
     HomeRecentModulesComponent,
-    HomeModuleComponent
+    HomeModuleAvailableComponent
   ],
   imports: [
     FlexLayoutModule,

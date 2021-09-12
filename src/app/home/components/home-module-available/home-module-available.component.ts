@@ -6,11 +6,11 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Color } from 'ng2-charts';
 
 @Component({
-  selector: 'home-module',
-  templateUrl: './home-module.component.html',
-  styleUrls: ['./home-module.component.scss']
+  selector: 'home-module-available',
+  templateUrl: './home-module-available.component.html',
+  styleUrls: ['./home-module-available.component.scss']
 })
-export class HomeModuleComponent implements OnInit {
+export class HomeModuleAvailableComponent implements OnInit {
 
   @Input() module: HomeModuleProgress;
 

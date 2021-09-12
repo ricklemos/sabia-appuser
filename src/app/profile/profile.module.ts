@@ -14,7 +14,6 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ChangePasswordPageComponent } from './containers/change-password-page/change-password-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileToolbarComponent } from './components/profile-toolbar/profile-toolbar.component';
 import { ProfilePicComponent } from './components/profile-pic/profile-pic.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -31,7 +30,6 @@ import { NavigationModule } from '../navigation/navigation.module';
     LayoutProfileComponent,
     ChangePasswordComponent,
     ChangePasswordPageComponent,
-    ProfileToolbarComponent,
     ProfilePicComponent
   ],
   imports: [

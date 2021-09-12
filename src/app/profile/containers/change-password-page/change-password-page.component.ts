@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'app-change-password-page',
@@ -7,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePasswordPageComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private urlService: UrlService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
+  goBack(): void {
+    this.router.navigate([this.urlService.getProfileUrl()]);
+  }
 }

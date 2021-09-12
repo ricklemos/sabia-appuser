@@ -1,12 +1,10 @@
 <div class="app-bar-group--appbar" [class.z-index12]="!isOpen">
   <cl-appbar backgroundColor="#2E3037">
-    <div left *ngIf="!disableNavigation">
-      <button clButtonIcon *ngIf="!hasLinkBack" (click)="openNavDrawer()">
+    <div left>
+      <button *ngIf="!disableNavigation" clButtonIcon (click)="openNavDrawer()">
         <i clIcon name="cl-menu" color="#fff"></i>
       </button>
-      <button clButtonIcon *ngIf="hasLinkBack" (click)="backClicked()">
-        <i clIcon [name]="disableNavDrawer?'cl-close':'cl-arrow-left'" color="#fff"></i>
-      </button>
+      <ng-content select=".left"></ng-content>
     </div>
     <div middle *ngIf="barTitle">
       <h1 class="white-alpha-900">{{ barTitle }}</h1>

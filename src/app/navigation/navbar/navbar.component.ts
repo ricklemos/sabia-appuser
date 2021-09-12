@@ -87,10 +87,6 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     this.navDrawerService.openNavDrawer();
   }
 
-  backClicked(): void {
-    console.log('backClicked()');
-  }
-
   logout(): void {
     console.log('logout()');
   }

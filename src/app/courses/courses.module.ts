@@ -11,6 +11,7 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { CoursesCourseDetailsPageComponent } from './containers/courses-course-details-page/courses-course-details-page.component';
 import { CoursesModuleBoxComponent } from './components/courses-module-box/courses-module-box.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     RouterModule.forChild(CoursesRoutes),
     CollactDesignSystemModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ChartsModule
   ]
 })
 export class CoursesModule {

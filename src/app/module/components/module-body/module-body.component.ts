@@ -48,7 +48,7 @@ export class ModuleBodyComponent implements OnInit {
 
   fetchingModuleError(error): void {
     this.matSnackBar.open('Ocorreu um erro ao obter o módulo.', 'OK', { duration: 4000 });
-    this.router.navigate([this.urlService.getHomeUrl()]);
+    this.router.navigate([this.urlService.getHome()]);
   }
 
   startLesson(lesson: ModuleLesson): void {

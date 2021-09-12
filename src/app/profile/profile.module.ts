@@ -19,6 +19,7 @@ import { ProfilePicComponent } from './components/profile-pic/profile-pic.compon
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CollactDesignSystemModule } from 'collact-design-system';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { CollactDesignSystemModule } from 'collact-design-system';
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    CollactDesignSystemModule
+    CollactDesignSystemModule,
+    NavigationModule
   ],
   providers: [
     ModifyUserDataService,

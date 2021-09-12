@@ -24,7 +24,7 @@ const routes: Routes = [
     component: LayoutRankingsComponent
   },
   {
-    path: 'instructor',
+    path: 'instrutor',
     component: LayoutInstructorDashComponent
   }
 

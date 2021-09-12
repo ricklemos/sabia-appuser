@@ -6,14 +6,14 @@ import { CreateNewClassroomPageComponent } from './containers/create-new-classro
 
 export const InstructorDashRoutes: Routes = [
   {
-    path: 'instructor',
+    path: 'instrutor',
     children: [
       {
-        path: 'classrooms',
+        path: 'classes',
         canActivate: [AuthGuard],
         children: [
           {
-            path: 'create',
+            path: 'criar',
             component: CreateNewClassroomPageComponent
           },
           {

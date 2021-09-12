@@ -80,10 +80,10 @@ export class UrlService {
   }
 
   public getInstructorClassroomsPage(): string {
-    return `/instructor/classrooms`;
+    return `/instrutor/classes`;
   }
 
   public getInstructorClassroomPage(classroomId): string {
-    return `/instructor/classrooms/${ classroomId }`;
+    return `/instrutor/classes/${ classroomId }`;
   }
 }

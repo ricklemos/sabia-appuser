@@ -14,10 +14,13 @@
     </div>
   </div>
 
-  <div (click)="markAsDone()" *ngIf="!lessonDone" clButtonContainedSecondary>
+  <div (click)="markAsDone()" *ngIf="!lessonDone" clButtonContained class="bg-sabia-blue-500">
     <span>Marcar como concluído</span>
   </div>
-  <div (click)="markAsDone()" *ngIf="lessonDone" clButtonContained class="bg-sabia-blue-500">
-    <span>Lição concluída</span>
+  <div (click)="markAsDone()" *ngIf="lessonDone" clButtonContainedSecondary>
+    <span>Marcar como não concluído</span>
   </div>
+
+  <p *ngIf="lessonDone" class="module-content__description">Essa lição está marcada como concluída</p>
+
 </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
-import { ModuleProgress } from '../models/module';
+import { ModuleLesson, ModuleProgress } from '../models/module';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class ModuleService {
 
   moduleId: string;
   module: ModuleProgress;
+  moduleLesson: ModuleLesson;
   constructor(
     private angularFirestore: AngularFirestore,
     private sessionsService: SessionsLoginService
@@ -41,4 +42,5 @@ export class ModuleService {
   getModule(): ModuleProgress{
     return this.module;
   }
+
 }

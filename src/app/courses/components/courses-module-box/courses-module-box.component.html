@@ -8,9 +8,16 @@
 
     <div fxLayout="row" fxLayoutGap="8px">
       <p>{{ moduleProgress.moduleProgressPercentage }}%</p>
-      <mat-progress-spinner [diameter]="50" [value]=moduleProgress.moduleProgressPercentage
-                            color="accent"></mat-progress-spinner>
-      <!--      TODO: fazer gráfico bonito (obs: usar Chart.js)-->
+      <div class="chart">
+        <canvas
+          [chartType]="pieChartType"
+          [colors]="pieChartColors"
+          [data]="pieChartData"
+          [legend]="pieChartLegend"
+          [options]="pieChartOptions"
+          baseChart>
+        </canvas>
+      </div>
     </div>
 
     <button class="link">Começar</button>

@@ -9,14 +9,17 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { ModuleBodyComponent } from './components/module-body/module-body.component';
 import { ModuleService } from './services/module.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { ModuleContentPageComponent } from './containers/module-content-page/module-content-page.component';
+import { AttachmentBoxComponent } from './components/attachment-box/attachment-box.component';
 
 
 @NgModule({
   declarations: [
     LayoutModuleComponent,
     ModuleProgressPageComponent,
-    ModuleBodyComponent
+    ModuleBodyComponent,
+    ModuleContentPageComponent,
+    AttachmentBoxComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,16 @@
 @import "~collact-design-system/styles/colors";
 
-.courses-details {
-  &__header {
+.module-content {
+  &__title {
     color: $black-alpha-700;
     font-size: 20px;
-    font-family: ProximaNova, sans-serif;
+    font-family: ProximaNovaSemiBold, sans-serif;
+  }
+
+  &__subtitle {
+    color: $black-alpha-500;
+    font-size: 20px;
+    font-family: ProximaNovaSemiBold, sans-serif;
   }
 
   &__background {

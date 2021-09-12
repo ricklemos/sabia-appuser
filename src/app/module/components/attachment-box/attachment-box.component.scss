@@ -7,22 +7,16 @@ h3 {
 }
 
 p {
-  font-size: 16px;
+  font-size: 12px;
   font-family: ProximaNova, sans-serif;
   color: $black-alpha-500;
 }
 
-button.link {
-  background: none;
-  border: none;
-  color: #009688;
+.attachment-box__container {
+  width: 150px;
+  height: 100px;
 }
 
-.courses-module-box__container {
-  width: 200px;
-}
-
-.chart {
-  width: 48px;
-  height: 48px;
+a {
+  text-decoration: none;
 }

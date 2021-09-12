@@ -4,7 +4,7 @@ import { UrlService } from '../../../services/url.service';
 import { ModuleService } from '../../services/module.service';
 import { noop, of, throwError } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
-import { Lesson, ModuleProgress } from '../../models/module';
+import { ModuleLesson, ModuleProgress } from '../../models/module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ModuleBodyComponent implements OnInit {
 
   moduleProgress: ModuleProgress;
-  lessons: Lesson[];
+  lessons: ModuleLesson[];
   loading = true;
 
   constructor(
@@ -51,7 +51,7 @@ export class ModuleBodyComponent implements OnInit {
     this.router.navigate([this.urlService.getHomeUrl()]);
   }
 
-  startLesson(lesson: Lesson): void {
+  startLesson(lesson: ModuleLesson): void {
     if (lesson.questionaryId) {
       if (lesson.complete) {
         // Revisa o questionário
@@ -62,7 +62,7 @@ export class ModuleBodyComponent implements OnInit {
       }
     } else if (lesson.lessonId) {
       // Vai pra página de conteúdo teórico
-      this.router.navigate([this.urlService.getLesson(lesson.lessonId)]);
+      this.router.navigate([this.urlService.getLesson(this.moduleProgress.moduleId, lesson.lessonId)]);
     }
 
   }

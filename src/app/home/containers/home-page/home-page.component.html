@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="!loading">
   <div class="page" fxLayout="column" fxLayoutAlign="center center">
-    <start-now [startNowModule]="startNowModule"></start-now>
+    <home-start-now [startNowModule]="startNowModule"></home-start-now>
   </div>
-  <recent-modules [userModules]="recentModules"></recent-modules>
+  <home-recent-modules [userModules]="recentModules"></home-recent-modules>
 </div>

@@ -16,7 +16,7 @@ export class HomeModuleComponent implements OnInit {
 
   pieChartData: number[];
   pieChartType: ChartType;
-  lineChartColors: Color[];
+  pieChartColors: Color[];
   pieChartOptions: ChartOptions;
   pieChartLegend: boolean;
 
@@ -29,7 +29,7 @@ export class HomeModuleComponent implements OnInit {
   ngOnInit(): void {
     this.pieChartData = [this.module.moduleProgressPercentage, 100 - this.module.moduleProgressPercentage];
     this.pieChartType = 'pie';
-    this.lineChartColors = [
+    this.pieChartColors = [
       {
         backgroundColor: ['rgba(57,192,186,1)', 'rgba(255,255,255,1)'],
         borderColor: 'rgba(0,0,0,1)'

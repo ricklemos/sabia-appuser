@@ -4,11 +4,11 @@ import { UrlService } from '../../../services/url.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'start-now',
-  templateUrl: './start-now.component.html',
-  styleUrls: ['./start-now.component.scss']
+  selector: 'home-start-now',
+  templateUrl: './home-start-now.component.html',
+  styleUrls: ['./home-start-now.component.scss']
 })
-export class StartNowComponent implements OnInit {
+export class HomeStartNowComponent implements OnInit {
 
   @Input() startNowModule: HomeModuleProgress;
 

@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HomeModuleProgress } from '../../models/module';
 
 @Component({
-  selector: 'recent-modules',
-  templateUrl: './recent-modules.component.html',
-  styleUrls: ['./recent-modules.component.scss']
+  selector: 'home-recent-modules',
+  templateUrl: './home-recent-modules.component.html',
+  styleUrls: ['./home-recent-modules.component.scss']
 })
-export class RecentModulesComponent implements OnInit {
+export class HomeRecentModulesComponent implements OnInit {
 
   @Input() userModules: HomeModuleProgress[];
 

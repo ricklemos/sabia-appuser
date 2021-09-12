@@ -9,19 +9,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { HomePageComponent } from './containers/home-page/home-page.component';
 import { LayoutHomeComponent } from './layout/layout-home.component';
-import { StartNowComponent } from './components/start-now/start-now.component';
-import { RecentModulesComponent } from './components/recent-modules/recent-modules.component';
+import { HomeStartNowComponent } from './components/home-start-now/home-start-now.component';
+import { HomeRecentModulesComponent } from './components/home-recent-modules/home-recent-modules.component';
 import { HomeModuleComponent } from './components/home-module/home-module.component';
 import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
+import { HomeService } from './services/home.service';
 
 
 @NgModule({
   declarations: [
     HomePageComponent,
     LayoutHomeComponent,
-    StartNowComponent,
-    RecentModulesComponent,
+    HomeStartNowComponent,
+    HomeRecentModulesComponent,
     HomeModuleComponent
   ],
   imports: [
@@ -36,7 +37,9 @@ import { ChartsModule } from 'ng2-charts';
     CommonModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [
+    HomeService
+  ],
   exports: []
 })
 export class HomeModule {

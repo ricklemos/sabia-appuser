@@ -1,17 +1,19 @@
-<div class="page-container" fxLayoutAlign="center center" *ngIf="loading">
-  <mat-spinner></mat-spinner>
-</div>
+<navbar barTitle="Início">
+  <div class="page-container" fxLayoutAlign="center center" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 
-<div class="page-container" fxLayout="column" fxLayoutAlign="center center" *ngIf="!loading">
-  <p>sessions-logged-page works!</p>
-  <button (click)="goToCourses()">courses</button>
-  <button (click)="goProfilePage()">Perfil</button>
-  <button (click)="goModulePage()">Módulo</button>
-  <button (click)="goRankingPage()">Rankings</button>
-  <button (click)="goToClassroomPage()">Classrooms</button>
-  <button (click)="callCloudFunction()">Call Cloud Function</button>
-  <button (click)="goHomePage()">Home</button>
-  <button (click)="editRoles()">Editar Papéis de Usuários</button>
-</div>
+  <div class="page-container" fxLayout="column" fxLayoutAlign="center center" *ngIf="!loading">
+    <p>Olá, {{ userData.firstName }} {{ userData.lastName }}!</p>
+    <button (click)="goToCourses()">courses</button>
+    <button (click)="goProfilePage()">Perfil</button>
+    <button (click)="goModulePage()">Módulo</button>
+    <button (click)="goRankingPage()">Rankings</button>
+    <button (click)="goToClassroomPage()">Classrooms</button>
+    <button (click)="callCloudFunction()">Call Cloud Function</button>
+    <button (click)="goHomePage()">Home</button>
+    <button (click)="editRoles()">Editar Papéis de Usuários</button>
+  </div>
+</navbar>
 
 

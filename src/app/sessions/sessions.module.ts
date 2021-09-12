@@ -28,6 +28,7 @@ import { SessionsEditRolePageComponent } from './containers/sessions-edit-role-p
 import { FormsModule } from '../forms/forms.module';
 import { CollactComponentsModule } from 'collact-components';
 import { CollactDesignSystemModule } from 'collact-design-system';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 
@@ -61,6 +62,8 @@ import { CollactDesignSystemModule } from 'collact-design-system';
     FormsModule,
     CollactComponentsModule,
     CollactDesignSystemModule,
+    MatDialogModule,
+    NavigationModule
   ],
   entryComponents: [
     SessionsInvalidEmailDialogComponent

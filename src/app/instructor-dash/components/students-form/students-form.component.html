@@ -1,0 +1,33 @@
+<div clCard>
+  <h2 clCardTitle>{{ title }}</h2>
+  <h2 clCardSubTitle>Adicione o e-mail dos alunos</h2>
+  <div clCardContent fxLayout="column" fxLayoutGap="8px">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3>Adicione alunos com um arquivo CSV:</h3>
+      <label clButtonSecondary for="uploadCSV">
+        <span>Upload CSV</span>
+        <i clIcon name="cl-upload"></i>
+      </label>
+      <input id="uploadCSV" type="file" class="upload" hidden (change)="getCSV($event)">
+    </div>
+
+
+    <h3>Ou adicione pela caixa de texto:</h3>
+    <cl-form-component
+      [formConfig]="formStudents"
+      (changes)="getFormStudentsChanges($event)"
+      (isValid)="checkIfFormIsValid($event)"
+    ></cl-form-component>
+    <button clButtonContainedSecondary [disabled]="addDisabled" (click)="addStudentsFromTextarea()">
+      <i clIcon name="cl-plus"></i>
+      <span>Adicionar</span>
+    </button>
+
+    <p *ngIf="students.length > 0">Confirmar adição dos alunos:</p>
+    <div *ngFor="let student of students">
+      <p>{{ student }}</p>
+    </div>
+  </div>
+</div>
+
+

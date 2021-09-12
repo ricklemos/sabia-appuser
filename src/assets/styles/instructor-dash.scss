@@ -1,0 +1,27 @@
+@import "~collact-design-system/styles/colors";
+
+.container{
+  padding: 24px;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 24px;
+  font-family: ProximaNova, sans-serif;
+}
+
+h2 {
+  font-size: 20px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+}
+
+h3{
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+}

@@ -1,0 +1,8 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+  <h1>Criar nova classe</h1>
+  <create-classroom-form (formDone)="courseCheck($event)"></create-classroom-form>
+  <students-form (formDone)="studentsCheck($event)"></students-form>
+  <button clButton [disabled]="submitDisabled" (click)="createClassroom()">
+    <span>Criar nova classe</span>
+  </button>
+</div>

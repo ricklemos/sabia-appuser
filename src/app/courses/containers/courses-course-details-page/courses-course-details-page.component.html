@@ -4,8 +4,10 @@
   <p class="courses-details__description">{{ enrollment.courseDescription }}</p>
   <h2 class="courses-details__header">Módulos</h2>
 
-  <div *ngFor="let moduleProgress of modulesList">
-    <courses-module-box [moduleProgress]="moduleProgress"></courses-module-box>
+  <div class="courses-details__scroll" fxLayout="row" fxLayoutGap="16px">
+    <div *ngFor="let moduleProgress of modulesList">
+      <courses-module-box [moduleProgress]="moduleProgress"></courses-module-box>
+    </div>
   </div>
 
   <a [href]="enrollment.courseLink" clButtonContainedSecondary target="_blank">

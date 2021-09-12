@@ -19,4 +19,9 @@
     color: $black-alpha-500;
     font-size: 16px;
   }
+
+  &__scroll {
+    overflow: hidden;
+    overflow-x: auto;
+  }
 }

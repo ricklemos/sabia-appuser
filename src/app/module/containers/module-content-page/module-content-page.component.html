@@ -8,8 +8,10 @@
 
   <h2 class="module-content__title">Anexos</h2>
 
-  <div fxLayout="row" fxLayoutGap="16px">
-    <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>
+  <div class="module-content__scroll" fxLayout="row" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutGap="16px">
+      <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>
+    </div>
   </div>
 
   <div (click)="markAsDone()" *ngIf="!lessonDone" clButtonContainedSecondary>

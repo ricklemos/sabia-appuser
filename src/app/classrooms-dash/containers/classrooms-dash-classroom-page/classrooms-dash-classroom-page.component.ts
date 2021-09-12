@@ -1,19 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { noop, Subscription } from 'rxjs';
-import { InstructorDashClassroom } from '../../models/instructor-dash-models';
-import { InstructorDashUploadClassroomService } from '../../services/instructor-dash-upload-classroom.service';
+import { ClassroomsDashClassroom } from '../../models/classrooms-dash-models';
+import { ClassroomsDashUploadClassroomService } from '../../services/classrooms-dash-upload-classroom.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 
 @Component({
-  selector: 'classroom-page',
-  templateUrl: './classroom-page.component.html',
-  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
+  selector: 'classrooms-dash-classroom-page',
+  templateUrl: './classrooms-dash-classroom-page.component.html',
+  styleUrls: ['../../../../assets/styles/classrooms-dash.scss']
 })
-export class ClassroomPageComponent implements OnInit, OnDestroy {
+export class ClassroomsDashClassroomPageComponent implements OnInit, OnDestroy {
 
-  classroom: InstructorDashClassroom;
+  classroom: ClassroomsDashClassroom;
   students: string[] = [];
   subscriptions: Subscription[] = [];
   loadingClassroom = true;
@@ -21,7 +21,7 @@ export class ClassroomPageComponent implements OnInit, OnDestroy {
   addStudents = false;
 
   constructor(
-    private instructorDashUploadClassroomService: InstructorDashUploadClassroomService,
+    private instructorDashUploadClassroomService: ClassroomsDashUploadClassroomService,
     private route: ActivatedRoute,
     private router: Router,
     private urlService: UrlService

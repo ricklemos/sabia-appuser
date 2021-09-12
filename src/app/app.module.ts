@@ -16,9 +16,9 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { QuestionaryModule } from './questionary/questionary.module';
 import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
-import { InstructorDashModule } from './instructor-dash/instructor-dash.module';
 import { HomeModule } from './home/home.module';
 import { ChartsModule } from 'ng2-charts';
+import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
 
 
 @NgModule({
@@ -38,8 +38,8 @@ import { ChartsModule } from 'ng2-charts';
     ModuleModule,
     RankingsModule,
     CoursesModule,
+    ClassroomsDashModule
     HomeModule,
-    InstructorDashModule,
     ChartsModule
   ],
   providers: [
@@ -47,5 +47,4 @@ import { ChartsModule } from 'ng2-charts';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

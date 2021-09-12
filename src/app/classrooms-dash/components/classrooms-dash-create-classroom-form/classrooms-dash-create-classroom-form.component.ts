@@ -1,17 +1,17 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ClFieldConfig } from 'collact-components';
-import { CreateNewClassroomService } from '../../services/create-new-classroom.service';
+import { ClassroomsDashCreateNewClassroomService } from '../../services/classrooms-dash-create-new-classroom.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
-import { InstructorDashClassroom } from '../../models/instructor-dash-models';
-import { CreateClassroomForm } from '../../models/instructor-dash-forms';
+import { ClassroomsDashClassroom } from '../../models/classrooms-dash-models';
+import { CreateClassroomForm } from '../../models/classrooms-dash-forms';
 
 @Component({
-  selector: 'create-classroom-form',
-  templateUrl: './create-classroom-form.component.html',
-  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
+  selector: 'classrooms-dash-create-classroom-form',
+  templateUrl: './classrooms-dash-create-classroom-form.component.html',
+  styleUrls: ['../../../../assets/styles/classrooms-dash.scss']
 })
-export class CreateClassroomFormComponent implements OnInit {
+export class ClassroomsDashCreateClassroomFormComponent implements OnInit {
 
   @Output() formDone: EventEmitter<any> = new EventEmitter<any>();
 
@@ -19,7 +19,7 @@ export class CreateClassroomFormComponent implements OnInit {
   submitDisabled = false;
   courseOptions = [];
   formCourse: ClFieldConfig[] = CreateClassroomForm;
-  newClassroom: InstructorDashClassroom = {
+  newClassroom: ClassroomsDashClassroom = {
     classroomName: '',
     classroomId: '',
     courseId: '',
@@ -32,12 +32,12 @@ export class CreateClassroomFormComponent implements OnInit {
   courses = [];
 
   constructor(
-    private createNewClassroomService: CreateNewClassroomService
+    private createNewClassroomService: ClassroomsDashCreateNewClassroomService
   ) {
-    this.formCourse[1].options = this.courseOptions;
   }
 
   ngOnInit(): void {
+    // TODO: filtrar cursos da forma correta no nome da instituição
     this.createNewClassroomService.fetchCoursesTemplate('BTC').pipe(
       tap((query) => {
         query.forEach((course) => {
@@ -46,6 +46,7 @@ export class CreateClassroomFormComponent implements OnInit {
             value: course.courseId,
             label: course.courseName
           });
+          this.formCourse[1].options = this.courseOptions;
         });
       })
     ).subscribe(noop);

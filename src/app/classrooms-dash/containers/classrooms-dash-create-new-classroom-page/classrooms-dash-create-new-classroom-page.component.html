@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
   <h1>Criar nova classe</h1>
-  <create-classroom-form (formDone)="courseCheck($event)"></create-classroom-form>
-  <students-form (formDone)="studentsCheck($event)"></students-form>
+  <classrooms-dash-create-classroom-form (formDone)="courseCheck($event)"></classrooms-dash-create-classroom-form>
+  <classrooms-dash-students-form (formDone)="studentsCheck($event)"></classrooms-dash-students-form>
   <button clButton [disabled]="submitDisabled" (click)="createClassroom()">
     <span>Criar nova classe</span>
   </button>

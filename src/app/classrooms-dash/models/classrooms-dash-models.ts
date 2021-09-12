@@ -1,4 +1,4 @@
-export interface InstructorDashClassroom {
+export interface ClassroomsDashClassroom {
   classroomId: string;
   classroomName: string;
   courseId: string;

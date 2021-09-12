@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateNewClassroomService {
+export class ClassroomsDashCreateNewClassroomService {
 
   constructor(
     private angularFirestore: AngularFirestore

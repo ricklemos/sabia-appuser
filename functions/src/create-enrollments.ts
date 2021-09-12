@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 import { PreEnrollment, UserData } from './models';
 import * as admin from 'firebase-admin';
-import { error } from 'firebase-functions/lib/logger';
 
 export const createEnrollmentWhenCreateUserData = functions.firestore
   .document('userData/{userId}')
@@ -149,7 +148,8 @@ export const createmoduleProgressWhenCreateEnrollment = functions.firestore
                         institutionName: enrollment.institutionName,
                         lessons: moduleData.lessons,
                         score: 0,
-                        classroomId: enrollment.classroomId
+                        classroomId: enrollment.classroomId,
+                        moduleProgressPercentage: 0
                       });
                   } else {
                     throw Error('No Module Data');
@@ -200,7 +200,8 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.fires
                   })
                   .catch(err => console.log('erro:', err));
               } else {
-                throw error('questionnaire does not exist');
+                functions.logger
+                  .info('Questionnaire não existe', { structuredData: true });
               }
             }).catch((err) => console.log('erro:', err));
         }

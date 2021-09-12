@@ -18,8 +18,8 @@ export class SessionsLoggedPageComponent implements OnInit {
   // TODO: Definir home pages corretas
   rolePage = {
     STUDENT: this.urlService.getModule('0001'),
-    SCHOOL_ADMIN: this.urlService.getInstructorClassroomsPage(),
-    INSTRUCTOR: this.urlService.getInstructorClassroomsPage(),
+    SCHOOL_ADMIN: this.urlService.getClassroomsDashPage(),
+    INSTRUCTOR: this.urlService.getClassroomsDashPage(),
     MASTER: 'sessions'
   };
   loading = true;
@@ -73,7 +73,7 @@ export class SessionsLoggedPageComponent implements OnInit {
   }
 
   goToClassroomPage(): void {
-    const url = this.urlService.getInstructorClassroomsPage();
+    const url = this.urlService.getClassroomsDashPage();
     this.router.navigate([url]);
   }
 

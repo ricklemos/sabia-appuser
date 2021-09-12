@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { InstructorDashClassroom } from '../../models/instructor-dash-models';
-import { InstructorDashUploadClassroomService } from '../../services/instructor-dash-upload-classroom.service';
+import { ClassroomsDashClassroom } from '../../models/classrooms-dash-models';
+import { ClassroomsDashUploadClassroomService } from '../../services/classrooms-dash-upload-classroom.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'create-new-classroom-page',
-  templateUrl: './create-new-classroom-page.component.html',
-  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
+  selector: 'classrooms-dash-create-new-classroom-page',
+  templateUrl: './classrooms-dash-create-new-classroom-page.component.html',
+  styleUrls: ['../../../../assets/styles/classrooms-dash.scss']
 })
-export class CreateNewClassroomPageComponent implements OnInit {
+export class ClassroomsDashCreateNewClassroomPageComponent implements OnInit {
 
   students: string[] = [];
-  classroom: InstructorDashClassroom;
+  classroom: ClassroomsDashClassroom;
   isCourseCheck = false;
   isStudentsCheck = false;
   submitDisabled = true;
 
   constructor(
-    private instructorDashUploadClassroomService: InstructorDashUploadClassroomService,
+    private instructorDashUploadClassroomService: ClassroomsDashUploadClassroomService,
     private router: Router,
     private urlService: UrlService,
     private matSnackBar: MatSnackBar
@@ -36,7 +36,7 @@ export class CreateNewClassroomPageComponent implements OnInit {
         this.matSnackBar.open('Turma criada', 'OK', {
           duration: 3000
         });
-        this.router.navigate([this.urlService.getInstructorClassroomsPage()]);
+        this.router.navigate([this.urlService.getClassroomsDashPage()]);
       })
       .catch((error) => console.log(error));
   }

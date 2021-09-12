@@ -1,12 +1,14 @@
-<div class="my-courses__background" fxLayout="column" fxLayoutGap="16px">
+<navbar barTitle="Meus Cursos">
+  <div class="my-courses__background" fxLayout="column" fxLayoutGap="16px">
 
-  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-    <h2 class="my-courses__header">
-      Meus Cursos
-    </h2>
-    <div *ngFor="let course of coursesList">
-      <courses-box [enrollment]="course"></courses-box>
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+      <h2 class="my-courses__header">
+        Meus Cursos
+      </h2>
+      <div *ngFor="let course of coursesList">
+        <courses-box [enrollment]="course"></courses-box>
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>
+</navbar>

@@ -12,6 +12,7 @@ import { CoursesCourseDetailsPageComponent } from './containers/courses-course-d
 import { CoursesModuleBoxComponent } from './components/courses-module-box/courses-module-box.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChartsModule } from 'ng2-charts';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ChartsModule } from 'ng2-charts';
     RouterModule.forChild(CoursesRoutes),
     CollactDesignSystemModule,
     MatProgressSpinnerModule,
-    ChartsModule
+    ChartsModule,
+    NavigationModule
   ]
 })
 export class CoursesModule {

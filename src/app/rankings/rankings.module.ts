@@ -11,6 +11,7 @@ import { CollactDesignSystemModule } from 'collact-design-system';
 import { RankingUserDataComponent } from './components/ranking-user-data/ranking-user-data.component';
 import { ProfileModule } from '../profile/profile.module';
 import { CollactComponentsModule } from 'collact-components';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 
@@ -30,6 +31,7 @@ import { CollactComponentsModule } from 'collact-components';
     CollactDesignSystemModule,
     ProfileModule,
     CollactComponentsModule,
+    NavigationModule,
   ]
 })
 export class RankingsModule { }

@@ -11,6 +11,7 @@ import { ModuleService } from './services/module.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModuleContentPageComponent } from './containers/module-content-page/module-content-page.component';
 import { AttachmentBoxComponent } from './components/attachment-box/attachment-box.component';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AttachmentBoxComponent } from './components/attachment-box/attachment-b
     CollactDesignSystemModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
+    NavigationModule,
   ],
   providers: [
     ModuleService

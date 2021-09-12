@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RankingClassService } from '../../services/ranking-class.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RankingsClassRanking } from '../../models/rankings-models';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'rankings-class-page',
@@ -17,7 +18,9 @@ export class RankingsClassPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private rankingClassService: RankingClassService
+    private rankingClassService: RankingClassService,
+    private router: Router,
+    private urlService: UrlService,
   ) {
   }
 
@@ -36,4 +39,7 @@ export class RankingsClassPageComponent implements OnInit, OnDestroy {
     this.unsubscribe.map(u => u.unsubscribe);
   }
 
+  goBack(): void {
+    this.router.navigate([this.urlService.getRankings()]);
+  }
 }

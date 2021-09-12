@@ -1,4 +1,8 @@
-<div class="profile-page-container" fxLayout="column" fxLayoutAlign="start center">
-  <profile-toolbar pageName="Editar Perfil"></profile-toolbar>
+<navbar barTitle="Editar Perfil" disableNavigation="true">
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
+  </div>
   <app-edit-data></app-edit-data>
-</div>
+</navbar>

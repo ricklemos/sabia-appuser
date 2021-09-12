@@ -15,6 +15,7 @@ import { HomeModuleAvailableComponent } from './components/home-module-available
 import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { HomeService } from './services/home.service';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { HomeService } from './services/home.service';
     MatSnackBarModule,
     CollactDesignSystemModule,
     CommonModule,
-    ChartsModule
+    ChartsModule,
+    NavigationModule
   ],
   providers: [
     HomeService

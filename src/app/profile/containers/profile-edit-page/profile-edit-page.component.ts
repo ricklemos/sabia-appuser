@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlService } from '../../../services/url.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-edit-page.component.scss']
 })
 export class ProfileEditPageComponent implements OnInit {
-  constructor() {
+  constructor(
+    private urlService: UrlService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
+  }
+
+  goBack(): void {
+    this.router.navigate([this.urlService.getProfileUrl()]);
   }
 
 }

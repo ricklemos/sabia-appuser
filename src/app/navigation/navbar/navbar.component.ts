@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     this.menuList.push({
       icon: 'cl-home',
       label: 'Início',
-      url: this.urlService.getHomeUrl(),
+      url: this.urlService.getHome(),
       external: false,
     });
     this.menuList.push({
@@ -85,10 +85,6 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
 
   openNavDrawer(): void {
     this.navDrawerService.openNavDrawer();
-  }
-
-  backClicked(): void {
-    console.log('backClicked()');
   }
 
   logout(): void {

@@ -35,7 +35,7 @@ export class SessionsLoginService {
         if (autoLogin) {
           localStorage.setItem('firebaseJWT', JSON.stringify(this.user.refreshToken));
         }
-        this.router.navigate([this.urlService.getHomeUrl()]);
+        this.router.navigate([this.urlService.getHome()]);
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {

@@ -69,7 +69,7 @@ export class SessionsSignupService {
         };
         return this.angularFirestore.doc(`users/${ this.uid }`).set(body);
       }).then(() => {
-      this.router.navigate([this.urlService.getHomeUrl()]);
+      this.router.navigate([this.urlService.getHome()]);
     })
       .catch(error => console.log(error));
   }

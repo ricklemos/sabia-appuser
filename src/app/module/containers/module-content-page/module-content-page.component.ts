@@ -4,7 +4,8 @@ import { noop } from 'rxjs';
 import { ModuleContentService } from '../../services/module-content.service';
 import { Lesson, ModuleProgress } from '../../models/module';
 import { ModuleService } from '../../services/module.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'module-content-page',
@@ -22,7 +23,9 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
   constructor(
     private moduleContentService: ModuleContentService,
     private moduleService: ModuleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private urlService: UrlService
   ) {
   }
 
@@ -50,6 +53,9 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
     filteredLesson.complete = this.lessonDone;
   }
 
+  goBack(): void {
+    this.router.navigate([this.urlService.getModule(this.moduleProgress.moduleId)]);
+  }
 }
 
 

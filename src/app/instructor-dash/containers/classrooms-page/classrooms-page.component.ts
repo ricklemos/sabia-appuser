@@ -5,11 +5,10 @@ import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-
 @Component({
   selector: 'classrooms-page',
   templateUrl: './classrooms-page.component.html',
-  styleUrls: ['./classrooms-page.component.scss']
+  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
 })
 export class ClassroomsPageComponent implements OnInit {
 

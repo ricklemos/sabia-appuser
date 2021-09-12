@@ -9,7 +9,7 @@ import { UrlService } from '../../../services/url.service';
 @Component({
   selector: 'classroom-page',
   templateUrl: './classroom-page.component.html',
-  styleUrls: ['./classroom-page.component.scss']
+  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
 })
 export class ClassroomPageComponent implements OnInit, OnDestroy {
 

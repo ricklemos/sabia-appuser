@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Validators } from '@angular/forms';
 import { ClFieldConfig } from 'collact-components';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StudentsForm } from '../../models/instructor-dash-forms';
 
 @Component({
   selector: 'students-form',
   templateUrl: './students-form.component.html',
-  styleUrls: ['./students-form.component.scss']
+  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
 })
 export class StudentsFormComponent implements OnInit {
   @Input() title = 'Alunos';
@@ -16,14 +16,7 @@ export class StudentsFormComponent implements OnInit {
   validStudents = false;
   addDisabled = true;
   textStudents: string[] = [];
-  formStudents: ClFieldConfig[] = [
-    {
-      type: 'textArea',
-      placeholder: 'Insira o e-mail dos alunos separando por linha',
-      name: 'students',
-      value: '',
-    }
-  ];
+  formStudents: ClFieldConfig[] = StudentsForm;
 
   constructor(
     private matSnackBar: MatSnackBar

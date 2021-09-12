@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'create-new-classroom-page',
   templateUrl: './create-new-classroom-page.component.html',
-  styleUrls: ['./create-new-classroom-page.component.scss']
+  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
 })
 export class CreateNewClassroomPageComponent implements OnInit {
 

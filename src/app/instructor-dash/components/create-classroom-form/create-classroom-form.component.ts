@@ -1,15 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Validators } from '@angular/forms';
 import { ClFieldConfig } from 'collact-components';
 import { CreateNewClassroomService } from '../../services/create-new-classroom.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { InstructorDashClassroom } from '../../models/instructor-dash-models';
+import { CreateClassroomForm } from '../../models/instructor-dash-forms';
 
 @Component({
   selector: 'create-classroom-form',
   templateUrl: './create-classroom-form.component.html',
-  styleUrls: ['./create-classroom-form.component.scss']
+  styleUrls: ['../../../../assets/styles/instructor-dash.scss']
 })
 export class CreateClassroomFormComponent implements OnInit {
 
@@ -18,37 +18,7 @@ export class CreateClassroomFormComponent implements OnInit {
   loading = true;
   submitDisabled = false;
   courseOptions = [];
-  formCourse: ClFieldConfig[] = [
-    {
-      type: 'input',
-      inputType: 'text',
-      label: 'Nome da turma',
-      name: 'classroomName',
-      value: '',
-      validations: [
-        {
-          name: 'required',
-          validator: Validators.required,
-          message: 'O campo é obrigatório'
-        },
-      ]
-    },
-    {
-      type: 'select',
-      label: 'Curso',
-      name: 'course',
-      value: '',
-      options: this.courseOptions,
-      validations: [
-        {
-          name: 'required',
-          validator: Validators.required,
-          message: 'O curso é obrigatório'
-        }
-      ]
-    },
-  ];
-
+  formCourse: ClFieldConfig[] = CreateClassroomForm;
   newClassroom: InstructorDashClassroom = {
     classroomName: '',
     classroomId: '',
@@ -64,6 +34,7 @@ export class CreateClassroomFormComponent implements OnInit {
   constructor(
     private createNewClassroomService: CreateNewClassroomService
   ) {
+    this.formCourse[1].options = this.courseOptions;
   }
 
   ngOnInit(): void {

@@ -45,3 +45,20 @@ export const UserFormPassword = [
     ]
   }
 ];
+
+export const UserFormFirstName = [
+  {
+    type: 'input',
+    placeholder: 'Primeiro nome',
+    name: 'firstName',
+    value: '',
+    mask: '',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'O campo é obrigatório'
+      }
+    ]
+  }
+];

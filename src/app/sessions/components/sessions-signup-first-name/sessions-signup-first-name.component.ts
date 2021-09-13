@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { SessionsSignupService } from '../../services/sessions-signup.service';
+import { UserFormFirstName } from '../../models/sessions-forms';
 
 @Component({
   selector: 'sessions-signup-first-name',
@@ -8,19 +8,32 @@ import { SessionsSignupService } from '../../services/sessions-signup.service';
   styleUrls: ['./sessions-signup-first-name.component.scss']
 })
 export class SessionsSignupFirstNameComponent implements OnInit {
-  firstNameForm = new FormControl('', [Validators.required, Validators.minLength(2)]);
-  formControl: FormControl;
+
+  formConfig = UserFormFirstName;
+  formValid = false;
+  firstName: string;
+  loading = false;
 
   constructor(
     private sessionsSignupService: SessionsSignupService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
+  isValid(event): void {
+    this.formValid = event;
+  }
+
+  changes(value): void {
+    this.firstName = value.firstName;
+  }
+
   submitFirstName(): void {
-    if (!this.firstNameForm.invalid) {
-      this.sessionsSignupService.firstName = this.firstNameForm.value;
+    if (this.formValid) {
+      this.loading = true;
+      this.sessionsSignupService.firstName = this.firstName;
       this.sessionsSignupService.nextStep('LAST_NAME');
     }
   }

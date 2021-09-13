@@ -5,7 +5,7 @@ import { UserFormLastName } from '../../models/sessions-forms';
 @Component({
   selector: 'sessions-signup-last-name',
   templateUrl: './sessions-signup-last-name.component.html',
-  styleUrls: ['./sessions-signup-last-name.component.scss']
+  styleUrls: ['../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsSignupLastNameComponent implements OnInit {
 

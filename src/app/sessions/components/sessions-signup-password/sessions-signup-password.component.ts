@@ -5,7 +5,7 @@ import { UserFormPassword } from '../../models/sessions-forms';
 @Component({
   selector: 'sessions-signup-password',
   templateUrl: './sessions-signup-password.component.html',
-  styleUrls: ['./sessions-signup-password.component.scss']
+  styleUrls: ['../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsSignupPasswordComponent implements OnInit {
 

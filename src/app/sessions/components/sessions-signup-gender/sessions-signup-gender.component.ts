@@ -6,7 +6,7 @@ import { UserFormGender } from '../../models/sessions-forms';
 @Component({
   selector: 'sessions-signup-gender',
   templateUrl: './sessions-signup-gender.component.html',
-  styleUrls: ['./sessions-signup-gender.component.scss']
+  styleUrls: ['./sessions-signup-gender.component.scss', '../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsSignupGenderComponent implements OnInit {
   formControl: FormControl;

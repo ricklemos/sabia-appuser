@@ -62,3 +62,20 @@ export const UserFormFirstName = [
     ]
   }
 ];
+
+export const UserFormLastName = [
+  {
+    type: 'input',
+    placeholder: 'Sobrenome',
+    name: 'lastName',
+    value: '',
+    mask: '',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'O campo é obrigatório'
+      }
+    ]
+  }
+];

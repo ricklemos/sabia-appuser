@@ -1,5 +1,6 @@
 import { Validators } from '@angular/forms';
 import { ValidatorEmail } from '../../forms/validators/validator-email';
+import { ValidatorMin } from '../../forms/validators/validator-min';
 
 export const UserFormEmail = [
   {
@@ -19,6 +20,27 @@ export const UserFormEmail = [
         name: 'validateEmail',
         validator: ValidatorEmail.validator,
         message: 'E-mail inválido'
+      }
+    ]
+  }
+];
+export const UserFormPassword = [
+  {
+    label: 'senha',
+    type: 'password',
+    placeholder: '',
+    name: 'password',
+    value: '',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Senha é obrigatória'
+      },
+      {
+        name: 'minValue',
+        validator: ValidatorMin.validator(6, 'letters'),
+        message: 'Min. 6 caracteres'
       }
     ]
   }

@@ -1,8 +1,11 @@
-<h2 mat-dialog-title>E-mail não encontrado</h2>
-<div mat-dialog-content>
-  <p>Entre em contato com a instituição de ensino para solicitar um cadastro na plataforma com o seu e-mail.</p>
-  <p>Caso ainda tenha dúvidas entre em contato com o suporte</p>
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutGap="8px">
+      <h2>E-mail não encontrado</h2>
+      <p>Entre em contato com a instituição de ensino para solicitar um cadastro na plataforma com o seu e-mail.</p>
+    </div>
+    <button (click)="closeDialog()" clButtonContained class="bg-sabia-blue-500">
+      <span>Ok</span>
+    </button>
+  </div>
 </div>
-
-<div mat-dialog-close (click)="closeDialog()">OK</div>
-

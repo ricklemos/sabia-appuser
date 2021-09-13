@@ -68,7 +68,7 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           } else {
             // emite dialog de erro
             this.loading = false;
-            this.matDialog.open(SessionsInvalidEmailDialogComponent);
+            this.matDialog.open(SessionsInvalidEmailDialogComponent, { width: '343px' });
           }
         })
       ).subscribe(noop);

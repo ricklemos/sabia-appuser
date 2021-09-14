@@ -17,7 +17,7 @@ export class SessionsLoggedPageComponent implements OnInit {
   userData: SessionsUserData;
   // TODO: Definir home pages corretas
   rolePage = {
-    STUDENT: this.urlService.getModule('0001'),
+    STUDENT: this.urlService.getHome(),
     SCHOOL_ADMIN: this.urlService.getClassroomsDashPage(),
     INSTRUCTOR: this.urlService.getClassroomsDashPage(),
     MASTER: 'sessions'

@@ -22,7 +22,7 @@ export class UrlService {
     return `${ url }/login`;
   }
 
-  public getHomeUrl(): string {
+  public getSessionsLogged(): string {
     return `sessions`;
   }
 

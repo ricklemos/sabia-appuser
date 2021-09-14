@@ -22,7 +22,7 @@ export class ClassroomsDashCreateNewClassroomPageComponent implements OnInit {
     private instructorDashUploadClassroomService: ClassroomsDashUploadClassroomService,
     private router: Router,
     private urlService: UrlService,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
   ) {
   }
 
@@ -51,6 +51,10 @@ export class ClassroomsDashCreateNewClassroomPageComponent implements OnInit {
     this.students = $event;
     this.isStudentsCheck = true;
     this.submitDisabled = !this.isCourseCheck;
+  }
+
+  goBack(): void {
+    this.router.navigate([this.urlService.getClassroomsDashPage()]);
   }
 
 }

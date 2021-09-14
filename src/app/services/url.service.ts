@@ -89,6 +89,9 @@ export class UrlService {
   public getClassroomsDashClassroomPage(classroomId): string {
     return `/painel-classes/${ classroomId }`;
   }
+  public getClassroomsDashCreateClassroomPage(): string {
+    return `/painel-classes/criar`;
+  }
 
   public getEditRolePage(): string {
     return `/sessions/edit-role`;

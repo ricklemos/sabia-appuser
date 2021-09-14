@@ -60,6 +60,10 @@ export class ClassroomsDashClassroomPageComponent implements OnInit, OnDestroy {
     this.instructorDashUploadClassroomService.addStudents(this.students);
   }
 
+  goBack(): void {
+    this.router.navigate([this.urlService.getClassroomsDashPage()]);
+  }
+
   goToRanking(): void {
     this.router.navigate([this.urlService.getClassroomRanking(this.classroom.classroomId)]);
   }

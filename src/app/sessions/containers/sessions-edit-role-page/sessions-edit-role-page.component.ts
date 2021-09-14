@@ -5,6 +5,7 @@ import { SessionsRolesService } from '../../services/sessions-roles.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { SessionsRole } from '../../models/sessions-models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'sessions-edit-role-page',
@@ -54,7 +55,8 @@ export class SessionsEditRolePageComponent implements OnInit {
   role: SessionsRole;
 
   constructor(
-    private sessionsRolesService: SessionsRolesService
+    private sessionsRolesService: SessionsRolesService,
+    private matSnackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class SessionsEditRolePageComponent implements OnInit {
   submit(): void {
     this.sessionsRolesService.setRole(this.userEmail, this.role).pipe(
       tap((data) => {
-        console.log('Resposta', data);
+        this.matSnackBar.open(data.result, 'OK', { duration: 4000 });
       })
     ).subscribe(noop);
   }

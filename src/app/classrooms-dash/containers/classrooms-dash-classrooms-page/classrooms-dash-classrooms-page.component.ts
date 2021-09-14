@@ -33,6 +33,10 @@ export class ClassroomsDashClassroomsPageComponent implements OnInit {
     ).subscribe(noop);
   }
 
+  goToCreateClassroomPage(): void {
+    this.router.navigate([this.urlService.getClassroomsDashCreateClassroomPage()]);
+  }
+
   goToClassroomPage(classroom: ClassroomsDashClassroom): void {
     this.router.navigate([this.urlService.getClassroomsDashClassroomPage(classroom.classroomId)]);
   }

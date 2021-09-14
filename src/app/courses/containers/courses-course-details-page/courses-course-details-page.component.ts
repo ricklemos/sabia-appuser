@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Enrollment } from '../../models/enrollment';
 import { CoursesService } from '../../services/courses.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'courses-course-details',
@@ -17,7 +18,9 @@ export class CoursesCourseDetailsPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private coursesServices: CoursesService
+    private coursesServices: CoursesService,
+    private router: Router,
+    private urlService: UrlService
   ) {
   }
 
@@ -37,4 +40,7 @@ export class CoursesCourseDetailsPageComponent implements OnInit, OnDestroy {
     this.subscriptions.map(u => u.unsubscribe);
   }
 
+  goBack(): void {
+    this.router.navigate([this.urlService.getCourses()]);
+  }
 }

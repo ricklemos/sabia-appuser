@@ -17,6 +17,7 @@ import { ModuleModule } from './module/module.module';
 import { RankingsModule } from './rankings/rankings.module';
 import { HomeModule } from './home/home.module';
 import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
+import { StorageService } from './services/storage.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
     HomeModule,
   ],
   providers: [
-    UrlService
+    UrlService,
+    StorageService,
   ],
   bootstrap: [AppComponent]
 })

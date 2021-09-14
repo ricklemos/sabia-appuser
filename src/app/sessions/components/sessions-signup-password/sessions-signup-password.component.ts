@@ -1,26 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { SessionsSignupService } from '../../services/sessions-signup.service';
+import { UserFormPassword } from '../../models/sessions-forms';
 
 @Component({
   selector: 'sessions-signup-password',
   templateUrl: './sessions-signup-password.component.html',
-  styleUrls: ['./sessions-signup-password.component.scss']
+  styleUrls: ['../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsSignupPasswordComponent implements OnInit {
-  passwordForm = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  formControl: FormControl;
+
+  formConfig = UserFormPassword;
+  formValid = false;
+  password: string;
+  loading = false;
 
   constructor(
     private sessionsSignupService: SessionsSignupService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
+  isValid(event): void {
+    this.formValid = event;
+  }
+
+  changes(value): void {
+    this.password = value.password;
+  }
+
   createUser(): void {
-    if (!this.passwordForm.invalid) {
-      this.sessionsSignupService.createUser(this.passwordForm.value);
+    if (this.formValid) {
+      this.loading = true;
+      this.sessionsSignupService.createUser(this.password);
     }
   }
 }

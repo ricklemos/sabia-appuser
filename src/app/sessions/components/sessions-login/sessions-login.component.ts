@@ -13,7 +13,7 @@ import { UserFormEmail } from '../../models/sessions-forms';
 @Component({
   selector: 'sessions-login',
   templateUrl: './sessions-login.component.html',
-  styleUrls: ['./sessions-login.component.scss']
+  styleUrls: ['../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsLoginComponent implements OnInit, OnDestroy {
 
@@ -68,7 +68,7 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           } else {
             // emite dialog de erro
             this.loading = false;
-            this.matDialog.open(SessionsInvalidEmailDialogComponent);
+            this.matDialog.open(SessionsInvalidEmailDialogComponent, { width: '343px' });
           }
         })
       ).subscribe(noop);

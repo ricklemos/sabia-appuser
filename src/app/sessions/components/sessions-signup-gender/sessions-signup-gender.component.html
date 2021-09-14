@@ -2,19 +2,14 @@
      fxLayoutGap.lt-sm="8px"
 >
   <h2 class="sessions__title">Qual é seu gênero?</h2>
-  <form [formGroup]="formGroup" class="sessions__radio">
-    <label class="container"> Masculino
-      <input type="radio" value="MALE" formControlName="gender">
-      <span class="checkmark"></span>
-    </label>
-    <label class="container"> Feminino
-      <input type="radio" value="FEMALE" formControlName="gender">
-      <span class="checkmark"></span>
-    </label>
-    <label class="container"> Outro
-      <input type="radio" value="OTHER" formControlName="gender">
-      <span class="checkmark"></span>
-    </label>
-  </form>
-  <button class="sessions__button" (click)="submitGender()" [disabled]="formGroup.invalid">Continuar</button>
+  <cl-form-component
+    (changes)="changes($event)"
+    (isValid)="isValid($event)"
+    (submit)="submitGender()"
+    [formConfig]="formConfig"
+  ></cl-form-component>
+  <button (click)="submitGender()" [hasDisabled]="!formValid" [loading]="loading" clButtonContained
+          class="bg-sabia-blue-500">
+    <span>Continuar</span>
+  </button>
 </div>

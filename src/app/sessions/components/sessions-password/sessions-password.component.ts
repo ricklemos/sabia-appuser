@@ -1,22 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { SessionsLoginPageComponent } from '../../containers/sessions-login-page/sessions-login-page.component';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { SessionsLoginService } from '../../services/sessions-login.service';
-import { tap } from 'rxjs/operators';
-import { noop } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserFormPassword } from '../../models/sessions-forms';
 
 @Component({
   selector: 'sessions-password',
   templateUrl: './sessions-password.component.html',
   styleUrls: ['./sessions-password.component.scss']
 })
-export class SessionsPasswordComponent implements OnInit, OnDestroy {
-  unsubscriptions = [];
-  password = new FormControl('', [Validators.required, Validators.minLength(3)]);
+export class SessionsPasswordComponent implements OnInit {
   autoLogin = new FormControl(true);
-  passwordIncomplete = true;
   forgotPasswordClicked = false;
+
+  formConfig = UserFormPassword;
+  formValid = false;
+  userPassword: string;
+  loading = false;
 
   constructor(
     private sessionsLoginService: SessionsLoginService,
@@ -25,17 +25,14 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const listenPassword = this.password.valueChanges.pipe(
-      tap(password => {
-        this.passwordIncomplete = !this.password.valid;
-      })
-    )
-      .subscribe(noop);
-    this.unsubscriptions.push(listenPassword);
   }
 
-  ngOnDestroy(): void {
-    this.unsubscriptions.map(u => u.unsubscribe());
+  isValid(event): void {
+    this.formValid = event;
+  }
+
+  changes(value): void {
+    this.userPassword = value.password;
   }
 
   changeEmailForLogin(): void {
@@ -43,8 +40,10 @@ export class SessionsPasswordComponent implements OnInit, OnDestroy {
   }
 
   setPasswordAndSignIn(): void {
-    this.sessionsLoginService.setPassword(this.password.value);
+    this.loading = true;
+    this.sessionsLoginService.setPassword(this.userPassword);
     this.sessionsLoginService.signIn(this.autoLogin.value);
+    this.loading = false;
   }
 
   forgotPassword(): void {

@@ -2,6 +2,14 @@
   fxLayoutGap.lt-sm="8px"
 >
   <h2 class="sessions__title">Comece com o seu e-mail</h2>
-  <input type="email" placeholder="e-mail" [formControl]="email" class="sessions__input" name="email">
-  <button class="sessions__button" (click)="verifyEmail()" [disabled]="email.invalid">Continuar</button>
+
+  <cl-form-component
+    [formConfig]="formConfig"
+    (isValid)="isValid($event)"
+    (submit)="verifyEmail()"
+    (changes)="changes($event)"
+  ></cl-form-component>
+  <button clButtonContained (click)="verifyEmail()" [hasDisabled]="!formValid" class="bg-sabia-blue-500" [loading]="loading">
+    <span>Continuar</span>
+  </button>
 </div>

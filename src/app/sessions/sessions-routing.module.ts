@@ -20,12 +20,13 @@ export const SessionsRoutes: Routes = [
       {
         path: 'edit-role',
         component: SessionsEditRolePageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ['MASTER'] }
       },
       {
         path: '',
         component: SessionsLoggedPageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       }
     ]
   }

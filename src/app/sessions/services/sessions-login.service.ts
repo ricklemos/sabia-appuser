@@ -5,7 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UrlService } from '../../services/url.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SessionsRolesService } from './sessions-roles.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,6 @@ export class SessionsLoginService {
     private router: Router,
     private urlService: UrlService,
     private snackBar: MatSnackBar,
-    private sessionsRolesServices: SessionsRolesService
   ) {
   }
 
@@ -37,6 +35,7 @@ export class SessionsLoginService {
         if (autoLogin) {
           localStorage.setItem('firebaseJWT', JSON.stringify(this.user.refreshToken));
         }
+        // Vai pra sessionsLogged pra definir qual é a home do usuário
         this.router.navigate([this.urlService.getSessionsLogged()]);
       })
       .catch((error) => {

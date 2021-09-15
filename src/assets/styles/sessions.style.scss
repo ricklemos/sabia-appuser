@@ -28,7 +28,12 @@
     cursor: pointer;
   }
 
-
+  &__buttons-container {
+    width: 100%;
+    button {
+      width: 100%;
+    }
+  }
 }
 
 cl-form-component ::ng-deep {

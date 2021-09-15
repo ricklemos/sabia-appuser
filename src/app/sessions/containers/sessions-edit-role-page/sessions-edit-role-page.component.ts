@@ -75,7 +75,7 @@ export class SessionsEditRolePageComponent implements OnInit {
     this.submitDisabled = !$event;
   }
   submit(): void {
-    this.sessionsRolesService.setRole(this.userEmail, this.role).pipe(
+    this.sessionsRolesService.updateRole(this.userEmail, this.role).pipe(
       tap((data) => {
         this.matSnackBar.open(data.result, 'OK', { duration: 4000 });
       })

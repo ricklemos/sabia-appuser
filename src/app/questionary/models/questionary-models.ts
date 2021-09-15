@@ -1,10 +1,11 @@
-export interface QuestionaryAnswer {
+export interface QuestionnaireAnswer {
   userId: string;
-  questionaryId: string;
-  questionaryName: string;
+  questionnaireId: string;
+  questionnaireName: string;
   questions: Question[];
   score?: number;
   tentatives?: number;
+  moduleId?: string;
 }
 
 export interface Question {

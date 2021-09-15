@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
       if (userRole === 'MASTER') {
         return true;
       } else {
-        const isAllowed = userRole in route.data.roles;
+        const isAllowed = route.data.roles.includes(userRole);
         this.matSnackBar.open('Você não tem permissão de acesso a essa página', 'OK', { duration: 4000 });
         this.router.navigate([this.urlService.getSessionsLogged()]);
         return isAllowed;

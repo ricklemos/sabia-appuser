@@ -20,8 +20,11 @@
         <div clBadgeOutline [diameter]="40" bgColor="#2E3037" *ngIf="lesson.complete">
           <i clIcon name="cl-correct-focus"></i>
         </div>
-        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete">
-          <i clIcon name="cl-menu-food"></i>
+        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'QUESTIONARY'">
+          <i clIcon name="cl-edit"></i>
+        </div>
+        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'TEXT'">
+          <i clIcon name="cl-university"></i>
         </div>
         <p>{{ lesson.lessonName }}</p>
       </div>

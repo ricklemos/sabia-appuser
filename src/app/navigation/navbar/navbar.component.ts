@@ -65,13 +65,15 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     const fetchIdToken = this.sessionsRolesService.fetchRoleByIdToken().pipe(
       tap(idToken => {
         const role = idToken.claims.role;
-        if (role !== 'STUDENT') {
+        if (['MASTER', 'SCHOOL_ADMIN'].includes(role)) {
           this.menuList.push({
             icon: 'cl-users',
-            label: 'Turmas',
+            label: 'Classes',
             url: this.urlService.getClassroomsDashPage(),
             external: false,
           });
+        }
+        if (role === 'MASTER'){
           this.menuList.push({
             icon: 'cl-user-document',
             label: 'Perfil de usuários',
@@ -81,6 +83,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         }
       })
     ).subscribe(noop);
+    this.subscriptions.push(fetchIdToken);
   }
 
   ngOnInit(): void {

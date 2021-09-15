@@ -21,6 +21,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { QuestionaryDialogCloseComponent } from './dialogs/questionary-dialog-close/questionary-dialog-close.component';
 import { QuestionaryReviewPageComponent } from './containers/questionary-review-page/questionary-review-page.component';
 import { QuestionaryReviewComponent } from './components/questionary-review/questionary-review.component';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 
@@ -47,7 +48,8 @@ import { QuestionaryReviewComponent } from './components/questionary-review/ques
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    NavigationModule
   ],
   entryComponents: [
     QuestionaryBottomSheetAnswerComponent,

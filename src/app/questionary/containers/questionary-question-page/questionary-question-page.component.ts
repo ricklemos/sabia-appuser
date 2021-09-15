@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuestionaryService } from '../../services/questionary.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
-import { Alternative, Question, QuestionaryAnswer } from '../../models/questionary-models';
+import { Alternative, Question, QuestionnaireAnswer } from '../../models/questionary-models';
 
 @Component({
   selector: 'app-questionary-question-page',
@@ -14,7 +14,7 @@ export class QuestionaryQuestionPageComponent implements OnInit {
 
   questionaryId: string;
   loadingQuestionary: boolean;
-  questionary: QuestionaryAnswer;
+  questionary: QuestionnaireAnswer;
   questions: Question[];
   currentQuestion: Question;
   currentQuestionNumber: number;
@@ -49,7 +49,7 @@ export class QuestionaryQuestionPageComponent implements OnInit {
     if (alternative.isRight) {
       this.score += 1;
     }
-    this.questions[this.currentQuestionNumber -1].selectedAlternative = alternative;
+    this.questions[this.currentQuestionNumber - 1].selectedAlternative = alternative;
     // Caso tenha sido a última pergunta, atualiza o questionário com as respostas
     if (this.currentQuestionNumber === this.questions.length) {
       this.questionary.questions = this.questions;

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Question } from '../../models/questionary-models';
+import { Question, QuestionnaireAnswer } from '../../models/questionary-models';
 import { QuestionaryService } from '../../services/questionary.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class QuestionaryReviewPageComponent implements OnInit, OnDestroy {
   loadingQuestionary: boolean;
   questions: Question[];
   unsubscribe = [];
+  questionnaire: QuestionnaireAnswer;
 
   constructor(
     private questionaryService: QuestionaryService,
@@ -32,6 +33,7 @@ export class QuestionaryReviewPageComponent implements OnInit, OnDestroy {
     const questionaryService = this.questionaryService.fetchQuestionary(this.questionaryId).pipe(
       tap((questionary) => {
         this.questionaryService.setQuestionary(questionary);
+        this.questionnaire = questionary;
         this.questions = questionary.questions;
         this.loadingQuestionary = false;
       })
@@ -39,11 +41,14 @@ export class QuestionaryReviewPageComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(questionaryService);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubscribe.map(u => u.unsubscribe);
   }
 
   redoTest(): void {
     this.router.navigate([this.urlService.getQuestionary(this.questionaryId)]);
+  }
+  goBack(): void {
+    this.router.navigate([this.urlService.getModule(this.questionnaire.moduleId)]);
   }
 }

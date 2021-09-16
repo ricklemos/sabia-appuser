@@ -37,3 +37,10 @@ export interface PreEnrollment {
   institutionName: string;
   classroomId: string;
 }
+
+export interface Lesson {
+  complete: boolean;
+  lessonId: string;
+  lessonName: string;
+  lessonType: 'TEXT' | 'QUESTIONNAIRE' | 'QUESTIONARY';
+}

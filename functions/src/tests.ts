@@ -111,24 +111,28 @@ export const createMockupData = functions.https
         moduleName: 'Renda Fixa',
         lessons: [
           {
-            lessonType: 'lesson',
+            lessonType: 'TEXT',
             complete: false,
-            lessonId: '01'
+            lessonId: '01',
+            lessonName: 'lição 1'
           },
           {
-            lessonType: 'lesson',
+            lessonType: 'TEXT',
             complete: false,
-            lessonId: '02'
+            lessonId: '02',
+            lessonName: 'lição 2'
           },
           {
-            lessonType: 'questionnaire',
+            lessonType: 'QUESTIONNAIRE',
             complete: false,
-            questionnaireId: '01'
+            questionnaireId: '01',
+            lessonName: 'lição 3'
           },
           {
-            lessonType: 'questionnaire',
+            lessonType: 'QUESTIONNAIRE',
             complete: false,
-            questionnaireId: '02'
+            questionnaireId: '02',
+            lessonName: 'lição 4'
           }
         ]
       })
@@ -138,16 +142,20 @@ export const createMockupData = functions.https
       .create({
         moduleId: '02',
         moduleName: 'Renda Variável',
-        lessons: [{
-          lessonType: 'lesson',
-          complete: false,
-          lessonId: '03'
-        },
+        lessons: [
           {
-            lessonType: 'lesson',
+            lessonType: 'LESSON',
             complete: false,
-            lessonId: '04'
-          }]
+            lessonId: '03',
+            lessonName: 'lição 3'
+          },
+          {
+            lessonType: 'LESSON',
+            complete: false,
+            lessonId: '04',
+            lessonName: 'lição 4'
+          }
+        ]
       })
       .then(() => res.send('createClassroom Succesfully'))
       .catch(err => console.log(err));
@@ -164,8 +172,6 @@ export const createClassroom = functions.https
         classroomName: 'Turma 1',
         institutionName: 'BTC',
         modules: ['01', '02'],
-        // students: [ 'teste4@teste.com', 'teste@teste.com', 'teste2@teste.com', 'teste3@teste.com',],
-        // students: ['gmduarte96@gmail.com', 'rick1@teste.com', 'teste@teste.com', 'rick2@teste.com', 'rick3@teste.com', 'teste2@teste.com', 'rick4@teste.com'],
         students: ['teste4@teste.com', 'rick1@teste.com', 'rick2@teste.com', 'rick3@teste.com', 'rick4@teste.com', 'teste5@teste.com'],
       })
       .then(() => res.send('createClassroom Succesfully'))

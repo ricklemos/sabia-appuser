@@ -3,6 +3,7 @@ import * as tests from './tests';
 import * as createEnrollments from './create-enrollments';
 import * as updateRankingScore from './update-ranking-score';
 import * as authentication from './authentication';
+import * as updateModuleProgress from './update-module-progress';
 
 admin.initializeApp();
 
@@ -23,4 +24,8 @@ export const updateRanking = updateRankingScore.updateRanking;
 // Funções de administração de papéis
 export const setStudentRole = authentication.setStudentRoleOnCreate;
 export const setRole = authentication.setRole;
+
+// Funções de atualização do module progress
+export const updateModuleProgressPercentageWhenUpdateModuleProgress =
+  updateModuleProgress.updateModuleProgressPercentageWhenUpdateModuleProgress;
 

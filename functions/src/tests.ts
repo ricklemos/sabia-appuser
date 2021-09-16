@@ -99,9 +99,11 @@ export const createMockupData = functions.https
     });
     admin.firestore().doc(`/courseTemplate/${ courseId }`)
       .create({
-        courseId: '02',
+        courseId: '01',
         courseName: 'General Business Program',
         modules: ['01', '02'],
+        courseLink: 'https://www.btcompany.com.br/gbp',
+        courseDescription: 'Trabalhando temas como Soft Skills, Finanças Corporativas & Valuation, Estratégia Empresarial, Marketing, Business Modeling e Problem Solving, os alunos do GBP ficam mais preparados para alavancar seus resultados nas carreiras mais buscadas, entendendo o negócio de forma generalista e analítica e fortalecendo o processo de tomada de decisão.'
       })
       .then(() => res.send('createClassroom Succesfully'))
       .catch(err => console.log(err));
@@ -169,6 +171,8 @@ export const createClassroom = functions.https
         courseId: '02',
         classroomId,
         courseName: 'Renda Fixa',
+        courseDescription: 'Trabalhando temas como Soft Skills, Finanças Corporativas & Valuation, Estratégia Empresarial, Marketing, Business Modeling e Problem Solving, os alunos do GBP ficam mais preparados para alavancar seus resultados nas carreiras mais buscadas, entendendo o negócio de forma generalista e analítica e fortalecendo o processo de tomada de decisão.',
+        courseLink: 'https://www.btcompany.com.br/gbp',
         classroomName: 'Turma 1',
         institutionName: 'BTC',
         modules: ['01', '02'],

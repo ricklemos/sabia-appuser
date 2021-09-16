@@ -36,6 +36,8 @@ export interface PreEnrollment {
   classroomName: string;
   institutionName: string;
   classroomId: string;
+  courseDescription?: string;
+  courseLink?: string;
 }
 
 export interface Lesson {

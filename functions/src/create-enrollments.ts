@@ -21,6 +21,8 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
                 .create({
                   courseId: preEnrollment.courseId,
                   courseName: preEnrollment.courseName,
+                  courseDescription: preEnrollment.courseDescription,
+                  courseLink: preEnrollment.courseLink,
                   classroomName: preEnrollment.classroomName,
                   institutionName: preEnrollment.institutionName,
                   score: 0,
@@ -60,6 +62,7 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
       // Cria o Ranking da turma com array vazio
       admin.firestore().doc(`/classRankings/${ classroomId }`)
         .create({
+          classroomId,
           courseId: classroom.courseId,
           courseName: classroom.courseName,
           classroomName: classroom.classroomName,
@@ -82,6 +85,8 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
                     courseName: classroom.courseName,
                     classroomName: classroom.classroomName,
                     institutionName: classroom.institutionName,
+                    courseDescription: classroom.courseDescription,
+                    courseLink: classroom.courseLink,
                     score: 0,
                     classroomId,
                     userId,
@@ -109,6 +114,8 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
                     courseName: classroom.courseName,
                     classroomName: classroom.classroomName,
                     institutionName: classroom.institutionName,
+                    courseDescription: classroom.courseDescription,
+                    courseLink: classroom.courseLink,
                     classroomId
                   })
                 }
@@ -175,7 +182,7 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.fires
     if (moduleProgress) {
       const lessons = moduleProgress.lessons;
       lessons.forEach((lesson: any) => {
-        if (lesson.lessonType === 'questionnaire') {
+        if (lesson.lessonType === 'QUESTIONNAIRE') {
           const questionnaireId = lesson.questionnaireId;
           admin.firestore().doc(`questionnaireTemplate/${ questionnaireId }`).get()
             .then(doc => {

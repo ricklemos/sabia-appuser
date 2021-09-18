@@ -9,4 +9,6 @@ export interface ClassroomsDashClassroom {
   endDate?: Date;
   instructors?: string[];
   students: string[];
+  courseDescription: string;
+  courseLink: string;
 }

@@ -27,7 +27,9 @@ export class ClassroomsDashCreateClassroomFormComponent implements OnInit {
     institutionName: '',
     modules: [],
     students: [],
-    startDate: new Date()
+    startDate: new Date(),
+    courseDescription: '',
+    courseLink: ''
   };
   courses = [];
 
@@ -62,6 +64,8 @@ export class ClassroomsDashCreateClassroomFormComponent implements OnInit {
       this.newClassroom.courseName = course.courseName;
       this.newClassroom.institutionName = course.institutionName;
       this.newClassroom.modules = course.modules;
+      this.newClassroom.courseDescription = course.courseDescription;
+      this.newClassroom.courseLink = course.courseLink;
     }
   }
 

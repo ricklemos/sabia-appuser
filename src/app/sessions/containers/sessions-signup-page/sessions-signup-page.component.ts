@@ -6,7 +6,7 @@ import { UrlService } from '../../../services/url.service';
 @Component({
   selector: 'sessions-signup-page',
   templateUrl: './sessions-signup-page.component.html',
-  styleUrls: ['./sessions-signup-page.component.scss']
+  styleUrls: ['../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsSignupPageComponent implements OnInit, OnDestroy {
   showPage: string;

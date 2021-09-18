@@ -5,7 +5,7 @@ import { SessionsLoginService } from '../../services/sessions-login.service';
   // tslint:disable-next-line:component-selector
   selector: 'sessions-login-page',
   templateUrl: './sessions-login-page.component.html',
-  styleUrls: ['./sessions-login-page.component.scss']
+  styleUrls: ['../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsLoginPageComponent implements OnInit, OnDestroy {
 

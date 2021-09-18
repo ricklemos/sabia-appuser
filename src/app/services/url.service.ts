@@ -22,7 +22,7 @@ export class UrlService {
     return `${ url }/login`;
   }
 
-  public getHomeUrl(): string {
+  public getSessionsLogged(): string {
     return `sessions`;
   }
 
@@ -88,6 +88,9 @@ export class UrlService {
 
   public getClassroomsDashClassroomPage(classroomId): string {
     return `/painel-classes/${ classroomId }`;
+  }
+  public getClassroomsDashCreateClassroomPage(): string {
+    return `/painel-classes/criar`;
   }
 
   public getEditRolePage(): string {

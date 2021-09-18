@@ -1,22 +1,22 @@
-<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
-  <h1>Turmas</h1>
-  <button clButton routerLink="create">
-    <span>Adicionar Turma</span>
-    <i clIcon name="cl-plus"></i>
-  </button>
-  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="loadingClassrooms">
-    <mat-spinner></mat-spinner>
-  </div>
-  <div *ngIf="!loadingClassrooms" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
-    <div *ngFor="let classroom of classrooms">
-      <div clCard (click)="goToClassroomPage(classroom)">
-        <h2 clCardTitle>{{ classroom.courseName }}</h2>
-        <h2 clCardSubTitle>{{ classroom.institutionName }}</h2>
-        <div clCardContent>
-          <p>{{ classroom.classroomName }}</p>
+<navbar barTitle="Classes">
+  <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+    <button clButton (click)="goToCreateClassroomPage()">
+      <span>Adicionar Classe</span>
+      <i clIcon name="cl-plus"></i>
+    </button>
+    <div fxLayout="column" fxLayoutAlign="center center" *ngIf="loadingClassrooms">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!loadingClassrooms" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+      <div *ngFor="let classroom of classrooms">
+        <div clCard (click)="goToClassroomPage(classroom)">
+          <h2 clCardTitle>{{ classroom.courseName }}</h2>
+          <h2 clCardSubTitle>{{ classroom.institutionName }}</h2>
+          <div clCardContent>
+            <p>{{ classroom.classroomName }}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
+</navbar>

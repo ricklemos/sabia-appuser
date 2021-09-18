@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { switchMap, tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
-import { SessionsUserData } from '../../sessions/models/sessions-models';
+import { SessionsRole, SessionsUserData } from '../../sessions/models/sessions-models';
 import { ModifyUserDataService } from '../../profile/services/modify-user-data.service';
+import { SessionsRolesService } from '../../sessions/services/sessions-roles.service';
 
 @Component({
   selector: 'navbar-header',
@@ -14,10 +15,18 @@ export class NavbarHeaderComponent implements OnInit, OnDestroy {
   userData$: SessionsUserData;
   pictureLink: string;
   subscriptions = [];
+  role: SessionsRole;
+  roleName = {
+    STUDENT: 'Aluno',
+    SCHOOL_ADMIN: 'Administrador',
+    INSTRUCTOR: 'Instrutor',
+    MASTER: 'MASTER'
+  };
 
   constructor(
     private sessionsLoginService: SessionsLoginService,
     private modifyUserDataService: ModifyUserDataService,
+    private sessionsRolesService: SessionsRolesService
   ) {
   }
 
@@ -28,8 +37,13 @@ export class NavbarHeaderComponent implements OnInit, OnDestroy {
         this.userData$ = data;
         return this.modifyUserDataService.fetchProfilePicture(userId).getDownloadURL();
       }),
-      tap(picture => {
+      switchMap(picture => {
         this.pictureLink = picture;
+        return this.sessionsRolesService.fetchRoleByIdToken();
+      }),
+      tap(idToken => {
+        const systemRole = idToken.claims.role;
+        this.role = this.roleName[systemRole];
       })
     ).subscribe(noop);
     this.subscriptions.push(sub);

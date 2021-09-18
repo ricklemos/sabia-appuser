@@ -10,15 +10,18 @@ export const ClassroomsDashRoutes: Routes = [
     children: [
       {
         path: 'classes',
-        component: ClassroomsDashClassroomsPageComponent
+        component: ClassroomsDashClassroomsPageComponent,
+        data: { roles: ['INSTRUCTOR', 'SCHOOL_ADMIN'] }
       },
       {
         path: 'criar',
-        component: ClassroomsDashCreateNewClassroomPageComponent
+        component: ClassroomsDashCreateNewClassroomPageComponent,
+        data: { roles: ['INSTRUCTOR', 'SCHOOL_ADMIN'] }
       },
       {
         path: ':classroomId',
-        component: ClassroomsDashClassroomPageComponent
+        component: ClassroomsDashClassroomPageComponent,
+        data: { roles: ['INSTRUCTOR', 'SCHOOL_ADMIN'] }
       }
     ],
     canActivate: [AuthGuard],

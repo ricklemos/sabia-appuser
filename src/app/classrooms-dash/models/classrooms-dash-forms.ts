@@ -13,7 +13,7 @@ export const CreateClassroomForm = [
   {
     type: 'input',
     inputType: 'text',
-    label: 'Nome da turma',
+    label: 'Nome da classe',
     name: 'classroomName',
     value: '',
     validations: [

@@ -1,8 +1,15 @@
-<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
-  <h1>Criar nova classe</h1>
-  <classrooms-dash-create-classroom-form (formDone)="courseCheck($event)"></classrooms-dash-create-classroom-form>
-  <classrooms-dash-students-form (formDone)="studentsCheck($event)"></classrooms-dash-students-form>
-  <button clButton [disabled]="submitDisabled" (click)="createClassroom()">
-    <span>Criar nova classe</span>
-  </button>
-</div>
+<navbar barTitle="Classes" disableNavigation="true">
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
+  </div>
+  <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+    <h1>Criar nova classe</h1>
+    <classrooms-dash-create-classroom-form (formDone)="courseCheck($event)"></classrooms-dash-create-classroom-form>
+    <classrooms-dash-students-form (formDone)="studentsCheck($event)"></classrooms-dash-students-form>
+    <button clButton [disabled]="submitDisabled" (click)="createClassroom()">
+      <span>Criar nova classe</span>
+    </button>
+  </div>
+</navbar>

@@ -1,8 +1,18 @@
 <div class="questionary-question-page"  fxLayoutAlign="center center" *ngIf="loadingQuestionary">
   <mat-spinner></mat-spinner>
 </div>
-<div class="questionary-box" fxLayout="column" fxLayoutGap="24px">
-  <questionary-review *ngFor="let question of questions; let i=index" [question]="question" [index]="i"></questionary-review>
-  <button clButtonContainedSecondary class="bg-sabia-blue-force" (click)="redoTest()">Refazer o quizz</button>
-</div>
+
+
+<navbar *ngIf="!loadingQuestionary" [barTitle]="questionnaire.questionnaireName" disableNavigation="true">
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
+  </div>
+  <div class="questionary-box" fxLayout="column" fxLayoutGap="24px">
+    <questionary-review *ngFor="let question of questions; let i=index" [question]="question" [index]="i"></questionary-review>
+    <button clButtonContainedSecondary class="bg-sabia-blue-force" (click)="redoTest()">Refazer o quizz</button>
+  </div>
+
+</navbar>
 

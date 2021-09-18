@@ -20,7 +20,7 @@ export class SessionsLoginService {
     private angularFirestore: AngularFirestore,
     private router: Router,
     private urlService: UrlService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
   }
 
@@ -35,7 +35,8 @@ export class SessionsLoginService {
         if (autoLogin) {
           localStorage.setItem('firebaseJWT', JSON.stringify(this.user.refreshToken));
         }
-        this.router.navigate([this.urlService.getHome()]);
+        // Vai pra sessionsLogged pra definir qual é a home do usuário
+        this.router.navigate([this.urlService.getSessionsLogged()]);
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {

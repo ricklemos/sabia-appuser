@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QuestionaryAnswer } from '../models/questionary-models';
+import { QuestionnaireAnswer } from '../models/questionary-models';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { SessionsLoginService } from '../../sessions/services/sessions-login.ser
 })
 export class QuestionaryService {
 
-  questionaryAnswer: QuestionaryAnswer;
+  questionaryAnswer: QuestionnaireAnswer;
   score: number;
 
   constructor(
@@ -20,22 +20,22 @@ export class QuestionaryService {
   ) {
   }
 
-  fetchQuestionary(questionaryId: string): Observable<QuestionaryAnswer> {
+  fetchQuestionary(questionaryId: string): Observable<QuestionnaireAnswer> {
     const uid = this.sessionsService.getUserId();
     // @ts-ignore
     return this.angularFirestore.doc(`questionaryAnswers/${ uid + '-' + questionaryId }`).valueChanges();
   }
 
-  updateQuestionary(questionaryId: string, questionary: QuestionaryAnswer): Promise<any> {
+  updateQuestionary(questionaryId: string, questionary: QuestionnaireAnswer): Promise<any> {
     const uid = this.sessionsService.getUserId();
     return this.angularFirestore.doc(`questionaryAnswers/${ uid + '-' + questionaryId }`).update(questionary);
   }
 
-  setQuestionary(questionary: QuestionaryAnswer): void {
+  setQuestionary(questionary: QuestionnaireAnswer): void {
     this.questionaryAnswer = questionary;
   }
 
-  getQuestionary(): QuestionaryAnswer {
+  getQuestionary(): QuestionnaireAnswer {
     return this.questionaryAnswer;
   }
 

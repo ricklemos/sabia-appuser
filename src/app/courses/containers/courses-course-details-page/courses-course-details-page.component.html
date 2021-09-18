@@ -1,19 +1,27 @@
-<div class="courses-details__background" fxLayout="column" fxLayoutGap="16px">
-
-  <h2 class="courses-details__header">{{ enrollment.courseName }}</h2>
-  <p class="courses-details__description">{{ enrollment.courseDescription }}</p>
-  <h2 class="courses-details__header">Módulos</h2>
-
-  <div class="courses-details__scroll" fxLayout="row" fxLayoutGap="16px">
-    <div *ngFor="let moduleProgress of modulesList">
-      <courses-module-box [moduleProgress]="moduleProgress"></courses-module-box>
-    </div>
+<navbar barTitle="Meus Cursos" disableNavigation="true">
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
   </div>
 
-  <a [href]="enrollment.courseLink" clButtonContainedSecondary target="_blank">
-    <span>Visitar</span>
-    <i clIcon name="cl-external-links"></i>
-  </a>
+  <div class="courses-details__background" fxLayout="column" fxLayoutGap="16px">
 
-</div>
+    <h2 class="courses-details__header">{{ enrollment.courseName }}</h2>
+    <p class="courses-details__description">{{ enrollment.courseDescription }}</p>
+    <h2 class="courses-details__header">Módulos</h2>
 
+    <div class="courses-details__scroll" fxLayout="row" fxLayoutGap="16px">
+      <div *ngFor="let moduleProgress of modulesList">
+        <courses-module-box [moduleProgress]="moduleProgress"></courses-module-box>
+      </div>
+    </div>
+
+    <a [href]="enrollment.courseLink" clButtonContainedSecondary target="_blank">
+      <span>Visitar</span>
+      <i clIcon name="cl-external-links"></i>
+    </a>
+
+  </div>
+
+</navbar>

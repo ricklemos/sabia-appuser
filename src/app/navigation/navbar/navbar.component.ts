@@ -2,6 +2,9 @@ import { Component, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleCha
 import { ClNavDrawerService } from 'collact-components';
 import { UrlService } from '../../services/url.service';
 import { Title } from '@angular/platform-browser';
+import { SessionsRolesService } from '../../sessions/services/sessions-roles.service';
+import { tap } from 'rxjs/operators';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'navbar',
@@ -20,13 +23,11 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
   showTitleForce: boolean;
 
 
-
-
-
   constructor(
     private title: Title,
     private navDrawerService: ClNavDrawerService,
     private urlService: UrlService,
+    private sessionsRolesService: SessionsRolesService
   ) {
     this.isOpen = false;
     const subNavDrawer = this.navDrawerService
@@ -61,6 +62,28 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
       url: this.urlService.getProfileUrl(),
       external: false,
     });
+    const fetchIdToken = this.sessionsRolesService.fetchRoleByIdToken().pipe(
+      tap(idToken => {
+        const role = idToken.claims.role;
+        if (['MASTER', 'SCHOOL_ADMIN'].includes(role)) {
+          this.menuList.push({
+            icon: 'cl-users',
+            label: 'Classes',
+            url: this.urlService.getClassroomsDashPage(),
+            external: false,
+          });
+        }
+        if (role === 'MASTER'){
+          this.menuList.push({
+            icon: 'cl-user-document',
+            label: 'Perfil de usuários',
+            url: this.urlService.getEditRolePage(),
+            external: false,
+          });
+        }
+      })
+    ).subscribe(noop);
+    this.subscriptions.push(fetchIdToken);
   }
 
   ngOnInit(): void {
@@ -73,7 +96,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.barTitle) {
-      this.title.setTitle(`${this.barTitle} | Sabiá`);
+      this.title.setTitle(`${ this.barTitle } | Sabiá`);
     }
   }
 

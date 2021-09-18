@@ -16,6 +16,7 @@ import { FormsModule } from '../forms/forms.module';
 import { CollactComponentsModule } from 'collact-components';
 import { ClassroomsDashStudentsFormComponent } from './components/classrooms-dash-students-form/classrooms-dash-students-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NavigationModule } from '../navigation/navigation.module';
 
 
 
@@ -39,6 +40,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     FormsModule,
     CollactComponentsModule,
+    NavigationModule,
   ],
   providers: [
     ClassroomsDashUploadClassroomService

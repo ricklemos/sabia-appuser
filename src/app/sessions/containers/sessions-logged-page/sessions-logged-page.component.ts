@@ -17,10 +17,10 @@ export class SessionsLoggedPageComponent implements OnInit {
   userData: SessionsUserData;
   // TODO: Definir home pages corretas
   rolePage = {
-    STUDENT: this.urlService.getModule('0001'),
+    STUDENT: this.urlService.getHome(),
     SCHOOL_ADMIN: this.urlService.getClassroomsDashPage(),
     INSTRUCTOR: this.urlService.getClassroomsDashPage(),
-    MASTER: 'sessions'
+    MASTER: this.urlService.getEditRolePage()
   };
   loading = true;
 
@@ -36,11 +36,9 @@ export class SessionsLoggedPageComponent implements OnInit {
     this.sessionsRolesService.fetchRoleByIdToken().pipe(
       tap((idToken) => {
         const role = idToken.claims.role;
-        if (role !== 'MASTER') {
-          this.router.navigate([this.rolePage[role]]);
-        } else {
-          this.loading = false;
-        }
+        this.sessionsRolesService.setRole(role);
+        this.router.navigate([this.rolePage[role]]);
+        this.loading = false;
       })
     ).subscribe(noop);
   }

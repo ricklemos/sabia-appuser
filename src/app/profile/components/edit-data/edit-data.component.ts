@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { finalize, tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserProfileForm } from '../../models/profile-forms';
 
 
 @Component({
@@ -16,13 +16,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditDataComponent implements OnInit, OnDestroy {
 
-  formGroup: FormGroup;
+  userProfileForm = UserProfileForm;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  email:  string;
+  loading = false;
   unsubscribe = [];
 
   uploadProgress: string;
   uploading: boolean;
   deleting: boolean;
   uid: string;
+  formValid = false;
 
   subscriptions = [];
 
@@ -30,28 +36,19 @@ export class EditDataComponent implements OnInit, OnDestroy {
     private modifyUserDataService: ModifyUserDataService,
     private router: Router,
     private urlService: UrlService,
-    private formBuilder: FormBuilder,
     private sessionService: SessionsLoginService,
     private snackBar: MatSnackBar
   ) {
-    this.formGroup = formBuilder.group({
-      email: ['', Validators.required],
-      gender: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
-    });
     this.uid = this.sessionService.getUserId();
   }
 
   ngOnInit(): void {
     const subFetchUserData = this.sessionService.fetchUserData().pipe(
       tap(data => {
-        this.formGroup.setValue({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          gender: data.gender,
-          email: data.email
-        });
+        // this.userProfileForm[0].value = data.email;
+        // this.userProfileForm[1].value = data.firstName;
+        // this.userProfileForm[2].value = data.lastName;
+        // this.userProfileForm[3].value = data.gender;
       })
     ).subscribe(noop);
     this.unsubscribe.push(subFetchUserData);
@@ -62,14 +59,29 @@ export class EditDataComponent implements OnInit, OnDestroy {
     this.unsubscribe.map(u => u.unsubscribe);
   }
 
+  isValid(event): void {
+    this.formValid = event;
+  }
+
+  changes(value): void {
+    this.firstName = value.firstName;
+    this.lastName = value.lastName;
+    const [genderObject] = value.gender;
+    this.gender = genderObject.value;
+    this.email = value.email;
+  }
+
   edit(): void {
-    this.modifyUserDataService.editAll(
-      this.formGroup.value.firstName,
-      this.formGroup.value.lastName,
-      this.formGroup.value.gender,
-      this.formGroup.value.email
-    );
-    this.router.navigate([this.urlService.getProfileUrl()]);
+    if (this.formValid) {
+      this.loading = true;
+      this.modifyUserDataService.editAll(
+        this.firstName,
+        this.lastName,
+        this.gender,
+        this.email
+      );
+      this.router.navigate([this.urlService.getProfileUrl()]);
+    }
   }
 
   deletePic(): void {

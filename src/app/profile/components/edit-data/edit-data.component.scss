@@ -1,1 +1,5 @@
 @import "/src/assets/styles/profile.style";
+
+cl-form-component ::ng-deep {
+  width: auto !important;
+}

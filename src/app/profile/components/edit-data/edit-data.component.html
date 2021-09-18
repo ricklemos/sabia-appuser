@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" padding="12px">
-  <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="50px">
+  <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="24px">
 
     <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
       <label for="updatePicInput">
@@ -15,26 +15,16 @@
       <p (click)="deletePic()">Excluir foto</p>
     </div>
 
-    <form [formGroup]="formGroup">
-      <div>
-        <p class="nomeCampo__margin-left">Nome</p>
-        <input class="info-box" label="Nome" formControlName="firstName" type="firstName">
-      </div>
-      <div>
-        <p class="nomeCampo__margin-left">Sobrenome</p>
-        <input class="info-box" label="Sobrenome" formControlName="lastName" type="lastName">
-      </div>
-      <div>
-        <p class="nomeCampo__margin-left">Gênero</p>
-        <input class="info-box" label="Genero" formControlName="gender" type="gender">
-      </div>
-      <div>
-        <p class="nomeCampo__margin-left">E-mail</p>
-        <input class="info-box" label="E-mail" formControlName="email" type="email">
-      </div>
-    </form>
-
-    <button class="ds-button" (click)="edit()" [disabled]="formGroup.invalid">Salvar</button>
+    <cl-form-component
+      (changes)="changes($event)"
+      (isValid)="isValid($event)"
+      (submit)="edit()"
+      [formConfig]="userProfileForm"
+    ></cl-form-component>
+    <button (click)="edit()" [hasDisabled]="!formValid" [loading]="loading" clButtonContained
+            class="bg-sabia-blue-500">
+      <span>Salvar</span>
+    </button>
 
   </div>
 

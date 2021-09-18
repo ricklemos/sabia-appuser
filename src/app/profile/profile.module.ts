@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { NavigationModule } from '../navigation/navigation.module';
+import { FormsModule } from '../forms/forms.module';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NavigationModule } from '../navigation/navigation.module';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     CollactDesignSystemModule,
-    NavigationModule
+    NavigationModule,
+    FormsModule
   ],
   providers: [
     ModifyUserDataService,

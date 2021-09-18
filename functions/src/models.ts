@@ -44,5 +44,5 @@ export interface Lesson {
   complete: boolean;
   lessonId: string;
   lessonName: string;
-  lessonType: 'TEXT' | 'QUESTIONNAIRE' | 'QUESTIONARY';
+  lessonType: 'TEXT' | 'QUESTIONNAIRE';
 }

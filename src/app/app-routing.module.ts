@@ -12,7 +12,7 @@ const routes: Routes = [
     redirectTo: 'sessions/login'
   },
   {
-    path: 'questionary',
+    path: 'questionario',
     component: LayoutQuestionaryComponent
   },
   {

@@ -29,10 +29,10 @@ export class QuestionaryReviewPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadingQuestionary = true;
-    this.questionaryId = this.route.snapshot.paramMap.get('questionaryId');
+    this.questionaryId = this.route.snapshot.paramMap.get('questionnaireId');
     const questionaryService = this.questionaryService.fetchQuestionary(this.questionaryId).pipe(
       tap((questionary) => {
-        this.questionaryService.setQuestionary(questionary);
+        this.questionaryService.setQuestionnaire(questionary);
         this.questionnaire = questionary;
         this.questions = questionary.questions;
         this.loadingQuestionary = false;
@@ -46,7 +46,7 @@ export class QuestionaryReviewPageComponent implements OnInit, OnDestroy {
   }
 
   redoTest(): void {
-    this.router.navigate([this.urlService.getQuestionary(this.questionaryId)]);
+    this.router.navigate([this.urlService.getQuestionnaire(this.questionaryId)]);
   }
   goBack(): void {
     this.router.navigate([this.urlService.getModule(this.questionnaire.moduleId)]);

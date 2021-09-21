@@ -10,7 +10,7 @@ import { SessionsLoginService } from '../../sessions/services/sessions-login.ser
 })
 export class QuestionaryService {
 
-  questionaryAnswer: QuestionnaireAnswer;
+  questionnaireAnswer: QuestionnaireAnswer;
   score: number;
 
   constructor(
@@ -20,27 +20,27 @@ export class QuestionaryService {
   ) {
   }
 
-  fetchQuestionary(questionaryId: string): Observable<QuestionnaireAnswer> {
+  fetchQuestionary(questionnaireId: string): Observable<QuestionnaireAnswer> {
     const uid = this.sessionsService.getUserId();
     // @ts-ignore
-    return this.angularFirestore.doc(`questionaryAnswers/${ uid + '-' + questionaryId }`).valueChanges();
+    return this.angularFirestore.doc(`questionnaireAnswers/${ uid + '-' + questionnaireId }`).valueChanges();
   }
 
-  updateQuestionary(questionaryId: string, questionary: QuestionnaireAnswer): Promise<any> {
+  updateQuestionnaire(questionnaireId: string, questionnaire: QuestionnaireAnswer): Promise<any> {
     const uid = this.sessionsService.getUserId();
-    return this.angularFirestore.doc(`questionaryAnswers/${ uid + '-' + questionaryId }`).update(questionary);
+    return this.angularFirestore.doc(`questionnaireAnswers/${ uid + '-' + questionnaireId }`).update(questionnaire);
   }
 
-  setQuestionary(questionary: QuestionnaireAnswer): void {
-    this.questionaryAnswer = questionary;
+  setQuestionnaire(questionnaire: QuestionnaireAnswer): void {
+    this.questionnaireAnswer = questionnaire;
   }
 
-  getQuestionary(): QuestionnaireAnswer {
-    return this.questionaryAnswer;
+  getQuestionnaire(): QuestionnaireAnswer {
+    return this.questionnaireAnswer;
   }
 
   getNumberOfQuestions(): number {
-    return this.questionaryAnswer.questions.length;
+    return this.questionnaireAnswer.questions.length;
   }
 
 }

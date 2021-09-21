@@ -55,10 +55,10 @@ export class ModuleBodyComponent implements OnInit {
     if (lesson.questionnaireId) {
       if (lesson.complete) {
         // Revisa o questionário
-        this.router.navigate([this.urlService.getQuestionaryReview(lesson.questionnaireId)]);
+        this.router.navigate([this.urlService.getQuestionnaireReview(lesson.questionnaireId)]);
       } else {
         // Começa a responder o questionário
-        this.router.navigate([this.urlService.getQuestionary(lesson.questionnaireId)]);
+        this.router.navigate([this.urlService.getQuestionnaire(lesson.questionnaireId)]);
       }
     } else if (lesson.lessonId) {
       // Vai pra página de conteúdo teórico

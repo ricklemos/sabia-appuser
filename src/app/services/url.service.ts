@@ -47,12 +47,12 @@ export class UrlService {
     return `module/${ moduleId }/lesson/${ lessonId }`;
   }
 
-  public getQuestionary(questionaryId): string {
-    return `/questionary/${ questionaryId }`;
+  public getQuestionnaire(questionnaireId): string {
+    return `/questionario/${ questionnaireId }`;
   }
 
-  public getQuestionaryReview(questionaryId): string {
-    return `/questionary/${ questionaryId }/review`;
+  public getQuestionnaireReview(questionnaireId): string {
+    return `/questionario/${ questionnaireId }/revisar`;
   }
 
   public getModule(moduleId): string {

@@ -156,7 +156,8 @@ export const createmoduleProgressWhenCreateEnrollment = functions.firestore
                         lessons: moduleData.lessons,
                         score: 0,
                         classroomId: enrollment.classroomId,
-                        moduleProgressPercentage: 0
+                        moduleProgressPercentage: 0,
+                        courseId: enrollment.courseId,
                       });
                   } else {
                     throw Error('No Module Data');

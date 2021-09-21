@@ -8,6 +8,7 @@ export interface ModuleProgress {
   moduleProgressPercentage?: number; // um número de 0 a 100 que representa a porcentagem de conclusão do módulo,
   score?: number;
   classroomId?: string;
+  courseId?: string;
 }
 
 export interface ModuleLesson {

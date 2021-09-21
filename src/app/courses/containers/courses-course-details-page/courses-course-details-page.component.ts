@@ -28,6 +28,7 @@ export class CoursesCourseDetailsPageComponent implements OnInit, OnDestroy {
     const courseId = this.route.snapshot.paramMap.get('courseId');
     const fetchModules = this.coursesServices.fetchModules(courseId).pipe(
       tap(data => {
+        console.log('modules', data);
         this.modulesList = data;
       })
     ).subscribe(noop);

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModuleProgress } from '../../models/moduleProgress';
+import { CoursesModuleProgress } from '../../models/moduleProgress';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { ChartOptions, ChartType } from 'chart.js';
@@ -12,7 +12,7 @@ import { Color } from 'ng2-charts';
 })
 export class CoursesModuleBoxComponent implements OnInit {
 
-  @Input() moduleProgress: ModuleProgress;
+  @Input() moduleProgress: CoursesModuleProgress;
 
   pieChartData: number[];
   pieChartType: ChartType;

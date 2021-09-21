@@ -4,9 +4,10 @@
       <i clIcon name="cl-arrow-left" color="#fff"></i>
     </button>
   </div>
-  <div class="module-content__background" fxLayout="column" fxLayoutGap="16px">
-
-    <h2 class="module-content__title">{{moduleProgress.moduleName}}</h2>
+  <div *ngIf="loading" fxLayout="column" fxLayout="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!loading" class="module-content__background" fxLayout="column" fxLayoutGap="16px">
 
     <h3 class="module-content__subtitle">{{lesson.lessonName}}</h3>
 

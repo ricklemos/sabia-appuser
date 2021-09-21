@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { ModuleContentService } from '../../services/module-content.service';
-import { Lesson, ModuleProgress } from '../../models/module';
+import { ModuleTextLesson, ModuleProgress } from '../../models/module';
 import { ModuleService } from '../../services/module.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
@@ -14,9 +14,10 @@ import { UrlService } from '../../../services/url.service';
 })
 export class ModuleContentPageComponent implements OnInit, OnDestroy {
 
-  lesson: Lesson;
+  lesson: ModuleTextLesson;
   moduleProgress: ModuleProgress;
   lessonDone: boolean;
+  loading = true;
 
   subscriptions = [];
 
@@ -36,6 +37,7 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
         this.moduleProgress = this.moduleService.getModule();
         const [fetchLesson] = this.moduleProgress.lessons.filter(lesson => lesson.lessonId === this.lesson.lessonId);
         this.lessonDone = fetchLesson.complete;
+        this.loading = false;
       })
     ).subscribe(noop);
     this.subscriptions.push(fetchModule);

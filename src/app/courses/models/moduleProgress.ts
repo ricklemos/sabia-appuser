@@ -1,18 +1,19 @@
-export interface ModuleProgress {
+export interface CoursesModuleProgress {
+  lessons: CoursesLesson[];
   moduleId: string;
   moduleName: string;
-  moduleProgressPercentage: number;
-  schoolName: string;
-  courseId: string;
+  institutionName: string;
+  started?: any;
   userId: string;
-  started?: Date;
-  lessons: Lesson[];
+  moduleProgressPercentage?: number; // um número de 0 a 100 que representa a porcentagem de conclusão do módulo,
+  score?: number;
+  classroomId?: string;
 }
 
-export interface Lesson {
+export interface CoursesLesson {
   complete: boolean;
   lessonId?: string;
   lessonName: string;
   lessonType: string;
-  questionaryId?: string;
+  questionnaireId?: string;
 }

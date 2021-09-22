@@ -101,4 +101,8 @@ export class UrlService {
   public getWelcomePage(): string {
     return `boas-vindas/1`;
   }
+
+  public getWelcomeCoursesPage(): string {
+    return `boas-vindas/cursos`;
+  }
 }

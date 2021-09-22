@@ -70,6 +70,10 @@ export class SessionsLoginService {
     return this.angularFireAuth.user;
   }
 
+  setUser(user: any): void {
+    this.user = user;
+  }
+
   setEmail(email: string): void {
     this.email = email;
   }

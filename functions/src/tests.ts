@@ -4,38 +4,38 @@ import * as admin from 'firebase-admin';
 
 export const createMockupData = functions.https
   .onRequest((req, res) => {
-    // const users = [
-    //   {
-    //     userId: '01',
-    //     email: 'gmduarte96@gmail.com',
-    //     firstName: 'Gabriel',
-    //     lastName: 'Duarte'
-    //   },
-    //   {
-    //     userId: '02',
-    //     email: 'rick1@teste.com',
-    //     firstName: 'Rick',
-    //     lastName: 'Lemos'
-    //   },
-    //   {
-    //     userId: '03',
-    //     email: 'rick2@teste.com',
-    //     firstName: 'Rick',
-    //     lastName: 'Lemos'
-    //   },
-    //   {
-    //     userId: '04',
-    //     email: 'rick3@teste.com',
-    //     firstName: 'Rick',
-    //     lastName: 'Lemos'
-    //   },
-    //   {
-    //     userId: '05',
-    //     email: 'rick4@teste.com',
-    //     firstName: 'Rick',
-    //     lastName: 'Lemos'
-    //   }
-    // ];
+    const users = [
+      {
+        userId: '01',
+        email: 'gmduarte96@gmail.com',
+        firstName: 'Gabriel',
+        lastName: 'Duarte'
+      },
+      {
+        userId: '02',
+        email: 'rick1@teste.com',
+        firstName: 'Rick',
+        lastName: 'Lemos'
+      },
+      {
+        userId: '03',
+        email: 'rick2@teste.com',
+        firstName: 'Rick',
+        lastName: 'Lemos'
+      },
+      {
+        userId: '04',
+        email: 'rick3@teste.com',
+        firstName: 'Rick',
+        lastName: 'Lemos'
+      },
+      {
+        userId: '05',
+        email: 'rick4@teste.com',
+        firstName: 'Rick',
+        lastName: 'Lemos'
+      }
+    ];
     const questions = [
       {
         questionId: '01',
@@ -431,12 +431,12 @@ export const createMockupData = functions.https
     ];
     const courseId = '01';
     // Criar usuários de teste
-    // users.forEach(user => {
-    //   admin.firestore().doc(`/userData/${ user.userId }`)
-    //     .create(user)
-    //     .then(() => res.status(200).send('createUser Succesfully'))
-    //     .catch(err => res.status(500).send(err));
-    // });
+    users.forEach(user => {
+      admin.firestore().doc(`/userData/${ user.userId }`)
+        .create(user)
+        .then(() => res.status(200).send('createUser Succesfully'))
+        .catch(err => res.status(500).send(err));
+    });
 
     // Criar template do questionário
     questionnaireTemplates.forEach((questionnaire: QuestionnaireTemplate) => {

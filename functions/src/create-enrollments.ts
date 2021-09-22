@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
 import WriteResult = firestore.WriteResult;
 
-async function createEnrollment(preEnrollment: PreEnrollment, userId: string): Promise<WriteResult> {
+async function createEnrollmentFromPreEnrollment(preEnrollment: PreEnrollment, userId: string): Promise<WriteResult> {
   return admin.firestore().doc(`/enrollments/${ userId + '-' + preEnrollment.classroomId }`)
     .create({
       courseId: preEnrollment.courseId,
@@ -19,8 +19,8 @@ async function createEnrollment(preEnrollment: PreEnrollment, userId: string): P
     });
 }
 
-async function updateRanking(preEnrollment: PreEnrollment, userData: UserData): Promise<WriteResult> {
-  return admin.firestore().doc(`/classRankings/${ preEnrollment.classroomId }`)
+async function updateRanking(classroomId: string, userData: UserData): Promise<WriteResult> {
+  return admin.firestore().doc(`/classRankings/${ classroomId }`)
     .update({
       ranking: admin.firestore.FieldValue.arrayUnion({
         userId: userData.userId,
@@ -30,7 +30,7 @@ async function updateRanking(preEnrollment: PreEnrollment, userData: UserData): 
     });
 }
 
-async function createModuleProgress(moduleTemplate: any, userId: string, enrollment: any): Promise<WriteResult>{
+async function createModuleProgress(moduleTemplate: any, userId: string, enrollment: any): Promise<WriteResult> {
   return admin.firestore().doc(`moduleProgress/${ userId + '-' + moduleTemplate.moduleId }`)
     .create({
       userId,
@@ -42,6 +42,21 @@ async function createModuleProgress(moduleTemplate: any, userId: string, enrollm
       classroomId: enrollment.classroomId,
       moduleProgressPercentage: 0,
       courseId: enrollment.courseId,
+    });
+}
+
+async function createEnrollmentFromClassroom(classroom: any, userId: string): Promise<WriteResult> {
+  return admin.firestore().doc(`/enrollments/${ userId + '-' + classroom.classroomId }`)
+    .create({
+      courseId: classroom.courseId,
+      courseName: classroom.courseName,
+      classroomName: classroom.classroomName,
+      institutionName: classroom.institutionName,
+      courseDescription: classroom.courseDescription,
+      courseLink: classroom.courseLink,
+      score: 0,
+      classroomId: classroom.classroomId,
+      userId,
     });
 }
 
@@ -60,8 +75,8 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
       const preEnrollments: PreEnrollment[] = data.preEnrollments;
       const promises: Promise<WriteResult>[] = [];
       preEnrollments.forEach(preEnrollment => {
-        const p1 = createEnrollment(preEnrollment, userData.userId);
-        const p2 = updateRanking(preEnrollment, userData);
+        const p1 = createEnrollmentFromPreEnrollment(preEnrollment, userData.userId);
+        const p2 = updateRanking(preEnrollment.classroomId, userData);
         promises.push(p1, p2);
       });
       return Promise.all(promises);
@@ -70,7 +85,8 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
     }
   });
 
-export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
+// ToDo: Refactor
+export const createEnrollmentWhenCreateOrUpdateClassroombackup = functions.firestore
   .document('classrooms/{classroomId}')
   .onWrite((change) => {
     const data = change.after.data();
@@ -152,6 +168,72 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
     }
   });
 
+export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
+  .document('classrooms/{classroomId}')
+  .onWrite((change) => {
+    const data = change.after.data();
+    // Verifica se os dados existem
+    if (data) {
+      const students = data.students;
+      const classroomId = data.classroomId;
+      const classroom = data;
+      const promises = [];
+      // Cria o Ranking da turma com array vazio
+      const createClassRanking = admin.firestore().doc(`/classRankings/${ classroomId }`)
+        .create({
+          classroomId,
+          courseId: classroom.courseId,
+          courseName: classroom.courseName,
+          classroomName: classroom.classroomName,
+          institutionName: classroom.institutionName,
+        }).then(() => console.log(`criou o ranking da turma ${ classroomId }`));
+      promises.push(createClassRanking);
+      // Itera no array de students dos dados para criar as matrículas de cada aluno
+      students.map((studentEmail: string) => {
+        admin.firestore().collection('userData')
+          .where('email', '==', studentEmail).get()
+          .then((querySnapshot: any) => {
+            // Verifica se o usuário existe no userData
+            if (!querySnapshot.empty) {
+              querySnapshot.forEach((user: any) => {
+                const userData = user.data();
+                const userId = user.id;
+                // Cria o enrollment do aluno
+                const p1 = createEnrollmentFromClassroom(classroom, userId);
+                const p2 = updateRanking(classroom.classroomId, userData);
+                promises.push(p1, p2);
+              });
+            } else {
+              // Aluno não é um usuário (adiciona em users sem conta com pre-enrollment: classroomId)
+              const createNewUser = admin.firestore().collection('users').doc(studentEmail).set(
+                {
+                  email: studentEmail,
+                  preEnrollments: admin.firestore.FieldValue.arrayUnion({
+                    courseId: classroom.courseId,
+                    courseName: classroom.courseName,
+                    classroomName: classroom.classroomName,
+                    institutionName: classroom.institutionName,
+                    courseDescription: classroom.courseDescription,
+                    courseLink: classroom.courseLink,
+                    classroomId
+                  })
+                }
+                , { merge: true })
+                .then(() => console.log('adicionou um novo usuário'))
+                .catch((err) => console.log(err));
+              promises.push(createNewUser);
+            }
+          })
+          .catch((err: any) => console.log(err));
+      });
+      return Promise.all(promises);
+    } else {
+      functions.logger
+        .info('Dados da classe não existem', { structuredData: true });
+      return null;
+    }
+  });
+
 export const createmoduleProgressWhenCreateEnrollment = functions.firestore
   .document('enrollments/{enrollmentId}')
   .onCreate(async (snap) => {
@@ -228,6 +310,51 @@ export const createmoduleProgressWhenCreateEnrollmentBackup = functions.firestor
     } else {
       functions.logger
         .info('Dados da matrícula não existem', { structuredData: true });
+    }
+  });
+
+// ToDo: Refactor
+export const createQuestionnaireAnswerWhenCreateModuleProgressBackup = functions.firestore
+  .document('moduleProgress/{moduleProgressId}')
+  .onCreate((snap) => {
+    const moduleProgress = snap.data();
+    if (moduleProgress) {
+      const lessons = moduleProgress.lessons;
+      lessons.forEach((lesson: any) => {
+        if (lesson.lessonType === 'QUESTIONNAIRE') {
+          const questionnaireId = lesson.questionnaireId;
+          admin.firestore().doc(`questionnaireTemplate/${ questionnaireId }`).get()
+            .then(doc => {
+              const questionnaireTemplate = doc.data();
+              if (questionnaireTemplate) {
+                // O "in" limita a query a 10 objetos. Assim, um questionário não pode ter mais de 10 questões.
+                admin.firestore().collection('questionTemplate')
+                  .where('questionId', 'in', questionnaireTemplate.questions)
+                  .get()
+                  .then((questionsData) => {
+                    const questions: any[] = [];
+                    questionsData.docs.forEach(questionDoc => questions.push(questionDoc.data()));
+                    admin.firestore().doc(`questionnaireAnswers/${ moduleProgress.userId + '-' + questionnaireId }`)
+                      .create({
+                        userId: moduleProgress.userId,
+                        questionnaireId,
+                        questionnaireName: questionnaireTemplate.questionnaireName,
+                        questions,
+                        classroomId: moduleProgress.classroomId,
+                        moduleId: moduleProgress.moduleId
+                      });
+                  })
+                  .catch(err => console.log('erro:', err));
+              } else {
+                functions.logger
+                  .info('Questionnaire não existe', { structuredData: true });
+              }
+            }).catch((err) => console.log('erro:', err));
+        }
+      });
+    } else {
+      functions.logger
+        .info('Dados do moduleProgress não existem', { structuredData: true });
     }
   });
 

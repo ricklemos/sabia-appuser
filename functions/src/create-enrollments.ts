@@ -24,9 +24,20 @@ async function updateRanking(classroomId: string, userData: UserData): Promise<a
   const classRankingData = classRankingDoc?.data() ?? null;
   if (classRankingData) {
     const ranking = classRankingData.ranking;
-    const [isInArray] = ranking.filter((user: any) => user.userId === userData.userId);
-    if (isInArray) {
-      return null;
+    if (ranking) {
+      const [isInArray] = ranking.filter((user: any) => user.userId === userData.userId);
+      if (isInArray) {
+        return null;
+      } else {
+        return admin.firestore().doc(`/classRankings/${ classroomId }`)
+          .update({
+            ranking: admin.firestore.FieldValue.arrayUnion({
+              userId: userData.userId,
+              userName: userData.firstName + ' ' + userData.lastName,
+              userScore: 0
+            })
+          });
+      }
     } else {
       return admin.firestore().doc(`/classRankings/${ classroomId }`)
         .update({
@@ -74,7 +85,12 @@ async function createEnrollmentFromClassroom(classroom: any, userId: string): Pr
     });
 }
 
-async function createQuestionnaire(userId: string, questionnaireTemplate: any, classroomId: string, moduleId: string): Promise<WriteResult> {
+async function createQuestionnaire(
+  userId: string,
+  questionnaireTemplate: any,
+  classroomId: string,
+  moduleId: string
+): Promise<WriteResult> {
   return admin.firestore().doc(`questionnaireAnswers/${ userId + '-' + questionnaireTemplate.questionnaireId }`)
     .create({
       userId,
@@ -105,6 +121,8 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
         const p2 = updateRanking(preEnrollment.classroomId, userData);
         promises.push(p1, p2);
       });
+      const p3 = admin.firestore().doc(`users/${ userData.email }`).delete();
+      promises.push(p3);
       return Promise.all(promises);
     } else {
       return null;
@@ -113,7 +131,7 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
 
 export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
   .document('classrooms/{classroomId}')
-  .onWrite((change) => {
+  .onWrite(async (change) => {
     const data = change.after.data();
     // Verifica se os dados existem
     if (data) {
@@ -122,7 +140,7 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
       const classroom = data;
       const promises = [];
       // Cria o Ranking da turma com array vazio
-      const createClassRanking = admin.firestore().doc(`/classRankings/${ classroomId }`)
+      const createClassRanking = await admin.firestore().doc(`/classRankings/${ classroomId }`)
         .create({
           classroomId,
           courseId: classroom.courseId,

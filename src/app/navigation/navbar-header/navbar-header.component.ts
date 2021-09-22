@@ -35,15 +35,15 @@ export class NavbarHeaderComponent implements OnInit, OnDestroy {
     const sub = this.sessionsLoginService.fetchUserData().pipe(
       switchMap(data => {
         this.userData$ = data;
-        return this.modifyUserDataService.fetchProfilePicture(userId).getDownloadURL();
-      }),
-      switchMap(picture => {
-        this.pictureLink = picture;
         return this.sessionsRolesService.fetchRoleByIdToken();
       }),
-      tap(idToken => {
+      switchMap(idToken => {
         const systemRole = idToken.claims.role;
         this.role = this.roleName[systemRole];
+        return this.modifyUserDataService.fetchProfilePicture(userId).getDownloadURL();
+      }),
+      tap(picture => {
+        this.pictureLink = picture;
       })
     ).subscribe(noop);
     this.subscriptions.push(sub);

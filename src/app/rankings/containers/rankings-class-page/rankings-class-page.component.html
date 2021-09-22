@@ -9,7 +9,7 @@
     <div fxLayout="column" fxLayoutGap="8px">
       <h1>{{ classRanking.courseName }}</h1>
       <h2>{{ classRanking.schoolName }}</h2>
-      <p>Turma {{ classRanking.classroomName }}</p>
+      <p>{{ classRanking.classroomName }}</p>
     </div>
     <div clCard class="course-box" fxLayout="column" fxLayoutAlign="center stretch">
       <div *ngFor="let user of classRanking.ranking; let i=index">

@@ -19,15 +19,29 @@ async function createEnrollmentFromPreEnrollment(preEnrollment: PreEnrollment, u
     });
 }
 
-async function updateRanking(classroomId: string, userData: UserData): Promise<WriteResult> {
-  return admin.firestore().doc(`/classRankings/${ classroomId }`)
-    .update({
-      ranking: admin.firestore.FieldValue.arrayUnion({
-        userId: userData.userId,
-        userName: userData.firstName + ' ' + userData.lastName,
-        userScore: 0
-      })
-    });
+async function updateRanking(classroomId: string, userData: UserData): Promise<any> {
+  const classRankingDoc = await admin.firestore().doc(`/classRankings/${ classroomId }`).get();
+  const classRankingData = classRankingDoc?.data() ?? null;
+  if (classRankingData) {
+    const ranking = classRankingData.ranking;
+    const [isInArray] = ranking.filter((user: any) => user.userId === userData.userId);
+    if (isInArray) {
+      return null;
+    } else {
+      return admin.firestore().doc(`/classRankings/${ classroomId }`)
+        .update({
+          ranking: admin.firestore.FieldValue.arrayUnion({
+            userId: userData.userId,
+            userName: userData.firstName + ' ' + userData.lastName,
+            userScore: 0
+          })
+        });
+    }
+  } else {
+    return null;
+  }
+
+
 }
 
 async function createModuleProgress(moduleTemplate: any, userId: string, enrollment: any): Promise<WriteResult> {
@@ -60,7 +74,7 @@ async function createEnrollmentFromClassroom(classroom: any, userId: string): Pr
     });
 }
 
-async function createQuestionnaire(userId: string, questionnaireTemplate: any, classroomId: string, moduleId: string): Promise<WriteResult>{
+async function createQuestionnaire(userId: string, questionnaireTemplate: any, classroomId: string, moduleId: string): Promise<WriteResult> {
   return admin.firestore().doc(`questionnaireAnswers/${ userId + '-' + questionnaireTemplate.questionnaireId }`)
     .create({
       userId,

@@ -26,16 +26,8 @@ export class QuestionaryDoneComponent implements OnInit {
 
   ngOnInit(): void {
     this.questionaryName = this.questionaryService.getQuestionnaire().questionnaireName;
-    this.grade = Math.round(this.score / this.nQuestions * 10).toFixed(1);
-    // // TODO: Este código abaixo, na verdade, deveria ser uma cloud function (podemos implementar na próxima sprint)
-    // // Atualizar módulo
+    this.grade = (Math.round(this.score / this.nQuestions * 100) / 10).toFixed(1);
     const module = this.moduleService.getModule();
-    // if (!this.questionaryService.getQuestionnaire().tentatives) {
-    //   const nLessons = module.lessons.length;
-    //   const lastPercentage = module.moduleProgressPercentage;
-    //   const lessonsCompleted = lastPercentage * nLessons / 100 + 1;
-    //   module.moduleProgressPercentage = lessonsCompleted / nLessons * 100;
-    // }
     module.lessons.map(lesson => {
       if (lesson.questionnaireId === this.questionaryService.getQuestionnaire().questionnaireId) {
         lesson.complete = true;

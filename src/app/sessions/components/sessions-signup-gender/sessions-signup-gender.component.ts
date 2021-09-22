@@ -32,7 +32,7 @@ export class SessionsSignupGenderComponent implements OnInit {
   }
 
   changes(value): void {
-    this.gender = value.gender;
+    this.gender = value.gender[0].value;
   }
 
   submitGender(): void {

@@ -53,7 +53,8 @@ export class SessionsSignupService {
           email: this.email,
           firstName: this.firstName,
           lastName: this.lastName,
-          gender: this.gender
+          gender: this.gender,
+          userId: this.uid
         };
         return this.angularFirestore.doc(`userData/${ this.uid }`).set(body);
       })

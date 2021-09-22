@@ -1,7 +1,7 @@
 // Atualiza o Score do enrollment e do moduleProgress quando termina de responder o questionário pela primeira vez
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-
+// ToDo: Refatorar com return
 export const questionnaireUpdated = functions.firestore.document('/questionnaireAnswers/{questionnaireId}')
   .onUpdate((snap) => {
     const data = snap.after.data();

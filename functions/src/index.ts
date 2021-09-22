@@ -4,7 +4,7 @@ import * as createEnrollments from './create-enrollments';
 import * as updateRankingScore from './update-ranking-score';
 import * as authentication from './authentication';
 import * as updateModuleProgress from './update-module-progress';
-import * as firstLogin from './first-login';
+// import * as firstLogin from './first-login';
 
 admin.initializeApp();
 
@@ -30,5 +30,5 @@ export const setRole = authentication.setRole;
 export const updateModuleProgressPercentageWhenUpdateModuleProgress =
   updateModuleProgress.updateModuleProgressPercentageWhenUpdateModuleProgress;
 
-// Fisrst login
-export const createEnrollmentsWhenFirstLogin = firstLogin.createEnrollmentsWhenFirstLogin;
+// // First login
+// export const createEnrollmentsWhenFirstLogin = firstLogin.createEnrollmentsWhenFirstLogin;

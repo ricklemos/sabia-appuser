@@ -74,8 +74,8 @@ import { NavigationModule } from '../navigation/navigation.module';
     SessionsSignupService,
     SessionsRolesService,
     // Caso teste funções HTTP do cloud functions localmente, usar provider USE_EMULATOR e ajustar porta
-    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] }
-    { provide: REGION, useValue: 'us-central1' }
+    { provide: USE_EMULATOR, useValue: ['localhost', 5001] }
+    // { provide: REGION, useValue: 'us-central1' }
   ]
 })
 export class SessionsModule { }

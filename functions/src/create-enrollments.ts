@@ -1,53 +1,73 @@
 import * as functions from 'firebase-functions';
 import { PreEnrollment, UserData } from './models';
 import * as admin from 'firebase-admin';
+import { firestore } from 'firebase-admin';
+import WriteResult = firestore.WriteResult;
+
+async function createEnrollment(preEnrollment: PreEnrollment, userId: string): Promise<WriteResult> {
+  return admin.firestore().doc(`/enrollments/${ userId + '-' + preEnrollment.classroomId }`)
+    .create({
+      courseId: preEnrollment.courseId,
+      courseName: preEnrollment.courseName,
+      courseDescription: preEnrollment.courseDescription,
+      courseLink: preEnrollment.courseLink,
+      classroomName: preEnrollment.classroomName,
+      institutionName: preEnrollment.institutionName,
+      score: 0,
+      classroomId: preEnrollment.classroomId,
+      userId
+    });
+}
+
+async function updateRanking(preEnrollment: PreEnrollment, userData: UserData): Promise<WriteResult> {
+  return admin.firestore().doc(`/classRankings/${ preEnrollment.classroomId }`)
+    .update({
+      ranking: admin.firestore.FieldValue.arrayUnion({
+        userId: userData.userId,
+        userName: userData.firstName + ' ' + userData.lastName,
+        userScore: 0
+      })
+    });
+}
+
+async function createModuleProgress(moduleTemplate: any, userId: string, enrollment: any): Promise<WriteResult>{
+  return admin.firestore().doc(`moduleProgress/${ userId + '-' + moduleTemplate.moduleId }`)
+    .create({
+      userId,
+      moduleId: moduleTemplate.moduleId,
+      moduleName: moduleTemplate.moduleName,
+      institutionName: enrollment.institutionName,
+      lessons: moduleTemplate.lessons,
+      score: 0,
+      classroomId: enrollment.classroomId,
+      moduleProgressPercentage: 0,
+      courseId: enrollment.courseId,
+    });
+}
 
 export const createEnrollmentWhenCreateUserData = functions.firestore
   .document('userData/{userId}')
-  .onCreate((snap) => {
+  .onCreate(async (snap) => {
     const userData: UserData = {
       userId: snap.data().userId,
       email: snap.data().email,
       firstName: snap.data().firstName,
       lastName: snap.data().lastName
     };
-    admin.firestore().collection('users').where('email', '==', userData.email).get()
-      .then((query) => {
-        query.forEach((user) => {
-          if (user.data().preEnrollments) {
-            const preEnrollments = user.data().preEnrollments;
-            preEnrollments.forEach((preEnrollment: PreEnrollment) => {
-              admin.firestore().doc(`/enrollments/${ userData.userId + '-' + preEnrollment.classroomId }`)
-                .create({
-                  courseId: preEnrollment.courseId,
-                  courseName: preEnrollment.courseName,
-                  courseDescription: preEnrollment.courseDescription,
-                  courseLink: preEnrollment.courseLink,
-                  classroomName: preEnrollment.classroomName,
-                  institutionName: preEnrollment.institutionName,
-                  score: 0,
-                  classroomId: preEnrollment.classroomId,
-                  userId: userData.userId,
-                })
-                .then(() => {
-                  // Atualiza o ranking com o aluno novo
-                  admin.firestore().doc(`/classRankings/${ preEnrollment.classroomId }`)
-                    .update({
-                      ranking: admin.firestore.FieldValue.arrayUnion({
-                        userId: userData.userId,
-                        userName: userData.firstName + ' ' + userData.lastName,
-                        userScore: 0
-                      })
-                    });
-                })
-                .catch((err) => console.log('erro:', err));
-            });
-          } else {
-            functions.logger.info('Não há pre-enrollments', { structuredData: true });
-          }
-        });
+    const userDoc = await admin.firestore().doc(`users/${ userData.email }`).get();
+    const data = userDoc?.data() ?? null;
+    if (data !== null) {
+      const preEnrollments: PreEnrollment[] = data.preEnrollments;
+      const promises: Promise<WriteResult>[] = [];
+      preEnrollments.forEach(preEnrollment => {
+        const p1 = createEnrollment(preEnrollment, userData.userId);
+        const p2 = updateRanking(preEnrollment, userData);
+        promises.push(p1, p2);
       });
-
+      return Promise.all(promises);
+    } else {
+      return null;
+    }
   });
 
 export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
@@ -133,6 +153,41 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
   });
 
 export const createmoduleProgressWhenCreateEnrollment = functions.firestore
+  .document('enrollments/{enrollmentId}')
+  .onCreate(async (snap) => {
+    const enrollment = snap.data();
+    if (enrollment) {
+      const userId = enrollment.userId;
+      const courseQuery = await admin.firestore().doc(`courseTemplate/${ enrollment.courseId }`).get();
+      const course = courseQuery.data();
+      if (course) {
+        const promises: Promise<WriteResult>[] = [];
+        course.modules.forEach((moduleId: string) => {
+          admin.firestore().doc(`moduleTemplate/${ moduleId }`).get()
+            .then((module) => {
+              const moduleData = module?.data() ?? null;
+              if (moduleData) {
+                const p = createModuleProgress(moduleData, userId, enrollment);
+                promises.push(p);
+              } else {
+                throw Error('No Module Data');
+              }
+            })
+            .catch(err => console.log(err));
+        });
+        return Promise.all(promises);
+      } else {
+        throw Error('No Course Data');
+        return null;
+      }
+    } else {
+      functions.logger
+        .info('Dados da matrícula não existem', { structuredData: true });
+      return null;
+    }
+  });
+
+export const createmoduleProgressWhenCreateEnrollmentBackup = functions.firestore
   .document('enrollments/{enrollmentId}')
   .onCreate((snap) => {
     const enrollment = snap.data();

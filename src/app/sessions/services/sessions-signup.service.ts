@@ -13,7 +13,6 @@ export class SessionsSignupService {
 
   docId: string;
   uid: string;
-  isAdmin: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -58,18 +57,17 @@ export class SessionsSignupService {
         };
         return this.angularFirestore.doc(`userData/${ this.uid }`).set(body);
       })
-      .then(() => {
-        return this.angularFirestore.doc(`users/${ this.docId }`).delete();
-      })
+      // .then(() => {
+      //   return this.angularFirestore.doc(`users/${ this.docId }`).delete();
+      // })
       .then(() => {
         const body = {
           email: this.email,
           firstLogin: this.firstLogin,
-          isAdmin: !!this.isAdmin,
         };
         return this.angularFirestore.doc(`users/${ this.uid }`).set(body);
       }).then(() => {
-      this.router.navigate([this.urlService.getHome()]);
+      this.router.navigate([this.urlService.getWelcomePage()]);
     })
       .catch(error => console.log(error));
   }

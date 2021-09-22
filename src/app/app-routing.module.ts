@@ -4,6 +4,7 @@ import { LayoutQuestionaryComponent } from './questionary/layout/layout-question
 import { LayoutModuleComponent } from './module/layout/layout-module/layout-module.component';
 import { LayoutRankingsComponent } from './rankings/layout/layout-rankings/layout-rankings.component';
 import { LayoutClassroomsDashComponent } from './classrooms-dash/layout/layout-classrooms-dash/layout-classrooms-dash.component';
+import { LayoutWelcomeComponent } from './welcome/layout/layout-welcome/layout-welcome.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'painel-classes',
     component: LayoutClassroomsDashComponent
+  },
+  {
+    path: 'boas-vindas',
+    component: LayoutWelcomeComponent
   }
 
 ];

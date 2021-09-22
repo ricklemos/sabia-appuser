@@ -7,7 +7,7 @@ import { UserFormPassword } from '../../models/sessions-forms';
 @Component({
   selector: 'sessions-password',
   templateUrl: './sessions-password.component.html',
-  styleUrls: ['./sessions-password.component.scss']
+  styleUrls: ['./sessions-password.component.scss', '../../../../assets/styles/sessions.style.scss']
 })
 export class SessionsPasswordComponent implements OnInit {
   autoLogin = new FormControl(true);

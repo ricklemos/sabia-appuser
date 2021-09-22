@@ -1,0 +1,20 @@
+<div class="welcome" fxLayout="column" fxLayoutGap="16px">
+
+  <h2 *ngIf="userData$.firstName">Olá, {{ userData$.firstName }}!</h2>
+  <h2 *ngIf="!userData$.firstName">Olá!</h2>
+
+  <div *ngIf="!ready" class="welcome__loading" fxLayout="column" fxLayoutGap="16px">
+    <h2>Estamos preparando tudo pra você começar seus estudos</h2>
+    <mat-progress-bar mode="buffer" color="accent"></mat-progress-bar>
+    <h3>Carregando cursos...</h3>
+  </div>
+
+  <h2 *ngIf="ready && userData$.gender == 'MALE'">Bem-vindo à Sabiá!</h2>
+  <h2 *ngIf="ready && userData$.gender == 'FEMALE'">Bem-vinda à Sabiá!</h2>
+  <h2 *ngIf="ready && userData$.gender == 'OTHER'">Boas-vindas à Sabiá!</h2>
+
+  <button clButtonContained class="bg-sabia-blue-500" *ngIf="ready" (click)="start()">
+    <span>Começar!</span>
+  </button>
+
+</div>

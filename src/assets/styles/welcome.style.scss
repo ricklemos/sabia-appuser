@@ -1,0 +1,52 @@
+@import "~collact-design-system/styles/colors";
+
+h1 {
+  font-size: 24px;
+  font-family: ProximaNova, sans-serif;
+}
+
+h2 {
+  font-size: 20px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+}
+
+h3{
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+}
+
+.welcome {
+  &__loading{
+    padding: 16px;
+  }
+  &__courses{
+    height: 100vh;
+    padding: 16px;
+    background-color: #39C0BA;
+
+    &__header{
+      text-align: center;
+      margin-top: 32px;
+      max-width: 600px;
+    }
+    &__body{
+      max-width: 600px;
+    }
+    &__button{
+      max-width: 600px;
+    }
+  }
+  margin-top: 32px;
+  padding: 16px;
+  max-width: 600px;
+}
+
+
+
+

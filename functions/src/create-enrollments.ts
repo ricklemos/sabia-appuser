@@ -24,20 +24,9 @@ async function updateRanking(classroomId: string, userData: UserData): Promise<a
   const classRankingData = classRankingDoc?.data() ?? null;
   if (classRankingData) {
     const ranking = classRankingData.ranking;
-    if (ranking) {
-      const [isInArray] = ranking.filter((user: any) => user.userId === userData.userId);
-      if (isInArray) {
-        return null;
-      } else {
-        return admin.firestore().doc(`/classRankings/${ classroomId }`)
-          .update({
-            ranking: admin.firestore.FieldValue.arrayUnion({
-              userId: userData.userId,
-              userName: userData.firstName + ' ' + userData.lastName,
-              userScore: 0
-            })
-          });
-      }
+    const [isInArray] = ranking.filter((user: any) => user.userId === userData.userId);
+    if (isInArray) {
+      return null;
     } else {
       return admin.firestore().doc(`/classRankings/${ classroomId }`)
         .update({
@@ -51,8 +40,6 @@ async function updateRanking(classroomId: string, userData: UserData): Promise<a
   } else {
     return null;
   }
-
-
 }
 
 async function createModuleProgress(moduleTemplate: any, userId: string, enrollment: any): Promise<WriteResult> {

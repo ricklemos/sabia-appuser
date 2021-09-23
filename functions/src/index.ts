@@ -14,7 +14,8 @@ export const createClassroom = tests.createClassroom;
 
 // Funções de criar enrollment do aluno e documentos necessários para começar o curso.
 export const createEnrollmentWhenCreateUserData = createEnrollments.createEnrollmentWhenCreateUserData;
-export const createEnrollmentWhenCreateOrUpdateClassroom = createEnrollments.createEnrollmentWhenCreateOrUpdateClassroom;
+export const createEnrollmentsWhenCreateClassroom = createEnrollments.createEnrollmentsWhenCreateClassroom;
+export const createEnrollmentsWhenUpdateClassroom = createEnrollments.createEnrollmentsWhenUpdateClassroom;
 export const createmoduleProgressWhenCreateEnrollment = createEnrollments.createmoduleProgressWhenCreateEnrollment;
 export const createQuestionnaireAnswerWhenCreateModuleProgress = createEnrollments.createQuestionnaireAnswerWhenCreateModuleProgress;
 

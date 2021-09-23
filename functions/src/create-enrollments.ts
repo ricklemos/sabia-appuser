@@ -129,10 +129,10 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
     }
   });
 
-export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
+export const createEnrollmentsWhenCreateClassroom = functions.firestore
   .document('classrooms/{classroomId}')
-  .onWrite(async (change) => {
-    const data = change.after.data();
+  .onCreate(async (snap) => {
+    const data = snap.data();
     // Verifica se os dados existem
     if (data) {
       const students = data.students;
@@ -147,8 +147,65 @@ export const createEnrollmentWhenCreateOrUpdateClassroom = functions.firestore
           courseName: classroom.courseName,
           classroomName: classroom.classroomName,
           institutionName: classroom.institutionName,
+          ranking: []
         }).then(() => console.log(`criou o ranking da turma ${ classroomId }`));
       promises.push(createClassRanking);
+      // Itera no array de students dos dados para criar as matrículas de cada aluno
+      students.map((studentEmail: string) => {
+        admin.firestore().collection('userData')
+          .where('email', '==', studentEmail).get()
+          .then((querySnapshot: any) => {
+            // Verifica se o usuário existe no userData
+            if (!querySnapshot.empty) {
+              querySnapshot.forEach((user: any) => {
+                const userData = user.data();
+                const userId = user.id;
+                // Cria o enrollment do aluno
+                const p1 = createEnrollmentFromClassroom(classroom, userId);
+                const p2 = updateRanking(classroom.classroomId, userData);
+                promises.push(p1, p2);
+              });
+            } else {
+              // Aluno não é um usuário (adiciona em users sem conta com pre-enrollment: classroomId)
+              const createNewUser = admin.firestore().collection('users').doc(studentEmail).set(
+                {
+                  email: studentEmail,
+                  preEnrollments: admin.firestore.FieldValue.arrayUnion({
+                    courseId: classroom.courseId,
+                    courseName: classroom.courseName,
+                    classroomName: classroom.classroomName,
+                    institutionName: classroom.institutionName,
+                    courseDescription: classroom.courseDescription,
+                    courseLink: classroom.courseLink,
+                    classroomId
+                  })
+                }
+                , { merge: true })
+                .then(() => console.log('adicionou um novo usuário'))
+                .catch((err) => console.log(err));
+              promises.push(createNewUser);
+            }
+          })
+          .catch((err: any) => console.log(err));
+      });
+      return Promise.all(promises);
+    } else {
+      functions.logger
+        .info('Dados da classe não existem', { structuredData: true });
+      return null;
+    }
+  });
+
+export const createEnrollmentsWhenUpdateClassroom = functions.firestore
+  .document('classrooms/{classroomId}')
+  .onUpdate(async (change) => {
+    const data = change.after.data();
+    // Verifica se os dados existem
+    if (data) {
+      const students = data.students;
+      const classroomId = data.classroomId;
+      const classroom = data;
+      const promises: Promise<any>[] = [];
       // Itera no array de students dos dados para criar as matrículas de cada aluno
       students.map((studentEmail: string) => {
         admin.firestore().collection('userData')

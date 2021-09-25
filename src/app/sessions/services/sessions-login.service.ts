@@ -22,7 +22,6 @@ export class SessionsLoginService {
     private router: Router,
     private urlService: UrlService,
     private snackBar: MatSnackBar,
-    private storageService: StorageService
   ) {
   }
 

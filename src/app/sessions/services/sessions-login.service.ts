@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UrlService } from '../../services/url.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageService } from '../../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class SessionsLoginService {
     private router: Router,
     private urlService: UrlService,
     private snackBar: MatSnackBar,
+    private storageService: StorageService
   ) {
   }
 
@@ -28,13 +30,19 @@ export class SessionsLoginService {
     return this.angularFirestore.collection(collectionPath, ref => ref.where('email', '==', email)).valueChanges({ idField: 'docId' });
   }
 
+  signOut(): void {
+    this.angularFireAuth.signOut()
+      .then(() => this.router.navigate([this.urlService.getLoginUrl()]));
+  }
+
   signIn(autoLogin?: boolean): void {
-    this.angularFireAuth.signInWithEmailAndPassword(this.email, this.password)
+    const persistence = autoLogin ? 'local' : 'none';
+    this.angularFireAuth.setPersistence(persistence)
+      .then(() => {
+        return this.angularFireAuth.signInWithEmailAndPassword(this.email, this.password);
+      })
       .then((userCredential) => {
         this.user = userCredential.user;
-        if (autoLogin) {
-          localStorage.setItem('firebaseJWT', JSON.stringify(this.user.refreshToken));
-        }
         // Vai pra sessionsLogged pra definir qual é a home do usuário
         this.router.navigate([this.urlService.getSessionsLogged()]);
       })

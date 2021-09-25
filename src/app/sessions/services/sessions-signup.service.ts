@@ -61,9 +61,6 @@ export class SessionsSignupService {
         };
         return this.angularFirestore.doc(`userData/${ this.uid }`).set(body);
       })
-      // .then(() => {
-      //   return this.angularFirestore.doc(`users/${ this.docId }`).delete();
-      // })
       .then(() => {
         const body = {
           email: this.email,

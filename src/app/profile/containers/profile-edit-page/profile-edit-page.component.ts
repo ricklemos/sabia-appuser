@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UrlService } from '../../../services/url.service';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { noop } from 'rxjs';
 
 
 @Component({

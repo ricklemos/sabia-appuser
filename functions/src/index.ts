@@ -26,6 +26,7 @@ export const updateRanking = updateRankingScore.updateRanking;
 // Funções de administração de papéis
 export const setStudentRole = authentication.setStudentRoleOnCreate;
 export const setRole = authentication.setRole;
+export const setRoleOnUpdateUsers = authentication.setRoleOnUpdateUsers;
 
 // Funções de atualização do module progress
 export const updateModuleProgressPercentageWhenUpdateModuleProgress =

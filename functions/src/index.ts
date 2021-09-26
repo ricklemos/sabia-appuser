@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin';
-import * as tests from './tests';
+// import * as tests from './tests';
 import * as createEnrollments from './create-enrollments';
 import * as updateRankingScore from './update-ranking-score';
 import * as authentication from './authentication';
@@ -8,9 +8,9 @@ import * as updateModuleProgress from './update-module-progress';
 
 admin.initializeApp();
 
-// Funções de Teste
-export const createMockupData = tests.createMockupData;
-export const createClassroom = tests.createClassroom;
+// // Funções de Teste
+// export const createMockupData = tests.createMockupData;
+// export const createClassroom = tests.createClassroom;
 
 // Funções de criar enrollment do aluno e documentos necessários para começar o curso.
 export const createEnrollmentWhenCreateUserData = createEnrollments.createEnrollmentWhenCreateUserData;
@@ -31,6 +31,3 @@ export const setRoleOnUpdateUsers = authentication.setRoleOnUpdateUsers;
 // Funções de atualização do module progress
 export const updateModuleProgressPercentageWhenUpdateModuleProgress =
   updateModuleProgress.updateModuleProgressPercentageWhenUpdateModuleProgress;
-
-// // First login
-// export const createEnrollmentsWhenFirstLogin = firstLogin.createEnrollmentsWhenFirstLogin;

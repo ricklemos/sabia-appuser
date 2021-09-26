@@ -29,8 +29,6 @@ import { FormsModule } from '../forms/forms.module';
 import { CollactComponentsModule } from 'collact-components';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { NavigationModule } from '../navigation/navigation.module';
-import { PERSISTENCE } from '@angular/fire/auth';
-
 
 
 @NgModule({
@@ -76,9 +74,8 @@ import { PERSISTENCE } from '@angular/fire/auth';
     SessionsRolesService,
     // Caso teste funções HTTP do cloud functions localmente, usar provider USE_EMULATOR e ajustar porta
     // { provide: USE_EMULATOR, useValue: ['localhost', 5001] },
-    { provide: REGION, useValue: 'us-central1' },
+    { provide: REGION, useValue: 'southamerica-east1' },
     // { provide: ORIGIN, useValue: 'https://sabia-app-user.web.app' }
-    // { provide: PERSISTENCE, useValue: 'local' },
   ]
 })
 export class SessionsModule { }

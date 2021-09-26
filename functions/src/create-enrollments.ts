@@ -89,7 +89,7 @@ async function createQuestionnaire(
     });
 }
 
-export const createEnrollmentWhenCreateUserData = functions.firestore
+export const createEnrollmentWhenCreateUserData = functions.region('southamerica-east1').firestore
   .document('userData/{userId}')
   .onCreate(async (snap) => {
     const userData: UserData = {
@@ -116,7 +116,7 @@ export const createEnrollmentWhenCreateUserData = functions.firestore
     }
   });
 
-export const createEnrollmentsWhenCreateClassroom = functions.firestore
+export const createEnrollmentsWhenCreateClassroom = functions.region('southamerica-east1').firestore
   .document('classrooms/{classroomId}')
   .onCreate(async (snap) => {
     const data = snap.data();
@@ -183,7 +183,7 @@ export const createEnrollmentsWhenCreateClassroom = functions.firestore
     }
   });
 
-export const createEnrollmentsWhenUpdateClassroom = functions.firestore
+export const createEnrollmentsWhenUpdateClassroom = functions.region('southamerica-east1').firestore
   .document('classrooms/{classroomId}')
   .onUpdate(async (change) => {
     const data = change.after.data();
@@ -239,7 +239,7 @@ export const createEnrollmentsWhenUpdateClassroom = functions.firestore
     }
   });
 
-export const createmoduleProgressWhenCreateEnrollment = functions.firestore
+export const createmoduleProgressWhenCreateEnrollment = functions.region('southamerica-east1').firestore
   .document('enrollments/{enrollmentId}')
   .onCreate(async (snap) => {
     const enrollment = snap.data();
@@ -274,7 +274,7 @@ export const createmoduleProgressWhenCreateEnrollment = functions.firestore
     }
   });
 
-export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.firestore
+export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.region('southamerica-east1').firestore
   .document('moduleProgress/{moduleProgressId}')
   .onCreate(async (snap) => {
     const promises = [];

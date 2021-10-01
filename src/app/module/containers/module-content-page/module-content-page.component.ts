@@ -6,6 +6,7 @@ import { ModuleTextLesson, ModuleProgress } from '../../models/module';
 import { ModuleService } from '../../services/module.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'module-content-page',
@@ -18,7 +19,8 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
   moduleProgress: ModuleProgress;
   lessonDone: boolean;
   loading = true;
-
+  videosUrls = [];
+  otherAttachments = [];
   subscriptions = [];
 
   constructor(
@@ -26,7 +28,8 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
     private moduleService: ModuleService,
     private route: ActivatedRoute,
     private router: Router,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -37,6 +40,14 @@ export class ModuleContentPageComponent implements OnInit, OnDestroy {
         this.moduleProgress = this.moduleService.getModule();
         const [fetchLesson] = this.moduleProgress.lessons.filter(lesson => lesson.lessonId === this.lesson.lessonId);
         this.lessonDone = fetchLesson.complete;
+        const videos = this.lesson.attachments.filter(attachment => attachment.attachmentType === 'VIDEO');
+        videos.forEach(video => {
+          const videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(video.attachmentLink);
+          if (!this.videosUrls.includes(videoUrl)) {
+            this.videosUrls.push(videoUrl);
+          }
+        });
+        this.otherAttachments = this.lesson.attachments.filter(attachment => attachment.attachmentType !== 'VIDEO');
         this.loading = false;
       })
     ).subscribe(noop);

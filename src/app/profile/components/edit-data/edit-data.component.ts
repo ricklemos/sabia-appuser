@@ -40,19 +40,16 @@ export class EditDataComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.uid = this.sessionService.getUserId();
+    const userData = this.modifyUserDataService.getUserData();
+    this.userProfileForm[0].value = userData.email;
+    this.userProfileForm[1].value = userData.firstName;
+    this.userProfileForm[2].value = userData.lastName;
+    this.userProfileForm[3].value = userData.gender;
+    this.deleting = false;
   }
 
   ngOnInit(): void {
-    const subFetchUserData = this.sessionService.fetchUserData().pipe(
-      tap(data => {
-        // this.userProfileForm[0].value = data.email;
-        // this.userProfileForm[1].value = data.firstName;
-        // this.userProfileForm[2].value = data.lastName;
-        // this.userProfileForm[3].value = data.gender;
-      })
-    ).subscribe(noop);
-    this.unsubscribe.push(subFetchUserData);
-    this.deleting = false;
+
   }
 
   ngOnDestroy(): void {
@@ -66,8 +63,7 @@ export class EditDataComponent implements OnInit, OnDestroy {
   changes(value): void {
     this.firstName = value.firstName;
     this.lastName = value.lastName;
-    const [genderObject] = value.gender;
-    this.gender = genderObject.value;
+    this.gender = value.gender;
     this.email = value.email;
   }
 

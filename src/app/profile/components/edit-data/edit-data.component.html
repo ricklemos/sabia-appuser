@@ -14,18 +14,18 @@
       <label for="updatePicInput" >Alterar foto</label>
       <p (click)="deletePic()">Excluir foto</p>
     </div>
-
-    <cl-form-component
-      (changes)="changes($event)"
-      (isValid)="isValid($event)"
-      (submit)="edit()"
-      [formConfig]="userProfileForm"
-    ></cl-form-component>
+    <div class="Forms">
+      <cl-form-component
+        (changes)="changes($event)"
+        (isValid)="isValid($event)"
+        (submit)="edit()"
+        [formConfig]="userProfileForm"
+      ></cl-form-component>
+    </div>
     <button (click)="edit()" [hasDisabled]="!formValid" [loading]="loading" clButtonContained
-            class="bg-sabia-blue-500">
-      <span>Salvar</span>
-    </button>
-
+                  class="bg-sabia-blue-500">
+    <span>Salvar</span>
+  </button>
   </div>
 
 </div>

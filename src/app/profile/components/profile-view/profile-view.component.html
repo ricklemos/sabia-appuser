@@ -18,8 +18,14 @@
         <div class="info-box" label="Genero" large>{{ gender }}</div>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-        <button class="ds-button" (click)="goEditPage()" margin->Editar</button>
-        <button class="ds-button" (click)="goChangePasswordPage()">Trocar Senha</button>
+        <button (click)="goEditPage()" clButtonContained
+                class="bg-sabia-blue-500">
+          <span>Editar</span>
+        </button>
+        <button (click)="goChangePasswordPage()" clButtonContained
+                class="bg-sabia-blue-500">
+          <span>Trocar Senha</span>
+        </button>
       </div>
     </div>
     <button clButton color="warn" (click)="signOut()">

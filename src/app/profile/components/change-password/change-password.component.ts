@@ -1,15 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
+import { ChangePasswordForm } from '../../models/profile-forms';
 // TODO: Repensar forma de fazer o import do firebase, há mesmo necessidade?
 import firebase from 'firebase/app';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-change-password',
@@ -17,11 +18,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit, OnDestroy {
-  formGroup: FormGroup;
-  passwordIsEqual = false;
-  newEqualsOld = true;
+  changePasswordForm = ChangePasswordForm;
   user;
   unsubscribe = [];
+  formValid = false;
+  oldPassword: string;
+  newPassword: string;
+  repeatNewPassword: string;
+  loading = false;
+  eventValid = false;
 
   constructor(
     private modifyUserDataService: ModifyUserDataService,
@@ -31,11 +36,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     private sessionService: SessionsLoginService,
     private snackBar: MatSnackBar,
   ) {
-    this.formGroup = formBuilder.group({
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      oldPassword: ['', Validators.required],
-      repeatNewPassword: ['', Validators.required]
-    });
   }
 
   ngOnInit(): void {
@@ -43,38 +43,48 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       tap(user => this.user = user)
     ).subscribe(noop);
     this.unsubscribe.push(subFetchUser);
-
-    const subNewPassword = this.formGroup.get('newPassword').valueChanges.pipe(
-      tap(data => {
-        this.newEqualsOld = data === this.formGroup.value.oldPassword;
-      })
-    ).subscribe(noop);
-    this.unsubscribe.push(subNewPassword);
-
-    const subRepeatPassword = this.formGroup.get('repeatNewPassword').valueChanges.pipe(
-      tap(data => {
-        this.passwordIsEqual = data === this.formGroup.value.newPassword;
-      })
-    ).subscribe(noop);
-    this.unsubscribe.push(subRepeatPassword);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.map(u => u.unsubscribe);
   }
 
+
+  isValid(event): void {
+    this.eventValid = event;
+  }
+
+  changes(value): void {
+    this.oldPassword = value.oldPassword;
+    this.newPassword = value.newPassword;
+    this.repeatNewPassword = value.repeatNewPassword;
+    if (this.newPassword !== this.oldPassword) {
+      if (this.newPassword === this.repeatNewPassword) {
+        this.formValid = this.eventValid;
+      } else {
+        this.formValid = false;
+      }
+    } else {
+      this.formValid = false;
+    }
+  }
+
+
   changePassword(): void {
-    const credential = firebase.auth.EmailAuthProvider.credential(this.sessionService.getEmail(), this.formGroup.value.oldPassword);
-    this.user.reauthenticateWithCredential(credential).then(() => {
-      this.user.updatePassword(this.formGroup.value.newPassword);
-      this.router.navigate([this.urlService.getProfileUrl()]);
-      this.snackBar.open('Senha alterada com sucesso', 'OK', {
-        duration: 3000
+    if (this.formValid) {
+      this.loading = true;
+      const credential = firebase.auth.EmailAuthProvider.credential(this.sessionService.getEmail(), this.oldPassword);
+      this.user.reauthenticateWithCredential(credential).then(() => {
+        this.user.updatePassword(this.newPassword);
+        this.router.navigate([this.urlService.getProfileUrl()]);
+        this.snackBar.open('Senha alterada com sucesso', 'OK', {
+          duration: 3000
+        });
+      }).catch(() => {
+        this.snackBar.open('Senha antiga incorreta', 'OK', {
+          duration: 3000
+        });
       });
-    }).catch(() => {
-      this.snackBar.open('Senha antiga incorreta', 'OK', {
-        duration: 3000
-      });
-    });
+    }
   }
 }

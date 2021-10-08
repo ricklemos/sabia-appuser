@@ -6,6 +6,8 @@ export interface QuestionnaireAnswer {
   score?: number;
   tentatives?: number;
   moduleId?: string;
+  classroomId?: string;
+  courseId?: string;
 }
 
 export interface Question {

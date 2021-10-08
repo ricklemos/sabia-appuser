@@ -32,10 +32,10 @@ export class QuestionaryQuestionPageComponent implements OnInit {
   ngOnInit(): void {
     this.currentQuestionNumber = 1;
     this.loadingQuestionary = true;
-    this.questionaryId = this.route.snapshot.paramMap.get('questionaryId');
+    this.questionaryId = this.route.snapshot.paramMap.get('questionnaireId');
     this.questionaryService.fetchQuestionary(this.questionaryId).pipe(
       tap((questionary) => {
-        this.questionaryService.setQuestionary(questionary);
+        this.questionaryService.setQuestionnaire(questionary);
         this.questionary = questionary;
         this.questions = questionary.questions;
         this.currentQuestion = this.questions[this.currentQuestionNumber - 1];
@@ -59,8 +59,8 @@ export class QuestionaryQuestionPageComponent implements OnInit {
         this.questionary.tentatives = 1;
         this.questionary.score = this.score;
       }
-      this.questionaryService.setQuestionary(this.questionary);
-      this.questionaryService.updateQuestionary(this.questionaryId, this.questionary)
+      this.questionaryService.setQuestionnaire(this.questionary);
+      this.questionaryService.updateQuestionnaire(this.questionaryId, this.questionary)
         .then(() => this.done = true)
         .catch((error) => console.log(error));
     } else { // Caso não tenha sido a última pergunta, passa para a próxima

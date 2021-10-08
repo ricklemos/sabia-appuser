@@ -5,14 +5,14 @@ import { QuestionaryReviewPageComponent } from './containers/questionary-review-
 
 export const QuestionaryRoutes: Routes = [
   {
-    path: 'questionary',
+    path: 'questionario',
     children: [
       {
-        path: ':questionaryId',
+        path: ':questionnaireId',
         canActivate: [AuthGuard],
         children: [
           {
-            path: 'review',
+            path: 'revisar',
             component: QuestionaryReviewPageComponent
           },
           {

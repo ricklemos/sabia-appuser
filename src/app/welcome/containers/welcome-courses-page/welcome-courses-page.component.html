@@ -1,0 +1,26 @@
+<div fxLayout="column" class="welcome__courses" fxLayoutGap="16px">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class="welcome__courses__header">
+    <h2>Boas-vindas!</h2>
+    <h3 *ngIf="courses.length !== 0">Oba! É seu primeiro acesso! Vi aqui que você está cadastrado nesses cursos:</h3>
+    <h3 *ngIf="courses.length === 0">
+      Vi aqui que você não está cadastrado em nenhum curso. Entre em contato com a instituição de ensino para ter acesso aos módulos.
+    </h3>
+  </div>
+  <div class="welcome__courses__body" *ngIf="courses.length !== 0">
+    <div *ngFor="let course of courses">
+      <welcome-course-box [course]="course"></welcome-course-box>
+    </div>
+  </div>
+
+  <div class="welcome__courses__body" *ngIf="courses.length === 0" fxLayout="column" fxLayoutAlign="center center">
+    <div clBadgeOutline [diameter]="64">
+      <i clIcon name="cl-ghost"></i>
+    </div>
+  </div>
+
+
+  <button clButtonContained fxFlexAlign="end" class="bg-sabia-blue-500 welcome__courses__button" (click)="goToHome()">
+    <span>Continuar</span>
+  </button>
+
+</div>

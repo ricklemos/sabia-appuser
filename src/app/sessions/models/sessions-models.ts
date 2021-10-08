@@ -1,7 +1,6 @@
 export interface SessionsUser {
   email: string;
   firstLogin?: Date;
-  isAdmin?: boolean;
 }
 
 export interface SessionsUserData {
@@ -9,6 +8,7 @@ export interface SessionsUserData {
   firstName: string;
   lastName: string;
   gender: 'MALE' | 'FEMALE' | 'OTHER';
+  userId: string;
 }
 
 export type SessionsRole = 'SCHOOL_ADMIN' | 'INSTRUCTOR' | 'STUDENT' | 'MASTER';

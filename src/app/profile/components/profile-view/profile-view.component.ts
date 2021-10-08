@@ -56,4 +56,8 @@ export class ProfileViewComponent implements OnInit {
     const url = this.urlService.getChangePasswordUrl();
     this.router.navigate([url]);
   }
+
+  signOut(): void {
+    this.sessionService.signOut();
+  }
 }

@@ -21,13 +21,22 @@ export class QuestionaryBodyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectAlternative(alternative: Alternative): void {
-    this.alternativeSelected = alternative;
-    const data = {
-      isRight: alternative.isRight,
-      explanationText: this.question.explanationText
-    };
-    this.questionaryDialogService.openQuestionaryAnswer(data).subscribe(() => this.goToNextQuestion());
+  selectAlternative(alternativeSelected: Alternative): void {
+    this.alternativeSelected = alternativeSelected;
+    const [correctAnswer] = this.question.alternatives.filter((alternative: Alternative) => alternative.isRight);
+    if (this.question.explanationText){
+      const data = {
+        isRight: alternativeSelected.isRight,
+        explanationText: this.question.explanationText
+      };
+      this.questionaryDialogService.openQuestionaryAnswer(data).subscribe(() => this.goToNextQuestion());
+    } else {
+      const data = {
+        isRight: alternativeSelected.isRight,
+        explanationText: correctAnswer.alternativeText
+      };
+      this.questionaryDialogService.openQuestionaryAnswer(data).subscribe(() => this.goToNextQuestion());
+    }
   }
 
   goToNextQuestion(): void {

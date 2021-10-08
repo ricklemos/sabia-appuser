@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -18,6 +17,7 @@ import { RankingsModule } from './rankings/rankings.module';
 import { HomeModule } from './home/home.module';
 import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
 import { StorageService } from './services/storage.service';
+import { WelcomeModule } from './welcome/welcome.module';
 
 
 @NgModule({
@@ -39,6 +39,7 @@ import { StorageService } from './services/storage.service';
     CoursesModule,
     ClassroomsDashModule,
     HomeModule,
+    WelcomeModule
   ],
   providers: [
     UrlService,

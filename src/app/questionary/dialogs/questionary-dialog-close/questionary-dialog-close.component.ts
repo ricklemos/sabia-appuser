@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
+import { QuestionaryService } from '../../services/questionary.service';
 
 @Component({
   selector: 'questionary-dialog-close',
@@ -13,7 +14,8 @@ export class QuestionaryDialogCloseComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private questionnaireService: QuestionaryService
   ) {
   }
 
@@ -22,8 +24,7 @@ export class QuestionaryDialogCloseComponent implements OnInit {
 
   closeQuestionary(): void {
     this.dialog.closeAll();
-    // TODO: Posteriormente devemos buscar o módulo no banco de dados para fazer a referência
-    this.router.navigate([this.urlService.getModule('0001')]);
+    this.router.navigate([this.urlService.getModule(this.questionnaireService.getQuestionnaire().moduleId)]);
   }
 
   continueQuestionary(): void {

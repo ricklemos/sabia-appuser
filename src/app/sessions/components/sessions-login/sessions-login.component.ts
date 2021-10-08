@@ -61,7 +61,6 @@ export class SessionsLoginComponent implements OnInit, OnDestroy {
           } else if (user) {
             // vai pro primeiro login (cadastro)
             this.sessionsSignupService.email = this.userEmail;
-            this.sessionsSignupService.isAdmin = user.isAdmin;
             this.sessionsSignupService.docId = user.docId;
             const url = this.urlService.getSignUpUrl();
             this.router.navigate([url]);

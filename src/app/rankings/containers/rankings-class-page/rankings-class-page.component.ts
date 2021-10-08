@@ -15,6 +15,7 @@ export class RankingsClassPageComponent implements OnInit, OnDestroy {
 
   classRanking: RankingsClassRanking;
   unsubscribe = [];
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,7 @@ export class RankingsClassPageComponent implements OnInit, OnDestroy {
       tap((data) => {
         data.ranking.sort(this.rankingClassService.compareRanking);
         this.classRanking = data;
+        this.loading = false;
       })
     ).subscribe(noop);
     this.unsubscribe.push(fetchClassRanking);

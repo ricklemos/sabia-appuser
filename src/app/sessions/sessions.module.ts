@@ -22,14 +22,13 @@ import { SessionsSignupGenderComponent } from './components/sessions-signup-gend
 import { SessionsSignupPasswordComponent } from './components/sessions-signup-password/sessions-signup-password.component';
 import { SessionsSignupService } from './services/sessions-signup.service';
 import { SessionsRolesService } from './services/sessions-roles.service';
-import { AngularFireFunctionsModule, REGION, USE_EMULATOR } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SessionsEditRolePageComponent } from './containers/sessions-edit-role-page/sessions-edit-role-page.component';
 import { FormsModule } from '../forms/forms.module';
 import { CollactComponentsModule } from 'collact-components';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { NavigationModule } from '../navigation/navigation.module';
-
 
 
 @NgModule({
@@ -74,8 +73,9 @@ import { NavigationModule } from '../navigation/navigation.module';
     SessionsSignupService,
     SessionsRolesService,
     // Caso teste funções HTTP do cloud functions localmente, usar provider USE_EMULATOR e ajustar porta
-    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] }
-    { provide: REGION, useValue: 'us-central1' }
+    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] },
+    { provide: REGION, useValue: 'southamerica-east1' },
+    // { provide: ORIGIN, useValue: 'https://sabia-app-user.web.app' }
   ]
 })
 export class SessionsModule { }

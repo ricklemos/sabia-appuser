@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Lesson } from '../models/module';
+import { ModuleTextLesson } from '../models/module';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ModuleContentService {
 
-  lesson: Lesson;
+  lesson: ModuleTextLesson;
 
   constructor(
     private angularFirestore: AngularFirestore,

@@ -12,6 +12,7 @@ import { RankingUserDataComponent } from './components/ranking-user-data/ranking
 import { ProfileModule } from '../profile/profile.module';
 import { CollactComponentsModule } from 'collact-components';
 import { NavigationModule } from '../navigation/navigation.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -32,6 +33,7 @@ import { NavigationModule } from '../navigation/navigation.module';
     ProfileModule,
     CollactComponentsModule,
     NavigationModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class RankingsModule { }

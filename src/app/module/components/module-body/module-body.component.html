@@ -6,7 +6,7 @@
   <div class="module__bodyheader" fxLayout="row" fxLayoutAlign="space-between start">
     <div class="module__name">
       <h2>{{ moduleProgress.moduleName }}</h2>
-      <h3 *ngIf="moduleProgress.schoolName">{{ moduleProgress.schoolName }}</h3>
+      <h3 *ngIf="moduleProgress.institutionName">{{ moduleProgress.institutionName }}</h3>
     </div>
     <div class="module__progress">
       <h3>{{ moduleProgress.moduleProgressPercentage }}% concluído</h3>
@@ -20,11 +20,11 @@
         <div clBadgeOutline [diameter]="40" bgColor="#2E3037" *ngIf="lesson.complete">
           <i clIcon name="cl-correct-focus"></i>
         </div>
-        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'QUESTIONARY'">
+        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'QUESTIONNAIRE'">
           <i clIcon name="cl-edit"></i>
         </div>
         <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'TEXT'">
-          <i clIcon name="cl-university"></i>
+          <i clIcon name="cl-univerity"></i>
         </div>
         <p>{{ lesson.lessonName }}</p>
       </div>

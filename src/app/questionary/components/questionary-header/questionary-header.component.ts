@@ -22,8 +22,8 @@ export class QuestionaryHeaderComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.questionaryName = this.questionaryService.getQuestionary().questionnaireName;
-    this.nQuestions = this.questionaryService.getQuestionary().questions.length;
+    this.questionaryName = this.questionaryService.getQuestionnaire().questionnaireName;
+    this.nQuestions = this.questionaryService.getQuestionnaire().questions.length;
     this.progress = (this.questionNumber / this.nQuestions) * 100;
   }
 

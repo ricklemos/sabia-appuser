@@ -1,8 +1,11 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <p class="text">Recentes</p>
-  <div class="modules" fxLayout="row">
+  <div class="modules" fxLayout="row" *ngIf="userModules.length !==0">
     <div *ngFor="let module of userModules">
       <home-module-available [module]="module"></home-module-available>
     </div>
+  </div>
+  <div *ngIf="userModules.length ===0">
+    <p class="startModule">Comece um módulo para ver os módulos recentes</p>
   </div>
 </div>

@@ -47,12 +47,12 @@ export class UrlService {
     return `module/${ moduleId }/lesson/${ lessonId }`;
   }
 
-  public getQuestionary(questionaryId): string {
-    return `/questionary/${ questionaryId }`;
+  public getQuestionnaire(questionnaireId): string {
+    return `/questionario/${ questionnaireId }`;
   }
 
-  public getQuestionaryReview(questionaryId): string {
-    return `/questionary/${ questionaryId }/review`;
+  public getQuestionnaireReview(questionnaireId): string {
+    return `/questionario/${ questionnaireId }/revisar`;
   }
 
   public getModule(moduleId): string {
@@ -89,11 +89,20 @@ export class UrlService {
   public getClassroomsDashClassroomPage(classroomId): string {
     return `/painel-classes/${ classroomId }`;
   }
+
   public getClassroomsDashCreateClassroomPage(): string {
     return `/painel-classes/criar`;
   }
 
   public getEditRolePage(): string {
     return `/sessions/edit-role`;
+  }
+
+  public getWelcomePage(): string {
+    return `boas-vindas/1`;
+  }
+
+  public getWelcomeCoursesPage(): string {
+    return `boas-vindas/cursos`;
   }
 }

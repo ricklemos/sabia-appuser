@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UrlService } from '../../services/url.service';
+import { SessionsLoginService } from './sessions-login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,6 @@ export class SessionsSignupService {
 
   docId: string;
   uid: string;
-  isAdmin: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -26,6 +26,7 @@ export class SessionsSignupService {
     private angularFireAuth: AngularFireAuth,
     private router: Router,
     private urlService: UrlService,
+    private sessionsLoginService: SessionsLoginService
   ) {
   }
 
@@ -49,27 +50,25 @@ export class SessionsSignupService {
         this.firstLogin = user.metadata.creationTime;
         return this.angularFireAuth.signInWithEmailAndPassword(this.email, password);
       })
-      .then(() => {
+      .then((userCredential) => {
+        this.sessionsLoginService.setUser(userCredential.user);
         const body = {
           email: this.email,
           firstName: this.firstName,
           lastName: this.lastName,
-          gender: this.gender
+          gender: this.gender,
+          userId: this.uid
         };
         return this.angularFirestore.doc(`userData/${ this.uid }`).set(body);
-      })
-      .then(() => {
-        return this.angularFirestore.doc(`users/${ this.docId }`).delete();
       })
       .then(() => {
         const body = {
           email: this.email,
           firstLogin: this.firstLogin,
-          isAdmin: !!this.isAdmin,
         };
         return this.angularFirestore.doc(`users/${ this.uid }`).set(body);
       }).then(() => {
-      this.router.navigate([this.urlService.getHome()]);
+      this.router.navigate([this.urlService.getWelcomePage()]);
     })
       .catch(error => console.log(error));
   }

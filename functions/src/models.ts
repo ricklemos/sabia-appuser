@@ -40,6 +40,24 @@ export interface PreEnrollment {
   courseLink?: string;
 }
 
+export interface Enrollment {
+  courseId: string;
+  courseName: string;
+  courseDescription: string;
+  courseLink: string;
+  classroomName: string;
+  institutionName: string;
+  score: number;
+  classroomId: string;
+  userId: string;
+}
+
+export interface ModuleTemplate {
+  moduleId: string;
+  moduleName: string;
+  lessons: Lesson[];
+}
+
 export interface Lesson {
   complete: boolean;
   lessonId: string;

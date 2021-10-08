@@ -1,0 +1,11 @@
+<navbar barTitle="Meus Cursos">
+  <div class="my-courses__background" fxLayout="column" fxLayoutGap="16px">
+
+    <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+      <div *ngFor="let course of coursesList">
+        <courses-box [enrollment]="course"></courses-box>
+      </div>
+    </div>
+
+  </div>
+</navbar>

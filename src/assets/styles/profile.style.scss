@@ -1,0 +1,100 @@
+.ds-button {
+  background-color: #2E3037;
+  border-radius: 10px;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Roboto;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 100%;
+  max-width: 343px;
+}
+
+.ds-button:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  color: rgba(0, 0, 0, 0.2);
+  padding: 6px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Roboto;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 100%;
+  max-width: 343px;
+}
+
+.info-box {
+  margin-bottom: 16px;
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 299px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.64);
+  font-family: Roboto;
+  border: none;
+
+  &__small {
+    min-width: 132px;
+  }
+}
+
+.info-card {
+  margin-top: 16px;
+  width: 343px;
+  background-color: #FCFCFC;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 1px 5px 5px 1px darkgray;
+}
+
+.container {
+  padding-top: 46px;
+}
+
+.nameTitle {
+  font-size: 24px;
+  color: black;
+  font-family: Roboto;
+}
+
+.nomeCampo {
+  font-size: 12px;
+  color: black;
+  opacity: 0.64;
+  font-family: Roboto;
+  tab-size: 6px;
+
+  &__margin-left{
+    margin-left: 12px;
+    font-size: 12px;
+    color: black;
+    opacity: 0.64;
+    font-family: Roboto;
+    tab-size: 6px;
+  }
+}
+
+.profile-page-container {
+  //TODO: remove vh
+  height: 100vh;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: #F7F7F7;
+}
+
+profile-pic{
+  img{
+    height: 130px;
+    border-radius: 100%;
+  }
+  mat-progress-spinner{
+    height: 130px;
+  }
+}

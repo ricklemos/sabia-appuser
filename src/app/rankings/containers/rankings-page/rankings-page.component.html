@@ -1,0 +1,8 @@
+<navbar barTitle="Rankings">
+  <div class="ranking" fxLayout="column" fxLayoutGap="16px">
+    <h1>Rankings</h1>
+    <div *ngFor="let enrollment of enrollments">
+      <class-available [enrollment]="enrollment"></class-available>
+    </div>
+  </div>
+</navbar>

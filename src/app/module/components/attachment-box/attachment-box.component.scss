@@ -1,0 +1,22 @@
+@import "~collact-design-system/styles/colors";
+
+h3 {
+  font-size: 16px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+  color: $black-alpha-700;
+}
+
+p {
+  font-size: 12px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}
+
+.attachment-box__container {
+  width: 150px;
+  height: 100px;
+}
+
+a {
+  text-decoration: none;
+}

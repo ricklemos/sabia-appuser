@@ -1,0 +1,8 @@
+<cl-dynamic-form
+  *ngIf="regConfig"
+  (submit)="submitForm($event)"
+  [enableEnterSubmit]="false"
+  [theme]="theme"
+  class="width-100"
+  [fields]="regConfig">
+</cl-dynamic-form>

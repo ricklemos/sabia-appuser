@@ -1,0 +1,25 @@
+@import "~collact-design-system/styles/colors";
+
+.courses-details {
+  &__header {
+    color: $black-alpha-700;
+    font-size: 20px;
+    font-family: ProximaNova, sans-serif;
+  }
+
+  &__background {
+    padding: 16px;
+    background-color: #F7F7F7;
+  }
+
+  &__description {
+    font-family: ProximaNova, sans-serif;
+    color: $black-alpha-500;
+    font-size: 16px;
+  }
+
+  &__scroll {
+    overflow: hidden;
+    overflow-x: auto;
+  }
+}

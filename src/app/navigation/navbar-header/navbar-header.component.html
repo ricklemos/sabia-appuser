@@ -1,0 +1,8 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="bg-sabia-blue-500 container">
+  <img [src]="pictureLink" alt="foto de perfil" onerror="this.src='./../../../assets/img/profile-pic-std.png'"/>
+  <div *ngIf="userData$" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <h3 class="white-alpha-900">{{ userData$.firstName }} {{ userData$.lastName }}</h3>
+    <p class="white-alpha-700">{{ userData$.email }}</p>
+    <p *ngIf="role" class="navbar-header-role">{{ role }}</p>
+  </div>
+</div>

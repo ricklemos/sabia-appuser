@@ -1,0 +1,13 @@
+<div class="sessions__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+  <h2 class="sessions__title">Qual é seu primeiro nome?</h2>
+  <cl-form-component
+    (changes)="changes($event)"
+    (isValid)="isValid($event)"
+    (submit)="submitFirstName()"
+    [formConfig]="formConfig"
+  ></cl-form-component>
+  <button (click)="submitFirstName()" [hasDisabled]="!formValid" [loading]="loading" clButtonContained
+          class="bg-sabia-blue-500">
+    <span>Continuar</span>
+  </button>
+</div>

@@ -1,0 +1,23 @@
+.container {
+  height: 192px;
+  width: 100%;
+}
+
+img {
+  height: 64px;
+  width: 64px;
+  border-radius: 32px;
+}
+
+.navbar-header-role{
+  font-family: ProximaNova, sans-serif;
+  font-size: 12px;
+  padding: 4px 8px;
+  color: rgba(255,255,255, 0.8);
+  background-color: #2cb2ab;
+  border-radius: 16px;
+}
+
+p, h3{
+  font-family: ProximaNova, sans-serif;
+}

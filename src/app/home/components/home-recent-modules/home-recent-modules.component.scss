@@ -1,0 +1,22 @@
+@import '~collact-design-system/styles/colors';
+
+.modules {
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.text {
+  margin-top: 24px;
+  margin-left: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-700;
+  font-size: 20px;
+}
+
+.startModule{
+  margin: 24px;
+  text-align: center;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-700;
+  font-size: 16px;
+}

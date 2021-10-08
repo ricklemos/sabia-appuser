@@ -1,0 +1,15 @@
+<div class="sessions__card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px"
+  fxLayoutGap.lt-sm="8px"
+>
+  <h2 class="sessions__title">Comece com o seu e-mail</h2>
+
+  <cl-form-component
+    [formConfig]="formConfig"
+    (isValid)="isValid($event)"
+    (submit)="verifyEmail()"
+    (changes)="changes($event)"
+  ></cl-form-component>
+  <button clButtonContained (click)="verifyEmail()" [hasDisabled]="!formValid" class="bg-sabia-blue-500" [loading]="loading">
+    <span>Continuar</span>
+  </button>
+</div>

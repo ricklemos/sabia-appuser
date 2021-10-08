@@ -1,0 +1,20 @@
+@import "~collact-design-system/styles/colors";
+
+.courses-box {
+
+  &__buttons {
+    width: 100%;
+  }
+}
+
+h3 {
+  font-size: 16px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+  color: $black-alpha-700;
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}

@@ -1,0 +1,11 @@
+<div class="questionary-body" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+  <h2>{{ question.questionText }}</h2>
+  <div *ngFor="let alternative of question.alternatives" class="alternatives" fxLayout="column" fxLayoutAlign="center stretch">
+    <button class="alternatives__button" (click)="selectAlternative(alternative)">
+      <span>{{ alternative.alternativeText }}</span>
+    </button>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,41 @@
+@import "~collact-design-system/styles/colors";
+
+.sessions {
+  &__card {
+    padding: 24px;
+    width: 100vw;
+    max-width: 500px;
+    @media screen and (max-width: 600px) {
+      padding: 16px;
+    }
+  }
+
+  &__title {
+    font-size: 16px;
+    font-family: ProximaNovaSemiBold, sans-serif;
+    color: $black-alpha-700;
+  }
+
+  &__remember{
+    width: 100%;
+  }
+
+  &__forgot {
+    text-decoration: underline;
+    color: $black-alpha-500;
+    font-family: ProximaNova, sans-serif;
+    cursor: pointer;
+  }
+
+  &__buttons-container {
+    width: 100%;
+    button {
+      width: 100%;
+    }
+  }
+}
+
+cl-form-component ::ng-deep {
+  width: 100%;
+}
+

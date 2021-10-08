@@ -1,0 +1,17 @@
+.app-bar--navdrawer {
+  z-index: 11;
+  @media screen and (max-width: 600px) {
+    position: absolute;
+    visibility: hidden;
+  }
+}
+
+.footer-button {
+  width: calc(100% - 32px);
+}
+
+p, h3, span{
+  font-family: ProximaNova, sans-serif;
+}
+
+

@@ -1,0 +1,10 @@
+<div clCard>
+  <h1 clCardTitle>Nome e curso</h1>
+  <div clCardContent>
+    <cl-form-component
+      [formConfig]="formCourse"
+      (changes)="getFormCourseChanges($event)"
+      (isValid)="checkIfFormIsValid($event)"
+    ></cl-form-component>
+  </div>
+</div>

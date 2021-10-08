@@ -1,0 +1,34 @@
+<navbar [barTitle]="moduleProgress.moduleName" disableNavigation="true">
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
+  </div>
+  <div *ngIf="loading" class="page-container" fxLayout="column" fxLayout="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!loading" class="module-content__background" fxLayout="column" fxLayoutGap="16px">
+
+    <h2 class="module-content__title">{{lesson.lessonName}}</h2>
+
+    <p class="module-content__description">{{ lesson.lessonDescription }}</p>
+
+    <h2 class="module-content__title">Anexos</h2>
+
+    <div class="module-content__scroll" fxLayout="row" fxLayoutGap="16px">
+      <div fxLayout="row" fxLayoutGap="16px">
+        <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>
+      </div>
+    </div>
+
+    <div (click)="markAsDone()" *ngIf="!lessonDone" clButtonContained class="bg-sabia-blue-500">
+      <span>Marcar como concluído</span>
+    </div>
+    <div (click)="markAsDone()" *ngIf="lessonDone" clButtonContainedSecondary>
+      <span>Marcar como não concluído</span>
+    </div>
+
+    <p *ngIf="lessonDone" class="module-content__description">Essa lição está marcada como concluída</p>
+
+  </div>
+</navbar>

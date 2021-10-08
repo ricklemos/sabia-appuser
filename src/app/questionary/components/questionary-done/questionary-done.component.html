@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="32px" class="questionary-done">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+    <h1>Parabéns!</h1>
+    <div clBadge diameter="88" bgColor="#39C0BA" class="star">
+      <i clIcon name="cl-star-filled" color="#fff"></i>
+    </div>
+    <h2>Você concluiu o questionário {{ questionaryName }}!</h2>
+  </div>
+  <div fxLayout="column"fxLayoutAlign="center center" fxLayoutGap="16px">
+    <h2 class="score">Você acertou {{ score }} / {{ nQuestions }} questões.</h2>
+    <h2>Nota: {{ grade }}</h2>
+    <p>Quando quiser você pode voltar e fazer uma revisão.</p>
+    <p>Agora você pode colocar seus conhecimentos em prática!</p>
+  </div>
+  <button clButtonContainedSecondary (click)="closeQuestionary()">
+    <span>Concluir</span>
+  </button>
+</div>
+
+

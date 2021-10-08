@@ -1,0 +1,24 @@
+<navbar barTitle="Ranking" disableNavigation="true">
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
+  </div>
+
+  <div class="ranking-page" *ngIf="loading" fxLayout="column" fxLayoutAlign="center stretch">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading" class="ranking-page" fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutGap="8px">
+      <h1>{{ classRanking.courseName }}</h1>
+      <h2>{{ classRanking.schoolName }}</h2>
+      <p>{{ classRanking.classroomName }}</p>
+    </div>
+    <div clCard class="course-box" fxLayout="column" fxLayoutAlign="center stretch">
+      <div *ngFor="let user of classRanking.ranking; let i=index">
+        <ranking-user-data [user]="user" [index]="i+1"></ranking-user-data>
+      </div>
+    </div>
+  </div>
+</navbar>

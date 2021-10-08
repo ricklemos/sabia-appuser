@@ -1,0 +1,11 @@
+<navbar barTitle="Início">
+  <div *ngIf="loading" class="page-container" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!loading">
+    <div class="page" fxLayout="column" fxLayoutAlign="center center">
+      <home-start-now [startNowModule]="startNowModule"></home-start-now>
+    </div>
+    <home-recent-modules [userModules]="recentModules"></home-recent-modules>
+  </div>
+</navbar>

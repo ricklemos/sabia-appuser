@@ -1,0 +1,26 @@
+<div clCard class="courses-module-box__container">
+  <div (click)="goToModule()" clCardContent fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+
+    <div fxLayout="column" fxLayoutGap="8px">
+      <h3>{{ moduleProgress.moduleName }}</h3>
+      <p>{{moduleProgress.institutionName}}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="8px">
+      <p>{{ moduleProgress.moduleProgressPercentage }}%</p>
+      <div class="chart">
+        <canvas
+          [chartType]="pieChartType"
+          [colors]="pieChartColors"
+          [data]="pieChartData"
+          [legend]="pieChartLegend"
+          [options]="pieChartOptions"
+          baseChart>
+        </canvas>
+      </div>
+    </div>
+
+    <button class="link">Começar</button>
+
+  </div>
+</div>

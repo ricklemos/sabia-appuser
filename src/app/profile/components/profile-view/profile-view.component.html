@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutAlign="center center" padding="12px">
+  <div class="container" fxLayout="column" fxLayoutAlign="start center">
+
+    <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
+      <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
+      <!--Caso queira carregar somente a foto do usuário logado, não é necessário passar nenhum parâmetro -->
+      <profile-pic></profile-pic>
+    </div>
+
+    <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>
+    <div dsCard class="info-card" fxLayout="column">
+      <div>
+        <p class="nomeCampo__margin-left">E-mail</p>
+        <div class="info-box" label="Email" large>{{ email }}</div>
+      </div>
+      <div>
+        <p class="nomeCampo__margin-left">Gênero</p>
+        <div class="info-box" label="Genero" large>{{ gender }}</div>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <button class="ds-button" (click)="goEditPage()" margin->Editar</button>
+        <button class="ds-button" (click)="goChangePasswordPage()">Trocar Senha</button>
+      </div>
+    </div>
+    <button clButton color="warn" (click)="signOut()">
+      <span>Sair da Conta</span>
+    </button>
+  </div>
+</div>

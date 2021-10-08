@@ -1,0 +1,45 @@
+<navbar barTitle="Classe" disableNavigation="true">
+
+  <div class="left">
+    <button clButtonIcon (click)="goBack()">
+      <i clIcon name="cl-arrow-left" color="#fff"></i>
+    </button>
+  </div>
+
+  <div class="container" fxLayout="column" fxLayoutAlign="center center" *ngIf="loadingClassroom">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="!loadingClassroom" class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
+      <h1>{{ classroom.courseName }}</h1>
+      <h3>{{ classroom.institutionName }}</h3>
+      <h3>{{ classroom.classroomName }}</h3>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+      <div clCard>
+        <div clCardContent>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <h1>Alunos</h1>
+            <button clButton (click)="goToRanking()">
+              <span>Ranking</span>
+              <i clIcon name="cl-star"></i>
+            </button>
+          </div>
+          <div *ngFor="let student of classroom.students" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+            <p>{{ student }}</p>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="!addStudents" clButtonContainedSecondary (click)="openAddStudentsForm()">
+        <span>Adicionar alunos</span>
+      </button>
+      <classrooms-dash-students-form *ngIf="addStudents" [title]="'Adicionar Alunos'" (formDone)="addedStudents($event)"></classrooms-dash-students-form>
+      <button *ngIf="isAddingStudents" clButtonContainedSecondary (click)="uploadStudents()">
+        <span>Concluir</span>
+      </button>
+    </div>
+  </div>
+
+</navbar>

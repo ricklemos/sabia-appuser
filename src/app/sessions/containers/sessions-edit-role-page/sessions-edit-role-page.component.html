@@ -1,0 +1,16 @@
+<navbar barTitle="Editar perfil do usuário">
+  <div class="page-container">
+    <div clCard>
+      <div clCardContent>
+        <cl-form-component
+          [formConfig]="form"
+          (changes)="getFormChanges($event)"
+          (isValid)="checkIfFormIsValid($event)"
+        ></cl-form-component>
+      </div>
+      <button clButton [disabled]="submitDisabled" (click)="submit()">
+        <span>Confirmar</span>
+      </button>
+    </div>
+  </div>
+</navbar>

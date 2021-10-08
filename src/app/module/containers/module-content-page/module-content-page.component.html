@@ -4,7 +4,7 @@
       <i clIcon name="cl-arrow-left" color="#fff"></i>
     </button>
   </div>
-  <div *ngIf="loading" class="page-container" fxLayout="column" fxLayout="center center">
+  <div *ngIf="loading" class="page-container" fxLayout="column" fxLayoutAlign="center center">
     <mat-spinner></mat-spinner>
   </div>
   <div *ngIf="!loading" class="module-content__background" fxLayout="column" fxLayoutGap="16px">
@@ -13,11 +13,14 @@
 
     <p class="module-content__description">{{ lesson.lessonDescription }}</p>
 
-    <h2 class="module-content__title">Anexos</h2>
+    <div *ngFor="let videoUrl of videosUrls" fxLayout="column" fxLayoutAlign="center center">
+      <iframe [src]="videoUrl" allowfullscreen></iframe>
+    </div>
 
-    <div class="module-content__scroll" fxLayout="row" fxLayoutGap="16px">
+    <h2 *ngIf="otherAttachments.length !== 0" class="module-content__title">Anexos</h2>
+    <div *ngIf="otherAttachments.length !== 0" class="module-content__scroll" fxLayout="row" fxLayoutGap="16px">
       <div fxLayout="row" fxLayoutGap="16px">
-        <attachment-box *ngFor="let attachment of lesson.attachments" [attachment]="attachment"></attachment-box>
+        <attachment-box *ngFor="let attachment of otherAttachments" [attachment]="attachment"></attachment-box>
       </div>
     </div>
 

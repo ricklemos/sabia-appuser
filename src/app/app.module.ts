@@ -18,6 +18,7 @@ import { HomeModule } from './home/home.module';
 import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
 import { StorageService } from './services/storage.service';
 import { WelcomeModule } from './welcome/welcome.module';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { WelcomeModule } from './welcome/welcome.module';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule,
     AngularFirestoreModule,
     ProfileModule,
     SessionsModule,
@@ -44,6 +46,8 @@ import { WelcomeModule } from './welcome/welcome.module';
   providers: [
     UrlService,
     StorageService,
+    ScreenTrackingService,
+    UserTrackingService
   ],
   bootstrap: [AppComponent]
 })

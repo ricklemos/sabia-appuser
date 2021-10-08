@@ -30,7 +30,6 @@ export class WelcomePageComponent implements OnInit {
         return this.welcomeService.fetchCourses();
       }),
       tap(courses => {
-        console.log(courses);
         this.welcomeService.setCourses(courses);
         setTimeout(() => {
           this.ready = true;

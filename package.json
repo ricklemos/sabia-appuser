@@ -1,6 +1,7 @@
 {
   "name": "sabia-appuser",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "build": 1,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

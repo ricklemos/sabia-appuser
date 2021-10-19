@@ -62,6 +62,12 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
       url: this.urlService.getProfileUrl(),
       external: false,
     });
+    this.menuList.push({
+      icon: 'cl-cash',
+      label: 'Carteira de Investimentos',
+      url: this.urlService.getInvestmentWallet(),
+      external: false,
+    });
     const fetchIdToken = this.sessionsRolesService.fetchRoleByIdToken().pipe(
       tap(idToken => {
         const role = idToken.claims.role;

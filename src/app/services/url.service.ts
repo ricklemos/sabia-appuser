@@ -105,4 +105,8 @@ export class UrlService {
   public getWelcomeCoursesPage(): string {
     return `boas-vindas/cursos`;
   }
+
+  public getInvestmentWallet(): string {
+    return '/carteira';
+  }
 }

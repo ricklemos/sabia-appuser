@@ -112,7 +112,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     this.navDrawerService.openNavDrawer();
   }
 
-  logout(): void {
+  signOut(): void {
     this.sessionsLoginService.signOut();
   }
 }

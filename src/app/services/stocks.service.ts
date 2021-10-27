@@ -15,35 +15,34 @@ export class StocksService {
     private angularFirestore: AngularFirestore,
     private httpClient: HttpClient
   ) { }
+  // Retorna os dados da ação do Firebase (coleção simulatorStocks)
   fetchStockByTicker(ticker: string): Observable<any>{
     return this.angularFirestore.doc(`simulatorStocks/${ticker}`).valueChanges();
   }
+  // Atualiza os dados da ação do Firebase (coleção simulatorStocks)
+  // Não seve ser utilizado em produção (update é feito via cloudfunctions).
   updateStockByTicker(ticker: string, data): Promise<any>{
     return this.angularFirestore.doc(`simulatorStocks/${ticker}`).update(data);
   }
+  // Retorna um objeto com os dados históricos da ação (preço, volume, variação diária)
+  // Em tese, não deve ser utilizado, pois esses dados devem vir do firebase
+  fetchStockHistoryByTicker(ticker: string): Observable<any>{
+    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
+  }
+  // Retorna um objeto com os dados atuais da ação (preço, volume, variação diária)
   fetchStockStatusByTicker(ticker: string): Observable<any>{
     return this.httpClient.get(`${this.alphaVantageBaseURL}/query?=GLOBAL_QUOTE&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
   }
+  // Retorna um conjunto de objetos com os resultados da busca
   searchStock(keyword: string): Observable<any> {
-    return this.httpClient.get(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&symbol=${keyword}&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?function=SYMBOL_SEARCH&symbol=${keyword}&apikey=${this.API_KEY}`);
   }
-  // {
-  //   "Realtime Currency Exchange Rate": {
-  //     "1. From_Currency Code": "USD",
-  //     "2. From_Currency Name": "United States Dollar",
-  //     "3. To_Currency Code": "BRL",
-  //     "4. To_Currency Name": "Brazilian Real",
-  //     "5. Exchange Rate": "5.56530000",
-  //     "6. Last Refreshed": "2021-10-27 19:41:21",
-  //     "7. Time Zone": "UTC",
-  //     "8. Bid Price": "5.56527000",
-  //     "9. Ask Price": "5.56537000"
-  //   }
-  // }
+  // Retorna um Objeto com os dados de câmbio do dólar atuais
   fetchCurrentExchangeData(): Observable<any>{
-    return this.httpClient.get(`https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
   }
+  // Retorna um Objeto com os dados de câmbio do dólar histórico
   fetchExchangeDataHistory(): Observable<any>{
-    return this.httpClient.get(`https://www.alphavantage.co/query?function=FX_DAILY&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?function=FX_DAILY&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
   }
 }

@@ -27,22 +27,27 @@ export class StocksService {
   // Retorna um objeto com os dados históricos da ação (preço, volume, variação diária)
   // Em tese, não deve ser utilizado, pois esses dados devem vir do firebase
   fetchStockHistoryByTicker(ticker: string): Observable<any>{
-    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}
+    /query?=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
   }
   // Retorna um objeto com os dados atuais da ação (preço, volume, variação diária)
   fetchStockStatusByTicker(ticker: string): Observable<any>{
-    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?=GLOBAL_QUOTE&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}
+    /query?=GLOBAL_QUOTE&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
   }
   // Retorna um conjunto de objetos com os resultados da busca
   searchStock(keyword: string): Observable<any> {
-    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?function=SYMBOL_SEARCH&symbol=${keyword}&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}
+    /query?function=SYMBOL_SEARCH&symbol=${keyword}&apikey=${this.API_KEY}`);
   }
   // Retorna um Objeto com os dados de câmbio do dólar atuais
   fetchCurrentExchangeData(): Observable<any>{
-    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}
+    /query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
   }
   // Retorna um Objeto com os dados de câmbio do dólar histórico
   fetchExchangeDataHistory(): Observable<any>{
-    return this.httpClient.get(`${this.alphaVantageBaseURL}/query?function=FX_DAILY&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
+    return this.httpClient.get(`${this.alphaVantageBaseURL}
+    /query?function=FX_DAILY&from_currency=USD&to_currency=BRL&apikey=${this.API_KEY}`);
   }
 }

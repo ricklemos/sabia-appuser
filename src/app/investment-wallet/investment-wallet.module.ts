@@ -5,12 +5,16 @@ import { InvestmentWalletOverviewPageComponent } from './containers/investment-w
 import { RouterModule } from '@angular/router';
 import { InvestmentWalletRoutes } from './investment-wallet-routing';
 import { NavigationModule } from '../navigation/navigation.module';
+import { InvestmentWalletTradePageComponent } from './containers/investment-wallet-trade-page/investment-wallet-trade-page.component';
+import { InvestmentWalletProductsPageComponent } from './containers/investment-wallet-products-page/investment-wallet-products-page.component';
 
 
 @NgModule({
   declarations: [
     LayoutInvestmentWalletComponent,
-    InvestmentWalletOverviewPageComponent
+    InvestmentWalletOverviewPageComponent,
+    InvestmentWalletTradePageComponent,
+    InvestmentWalletProductsPageComponent
   ],
   imports: [
     CommonModule,

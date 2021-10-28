@@ -3,8 +3,11 @@ import * as createEnrollments from './create-enrollments';
 import * as updateRankingScore from './update-ranking-score';
 import * as authentication from './authentication';
 import * as updateModuleProgress from './update-module-progress';
+import * as stocks from './stocks';
 
 admin.initializeApp();
+
+export const myFirstCloudFunction = stocks.myFirstCloudFunction;
 
 // Funções de criar enrollment do aluno e documentos necessários para começar o curso.
 export const createEnrollmentWhenCreateUserData = createEnrollments.createEnrollmentWhenCreateUserData;

@@ -6,7 +6,6 @@ import { UrlService } from '../../../services/url.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'profile-view',

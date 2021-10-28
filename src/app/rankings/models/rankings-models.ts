@@ -3,7 +3,7 @@ export interface RankingsClassRanking {
   courseId: string;
   courseName: string;
   classroomName: string;
-  schoolName: string;
+  institutionName: string;
   ranking: RankingsUser[];
 }
 
@@ -20,7 +20,7 @@ export interface RankingsEnrollments {
   courseName: string;
   classroomName: string;
   courseDescription: string;
-  schoolName: string;
+  institutionName: string;
   score?: string;
   courseLink: string;
 }

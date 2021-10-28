@@ -1,5 +1,5 @@
 <div clCard class="courses-module-box__container">
-  <div (click)="goToModule()" clCardContent fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+  <div (click)="goToModule()" clCardContent fxLayout="column" fxLayoutAlign="space stretch" fxLayoutGap="16px">
 
     <div fxLayout="column" fxLayoutGap="8px">
       <h3>{{ moduleProgress.moduleName }}</h3>
@@ -20,7 +20,8 @@
       </div>
     </div>
 
-    <button class="link">Começar</button>
+    <button *ngIf="moduleProgress.moduleProgressPercentage!==0" class="link">Continuar</button>
+    <button *ngIf="moduleProgress.moduleProgressPercentage===0" class="link">Começar</button>
 
   </div>
 </div>

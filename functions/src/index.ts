@@ -7,7 +7,8 @@ import * as stocks from './stocks';
 
 admin.initializeApp();
 
-export const myFirstCloudFunction = stocks.myFirstCloudFunction;
+export const updateStocksData = stocks.updateStocksData;
+export const createStocks = stocks.createStocks;
 
 // Funções de criar enrollment do aluno e documentos necessários para começar o curso.
 export const createEnrollmentWhenCreateUserData = createEnrollments.createEnrollmentWhenCreateUserData;

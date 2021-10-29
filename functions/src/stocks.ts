@@ -74,6 +74,7 @@ export const updateStocksData = functions.https
 // export const updateStocksData = functions.pubsub.schedule('* * * * *')
 //   .onRun(async (context) => {
     const mode = req.query.mode;
+    const outputSize = req.query.size ? req.query.size : 'compact'; // full
     const API_KEY = '4YSTYIK08AMHDKZE';
     const promises: Promise<any>[] = [];
     const fetchStocks = await admin.firestore().collection('simulatorStocks').get();
@@ -81,8 +82,7 @@ export const updateStocksData = functions.https
     stocks.forEach((stock) => {
       const stockData = stock.data();
       let dados = '';
-      https.get(`https://www.alphavantage.co/query?
-      function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockData.ticker}.SAO&apikey=${API_KEY}`, (resolve) => {
+      https.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=${outputSize}&symbol=${stockData.ticker}.SAO&apikey=${API_KEY}`, (resolve) => {
         resolve.on('data', (d) => {
           dados += d;
         });
@@ -92,7 +92,11 @@ export const updateStocksData = functions.https
             const timeSeries = obj['Time Series (Daily)'];
             const transformedTimeSeries: any = {};
             for (const [key, value] of Object.entries(timeSeries)) {
-              transformedTimeSeries[key] = transformData(value);
+              if (key === '2015-07-01' || key === '2015-07-02' || key === '2015-07-03' ){
+                break; // Quebra o for para o objeto não passar de 1MB
+              } else {
+                transformedTimeSeries[key] = transformData(value);
+              }
             }
             const lastDay = getYesterday();
             const lastDayData = transformedTimeSeries[lastDay];

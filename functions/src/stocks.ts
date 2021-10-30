@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 import * as https from 'https';
 
 // .region('southamerica-east1')
-// export const myFirstCloudFunction = functions.pubsub.schedule('*/1 * * * *')
+// export const myFirstCloudFunction = functions.pubsub.schedule('15 6 * * *')
 //   .timeZone('America/New_York') // Users can choose timezone - default is America/Los_Angeles
 //   .onRun((context) => {
 //     const ticker = 'ITUB4';
@@ -39,15 +39,8 @@ export const createStocks = functions.https
         tradingStartDate: '06/07/2021',
         tradingEndDate: '31/12/9999',
         name: 'MAGAZINE LUIZA S.A.'
-      },
-      {
-        ticker: 'COGN3',
-        category: 'SHARES',
-        tradingStartDate: '26/04/2021',
-        tradingEndDate: '31/12/9999',
-        name: 'COGNA EDUCA��O S.A.'
       }
-    ];
+      ];
     // const stocks = [
     //   {
     //     ticker: 'PETR4',
@@ -1454,97 +1447,15 @@ export const createStocks = functions.https
 
   });
 
-// export const callUpdateStocksDataWhenUpdatedStock = functions.firestore.document('simulatorStocks/{stock}')
-//   .onUpdate((snap) => {
-//     const data = snap.after.data();
-//     console.log('dados atualizados:', data);
-//     setTimeout(() => {
-//       updateStocksData.call((resolve) => {
-//         resolve.on('end', () => {
-//         });
-//       });
-//       return https.get('http://localhost:5001/fpgr-tcc/us-central1/updateStocksData?mode=all&size=compact', (resolve) => {
-//
-//       });
-//     }, 15000);
-//
-//   });
-
-// export const updateStocksData = functions.https
-//   .onRequest(async (req, res) => {
-// // export const updateStocksData = functions.pubsub.schedule('* * * * *')
-// //   .onRun(async (context) => {
-//     const mode = req.query.mode;
-//     const outputSize = req.query.size ? req.query.size : 'compact'; // full
-//     const API_KEY = '4YSTYIK08AMHDKZE';
-//     const promises: Promise<any>[] = [];
-//     const now = new Date();
-//     const today = new Date(now.getFullYear(), now.getMonth() , now.getDate());
-//     const fetchStocks = await admin.firestore().collection('simulatorStocks')
-//       .where('lastUpdated', '<=', today)
-//       .get();
-//     const stocks = [];
-//     stocks.push(fetchStocks.docs[0]);
-//     stocks.push(fetchStocks.docs[1]);
-//     stocks.push(fetchStocks.docs[2]);
-//     stocks.push(fetchStocks.docs[3]);
-//     stocks.forEach((stock) => {
-//       const stockData = stock.data();
-//       let dados = '';
-//       https.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=${outputSize}&symbol=${stockData.ticker}.SAO&apikey=${API_KEY}`, (resolve) => {
-//         resolve.on('data', (d) => {
-//           dados += d;
-//         });
-//         resolve.on('end', () => {
-//           const obj = JSON.parse(dados);
-//           if (obj['Time Series (Daily)']) {
-//             if (mode === 'all') {
-//               const timeSeries = obj['Time Series (Daily)'];
-//               const transformedTimeSeries: any = {};
-//               for (const [key, value] of Object.entries(timeSeries)) {
-//                 if (key === '2015-07-01' || key === '2015-07-02' || key === '2015-07-03') {
-//                   break; // Quebra o for para o objeto não passar de 1MB
-//                 } else {
-//                   transformedTimeSeries[key] = transformData(value);
-//                 }
-//               }
-//               const lastDay = getYesterday();
-//               const lastDayData = transformedTimeSeries[lastDay];
-//               const path = `timeSeriesDaily`;
-//               promises.push(admin.firestore().doc(`simulatorStocks/${stockData.ticker}`)
-//                 .update({
-//                   [path]: transformedTimeSeries,
-//                   currentPrice: lastDayData.close,
-//                   lastUpdated: new Date()
-//                 }));
-//             } else {
-//               const lastDay = getYesterday();
-//               const lastDayData = obj['Time Series (Daily)'][lastDay];
-//               const transformedData = transformData(lastDayData);
-//               const path = `timeSeriesDaily.${lastDay}`;
-//               promises.push(admin.firestore().doc(`simulatorStocks/${stockData.ticker}`)
-//                 .update({
-//                   [path]: transformedData,
-//                   currentPrice: transformedData.close,
-//                   lastUpdated: new Date()
-//                 }));
-//             }
-//           }
-//         });
-//       });
-//     });
-//     Promise.all(promises).then(() => res.send(200));
-//     // return Promise.all(promises);
-//   });
-
-export const scheduledUpdate = functions.https.onRequest((req, res) => {
-  admin.firestore().doc('simulatorStocks/1_RUN_CF')
+export const scheduledUpdate = functions.pubsub.schedule('29 6 * * *').onRun((context) => {
+  return admin.firestore().doc('simulatorStocks/1_RUN_CF')
     .update({
       lastCall: new Date(),
       mode: '',
       outputSize: 'compact'
     })
-    .then(() => res.send(200));
+    .then(() => true)
+    .catch(() => false);
 });
 
 export const updateStocksData = functions.firestore.document('simulatorStocks/{stock}')

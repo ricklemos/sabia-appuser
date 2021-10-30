@@ -1537,10 +1537,22 @@ export const createStocks = functions.https
 //     // return Promise.all(promises);
 //   });
 
+export const scheduledUpdate = functions.https.onRequest((req, res) => {
+  admin.firestore().doc('simulatorStocks/1_RUN_CF')
+    .update({
+      lastCall: new Date(),
+      mode: '',
+      outputSize: 'compact'
+    })
+    .then(() => res.send(200));
+});
+
 export const updateStocksData = functions.firestore.document('simulatorStocks/{stock}')
-  .onUpdate(async () => {
-    const mode = 'all';
-    const outputSize = 'compact'; // full
+  .onUpdate(async (snap) => {
+    // Dados do documentos que foi alterado
+    const data = snap.after.data();
+    const mode = data.mode; // all | ""
+    const outputSize = data.outputSize; // full | compact
     const API_KEY = '4YSTYIK08AMHDKZE';
     const promises: Promise<any>[] = [];
     const now = new Date();

@@ -7,6 +7,7 @@ import * as stocks from './stocks';
 
 admin.initializeApp();
 
+// export const callUpdateStocksDataWhenUpdatedStock = stocks.callUpdateStocksDataWhenUpdatedStock;
 export const updateStocksData = stocks.updateStocksData;
 export const createStocks = stocks.createStocks;
 

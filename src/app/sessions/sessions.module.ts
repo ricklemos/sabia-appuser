@@ -62,7 +62,7 @@ import { NavigationModule } from '../navigation/navigation.module';
     CollactComponentsModule,
     CollactDesignSystemModule,
     MatDialogModule,
-    NavigationModule
+    NavigationModule,
   ],
   entryComponents: [
     SessionsInvalidEmailDialogComponent

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,15 @@ export class StocksService {
     private angularFirestore: AngularFirestore,
     private httpClient: HttpClient
   ) { }
+
+  searchStocks(ticker): Observable<any> {
+    return this.angularFirestore.collection('simulatorStocks', ref => ref
+      .limit(5)
+      .orderBy('ticker')
+      .startAt(ticker)
+      .endAt(ticker + '\uf8ff')
+    ).valueChanges();
+  }
   // Retorna os dados da ação do Firebase (coleção simulatorStocks)
   fetchStockByTicker(ticker: string): Observable<any>{
     return this.angularFirestore.doc(`simulatorStocks/${ticker}`).valueChanges();
@@ -36,7 +45,7 @@ export class StocksService {
     /query?=GLOBAL_QUOTE&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
   }
   // Retorna um conjunto de objetos com os resultados da busca
-  searchStock(keyword: string): Observable<any> {
+  searchStockFromApi(keyword: string): Observable<any> {
     return this.httpClient.get(`${this.alphaVantageBaseURL}
     /query?function=SYMBOL_SEARCH&symbol=${keyword}&apikey=${this.API_KEY}`);
   }

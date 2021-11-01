@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ClFieldConfig } from 'collact-components';
-import { Validators } from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import { SessionsRolesService } from '../../services/sessions-roles.service';
-import { tap } from 'rxjs/operators';
-import { noop } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+import { noop, of } from 'rxjs';
 import { SessionsRole } from '../../models/sessions-models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StocksService } from '../../../services/stocks.service';
 
 @Component({
   selector: 'sessions-edit-role-page',
@@ -54,12 +55,32 @@ export class SessionsEditRolePageComponent implements OnInit {
   userEmail: string;
   role: SessionsRole;
 
+  results: any;
+  searchValue = new FormControl('');
   constructor(
     private sessionsRolesService: SessionsRolesService,
-    private matSnackBar: MatSnackBar
-  ) { }
+    private matSnackBar: MatSnackBar,
+    private stocksService: StocksService,
+  ) {
+
+  }
 
   ngOnInit(): void {
+    this.searchValue.valueChanges.pipe(
+      switchMap((ticker) => {
+        ticker = ticker.toUpperCase();
+        console.log('acao', ticker);
+        if (ticker !== ''){
+          return this.stocksService.searchStocks(ticker);
+        } else {
+          return of(null);
+        }
+      }),
+      tap((array) => {
+        console.log('r', array);
+        this.results = array;
+      })
+    ).subscribe(noop);
   }
 
   getFormChanges($event): void {

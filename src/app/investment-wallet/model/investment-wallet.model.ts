@@ -25,3 +25,38 @@ export interface InvestmentProduct {
   currentValue?: number;
 }
 
+export interface InvestmentWallet {
+  userId: string,
+  balance: number,
+  stocksEvents: stocksEvent[],
+  publicFixesIncomeEvents: publicFixedIncomeEvent[],
+  privateFixedIncomeEvents: privateFixedIncomeEvent[];
+}
+
+export interface stocksEvent {
+  type: 'BUY' | 'SELL',
+  dateTime: Date,
+  ticker: string,
+  name: string,
+  quotas: number,
+  price: number;
+}
+
+export interface publicFixedIncomeEvent {
+  type: 'BUY' | 'SELL',
+  dateTime: Date,
+  // ticker: string,
+  // name: string,
+  // quotas: number,
+  // price: number;
+}
+
+export interface privateFixedIncomeEvent {
+  type: 'BUY' | 'SELL',
+  dateTime: Date,
+  // ticker: string,
+  // name: string,
+  // quotas: number,
+  // price: number;
+}
+

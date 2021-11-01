@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WalletService } from '../../services/wallet.service';
 
 @Component({
   selector: 'investment-wallet-overview-page',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvestmentWalletOverviewPageComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private walletService: WalletService
+  ) {
   }
 
   ngOnInit(): void {
   }
-
 }

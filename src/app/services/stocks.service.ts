@@ -18,12 +18,22 @@ export class StocksService {
 
   searchStocks(ticker): Observable<any> {
     return this.angularFirestore.collection('simulatorStocks', ref => ref
-      .limit(5)
+      .limit(4)
       .orderBy('ticker')
       .startAt(ticker)
       .endAt(ticker + '\uf8ff')
     ).valueChanges();
   }
+
+  searchStocksByName(name): Observable<any> {
+    return this.angularFirestore.collection('simulatorStocks', ref => ref
+      .limit(4)
+      .orderBy('name')
+      .startAt(name)
+      .endAt(name + '\uf8ff')
+    ).valueChanges();
+  }
+
   // Retorna os dados da ação do Firebase (coleção simulatorStocks)
   fetchStockByTicker(ticker: string): Observable<any>{
     return this.angularFirestore.doc(`simulatorStocks/${ticker}`).valueChanges();

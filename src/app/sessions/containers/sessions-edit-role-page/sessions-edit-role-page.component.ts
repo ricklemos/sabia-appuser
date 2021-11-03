@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClFieldConfig } from 'collact-components';
 import {FormControl, Validators} from '@angular/forms';
 import { SessionsRolesService } from '../../services/sessions-roles.service';
-import { switchMap, tap } from 'rxjs/operators';
-import { noop, of } from 'rxjs';
+import {switchMap, tap} from 'rxjs/operators';
+import { noop, of} from 'rxjs';
 import { SessionsRole } from '../../models/sessions-models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StocksService } from '../../../services/stocks.service';
@@ -67,13 +67,13 @@ export class SessionsEditRolePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchValue.valueChanges.pipe(
-      switchMap((ticker) => {
-        ticker = ticker.toUpperCase();
-        console.log('acao', ticker);
-        if (ticker !== ''){
-          return this.stocksService.searchStocks(ticker);
+      switchMap((text) => {
+        text = text.toUpperCase();
+        console.log('texto a procurar', text);
+        if (text !== ''){
+          return this.stocksService.searchStocks(text), this.stocksService.searchStocksByName(text);
         } else {
-          return of(null);
+          return of(null), of(null);
         }
       }),
       tap((array) => {

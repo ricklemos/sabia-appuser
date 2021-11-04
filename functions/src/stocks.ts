@@ -1470,6 +1470,7 @@ export const updateStocksData = functions // .region('southamerica-east1')
             const obj = JSON.parse(dados);
             if (obj['Time Series (Daily)']) {
               const timeSeries = obj['Time Series (Daily)'];
+              const pathStocksAll = `stockPrices.${stockData.ticker}`;
               // Caso o modo seja 'all', irá atualizar toda a série histórica da ação até a data de 03/07/2015
               if (mode === 'all') {
                 const transformedTimeSeries: any = {};
@@ -1488,6 +1489,12 @@ export const updateStocksData = functions // .region('southamerica-east1')
                     currentPrice: lastDayData.close,
                     lastUpdated: new Date()
                   }));
+                // Atualiza o vetor único de ações
+                promises.push(admin.firestore().doc(`simulatorStocks/allStocks`)
+                  .update({
+                    [pathStocksAll]: lastDayData.close,
+                    lastUpdated: new Date()
+                  }));
                 // Caso o modo não seja 'all', irá atualizar somente o dia mais recente.
               } else {
                 const lastDayData = timeSeries[Object.keys(timeSeries)[0]];
@@ -1498,6 +1505,12 @@ export const updateStocksData = functions // .region('southamerica-east1')
                   .update({
                     [path]: transformedData,
                     currentPrice: transformedData.close,
+                    lastUpdated: new Date()
+                  }));
+                // Atualiza o vetor único de ações
+                promises.push(admin.firestore().doc(`simulatorStocks/1_ALL_STOCKS`)
+                  .update({
+                    [pathStocksAll]: transformedData.close,
                     lastUpdated: new Date()
                   }));
               }

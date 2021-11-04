@@ -34,6 +34,11 @@ export class StocksService {
     ).valueChanges();
   }
 
+  // Retorna o documento com o preço atual de todas as ações
+  fetchAllStockPrices(): Observable<any> {
+    return this.angularFirestore.doc('simulatorStocks/1_ALL_STOCKS').get();
+  }
+
   // Retorna os dados da ação do Firebase (coleção simulatorStocks)
   fetchStockByTicker(ticker: string): Observable<any>{
     return this.angularFirestore.doc(`simulatorStocks/${ticker}`).valueChanges();

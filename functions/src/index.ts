@@ -3,8 +3,14 @@ import * as createEnrollments from './create-enrollments';
 import * as updateRankingScore from './update-ranking-score';
 import * as authentication from './authentication';
 import * as updateModuleProgress from './update-module-progress';
+import * as stocks from './stocks';
 
 admin.initializeApp();
+
+// Funções de atualizar ações para o simulador
+export const scheduledUpdate = stocks.scheduledUpdate;
+export const updateStocksData = stocks.updateStocksData;
+export const createStocks = stocks.createStocks;
 
 // Funções de criar enrollment do aluno e documentos necessários para começar o curso.
 export const createEnrollmentWhenCreateUserData = createEnrollments.createEnrollmentWhenCreateUserData;

@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { SessionsRolesService } from '../../sessions/services/sessions-roles.service';
 import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
+import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 
 @Component({
   selector: 'navbar',
@@ -27,7 +28,8 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     private title: Title,
     private navDrawerService: ClNavDrawerService,
     private urlService: UrlService,
-    private sessionsRolesService: SessionsRolesService
+    private sessionsRolesService: SessionsRolesService,
+    private sessionsLoginService: SessionsLoginService
   ) {
     this.isOpen = false;
     const subNavDrawer = this.navDrawerService
@@ -110,7 +112,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     this.navDrawerService.openNavDrawer();
   }
 
-  logout(): void {
-    console.log('logout()');
+  signOut(): void {
+    this.sessionsLoginService.signOut();
   }
 }

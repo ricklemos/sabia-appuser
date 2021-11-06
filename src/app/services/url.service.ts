@@ -109,4 +109,18 @@ export class UrlService {
   public getInvestmentWallet(): string {
     return '/carteira';
   }
+
+  public getInvestmentWalletModule(moduleName): string {
+    const url = [this.getInvestmentWallet()];
+    url.push('produtos');
+    url.push(moduleName);
+    return url.join('/');
+  }
+
+  public getInvestmentWalletProductDetails(moduleName, productId): string {
+    const url = [this.getInvestmentWalletModule(moduleName)];
+    url.push('trade');
+    url.push(productId);
+    return url.join('/');
+  }
 }

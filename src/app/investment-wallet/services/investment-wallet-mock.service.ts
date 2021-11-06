@@ -38,7 +38,7 @@ export class InvestmentWalletMockService {
     ];
   }
 
-  getProductList(moduleName: InvestmentModule['moduleName']): InvestmentProduct[] {
+  getProductList(moduleName: string): InvestmentProduct[] {
     return PRODUCTS.filter(iP => iP.module === moduleName);
   }
 

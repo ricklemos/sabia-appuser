@@ -7,6 +7,10 @@ import { InvestmentWalletRoutes } from './investment-wallet-routing';
 import { NavigationModule } from '../navigation/navigation.module';
 import { InvestmentWalletTradePageComponent } from './containers/investment-wallet-trade-page/investment-wallet-trade-page.component';
 import { InvestmentWalletProductsPageComponent } from './containers/investment-wallet-products-page/investment-wallet-products-page.component';
+import { InvestmentWalletProductListComponent } from './components/investment-wallet-product-list/investment-wallet-product-list.component';
+import { CollactDesignSystemModule } from 'collact-design-system';
+import { CollactComponentsModule } from 'collact-components';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NumeralPipe } from './pipes/numeral.pipe';
 
 
@@ -16,6 +20,7 @@ import { NumeralPipe } from './pipes/numeral.pipe';
     InvestmentWalletOverviewPageComponent,
     InvestmentWalletTradePageComponent,
     InvestmentWalletProductsPageComponent,
+    InvestmentWalletProductListComponent,
     NumeralPipe,
   ],
   imports: [
@@ -23,6 +28,9 @@ import { NumeralPipe } from './pipes/numeral.pipe';
     RouterModule,
     RouterModule.forRoot(InvestmentWalletRoutes),
     NavigationModule,
+    CollactDesignSystemModule,
+    CollactComponentsModule,
+    FlexLayoutModule,
   ]
 })
 export class InvestmentWalletModule {

@@ -1,0 +1,16 @@
+<div clCard fxLayout="column" fxLayoutGap="16px">
+  <div clCardTitle>
+    <h2>Produtos</h2>
+  </div>
+  <cl-list-item *ngFor="let product of productList" [action]="true" [routerLink]="getProductUrl(product)">
+    <div fxFlex="60" left>
+      <p>{{ product.id }}</p>
+    </div>
+    <div *ngIf="product.variationDay" fxFlex="40" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px" right>
+      <p
+        [ngClass]="product.variationDay < 0 ? 'red-700' : 'green-700'">{{ product.variationDay | numeral: 'percentage' }}
+        %</p>
+      <i clIconSmall name="cl-chevron-right"></i>
+    </div>
+  </cl-list-item>
+</div>

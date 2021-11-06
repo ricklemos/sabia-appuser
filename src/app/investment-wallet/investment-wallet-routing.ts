@@ -14,12 +14,12 @@ export const InvestmentWalletRoutes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'produtos',
+        path: 'produtos/:moduleId',
         component: InvestmentWalletProductsPageComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'trade',
+        path: 'produtos/:moduleId/trade/:productId',
         component: InvestmentWalletTradePageComponent,
         canActivate: [AuthGuard],
       }

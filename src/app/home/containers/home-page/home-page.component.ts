@@ -9,25 +9,25 @@ import { HomeModuleProgress } from '../../models/module';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
-  loading: boolean = true;
+export class HomePageComponent implements OnInit, OnDestroy {
+  loading = true;
   recentModules: HomeModuleProgress[] = [];
   startNowModules: HomeModuleProgress[] = [];
   startNowModule: HomeModuleProgress;
   unsubscribe = [];
 
   constructor(
-    private homeService: HomeService
+    private homeService: HomeService,
   ) {
   }
 
   ngOnInit(): void {
     const fetchModules = this.homeService.fetchModules().pipe(
       tap(query => {
-        this.recentModules = query.filter(module => module.moduleProgressPercentage != 0);
-        this.startNowModules = query.filter(module => module.moduleProgressPercentage == 0);
+        this.recentModules = query.filter(module => module.moduleProgressPercentage !== 0);
+        this.startNowModules = query.filter(module => module.moduleProgressPercentage === 0);
         this.loading = false;
-        if (this.startNowModules.length == 0) {
+        if (this.startNowModules.length === 0) {
           this.startNowModule = this.recentModules[0];
         } else {
           this.startNowModule = this.startNowModules[0];
@@ -36,8 +36,7 @@ export class HomePageComponent implements OnInit {
     ).subscribe(noop);
     this.unsubscribe.push(fetchModules);
   }
-
-  OnDestroy(): void {
+  ngOnDestroy(): void {
     this.unsubscribe.map(u => u.unsubscribe);
   }
 }

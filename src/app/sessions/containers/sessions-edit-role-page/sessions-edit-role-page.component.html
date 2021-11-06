@@ -12,5 +12,15 @@
         <span>Confirmar</span>
       </button>
     </div>
+
+    <div clCard>
+      <div clCardContent>
+        <input type="text" [formControl]="searchValue">
+        <div *ngFor="let result of results">
+          {{ result.ticker }}
+        </div>
+      </div>
+    </div>
+
   </div>
 </navbar>

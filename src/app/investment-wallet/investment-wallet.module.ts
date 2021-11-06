@@ -7,6 +7,7 @@ import { InvestmentWalletRoutes } from './investment-wallet-routing';
 import { NavigationModule } from '../navigation/navigation.module';
 import { InvestmentWalletTradePageComponent } from './containers/investment-wallet-trade-page/investment-wallet-trade-page.component';
 import { InvestmentWalletProductsPageComponent } from './containers/investment-wallet-products-page/investment-wallet-products-page.component';
+import { NumeralPipe } from './pipes/numeral.pipe';
 
 
 @NgModule({
@@ -14,13 +15,14 @@ import { InvestmentWalletProductsPageComponent } from './containers/investment-w
     LayoutInvestmentWalletComponent,
     InvestmentWalletOverviewPageComponent,
     InvestmentWalletTradePageComponent,
-    InvestmentWalletProductsPageComponent
+    InvestmentWalletProductsPageComponent,
+    NumeralPipe,
   ],
   imports: [
     CommonModule,
     RouterModule,
     RouterModule.forRoot(InvestmentWalletRoutes),
-    NavigationModule
+    NavigationModule,
   ]
 })
 export class InvestmentWalletModule {

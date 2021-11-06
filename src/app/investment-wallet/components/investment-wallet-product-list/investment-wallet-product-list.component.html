@@ -9,7 +9,11 @@
     <div *ngIf="product.variationDay" fxFlex="40" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px" right>
       <p
         [ngClass]="product.variationDay < 0 ? 'red-700' : 'green-700'">{{ product.variationDay | numeral: 'percentage' }}
-        %</p>
+      </p>
+      <i clIconSmall name="cl-chevron-right"></i>
+    </div>
+    <div *ngIf="product.yield" fxFlex="40" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px" right>
+      <p>{{ product.yield }}</p>
       <i clIconSmall name="cl-chevron-right"></i>
     </div>
   </cl-list-item>

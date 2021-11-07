@@ -1,0 +1,22 @@
+@import '~collact-design-system/styles/colors';
+
+:host {
+  width: 100%;
+  max-width: 500px;
+}
+
+h2, h3 {
+  font-family: ProximaNovaBold, sans-serif;
+  font-size: 20px;
+  color: $black-alpha-700;
+}
+
+h3 {
+  font-size: 16px;
+  color: $black-alpha-500;
+}
+
+p {
+  font-family: ProximaNova, sans-serif;
+  font-size: 14px;
+}

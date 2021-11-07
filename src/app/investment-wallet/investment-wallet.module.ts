@@ -13,6 +13,7 @@ import { CollactComponentsModule } from 'collact-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NumeralPipe } from './pipes/numeral.pipe';
 import { InvestmentWalletProductVariableIncomeComponent } from './components/investment-wallet-product-variable-income/investment-wallet-product-variable-income.component';
+import { InvestmentWalletProductFixedIncomeComponent } from './components/investment-wallet-product-fixed-income/investment-wallet-product-fixed-income.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { InvestmentWalletProductVariableIncomeComponent } from './components/inv
     InvestmentWalletProductListComponent,
     NumeralPipe,
     InvestmentWalletProductVariableIncomeComponent,
+    InvestmentWalletProductFixedIncomeComponent,
   ],
   imports: [
     CommonModule,

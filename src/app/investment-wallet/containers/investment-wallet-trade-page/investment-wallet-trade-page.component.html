@@ -1,3 +1,15 @@
-<navbar barTitle="Carteira de Investimentos">
-  <p>investment-wallet-trade-page works!</p>
+<navbar [barTitle]="product.id" [disableNavigation]="true">
+
+  <div class="left">
+    <button (click)="goBack()" clButtonIcon>
+      <i clIcon color="#fff" name="cl-arrow-left"></i>
+    </button>
+  </div>
+
+  <div class="products-page" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
+    <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
+                                               [product]="product"></investment-wallet-product-variable-income>
+    <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
+                                            [product]="product"></investment-wallet-product-fixed-income>
+  </div>
 </navbar>

@@ -1,0 +1,45 @@
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h2>{{ product.id }}</h2>
+      <p *ngIf="product.yield">{{ product.yield }}</p>
+    </div>
+    <h3>Variação</h3>
+    <div clCardOutline>
+      <div clCardContentList>
+        <cl-list-item divider="middle">
+          <div fxFlex="50" left>
+            <p>Ontem</p>
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
+            <p
+              [ngClass]="product.variationDay < 0 ? 'red-700' : 'green-700'">{{ product.variationDay | numeral: 'percentage' }}</p>
+          </div>
+        </cl-list-item>
+        <cl-list-item divider="middle">
+          <div fxFlex="50" left>
+            <p>Último mês</p>
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
+            <p
+              [ngClass]="product.variationMonth < 0 ? 'red-700' : 'green-700'">{{ product.variationMonth | numeral: 'percentage' }}</p>
+          </div>
+        </cl-list-item>
+        <cl-list-item>
+          <div fxFlex="50" left>
+            <p>Último ano</p>
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
+            <p
+              [ngClass]="product.variationYear < 0 ? 'red-700' : 'green-700'">{{ product.variationYear | numeral: 'percentage' }}</p>
+          </div>
+        </cl-list-item>
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="8px">
+      <p class="black-alpha-500">Valor da ação hoje</p>
+      <h3>R${{ product.currentValue / 100 | numeral: 'currency' }}</h3>
+    </div>
+  </div>
+</div>

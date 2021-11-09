@@ -1490,7 +1490,7 @@ export const updateStocksData = functions // .region('southamerica-east1')
                     lastUpdated: new Date()
                   }));
                 // Atualiza o vetor único de ações
-                promises.push(admin.firestore().doc(`simulatorStocks/allStocks`)
+                promises.push(admin.firestore().doc(`simulatorStocks/1_ALL_STOCKS`)
                   .update({
                     [pathStocksAll]: lastDayData.close,
                     lastUpdated: new Date()
@@ -1517,10 +1517,11 @@ export const updateStocksData = functions // .region('southamerica-east1')
             } else {
               // Log para o firebase caso a API não possua os dados históricos.
               console.log('Cannot get from API:', stockData.ticker);
+              console.log('API result:', dados);
             }
           });
         });
-      }, 15000);
+      }, 60000);
       return Promise.all(promises).then(() => true);
     } else {
       return false;

@@ -1,0 +1,7 @@
+.products-page {
+  height: 100%;
+  padding: 24px;
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
+}

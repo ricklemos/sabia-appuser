@@ -19,6 +19,7 @@ import { ClassroomsDashModule } from './classrooms-dash/classrooms-dash.module';
 import { StorageService } from './services/storage.service';
 import { WelcomeModule } from './welcome/welcome.module';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { InvestmentWalletModule } from './investment-wallet/investment-wallet.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService 
     CoursesModule,
     ClassroomsDashModule,
     HomeModule,
-    WelcomeModule
+    WelcomeModule,
+    InvestmentWalletModule,
   ],
   providers: [
     UrlService,

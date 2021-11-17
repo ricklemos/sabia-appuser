@@ -5,6 +5,7 @@ import { LayoutModuleComponent } from './module/layout/layout-module/layout-modu
 import { LayoutRankingsComponent } from './rankings/layout/layout-rankings/layout-rankings.component';
 import { LayoutClassroomsDashComponent } from './classrooms-dash/layout/layout-classrooms-dash/layout-classrooms-dash.component';
 import { LayoutWelcomeComponent } from './welcome/layout/layout-welcome/layout-welcome.component';
+import { LayoutInvestmentWalletComponent } from './investment-wallet/layout/layout-investment-wallet/layout-investment-wallet.component';
 
 const routes: Routes = [
 
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'boas-vindas',
     component: LayoutWelcomeComponent
+  },
+  {
+    path: '',
+    component: LayoutInvestmentWalletComponent
   }
 
 ];

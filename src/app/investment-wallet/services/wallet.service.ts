@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 import { noop, Subscription } from 'rxjs';
-import { InvestmentWallet } from '../model/investment-wallet.model';
 import { tap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
@@ -21,7 +20,7 @@ export class WalletService {
   ) {
   }
 
-  //Dá subscribe na carteira do aluno para que leituras e alterações sejam feitas futuramente
+  // Dá subscribe na carteira do aluno para que leituras e alterações sejam feitas futuramente
   getWallet(): void {
     this.uId = this.sessionService.getUserId();
 
@@ -44,7 +43,7 @@ export class WalletService {
   }
 
 
-  //Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
+  // Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
   buyStocks(ticker: string, quotas: number, price: number): Promise<any> {
     return this.firestore.doc(`simulatorWallet/${ this.walletId }`).update(
       {
@@ -53,9 +52,9 @@ export class WalletService {
           {
             type: 'BUY',
             dateTime: new Date(),
-            ticker: ticker,
-            quotas: quotas,
-            price: price
+            ticker,
+            quotas,
+            price
           }
         )
       }
@@ -63,7 +62,7 @@ export class WalletService {
   }
 
 
-  //Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
+  // Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
   sellStocks(ticker: string, quotas: number, price: number): Promise<any> {
     return this.firestore.doc(`simulatorWallet/${ this.walletId }`).update(
       {
@@ -72,37 +71,35 @@ export class WalletService {
           {
             type: 'SELL',
             dateTime: new Date(),
-            ticker: ticker,
-            quotas: quotas,
-            price: price
+            ticker,
+            quotas,
+            price
           }
         )
       }
     );
   }
 
-  //Cálculo do rendimento de uma ação da carteira
+  // Cálculo do rendimento de uma ação da carteira
   stockYield(ticker: string, currentPrice: number): any {
     let mediumPrice = 0;
     let totalQuota = 0;
-    const stocks = this.wallet.stocksEvents.filter((stock) => stock.ticker == ticker);
+    const stocks = this.wallet.stocksEvents.filter((stock) => stock.ticker === ticker);
     stocks.forEach((stock) => {
-      if(stock.type == 'BUY'){
+      if (stock.type === 'BUY') {
         mediumPrice += stock.price * stock.quotas;
         totalQuota += stock.quotas;
-      }
-      else if (stock.type == 'SELL'){
+      } else if (stock.type === 'SELL') {
         mediumPrice -= stock.price * stock.quotas;
         totalQuota -= stock.quotas;
       }
-    })
-    if(totalQuota != 0){
-      mediumPrice = mediumPrice/totalQuota;
-    }
-    else {
+    });
+    if (totalQuota !== 0) {
+      mediumPrice = mediumPrice / totalQuota;
+    } else {
       return 'usuario sem cotas';
     }
-    return (currentPrice - mediumPrice)/mediumPrice;
+    return (currentPrice - mediumPrice) / mediumPrice;
   }
 
 }

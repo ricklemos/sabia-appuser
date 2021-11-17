@@ -85,6 +85,13 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         }
       })
     ).subscribe(noop);
+    this.menuList.push({
+      icon: 'cl-contact-us',
+      label: 'Bugs e Feedback',
+      url: 'https://forms.gle/2M95u1k1gXJGe2xH8',
+      external: true,
+      target: '_blank'
+    });
     this.subscriptions.push(fetchIdToken);
   }
 

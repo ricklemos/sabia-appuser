@@ -10,6 +10,8 @@ export class NumeralPipe implements PipeTransform {
     switch (type) {
       case 'percentage':
         return numeral(value).format('0.00%');
+      case 'currency':
+        return numeral(value).format('0,0.00');
     }
     return null;
   }

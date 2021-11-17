@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -36,18 +37,40 @@ export class StocksService {
 
   // Retorna o documento com o preço atual de todas as ações
   fetchAllStockPrices(): Observable<any> {
-    return this.angularFirestore.doc('simulatorStocks/1_ALL_STOCKS').get();
+    return this.angularFirestore.doc('simulatorStocks/1_ALL_STOCKS').get().pipe(
+      map(res => res.data()),
+      map(data => {
+        // @ts-ignore
+        const { stockPrices } = data;
+        const response = [];
+        if (stockPrices) {
+          const entries = Object.entries(stockPrices);
+          entries.forEach(entry => {
+            response.push({
+              ticker: entry[0],
+              price: entry[1]
+            });
+          });
+        }
+        return response;
+      })
+    );
   }
 
-  // Retorna os dados da ação do Firebase (coleção simulatorStocks)
-  fetchStockByTicker(ticker: string): Observable<any>{
-    return this.angularFirestore.doc(`simulatorStocks/${ticker}`).valueChanges();
+  /**
+   * Retorna os dados da ação do Firebase (coleção simulatorStocks)
+   * @param ticker stock identifier
+   */
+  fetchStockByTicker(ticker: string): Observable<any> {
+    return this.angularFirestore.doc(`simulatorStocks/${ ticker }`).valueChanges();
   }
+
   // Atualiza os dados da ação do Firebase (coleção simulatorStocks)
   // Não seve ser utilizado em produção (update é feito via cloudfunctions).
-  updateStockByTicker(ticker: string, data): Promise<any>{
-    return this.angularFirestore.doc(`simulatorStocks/${ticker}`).update(data);
+  updateStockByTicker(ticker: string, data): Promise<any> {
+    return this.angularFirestore.doc(`simulatorStocks/${ ticker }`).update(data);
   }
+
   // Retorna um objeto com os dados históricos da ação (preço, volume, variação diária)
   // Em tese, não deve ser utilizado, pois esses dados devem vir do firebase
   fetchStockHistoryByTicker(ticker: string): Observable<any>{

@@ -24,7 +24,7 @@ export class EditDataComponent implements OnInit, OnDestroy {
   loading = false;
   unsubscribe = [];
 
-  uploadProgress: string;
+  uploadProgress: number;
   uploading: boolean;
   deleting: boolean;
   uid: string;
@@ -84,7 +84,7 @@ export class EditDataComponent implements OnInit, OnDestroy {
     // TODO: Show MatDialog asking the user before deleting
     this.deleting = true;
     const deletePic = this.modifyUserDataService.deleteUserProfilePic().pipe(
-      tap(data => this.deleting = false)
+      tap(() => this.deleting = false)
     ).subscribe(noop);
     this.subscriptions.push(deletePic);
   }
@@ -99,13 +99,13 @@ export class EditDataComponent implements OnInit, OnDestroy {
       if (file.type === 'image/jpeg' || file.type === 'image/png') {
         // Coloca o estado "uploading" em true para dar feedback de uplaod para o usuário
         this.uploading = true;
-        this.uploadProgress = '1';
+        this.uploadProgress = 1;
         // Chama a função de upload
         const task = this.modifyUserDataService.updateProfilePic(file);
         // Apresenta a porcentagem de conclusão do upload da foto que entra como valor do "mat-progress"
         task.percentageChanges().pipe(
           tap((percentage) => {
-            this.uploadProgress = Math.round(percentage).toFixed(0);
+            this.uploadProgress = Math.round(percentage);
           }),
         ).subscribe(noop);
         // A foto só pode voltar a ser mostrada se o upload tiver sido concluído no firebase

@@ -54,7 +54,7 @@
 }
 
 .container {
-  padding-top: 46px;
+  padding: 46px 0 24px 0;
 }
 
 .nameTitle {
@@ -84,8 +84,8 @@
   //TODO: remove vh
   height: 100vh;
   width: 100%;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   background-color: #F7F7F7;
 }
 

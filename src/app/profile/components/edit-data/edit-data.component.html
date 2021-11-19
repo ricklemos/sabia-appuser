@@ -1,18 +1,31 @@
-<div fxLayout="column" fxLayoutAlign="center center" padding="12px">
+<div fxLayout="column" fxLayoutAlign="center center">
   <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="24px">
 
-    <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
-      <label for="updatePicInput">
-        <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
-        <profile-pic *ngIf="!uploading && !deleting"></profile-pic>
-      </label>
-      <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
+    <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px" fxLayoutGap.xs="16px">
+      <div>
+        <label for="updatePicInput">
+          <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
+          <profile-pic *ngIf="!uploading && !deleting"></profile-pic>
+        </label>
+        <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
 
-      <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>
-      <p *ngIf="uploading">{{ uploadProgress }} %</p>
+        <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>
+        <p *ngIf="uploading">{{ uploadProgress }} %</p>
+      </div>
 
-      <label for="updatePicInput" >Alterar foto</label>
-      <p (click)="deletePic()">Excluir foto</p>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutGap.xs="8px">
+        <label for="updatePicInput" fxFlex="50">
+          <button clButtonContainedSecondary>
+            <i clIcon name="cl-edit"></i>
+            <span>Alterar foto</span>
+          </button>
+        </label>
+        <button clButtonContainedSecondary (click)="deletePic()">
+          <i clIcon name="cl-delete"></i>
+          <span>Excluir foto</span>
+        </button>
+      </div>
+
     </div>
     <div class="Forms">
       <cl-form-component
@@ -23,9 +36,9 @@
       ></cl-form-component>
     </div>
     <button (click)="edit()" [hasDisabled]="!formValid" [loading]="loading" clButtonContained
-                  class="bg-sabia-blue-500">
-    <span>Salvar</span>
-  </button>
+            class="bg-sabia-blue-500">
+      <span>Salvar</span>
+    </button>
   </div>
 
 </div>

@@ -10,6 +10,7 @@ import { InvestmentWalletProductsPageComponent } from './containers/investment-w
 import { InvestmentTopicComponent } from './components/investment-topic/investment-topic.component';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CreditAvailableComponent } from './components/credit-available/credit-available.component';
 import { InvestmentWalletProductListComponent } from './components/investment-wallet-product-list/investment-wallet-product-list.component';
 import { CollactComponentsModule } from 'collact-components';
 import { NumeralPipe } from './pipes/numeral.pipe';
@@ -24,7 +25,7 @@ import { InvestmentWalletProductFixedIncomeComponent } from './components/invest
     InvestmentWalletTradePageComponent,
     InvestmentWalletProductsPageComponent,
     InvestmentTopicComponent,
-    InvestmentWalletProductsPageComponent,
+    CreditAvailableComponent,
     InvestmentWalletProductListComponent,
     NumeralPipe,
     InvestmentWalletProductVariableIncomeComponent,

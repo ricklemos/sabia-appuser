@@ -1,0 +1,14 @@
+@import "~collact-design-system/styles/colors";
+
+.saldo-disponivel {
+
+  &__box {
+    padding: 8px;
+  }
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}

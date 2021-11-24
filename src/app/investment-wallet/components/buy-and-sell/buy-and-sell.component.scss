@@ -1,0 +1,50 @@
+@import "~collact-design-system/styles/colors";
+@import "/src/assets/styles/profile.style";
+
+.buy-sell {
+
+  &__box {
+    padding: 16px;
+  }
+
+  &__buttons {
+    width: 100%;
+  }
+
+  &__lotes {
+    margin-bottom: 16px;
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 6px;
+    min-width: 20px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.64);
+    border: none;
+  }
+
+  &__resgatar {
+    background-color: #892929;
+  }
+
+  &__investir {
+    background-color: #00843D;
+  }
+
+  &__texto-branco {
+    color: #f1f1f1;
+    font-family: ProximaNovaSemiBold, sans-serif;
+  }
+
+}
+
+h3 {
+  font-size: 20px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+  color: $black-alpha-700;
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}

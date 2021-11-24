@@ -25,6 +25,15 @@ export interface InvestmentProduct {
   currentValue?: number;
 }
 
+export interface InvestmentStock {
+  ticker: string;
+  companyName?: string;
+  varDay?: number;
+  varMonth?: number;
+  varYear?: number;
+  currentValue?: number;
+}
+
 export interface InvestmentWallet {
   userId: string;
   balance: number;

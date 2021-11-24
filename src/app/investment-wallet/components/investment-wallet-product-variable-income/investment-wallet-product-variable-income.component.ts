@@ -14,5 +14,4 @@ export class InvestmentWalletProductVariableIncomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

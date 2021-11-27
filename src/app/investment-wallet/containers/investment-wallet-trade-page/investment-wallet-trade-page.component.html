@@ -1,21 +1,21 @@
 <navbar [barTitle]="productId" [disableNavigation]="true">
 
-  <credit-available></credit-available>
-
   <div class="left">
     <button (click)="goBack()" clButtonIcon>
       <i clIcon color="#fff" name="cl-arrow-left"></i>
     </button>
   </div>
 
-  <div class="products-page" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
+  <credit-available [availableToSell]="productBalance" [balance]="balance"></credit-available>
+
+  <div class="products-page" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.lt-md="16px">
     <mat-spinner *ngIf="loading"></mat-spinner>
     <ng-container *ngIf="!loading">
       <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
                                                  [product]="product"></investment-wallet-product-variable-income>
       <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
                                               [product]="product"></investment-wallet-product-fixed-income>
+      <buy-and-sell [stockPrice]="product.variableIncomeData.currentPrice" (transactionRequired)="trade($event)"></buy-and-sell>
     </ng-container>
-    <buy-and-sell></buy-and-sell>
   </div>
 </navbar>

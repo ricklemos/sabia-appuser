@@ -20,7 +20,8 @@ import { InvestmentWalletProductFixedIncomeComponent } from './components/invest
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { InvestmentWalletPizzaComponent } from './components/investment-wallet-pizza/investment-wallet-pizza.component';
 import { ChartsModule } from 'ng2-charts';
-
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '../forms/forms.module';
 
 @NgModule({
   declarations: [
@@ -46,8 +47,9 @@ import { ChartsModule } from 'ng2-charts';
     CollactComponentsModule,
     FlexLayoutModule,
     ChartsModule,
-    FlexLayoutModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class InvestmentWalletModule {

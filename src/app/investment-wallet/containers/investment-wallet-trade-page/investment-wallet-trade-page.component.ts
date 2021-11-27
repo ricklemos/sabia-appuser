@@ -18,6 +18,9 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   moduleId: string;
   loading = true;
   subscribes: Subscription[] = [];
+  // TODO: Pegar os dados do firebase
+  balance = 3000;
+  productBalance = 1000;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +51,22 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscribes.map(u => u.unsubscribe());
+  }
+
+  trade($event): any{
+    // TODO: Trade request for database + verifications (if there is balance to buy or sell)
+    const value = $event.quota * this.product.variableIncomeData.currentPrice;
+    if ($event.type === 'buy'){
+      if (this.balance < value){
+        // TODO: Show Dialog with not enough funds
+        return;
+      }
+      // TODO: Buy Product
+    } else if ($event.type === 'sell'){
+      // TODO: se quer vender mais cotas do que tem disponível, não permitir
+      // TODO: Sell Product
+    }
+    console.log('trade', $event);
   }
 
   goBack(): void {

@@ -6,13 +6,13 @@
          fxLayoutGap="16px">
 
       <div class="investment-topic__border" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
-        <h3>Renda Variável</h3>
-        <h4>R$ 2.476,00</h4>
+        <h3>{{investmentModuleName[investmentModule.moduleName]}}</h3>
+        <h4>R$ {{investmentModule.invested | numeral: 'currency'}}</h4>
       </div>
 
       <div fxLayout="row">
-        <p>Variação : </p>
-        <div class="variacao"> +10.5%</div>
+        <p>Variação: </p>
+        <div [ngClass]="investmentModule.variation< 0 ? 'red-700' : 'green-700'"> {{investmentModule.variation | numeral: 'percentage'}}</div>
       </div>
 
     </div>

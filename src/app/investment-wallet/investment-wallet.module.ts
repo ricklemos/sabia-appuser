@@ -17,6 +17,8 @@ import { CollactComponentsModule } from 'collact-components';
 import { NumeralPipe } from './pipes/numeral.pipe';
 import { InvestmentWalletProductVariableIncomeComponent } from './components/investment-wallet-product-variable-income/investment-wallet-product-variable-income.component';
 import { InvestmentWalletProductFixedIncomeComponent } from './components/investment-wallet-product-fixed-income/investment-wallet-product-fixed-income.component';
+import { InvestmentWalletPizzaComponent } from './components/investment-wallet-pizza/investment-wallet-pizza.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { InvestmentWalletProductFixedIncomeComponent } from './components/invest
     NumeralPipe,
     InvestmentWalletProductVariableIncomeComponent,
     InvestmentWalletProductFixedIncomeComponent,
+    InvestmentWalletPizzaComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ import { InvestmentWalletProductFixedIncomeComponent } from './components/invest
     NavigationModule,
     CollactDesignSystemModule,
     CollactComponentsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ChartsModule
   ]
 })
 export class InvestmentWalletModule {

@@ -26,37 +26,44 @@ export interface InvestmentProduct {
 }
 
 export interface InvestmentWallet {
-  userId: string,
-  balance: number,
-  stocksEvents: stocksEvent[],
-  publicFixesIncomeEvents: publicFixedIncomeEvent[],
-  privateFixedIncomeEvents: privateFixedIncomeEvent[];
+  userId: string;
+  balance: number;
+  stocksEvents: StocksEvent[];
+  publicFixesIncomeEvents: PublicFixedIncomeEvent[];
+  privateFixedIncomeEvents: PrivateFixedIncomeEvent[];
 }
 
-export interface stocksEvent {
-  type: 'BUY' | 'SELL',
-  dateTime: Date,
-  ticker: string,
-  name: string,
-  quotas: number,
+export interface StocksEvent {
+  type: 'BUY' | 'SELL';
+  dateTime: Date;
+  ticker: string;
+  name: string;
+  quotas: number;
   price: number;
 }
 
-export interface publicFixedIncomeEvent {
-  type: 'BUY' | 'SELL',
-  dateTime: Date,
+export interface PublicFixedIncomeEvent {
+  type: 'BUY' | 'SELL';
+  dateTime: Date;
   // ticker: string,
   // name: string,
   // quotas: number,
   // price: number;
 }
 
-export interface privateFixedIncomeEvent {
-  type: 'BUY' | 'SELL',
-  dateTime: Date,
+export interface PrivateFixedIncomeEvent {
+  type: 'BUY' | 'SELL';
+  dateTime: Date;
   // ticker: string,
   // name: string,
   // quotas: number,
   // price: number;
+}
+
+export interface InvestmentWalletPizzaGraph {
+  fixedIncome: number;
+  variableIncome: number;
+  treasure: number;
+  balance: number;
 }
 

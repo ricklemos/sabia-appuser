@@ -23,6 +23,7 @@ export interface InvestmentProduct {
   variationMonth?: number;
   variationYear?: number;
   currentValue?: number;
+  variableIncomeData?: InvestmentStock;
 }
 
 export interface InvestmentStock {
@@ -31,7 +32,7 @@ export interface InvestmentStock {
   varDay?: number;
   varMonth?: number;
   varYear?: number;
-  currentValue?: number;
+  currentPrice?: number;
 }
 
 export interface InvestmentWallet {

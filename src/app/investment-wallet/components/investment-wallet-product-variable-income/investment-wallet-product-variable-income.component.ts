@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { InvestmentProduct } from '../../model/investment-wallet.model';
+import {InvestmentProduct, InvestmentStock} from '../../model/investment-wallet.model';
 
 @Component({
   selector: 'investment-wallet-product-variable-income',
@@ -8,10 +8,12 @@ import { InvestmentProduct } from '../../model/investment-wallet.model';
 })
 export class InvestmentWalletProductVariableIncomeComponent implements OnInit {
   @Input() product: InvestmentProduct;
+  variableIncomeData: InvestmentStock;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.variableIncomeData = this.product.variableIncomeData;
   }
 }

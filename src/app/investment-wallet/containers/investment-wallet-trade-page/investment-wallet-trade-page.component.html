@@ -1,4 +1,4 @@
-<navbar [barTitle]="product.id" [disableNavigation]="true">
+<navbar [barTitle]="productId" [disableNavigation]="true">
 
   <credit-available></credit-available>
 
@@ -9,13 +9,13 @@
   </div>
 
   <div class="products-page" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
-    <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
-                                               [product]="product"></investment-wallet-product-variable-income>
-    <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
-                                            [product]="product"></investment-wallet-product-fixed-income>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <ng-container *ngIf="!loading">
+      <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
+                                                 [product]="product"></investment-wallet-product-variable-income>
+      <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
+                                              [product]="product"></investment-wallet-product-fixed-income>
+    </ng-container>
     <buy-and-sell></buy-and-sell>
-
   </div>
-
-
 </navbar>

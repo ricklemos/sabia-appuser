@@ -31,8 +31,7 @@ export class InvestmentWalletProductListComponent implements OnInit {
   }
 
   getStockUrl(stock: InvestmentStock): string {
-    return stock.ticker;
-    // return this.urlService.getInvestmentWalletProductDetails(product.module, product.id);
+    return this.urlService.getInvestmentWalletProductDetails('VARIABLE_INCOME', stock.ticker);
   }
 
   getChanges($event: string): void {

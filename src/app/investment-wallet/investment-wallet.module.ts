@@ -7,21 +7,21 @@ import { InvestmentWalletRoutes } from './investment-wallet-routing';
 import { NavigationModule } from '../navigation/navigation.module';
 import { InvestmentWalletTradePageComponent } from './containers/investment-wallet-trade-page/investment-wallet-trade-page.component';
 import { InvestmentWalletProductsPageComponent } from './containers/investment-wallet-products-page/investment-wallet-products-page.component';
-import { InvestmentTopicComponent } from './components/investment-topic/investment-topic.component';
+import { InvestmentWalletInvestmentModuleComponent } from './components/investment-wallet-investment-module/investment-wallet-investment-module.component';
 import { CollactDesignSystemModule } from 'collact-design-system';
 import { CollactComponentsModule } from 'collact-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CreditAvailableComponent } from './components/credit-available/credit-available.component';
-import { BuyAndSellComponent } from './components/buy-and-sell/buy-and-sell.component';
+import { InvestmentWalletCreditAvailableComponent } from './components/investment-wallet-credit-available/investment-wallet-credit-available.component';
+import { InvestmentWalletBuyAndSellComponent } from './components/investment-wallet-buy-and-sell/investment-wallet-buy-and-sell.component';
 import { InvestmentWalletProductListComponent } from './components/investment-wallet-product-list/investment-wallet-product-list.component';
 import { NumeralPipe } from './pipes/numeral.pipe';
 import { InvestmentWalletProductVariableIncomeComponent } from './components/investment-wallet-product-variable-income/investment-wallet-product-variable-income.component';
 import { InvestmentWalletProductFixedIncomeComponent } from './components/investment-wallet-product-fixed-income/investment-wallet-product-fixed-income.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InvestmentWalletPizzaComponent } from './components/investment-wallet-pizza/investment-wallet-pizza.component';
 import { ChartsModule } from 'ng2-charts';
-import {ReactiveFormsModule} from '@angular/forms';
-import {FormsModule} from '../forms/forms.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '../forms/forms.module';
 
 @NgModule({
   declarations: [
@@ -29,9 +29,9 @@ import {FormsModule} from '../forms/forms.module';
     InvestmentWalletOverviewPageComponent,
     InvestmentWalletTradePageComponent,
     InvestmentWalletProductsPageComponent,
-    InvestmentTopicComponent,
-    CreditAvailableComponent,
-    BuyAndSellComponent,
+    InvestmentWalletInvestmentModuleComponent,
+    InvestmentWalletCreditAvailableComponent,
+    InvestmentWalletBuyAndSellComponent,
     InvestmentWalletProductListComponent,
     NumeralPipe,
     InvestmentWalletProductVariableIncomeComponent,

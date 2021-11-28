@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 @Component({
-  selector: 'buy-and-sell',
-  templateUrl: './buy-and-sell.component.html',
-  styleUrls: ['./buy-and-sell.component.scss']
+  selector: 'investiment-wallet-buy-and-sell',
+  templateUrl: './investment-wallet-buy-and-sell.component.html',
+  styleUrls: ['./investment-wallet-buy-and-sell.component.scss']
 })
-export class BuyAndSellComponent implements OnInit {
+export class InvestmentWalletBuyAndSellComponent implements OnInit {
 
   @Input() stockPrice: number;
   result: number;

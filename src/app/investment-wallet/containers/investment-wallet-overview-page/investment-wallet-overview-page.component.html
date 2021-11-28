@@ -6,10 +6,10 @@
 
     <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
       <ng-container *ngFor="let investmentModule of investmentModules">
-        <investment-topic
+        <investment-wallet-investment-module
           (click)="goToInvestmentWalletModule(investmentModule.moduleName)"
           [investmentModule]="investmentModule">
-        </investment-topic>
+        </investment-wallet-investment-module>
       </ng-container>
     </div>
   </div>

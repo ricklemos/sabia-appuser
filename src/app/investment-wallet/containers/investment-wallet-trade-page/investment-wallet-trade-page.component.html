@@ -6,7 +6,8 @@
     </button>
   </div>
 
-  <credit-available [availableToSell]="productBalance" [balance]="balance"></credit-available>
+  <investment-wallet-credit-available [availableToSell]="productBalance"
+                                      [balance]="balance"></investment-wallet-credit-available>
 
   <div class="products-page" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.lt-md="16px">
     <mat-spinner *ngIf="loading"></mat-spinner>
@@ -15,7 +16,8 @@
                                                  [product]="product"></investment-wallet-product-variable-income>
       <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
                                               [product]="product"></investment-wallet-product-fixed-income>
-      <buy-and-sell [stockPrice]="product.variableIncomeData.currentPrice" (transactionRequired)="trade($event)"></buy-and-sell>
+      <investiment-wallet-buy-and-sell (transactionRequired)="trade($event)"
+                                       [stockPrice]="product.variableIncomeData.currentPrice"></investiment-wallet-buy-and-sell>
     </ng-container>
   </div>
 </navbar>

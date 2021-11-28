@@ -27,6 +27,12 @@ body {
   }
 }
 
+div.divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
+
 .width {
   &-100 {
     width: 100%;

@@ -1,0 +1,39 @@
+@import "~collact-design-system/styles/colors";
+
+.investment-topic {
+
+  &__box {
+    border-top-color: #2cb2ab;
+    border-style: solid;
+    border-width: 12px 0 0 0;
+  }
+
+  &__ex-icon {
+    width: 100%;
+  }
+
+}
+
+h3 {
+  font-size: 20px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+  color: $black-alpha-700;
+}
+
+h4 {
+  font-size: 20px;
+  font-family: ProximaNovaSemiBold, sans-serif;
+  color: $black-alpha-500;
+}
+
+p {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: $black-alpha-500;
+}
+
+.variacao {
+  font-size: 16px;
+  font-family: ProximaNova, sans-serif;
+  color: green;
+}

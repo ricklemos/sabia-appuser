@@ -1,0 +1,26 @@
+<div clCard class="investment-topic__box">
+
+  <div clCardContent fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div class="investment-topic__ex-icon" fxLayout="column" fxLayoutAlign="center stretch"
+         fxLayoutGap="16px">
+
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
+        <h3>{{investmentModule.label}}</h3>
+        <h4>R$ {{investmentModule.invested | numeral: 'currency'}}</h4>
+      </div>
+
+      <div class="divider"></div>
+
+      <div fxLayout="row">
+        <p>Variação: </p>
+        <div [ngClass]="investmentModule.variation< 0 ? 'red-700' : 'green-700'"> {{investmentModule.variation | numeral: 'percentage'}}</div>
+      </div>
+
+    </div>
+
+    <i clIcon name="cl-chevron-right"></i>
+
+  </div>
+
+</div>

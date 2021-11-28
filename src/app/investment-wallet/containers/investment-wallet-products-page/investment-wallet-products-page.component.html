@@ -1,5 +1,11 @@
-<navbar barTitle="Carteira de Investimentos">
+<navbar barTitle="Carteira de Investimentos" [disableNavigation]="true">
+
+  <div class="left">
+    <button (click)="goBack()" clButtonIcon>
+      <i clIcon color="#fff" name="cl-arrow-left"></i>
+    </button>
+  </div>
   <div class="products-page" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
-    <investment-wallet-product-list [productList]="productList"></investment-wallet-product-list>
+    <investment-wallet-product-list></investment-wallet-product-list>
   </div>
 </navbar>

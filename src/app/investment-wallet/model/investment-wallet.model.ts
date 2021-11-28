@@ -1,5 +1,5 @@
 export interface InvestmentModule {
-  moduleName: 'VARIABLE_INCOME' | 'FIXED_INCOME' | 'ANIMAL_GAME';
+  moduleName: 'VARIABLE_INCOME' | 'FIXED_INCOME' | 'TREASURE' | 'ANIMAL_GAME';
   invested: number;  // in cents
   variation: number; // between 0 and 1
   label: string;
@@ -23,40 +23,57 @@ export interface InvestmentProduct {
   variationMonth?: number;
   variationYear?: number;
   currentValue?: number;
+  variableIncomeData?: InvestmentStock;
+}
+
+export interface InvestmentStock {
+  ticker: string;
+  companyName?: string;
+  varDay?: number;
+  varMonth?: number;
+  varYear?: number;
+  currentPrice?: number;
 }
 
 export interface InvestmentWallet {
-  userId: string,
-  balance: number,
-  stocksEvents: stocksEvent[],
-  publicFixesIncomeEvents: publicFixedIncomeEvent[],
-  privateFixedIncomeEvents: privateFixedIncomeEvent[];
+  userId: string;
+  balance: number;
+  stocksEvents: StocksEvent[];
+  publicFixesIncomeEvents: PublicFixedIncomeEvent[];
+  privateFixedIncomeEvents: PrivateFixedIncomeEvent[];
 }
 
-export interface stocksEvent {
-  type: 'BUY' | 'SELL',
-  dateTime: Date,
-  ticker: string,
-  name: string,
-  quotas: number,
+export interface StocksEvent {
+  type: 'BUY' | 'SELL';
+  dateTime: Date;
+  ticker: string;
+  name: string;
+  quotas: number;
   price: number;
 }
 
-export interface publicFixedIncomeEvent {
-  type: 'BUY' | 'SELL',
-  dateTime: Date,
+export interface PublicFixedIncomeEvent {
+  type: 'BUY' | 'SELL';
+  dateTime: Date;
   // ticker: string,
   // name: string,
   // quotas: number,
   // price: number;
 }
 
-export interface privateFixedIncomeEvent {
-  type: 'BUY' | 'SELL',
-  dateTime: Date,
+export interface PrivateFixedIncomeEvent {
+  type: 'BUY' | 'SELL';
+  dateTime: Date;
   // ticker: string,
   // name: string,
   // quotas: number,
   // price: number;
+}
+
+export interface InvestmentWalletPizzaGraph {
+  fixedIncome: number;
+  variableIncome: number;
+  treasure: number;
+  balance: number;
 }
 

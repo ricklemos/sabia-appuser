@@ -17,6 +17,10 @@ export class StocksService {
     private httpClient: HttpClient
   ) { }
 
+  fetchSheetStocks(): Observable<any>{
+    return this.angularFirestore.doc('simulatorStocks/1_SHEET_STOCKS').get();
+  }
+
   searchStocks(ticker): Observable<any> {
     return this.angularFirestore.collection('simulatorStocks', ref => ref
       .limit(4)

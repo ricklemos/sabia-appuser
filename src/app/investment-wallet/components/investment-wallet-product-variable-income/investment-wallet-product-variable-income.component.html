@@ -1,7 +1,7 @@
 <div clCard>
   <div clCardContent fxLayout="column" fxLayoutGap="16px">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h2>{{ product.id }}</h2>
+      <h2>{{ variableIncomeData.ticker }}</h2>
     </div>
     <h3>Variação</h3>
     <div clCardOutline>
@@ -12,7 +12,7 @@
           </div>
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
             <p
-              [ngClass]="product.variationDay < 0 ? 'red-700' : 'green-700'">{{ product.variationDay | numeral: 'percentage' }}</p>
+              [ngClass]="variableIncomeData.varDay < 0 ? 'red-700' : 'green-700'">{{ variableIncomeData.varDay | numeral: 'percentage' }}</p>
           </div>
         </cl-list-item>
         <cl-list-item divider="middle">
@@ -21,7 +21,7 @@
           </div>
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
             <p
-              [ngClass]="product.variationMonth < 0 ? 'red-700' : 'green-700'">{{ product.variationMonth | numeral: 'percentage' }}</p>
+              [ngClass]="variableIncomeData.varMonth < 0 ? 'red-700' : 'green-700'">{{ variableIncomeData.varMonth | numeral: 'percentage' }}</p>
           </div>
         </cl-list-item>
         <cl-list-item>
@@ -30,7 +30,7 @@
           </div>
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
             <p
-              [ngClass]="product.variationYear < 0 ? 'red-700' : 'green-700'">{{ product.variationYear | numeral: 'percentage' }}</p>
+              [ngClass]="variableIncomeData.varYear < 0 ? 'red-700' : 'green-700'">{{ variableIncomeData.varYear | numeral: 'percentage' }}</p>
           </div>
         </cl-list-item>
       </div>
@@ -38,7 +38,7 @@
 
     <div fxLayout="column" fxLayoutGap="8px">
       <p class="black-alpha-500">Valor da ação hoje</p>
-      <h3>R${{ product.currentValue / 100 | numeral: 'currency' }}</h3>
+      <h3>R${{ variableIncomeData.currentPrice | numeral: 'currency' }}</h3>
     </div>
   </div>
 </div>

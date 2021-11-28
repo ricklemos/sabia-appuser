@@ -1,12 +1,11 @@
-<div class="available-balance" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+<div class="saldo-disponivel__box" fxLayout="column" fxLayoutAlign="space-between center">
 
-  <div>
-    <p>Disponível para resgate: R$3.000,00</p>
+  <div class="saldo-disponivel__box">
+    <p>Disponível para resgate: R$ {{ availableToSell | numeral: 'currency' }}</p>
   </div>
 
-  <div>
-    <p>Disponível para investir: R$2.000,00</p>
+  <div class="saldo-disponivel__box">
+    <p>Disponível para investir: R$ {{ balance | numeral: 'currency' }}</p>
   </div>
 
 </div>
-

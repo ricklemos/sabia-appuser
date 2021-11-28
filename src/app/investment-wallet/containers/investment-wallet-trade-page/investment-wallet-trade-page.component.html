@@ -1,6 +1,4 @@
-<navbar [barTitle]="product.id" [disableNavigation]="true">
-
-  <investment-wallet-credit-available></investment-wallet-credit-available>
+<navbar [barTitle]="productId" [disableNavigation]="true">
 
   <div class="left">
     <button (click)="goBack()" clButtonIcon>
@@ -8,14 +6,18 @@
     </button>
   </div>
 
-  <div class="products-page" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
-    <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
-                                               [product]="product"></investment-wallet-product-variable-income>
-    <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
-                                            [product]="product"></investment-wallet-product-fixed-income>
-    <investment-wallet-buy-and-sell></investment-wallet-buy-and-sell>
+  <investment-wallet-credit-available [availableToSell]="productBalance"
+                                      [balance]="balance"></investment-wallet-credit-available>
 
+  <div class="products-page" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.lt-md="16px">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <ng-container *ngIf="!loading">
+      <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
+                                                 [product]="product"></investment-wallet-product-variable-income>
+      <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
+                                              [product]="product"></investment-wallet-product-fixed-income>
+      <investiment-wallet-buy-and-sell (transactionRequired)="trade($event)"
+                                       [stockPrice]="product.variableIncomeData.currentPrice"></investiment-wallet-buy-and-sell>
+    </ng-container>
   </div>
-
-
 </navbar>

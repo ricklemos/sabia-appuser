@@ -5,7 +5,12 @@
     <investment-wallet-pizza [data]="data"></investment-wallet-pizza>
 
     <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
-      <investment-wallet-investment-module></investment-wallet-investment-module>
+      <ng-container *ngFor="let investmentModule of investmentModules">
+        <investment-wallet-investment-module
+          (click)="goToInvestmentWalletModule(investmentModule.moduleName)"
+          [investmentModule]="investmentModule">
+        </investment-wallet-investment-module>
+      </ng-container>
     </div>
   </div>
 </navbar>

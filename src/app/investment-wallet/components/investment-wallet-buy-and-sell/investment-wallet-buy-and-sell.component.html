@@ -1,26 +1,23 @@
-<div class="buy-sell">
-  <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
-
-    <div fxLayout="row" fxLayoutGap="8px">
-      <h3>Número de lotes: </h3>
-      <input class="buy-sell__lotes">
+<div class="buy-sell__box">
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+    <h3>Negociar</h3>
+    <div>
+      <cl-form-component
+        [formConfig]="formConfig"
+        (changes)="changes($event)">
+      </cl-form-component>
     </div>
-
     <div fxLayout="row" fxLayoutGap="8px">
       <h3>Valor resultante: </h3>
-      <h3>R$ 1.147,00</h3>
+      <h3>R$ {{ result | numeral: 'currency' }}</h3>
     </div>
-
     <div class="buy-sell__buttons" fxLayout="row" fxLayoutGap="8px">
-
-      <button clButtonContainedSecondary class="buy-sell__redeem">
-        <span class="white-alpha-1000-force">Resgatar</span>
+      <a clButtonContainedSecondary class="buy-sell__resgatar" (click)="sell()">
+        <span class="buy-sell__texto-branco">Resgatar</span>
+      </a>
+      <button clButtonContained class="buy-sell__investir" (click)="buy()">
+        <span class="buy-sell__texto-branco">Investir</span>
       </button>
-
-      <button clButtonContained class="buy-sell__invest">
-        <span class="white-alpha-1000-force">Investir</span>
-      </button>
-
     </div>
   </div>
 </div>

@@ -9,17 +9,19 @@ import { InvestmentWalletTradePageComponent } from './containers/investment-wall
 import { InvestmentWalletProductsPageComponent } from './containers/investment-wallet-products-page/investment-wallet-products-page.component';
 import { InvestmentWalletInvestmentModuleComponent } from './components/investment-wallet-investment-module/investment-wallet-investment-module.component';
 import { CollactDesignSystemModule } from 'collact-design-system';
+import { CollactComponentsModule } from 'collact-components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InvestmentWalletCreditAvailableComponent } from './components/investment-wallet-credit-available/investment-wallet-credit-available.component';
 import { InvestmentWalletBuyAndSellComponent } from './components/investment-wallet-buy-and-sell/investment-wallet-buy-and-sell.component';
 import { InvestmentWalletProductListComponent } from './components/investment-wallet-product-list/investment-wallet-product-list.component';
-import { CollactComponentsModule } from 'collact-components';
 import { NumeralPipe } from './pipes/numeral.pipe';
 import { InvestmentWalletProductVariableIncomeComponent } from './components/investment-wallet-product-variable-income/investment-wallet-product-variable-income.component';
 import { InvestmentWalletProductFixedIncomeComponent } from './components/investment-wallet-product-fixed-income/investment-wallet-product-fixed-income.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InvestmentWalletPizzaComponent } from './components/investment-wallet-pizza/investment-wallet-pizza.component';
 import { ChartsModule } from 'ng2-charts';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '../forms/forms.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,10 @@ import { ChartsModule } from 'ng2-charts';
     CollactDesignSystemModule,
     CollactComponentsModule,
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class InvestmentWalletModule {

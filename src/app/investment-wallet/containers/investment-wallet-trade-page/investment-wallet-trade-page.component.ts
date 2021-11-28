@@ -66,6 +66,7 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
       // TODO: se quer vender mais cotas do que tem disponível, não permitir
       // TODO: Sell Product
     }
+    // TODO: No caso de renda variável barrar se o número de cotas não for inteiro
     console.log('trade', $event);
   }
 

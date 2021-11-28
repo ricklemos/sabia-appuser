@@ -32,7 +32,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
         invested: 1000, // in Reais
         variation: -0.2, // between 0 and 1
         label: 'Renda Variável',
-        color: 'red',
+        color: '#2B8B87',
         percentage: 0.1,
       },
       {
@@ -40,7 +40,15 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
         invested: 500, // in Reais
         variation: 0.2, // between 0 and 1
         label: 'Renda Fixa Privada',
-        color: 'red',
+        color: '#39C0BA',
+        percentage: 0.1,
+      },
+      {
+        moduleName: 'TREASURE',
+        invested: 500, // in Reais
+        variation: 0.2, // between 0 and 1
+        label: 'Tesouro Direto',
+        color: '#C8EAE8',
         percentage: 0.1,
       },
     ];

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '../../services/wallet.service';
-import {Router} from '@angular/router';
-import {UrlService} from '../../../services/url.service';
-import {InvestmentModule} from '../../model/investment-wallet.model';
-import { InvestmentWalletPizzaGraph } from '../../model/investment-wallet.model';
+import { Router } from '@angular/router';
+import { UrlService } from '../../../services/url.service';
+import { InvestmentModule, InvestmentWalletPizzaGraph } from '../../model/investment-wallet.model';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
 
 @Component({
   selector: 'investment-wallet-overview-page',
@@ -24,7 +24,8 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
   constructor(
     private walletService: WalletService,
     private router: Router,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private investmentWalletHelperService: InvestmentWalletHelperService,
   ) {
     this.investmentModules = [
       {
@@ -58,6 +59,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
   }
 
   goToInvestmentWalletModule(moduleId): void {
-    this.router.navigate([this.urlService.getInvestmentWalletModule(moduleId)]);
+    const moduleSlug = this.investmentWalletHelperService.getModuleSlugFromId(moduleId);
+    this.router.navigate([this.urlService.getInvestmentWalletModule(moduleSlug)]);
   }
 }

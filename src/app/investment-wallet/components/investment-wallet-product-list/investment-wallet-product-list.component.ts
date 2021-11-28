@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {InvestmentStock} from '../../model/investment-wallet.model';
+import { InvestmentStock } from '../../model/investment-wallet.model';
 import { UrlService } from '../../../services/url.service';
-import {StocksService} from '../../../services/stocks.service';
-import {noop} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { StocksService } from '../../../services/stocks.service';
+import { noop } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
 
 @Component({
   selector: 'investment-wallet-product-list',
@@ -16,7 +17,8 @@ export class InvestmentWalletProductListComponent implements OnInit {
 
   constructor(
     private urlService: UrlService,
-    private stocksService: StocksService
+    private stocksService: StocksService,
+    private investmentWalletHelperService: InvestmentWalletHelperService,
   ) {
 
   }
@@ -31,7 +33,8 @@ export class InvestmentWalletProductListComponent implements OnInit {
   }
 
   getStockUrl(stock: InvestmentStock): string {
-    return this.urlService.getInvestmentWalletProductDetails('VARIABLE_INCOME', stock.ticker);
+    const moduleSlug = this.investmentWalletHelperService.getModuleSlugFromId('VARIABLE_INCOME');
+    return this.urlService.getInvestmentWalletProductDetails(moduleSlug, stock.ticker);
   }
 
   getChanges($event: string): void {

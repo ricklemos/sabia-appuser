@@ -110,16 +110,16 @@ export class UrlService {
     return '/carteira';
   }
 
-  public getInvestmentWalletModule(moduleName): string {
+  public getInvestmentWalletModule(moduleSlug): string {
     const url = [this.getInvestmentWallet()];
     url.push('produtos');
-    url.push(moduleName);
+    url.push(moduleSlug);
     return url.join('/');
   }
 
-  public getInvestmentWalletProductDetails(moduleName, productId): string {
-    const url = [this.getInvestmentWalletModule(moduleName)];
-    url.push('trade');
+  public getInvestmentWalletProductDetails(moduleSlug, productId): string {
+    const url = [this.getInvestmentWalletModule(moduleSlug)];
+    url.push('comprar-e-vender');
     url.push(productId);
     return url.join('/');
   }

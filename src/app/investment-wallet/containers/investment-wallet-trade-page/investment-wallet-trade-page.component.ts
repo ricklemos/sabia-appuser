@@ -1,11 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvestmentProduct } from '../../model/investment-wallet.model';
 import { InvestmentWalletMockService } from '../../services/investment-wallet-mock.service';
 import { UrlService } from '../../../services/url.service';
-import {StocksService} from '../../../services/stocks.service';
-import {noop, Subscription} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { StocksService } from '../../../services/stocks.service';
+import { noop, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
 
 @Component({
   selector: 'investment-wallet-trade-page',
@@ -28,9 +29,10 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     private urlService: UrlService,
     private router: Router,
     private stocksService: StocksService,
+    private investmentWalletHelperService: InvestmentWalletHelperService,
   ) {
     this.productId = this.route.snapshot.paramMap.get('productId');
-    this.moduleId = this.route.snapshot.paramMap.get('moduleId');
+    this.moduleId = this.investmentWalletHelperService.getModuleIdFromSlug(this.route.snapshot.paramMap.get('moduleSlug'));
     const fetchStockInfo = this.stocksService.fetchSheetStocks().pipe(
       tap(req => {
         const data = req.data();
@@ -72,6 +74,7 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     const { module } = this.product;
-    this.router.navigate([this.urlService.getInvestmentWalletModule(module)]);
+    const moduleSlug = this.investmentWalletHelperService.getModuleSlugFromId(module);
+    this.router.navigate([this.urlService.getInvestmentWalletModule(moduleSlug)]);
   }
 }

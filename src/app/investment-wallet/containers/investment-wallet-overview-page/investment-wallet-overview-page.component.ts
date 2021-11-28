@@ -31,7 +31,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
         moduleName: 'VARIABLE_INCOME',
         invested: 1000, // in Reais
         variation: -0.2, // between 0 and 1
-        label: 'bla',
+        label: 'Renda Variável',
         color: 'red',
         percentage: 0.1,
       },
@@ -39,7 +39,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
         moduleName: 'FIXED_INCOME',
         invested: 500, // in Reais
         variation: 0.2, // between 0 and 1
-        label: 'bla',
+        label: 'Renda Fixa Privada',
         color: 'red',
         percentage: 0.1,
       },

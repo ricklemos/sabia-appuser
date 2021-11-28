@@ -8,11 +8,6 @@ import {InvestmentModule} from '../../model/investment-wallet.model';
 })
 export class InvestmentTopicComponent implements OnInit {
   @Input() investmentModule: InvestmentModule;
-  investmentModuleName = {
-    VARIABLE_INCOME: 'Renda Variável',
-    FIXED_INCOME: 'Renda Fixa Privada',
-    TREASURE: 'Tesouro Direto'
-  };
 
   constructor() {
   }

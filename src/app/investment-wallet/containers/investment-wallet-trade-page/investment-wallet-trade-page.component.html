@@ -1,6 +1,6 @@
 <navbar [barTitle]="product.id" [disableNavigation]="true">
 
-  <credit-available></credit-available>
+  <investment-wallet-credit-available></investment-wallet-credit-available>
 
   <div class="left">
     <button (click)="goBack()" clButtonIcon>
@@ -13,7 +13,7 @@
                                                [product]="product"></investment-wallet-product-variable-income>
     <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
                                             [product]="product"></investment-wallet-product-fixed-income>
-    <buy-and-sell></buy-and-sell>
+    <investment-wallet-buy-and-sell></investment-wallet-buy-and-sell>
 
   </div>
 

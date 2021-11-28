@@ -2,10 +2,8 @@
 @import "/src/assets/styles/profile.style";
 
 .buy-sell {
+  padding: 16px;
 
-  &__box {
-    padding: 16px;
-  }
 
   &__buttons {
     width: 100%;
@@ -22,19 +20,13 @@
     border: none;
   }
 
-  &__resgatar {
+  &__redeem {
     background-color: #892929;
   }
 
-  &__investir {
+  &__invest {
     background-color: #00843D;
   }
-
-  &__texto-branco {
-    color: #f1f1f1;
-    font-family: ProximaNovaSemiBold, sans-serif;
-  }
-
 }
 
 h3 {

@@ -27,14 +27,6 @@ export class InvestmentWalletMockService {
         color: this._getInvestmentModuleColor('FIXED_INCOME'),
         percentage: 0.283,
       },
-      {
-        moduleName: 'ANIMAL_GAME',
-        invested: 37600,
-        variation: 0.631,
-        label: this._getInvestmentModuleLabel('ANIMAL_GAME'),
-        color: this._getInvestmentModuleColor('ANIMAL_GAME'),
-        percentage: 0.09,
-      },
     ];
   }
 
@@ -52,8 +44,6 @@ export class InvestmentWalletMockService {
         return 'Renda Variável';
       case 'FIXED_INCOME':
         return 'Renda Fixa';
-      case 'ANIMAL_GAME':
-        return 'Jogo do Bixo';
     }
   }
 
@@ -63,8 +53,6 @@ export class InvestmentWalletMockService {
         return '#39C0BA';
       case 'FIXED_INCOME':
         return '#2B8B87';
-      case 'ANIMAL_GAME':
-        return '#C8EAE8';
     }
   }
 }
@@ -156,65 +144,5 @@ const PRODUCTS: InvestmentProduct[] = [
     yield: 'IPCA + 10% a.a.',
     returnDate: '2026/07/21',
     minimumInvestment: 5000,
-  },
-  {
-    id: 'Avestruz',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Águia',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Burro',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Borboleta',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Cachorro',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Cabra',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Carneiro',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Camelo',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Cobra',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Coelho',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Cavalo',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Elefante',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Galo',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Gato',
-    module: 'ANIMAL_GAME'
-  },
-  {
-    id: 'Jacaré',
-    module: 'ANIMAL_GAME'
   },
 ];

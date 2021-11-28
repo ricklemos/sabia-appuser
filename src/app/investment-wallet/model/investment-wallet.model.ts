@@ -1,5 +1,5 @@
 export interface InvestmentModule {
-  moduleName: 'VARIABLE_INCOME' | 'FIXED_INCOME' | 'TREASURE' | 'ANIMAL_GAME';
+  moduleName: 'VARIABLE_INCOME' | 'FIXED_INCOME' | 'TREASURE';
   invested: number;  // in cents
   variation: number; // between 0 and 1
   label: string;

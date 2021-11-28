@@ -3,10 +3,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../../sessions/services/sessions-login.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
-import { finalize, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { noop } from 'rxjs';
 import { ModifyUserDataService } from '../../services/modify-user-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'profile-view',
@@ -18,6 +17,11 @@ export class ProfileViewComponent implements OnInit {
   lastName: string;
   gender: string;
   email: string;
+  genders = {
+    MALE: 'Masculino',
+    FEMALE: 'Feminino',
+    OTHER: 'Neutro'
+  };
 
   uploadProgress: string;
   uploading: boolean;
@@ -30,7 +34,6 @@ export class ProfileViewComponent implements OnInit {
     private router: Router,
     private urlService: UrlService,
     private modifyUserDataService: ModifyUserDataService,
-    private snackBar: MatSnackBar
   ) {
     // Necessário colocar o uid neste componente para passar para o componente "profile pic"
     this.uid = this.sessionService.getUserId();
@@ -41,8 +44,9 @@ export class ProfileViewComponent implements OnInit {
       tap(data => {
         this.firstName = data.firstName;
         this.lastName = data.lastName;
-        this.gender = data.gender;
+        this.gender = this.genders[data.gender];
         this.email = data.email;
+        this.modifyUserDataService.setUserData(data);
       })
     ).subscribe(noop);
   }

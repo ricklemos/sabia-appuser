@@ -6,7 +6,7 @@
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  font-family: Roboto;
+  font-family: ProximaNova, sans-serif;
   cursor: pointer;
   text-transform: uppercase;
   width: 100%;
@@ -21,7 +21,7 @@
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  font-family: Roboto;
+  font-family: ProximaNova, sans-serif;
   cursor: pointer;
   text-transform: uppercase;
   width: 100%;
@@ -36,7 +36,7 @@
   min-width: 299px;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.64);
-  font-family: Roboto;
+  font-family: ProximaNova, sans-serif;
   border: none;
 
   &__small {
@@ -54,28 +54,28 @@
 }
 
 .container {
-  padding-top: 46px;
+  padding: 46px 0 24px 0;
 }
 
 .nameTitle {
   font-size: 24px;
   color: black;
-  font-family: Roboto;
+  font-family: ProximaNova, sans-serif;
 }
 
 .nomeCampo {
   font-size: 12px;
   color: black;
   opacity: 0.64;
-  font-family: Roboto;
+  font-family: ProximaNova, sans-serif;
   tab-size: 6px;
 
-  &__margin-left{
+  &__margin-left {
     margin-left: 12px;
     font-size: 12px;
     color: black;
     opacity: 0.64;
-    font-family: Roboto;
+    font-family: ProximaNova, sans-serif;
     tab-size: 6px;
   }
 }
@@ -84,17 +84,22 @@
   //TODO: remove vh
   height: 100vh;
   width: 100%;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   background-color: #F7F7F7;
 }
 
-profile-pic{
-  img{
+profile-pic {
+  img {
     height: 130px;
     border-radius: 100%;
   }
-  mat-progress-spinner{
+
+  mat-progress-spinner {
     height: 130px;
   }
+}
+
+.Forms {
+  width: 343px;
 }

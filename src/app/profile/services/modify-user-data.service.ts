@@ -4,12 +4,15 @@ import { SessionsLoginService } from '../../sessions/services/sessions-login.ser
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { SessionsUserData } from '../../sessions/models/sessions-models';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModifyUserDataService {
   uId: string;
+  userData: SessionsUserData;
 
   constructor(private firestore: AngularFirestore,
               private sessionService: SessionsLoginService,
@@ -69,6 +72,14 @@ export class ModifyUserDataService {
 
   deleteUserProfilePic(): Observable<any> {
     return this.angularFireStorage.ref(`profilePics/${ this.sessionService.getUserId() }`).delete();
+  }
+
+  getUserData(): SessionsUserData {
+    return this.userData;
+  }
+
+  setUserData(userData: SessionsUserData): void {
+    this.userData = userData;
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { InvestmentWalletPizzaGraph } from '../../model/investment-wallet.model';
+import { InvestmentWalletPizzaGraphProduct } from '../../model/investment-wallet.model';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Color } from 'ng2-charts';
 
@@ -10,40 +10,39 @@ import { Color } from 'ng2-charts';
 })
 export class InvestmentWalletPizzaComponent implements OnInit {
 
-  @Input() data: InvestmentWalletPizzaGraph;
+  @Input() data: InvestmentWalletPizzaGraphProduct[];
   pieChartData = [];
-  pieChartLabels = [
-    'Renda Fixa',
-    'Tesouro Direto',
-    'Renda Variável',
-    'Saldo'
-  ];
+  pieChartLabels = [];
   pieChartType: ChartType;
   pieChartColors: Color[];
   pieChartOptions: ChartOptions;
+  colorArray: string[] = [];
 
   constructor() {
   }
 
   ngOnInit(): void {
 
-    this.pieChartData.push(this.data.fixedIncome);
-    this.pieChartData.push(this.data.treasure);
-    this.pieChartData.push(this.data.variableIncome);
-    this.pieChartData.push(this.data.balance);
-
     this.pieChartType = 'pie';
+    this.pieChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        position: 'right'
+      }
+    };
+    this.data.map((product) => {
+      this.pieChartLabels.push(product.name);
+      this.pieChartData.push(product.balance);
+      this.colorArray.push(product.color);
+    });
     this.pieChartColors = [
       {
-        backgroundColor: ['rgba(43,139,135,1)', 'rgba(57,192,186,1)', 'rgba(200,234,232,1)', 'rgba(255,255,255,1)'],
+        // backgroundColor: ['rgba(43,139,135,1)', 'rgba(57,192,186,1)', 'rgba(200,234,232,1)', 'rgba(255,255,255,1)'],
+        backgroundColor: this.colorArray,
         borderColor: 'rgba(0,0,0,1)'
       }
     ];
-    this.pieChartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
-
-    };
   }
 
 }

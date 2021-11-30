@@ -3,7 +3,7 @@
 .investment-topic {
 
   &__box {
-    border-top-color: #2cb2ab;
+    border-top-color: var(--border-top-color);
     border-style: solid;
     border-width: 12px 0 0 0;
   }

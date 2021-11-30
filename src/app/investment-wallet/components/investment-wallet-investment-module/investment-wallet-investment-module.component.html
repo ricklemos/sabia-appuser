@@ -7,14 +7,16 @@
 
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
         <h3>{{investmentModule.label}}</h3>
-        <h4>R$ {{investmentModule.invested | numeral: 'currency'}}</h4>
+        <h4>{{investmentModule.percentage | numeral: 'percentage'}}</h4>
       </div>
 
       <div class="divider"></div>
 
-      <div fxLayout="row">
-        <p>Variação: </p>
-        <div [ngClass]="investmentModule.variation< 0 ? 'red-700' : 'green-700'"> {{investmentModule.variation | numeral: 'percentage'}}</div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <p>Posição:</p>
+<!--        <div [ngClass]="investmentModule.percentage< 0 ? 'red-700' : 'green-700'"> {{investmentModule.percentage | numeral: 'percentage'}}</div>-->
+        <div [ngClass]="'green-700'"> R$ {{investmentModule.invested | numeral: 'currency'}}</div>
+<!--        <div [ngClass]="'green-700'"> {{investmentModule.percentage | numeral: 'percentage'}}</div>-->
       </div>
 
     </div>

@@ -1,8 +1,14 @@
 <navbar barTitle="Carteira de Investimentos">
 
-  <div class="investment-topic__background" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+  <div *ngIf="loading" fxLayout="column" fxLayoutAlign="center">
+    <mat-spinner ></mat-spinner>
+  </div>
 
-    <investment-wallet-pizza [data]="data"></investment-wallet-pizza>
+  <div *ngIf="!loading" class="investment-topic__background" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+
+    <investment-wallet-pizza [data]="pizzaGraphData"></investment-wallet-pizza>
+
+    <h3>Total Investido: R$ {{ totalWithoutBalance | numeral: 'currency' }}</h3>
 
     <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
       <ng-container *ngFor="let investmentModule of investmentModules">

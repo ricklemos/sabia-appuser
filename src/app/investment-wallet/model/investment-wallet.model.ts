@@ -1,5 +1,5 @@
 export interface InvestmentModule {
-  moduleName: 'VARIABLE_INCOME' | 'FIXED_INCOME' | 'TREASURE';
+  moduleName: 'VARIABLE_INCOME' | 'FIXED_INCOME' | 'TREASURE' | 'BALANCE';
   invested: number;  // in cents
   variation: number; // between 0 and 1
   label: string;
@@ -75,10 +75,9 @@ export interface PrivateFixedIncomeEvent {
   due: string;
 }
 
-export interface InvestmentWalletPizzaGraph {
-  fixedIncome: number;
-  variableIncome: number;
-  treasure: number;
+export interface InvestmentWalletPizzaGraphProduct {
+  name: string;
   balance: number;
+  color: string;
 }
 

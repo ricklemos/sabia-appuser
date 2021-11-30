@@ -55,19 +55,24 @@ export interface StocksEvent {
 export interface PublicFixedIncomeEvent {
   type: 'BUY' | 'SELL';
   dateTime: Date;
-  // ticker: string,
-  // name: string,
-  // quotas: number,
-  // price: number;
+  id: string;
+  quotas: number;
+  productType: string;
+  tax: number;
+  unitPrice: number;
+  due: string;
 }
 
 export interface PrivateFixedIncomeEvent {
   type: 'BUY' | 'SELL';
   dateTime: Date;
-  // ticker: string,
-  // name: string,
-  // quotas: number,
-  // price: number;
+  bank: string;
+  name: string;
+  amount: number;
+  productType: string;
+  yield: string;
+  liquidity: string;
+  due: string;
 }
 
 export interface InvestmentWalletPizzaGraph {

@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import { InvestmentModule, InvestmentWalletPizzaGraph } from '../../model/investment-wallet.model';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
+import {switchMap, tap} from 'rxjs/operators';
+import {noop} from 'rxjs';
+import {StocksService} from '../../../services/stocks.service';
 
 @Component({
   selector: 'investment-wallet-overview-page',
@@ -20,12 +23,15 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
   };
 
   investmentModules: InvestmentModule[];
+  wallet;
 
   constructor(
     private walletService: WalletService,
+    private walletHelperService: InvestmentWalletHelperService,
     private router: Router,
     private urlService: UrlService,
     private investmentWalletHelperService: InvestmentWalletHelperService,
+    private stocksService: StocksService
   ) {
     this.investmentModules = [
       {
@@ -56,6 +62,18 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.walletService.getUserWallets().pipe(
+      switchMap(docs => {
+        this.wallet = docs[0];
+        return this.stocksService.fetchSheetStocks(); // Pega o preço atual das ações para calcular a posição
+      }),
+      tap((stocks) => {
+        console.log('query', stocks.data().stocks);
+        const stockPrices = stocks.data().stocks;
+        const quotasDic = this.walletHelperService.calculateQuotas(this.wallet.stocksEvents);
+        this.investmentModules[0].invested = this.walletHelperService.calculatePosition(quotasDic, stockPrices);
+      })
+    ).subscribe(noop);
   }
 
   goToInvestmentWalletModule(moduleId): void {

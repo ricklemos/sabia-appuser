@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
-import { noop, Subscription } from 'rxjs';
+import {noop, Observable, Subscription} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 
@@ -18,6 +18,11 @@ export class WalletService {
     private firestore: AngularFirestore,
     private sessionService: SessionsLoginService
   ) {
+  }
+
+  getUserWallets(): Observable<any>{
+    this.uId = this.sessionService.getUserId();
+    return this.firestore.collection('simulatorWallet', ref => ref.where('userId', '==', this.uId)).valueChanges();
   }
 
   // Dá subscribe na carteira do aluno para que leituras e alterações sejam feitas futuramente

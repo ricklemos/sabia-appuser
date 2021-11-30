@@ -20,7 +20,7 @@ export class WalletService {
   ) {
   }
 
-  getUserWallets(): Observable<any>{
+  fetchUserWallets(): Observable<any>{
     this.uId = this.sessionService.getUserId();
     return this.firestore.collection('simulatorWallet', ref => ref.where('userId', '==', this.uId)).valueChanges();
   }

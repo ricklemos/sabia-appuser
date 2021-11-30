@@ -7,6 +7,7 @@ import { StocksService } from '../../../services/stocks.service';
 import { noop, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
+import {WalletService} from '../../services/wallet.service';
 
 @Component({
   selector: 'investment-wallet-trade-page',
@@ -20,7 +21,7 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   loading = true;
   subscribes: Subscription[] = [];
   // TODO: Pegar os dados do firebase
-  balance = 3000;
+  balance: number;
   productBalance = 1000;
 
   constructor(
@@ -30,7 +31,9 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     private router: Router,
     private stocksService: StocksService,
     private investmentWalletHelperService: InvestmentWalletHelperService,
+    private walletService: WalletService
   ) {
+    console.log('construct');
     this.productId = this.route.snapshot.paramMap.get('productId');
     this.moduleId = this.investmentWalletHelperService.getModuleIdFromSlug(this.route.snapshot.paramMap.get('moduleSlug'));
     const fetchStockInfo = this.stocksService.fetchSheetStocks().pipe(
@@ -49,6 +52,15 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('ng on init');
+    const fetchWallet = this.walletService.fetchUserWallets().pipe(
+      tap((query) => {
+        console.log(query, query.docs[0]);
+        const wallet = query.docs[0].data();
+        this.balance = wallet.balance;
+      })
+    ).subscribe(noop);
+    this.subscribes.push(fetchWallet);
   }
 
   ngOnDestroy(): void {

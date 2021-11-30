@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { WalletService } from '../../services/wallet.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
@@ -16,7 +16,7 @@ import {StocksService} from '../../../services/stocks.service';
   templateUrl: './investment-wallet-overview-page.component.html',
   styleUrls: ['./investment-wallet-overview-page.component.scss']
 })
-export class InvestmentWalletOverviewPageComponent implements OnInit {
+export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy {
 
   pizzaGraphData: InvestmentWalletPizzaGraphProduct[] = [];
   loading = true;
@@ -24,6 +24,8 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
   investmentModules: InvestmentModule[];
   wallet;
   totalWithoutBalance: number;
+
+  subscribes = [];
 
   constructor(
     private walletService: WalletService,
@@ -70,7 +72,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.walletService.getUserWallets().pipe(
+    const fetchSub = this.walletService.fetchUserWallets().pipe(
       switchMap(docs => {
         this.wallet = docs[0];
         this.investmentModules[3].invested = this.wallet.balance;
@@ -84,7 +86,6 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
         return this.stocksService.fetchSheetStocks(); // Pega o preço atual das ações para calcular a posição
       }),
       tap((stocks) => {
-        console.log('query', stocks.data().stocks);
         const stockPrices = stocks.data().stocks;
         const quotasDic = this.walletHelperService.calculateQuotas(this.wallet.stocksEvents);
         this.investmentModules[0].invested = this.walletHelperService.calculatePosition(quotasDic, stockPrices);
@@ -109,6 +110,11 @@ export class InvestmentWalletOverviewPageComponent implements OnInit {
         this.loading = false;
       })
     ).subscribe(noop);
+    this.subscribes.push(fetchSub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscribes.map(u => u.unsubscribe);
   }
 
   goToInvestmentWalletModule(moduleId): void {

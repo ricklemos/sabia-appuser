@@ -134,7 +134,7 @@ const PRODUCTS: InvestmentProduct[] = [
     seller: 'Banco XPTO',
     module: 'FIXED_INCOME',
     yield: '100% CDI',
-    returnDate: '2026/07/21',
+    dueDate: '2026/07/21',
     minimumInvestment: 500000,
   },
   {
@@ -142,7 +142,7 @@ const PRODUCTS: InvestmentProduct[] = [
     label: 'Tesouro IPCA+ 2026',
     module: 'FIXED_INCOME',
     yield: 'IPCA + 10% a.a.',
-    returnDate: '2026/07/21',
+    dueDate: '2026/07/21',
     minimumInvestment: 5000,
   },
 ];

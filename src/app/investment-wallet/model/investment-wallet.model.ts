@@ -12,11 +12,12 @@ export interface InvestmentProduct {
   label?: string;
   position?: number;
   module: InvestmentModule['moduleName'];
+  unitPrice?: number;
 
   // Renda Fixa
   seller?: string;
   yield?: string; // Rendimento
-  returnDate?: string; // Data
+  dueDate?: string; // Data
   minimumInvestment?: number;
 
   // Renda Variável

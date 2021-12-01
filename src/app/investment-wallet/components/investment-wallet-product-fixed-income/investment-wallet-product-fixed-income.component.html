@@ -1,20 +1,24 @@
 <div clCard>
   <div clCardContent fxLayout="column" fxLayoutGap="16px">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h2>{{ product.id }}</h2>
+      <h2>{{ product.label }}</h2>
       <p *ngIf="product.seller">{{ product.seller }}</p>
     </div>
     <div fxLayout="column" fxLayoutGap="8px">
       <p class="black-alpha-500">Rendimento</p>
-      <h3>{{ product.yield }}</h3>
+      <h3>{{ product.yield }} %</h3>
     </div>
     <div fxLayout="column" fxLayoutGap="8px">
       <p class="black-alpha-500">Vencimento</p>
-      <h3>{{ product.returnDate }}</h3>
+      <h3>{{ product.dueDate }}</h3>
     </div>
     <div fxLayout="column" fxLayoutGap="8px">
-      <p class="black-alpha-500">Investimento mínimo</p>
-      <h3>R${{ product.minimumInvestment / 100 | numeral: 'currency' }}</h3>
+      <p class="black-alpha-500">Preço Unitário</p>
+      <h3>R${{ product.unitPrice | numeral: 'currency' }}</h3>
+    </div>
+    <div fxLayout="column" fxLayoutGap="8px">
+      <p class="black-alpha-500">Investimento mínimo  (0.01 cotas)</p>
+      <h3>R${{ product.minimumInvestment | numeral: 'currency' }}</h3>
     </div>
   </div>
 </div>

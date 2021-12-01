@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class InvestmentWalletBuyAndSellComponent implements OnInit {
 
-  @Input() stockPrice: number;
+  @Input() price: number;
   result: number;
   quota: number;
   @Output() transactionRequired = new EventEmitter<any>();
@@ -29,7 +29,7 @@ export class InvestmentWalletBuyAndSellComponent implements OnInit {
   }
   changes($event: any): void {
     this.quota = $event.cotas;
-    this.result = this.stockPrice * this.quota;
+    this.result = this.price * this.quota;
   }
   sell(): void {
     this.transactionRequired.emit({type: 'SELL', quota: this.quota});

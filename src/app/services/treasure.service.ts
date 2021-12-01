@@ -14,4 +14,7 @@ export class TreasureService {
   fetchAvailableTitles(): Observable<any>{
     return this.firestore.doc('simulatorTreasure/availableTitles').valueChanges();
   }
+  fetchTitle(titleId: string): Observable<any>{
+    return this.firestore.doc(`simulatorTreasure/${titleId}`).valueChanges();
+  }
 }

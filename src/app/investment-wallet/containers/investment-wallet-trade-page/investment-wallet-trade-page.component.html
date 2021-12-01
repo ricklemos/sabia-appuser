@@ -1,4 +1,4 @@
-<navbar [barTitle]="productId" [disableNavigation]="true">
+<navbar barTitle="Detalhes do produto" [disableNavigation]="true">
 
   <div class="left">
     <button (click)="goBack()" clButtonIcon>
@@ -11,13 +11,14 @@
     <ng-container *ngIf="!loading">
       <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
                                                  [product]="product"></investment-wallet-product-variable-income>
-      <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"
+<!--      <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"-->
+<!--                                              [product]="product"></investment-wallet-product-fixed-income>-->
+      <investment-wallet-product-fixed-income *ngIf="product.module === 'TREASURE'"
                                               [product]="product"></investment-wallet-product-fixed-income>
-
       <investment-wallet-credit-available [availableToSell]="productBalance"
                                           [balance]="balance"></investment-wallet-credit-available>
       <investiment-wallet-buy-and-sell (transactionRequired)="trade($event)"
-                                       [stockPrice]="product.variableIncomeData.currentPrice"></investiment-wallet-buy-and-sell>
+                                       [price]="product.unitPrice"></investiment-wallet-buy-and-sell>
     </ng-container>
   </div>
 </navbar>

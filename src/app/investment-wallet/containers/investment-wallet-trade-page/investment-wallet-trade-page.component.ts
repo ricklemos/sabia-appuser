@@ -5,7 +5,7 @@ import { InvestmentWalletMockService } from '../../services/investment-wallet-mo
 import { UrlService } from '../../../services/url.service';
 import { StocksService } from '../../../services/stocks.service';
 import { noop, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
 import {WalletService} from '../../services/wallet.service';
 
@@ -20,9 +20,9 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   moduleId: string;
   loading = true;
   subscribes: Subscription[] = [];
-  // TODO: Pegar os dados do firebase
   balance: number;
-  productBalance = 1000;
+  productBalance: number;
+  quotasToSell: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,11 +33,13 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     private investmentWalletHelperService: InvestmentWalletHelperService,
     private walletService: WalletService
   ) {
-    console.log('construct');
+  }
+
+  ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId');
     this.moduleId = this.investmentWalletHelperService.getModuleIdFromSlug(this.route.snapshot.paramMap.get('moduleSlug'));
     const fetchStockInfo = this.stocksService.fetchSheetStocks().pipe(
-      tap(req => {
+      switchMap(req => {
         const data = req.data();
         const [obj] = data.stocks.filter(stock => stock.ticker === this.productId);
         this.product = {
@@ -45,22 +47,19 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
           module: 'VARIABLE_INCOME',
           variableIncomeData: obj
         };
+        return this.walletService.fetchUserWallets();
+      }),
+      tap((docs) => {
+        console.log(docs[0]);
+        const wallet = docs[0];
+        this.balance = wallet.balance;
+        const stockTransactions = wallet.stocksEvents.filter(stock => stock.ticker === this.productId);
+        this.quotasToSell = this.investmentWalletHelperService.calculateTickerQuotas(stockTransactions);
+        this.productBalance = this.product.variableIncomeData.currentPrice * this.quotasToSell;
         this.loading = false;
       })
     ).subscribe(noop);
     this.subscribes.push(fetchStockInfo);
-  }
-
-  ngOnInit(): void {
-    console.log('ng on init');
-    const fetchWallet = this.walletService.fetchUserWallets().pipe(
-      tap((query) => {
-        console.log(query, query.docs[0]);
-        const wallet = query.docs[0].data();
-        this.balance = wallet.balance;
-      })
-    ).subscribe(noop);
-    this.subscribes.push(fetchWallet);
   }
 
   ngOnDestroy(): void {

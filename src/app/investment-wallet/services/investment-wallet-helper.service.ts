@@ -49,6 +49,18 @@ export class InvestmentWalletHelperService {
     return dic;
   }
 
+  calculateTickerQuotas(transactionHistory: StocksEvent[]): number {
+    let count = 0;
+    transactionHistory.forEach(transaction => {
+      if (transaction.type === 'BUY'){
+        count += transaction.quotas;
+      } else {
+        count -= transaction.quotas;
+      }
+    });
+    return count;
+  }
+
   calculatePosition(quotasDictionary: object, stockPrices): number{
     let position = 0;
     for (const [key, value] of Object.entries(quotasDictionary)){

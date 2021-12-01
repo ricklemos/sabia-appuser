@@ -6,12 +6,11 @@
     </button>
   </div>
 
-  <investment-wallet-credit-available [availableToSell]="productBalance"
-                                      [balance]="balance"></investment-wallet-credit-available>
-
   <div class="products-page" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.lt-md="16px">
     <mat-spinner *ngIf="loading"></mat-spinner>
     <ng-container *ngIf="!loading">
+      <investment-wallet-credit-available [availableToSell]="productBalance"
+                                          [balance]="balance"></investment-wallet-credit-available>
       <investment-wallet-product-variable-income *ngIf="product.module === 'VARIABLE_INCOME'"
                                                  [product]="product"></investment-wallet-product-variable-income>
       <investment-wallet-product-fixed-income *ngIf="product.module === 'FIXED_INCOME'"

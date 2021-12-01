@@ -1,4 +1,4 @@
-<div class="buy-sell__box">
+<div class="buy-sell">
   <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
     <h3>Negociar</h3>
     <div>
@@ -12,12 +12,12 @@
       <h3>R$ {{ result | numeral: 'currency' }}</h3>
     </div>
     <div class="buy-sell__buttons" fxLayout="row" fxLayoutGap="8px">
-      <a clButtonContainedSecondary class="buy-sell__resgatar" (click)="sell()">
-        <span class="buy-sell__texto-branco">Resgatar</span>
-      </a>
-      <button clButtonContained class="buy-sell__investir" (click)="buy()">
-        <span class="buy-sell__texto-branco">Investir</span>
-      </button>
+      <div clButtonContainedSecondary class="buy-sell__redeem" (click)="sell()">
+        <span>Resgatar</span>
+      </div>
+      <div clButtonContained class="buy-sell__invest" (click)="buy()">
+        <span>Investir</span>
+      </div>
     </div>
   </div>
 </div>

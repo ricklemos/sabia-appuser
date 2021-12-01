@@ -2,7 +2,7 @@
 @import "/src/assets/styles/profile.style";
 
 .buy-sell {
-  padding: 16px;
+  padding: 8px;
 
 
   &__buttons {
@@ -39,4 +39,8 @@ p {
   font-size: 16px;
   font-family: ProximaNova, sans-serif;
   color: $black-alpha-500;
+}
+
+span{
+  color: white;
 }

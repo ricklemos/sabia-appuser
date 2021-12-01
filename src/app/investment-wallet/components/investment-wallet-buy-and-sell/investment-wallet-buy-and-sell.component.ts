@@ -33,9 +33,9 @@ export class InvestmentWalletBuyAndSellComponent implements OnInit {
     this.result = this.stockPrice * this.quota;
   }
   sell(): void {
-    this.transactionRequired.emit({type: 'sell', quota: this.quota});
+    this.transactionRequired.emit({type: 'SELL', quota: this.quota});
   }
   buy(): void {
-    this.transactionRequired.emit({type: 'buy', quota: this.quota});
+    this.transactionRequired.emit({type: 'BUY', quota: this.quota});
   }
 }

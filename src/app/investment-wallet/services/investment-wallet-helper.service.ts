@@ -63,11 +63,25 @@ export class InvestmentWalletHelperService {
   calculatePosition(quotasDictionary: object, stockPrices): number{
     let position = 0;
     for (const [key, value] of Object.entries(quotasDictionary)){
-      console.log(key, value);
       const [stockInfo] = stockPrices.filter(stock => stock.ticker === key);
       position += stockInfo.currentPrice * value;
     }
     return position;
+  }
+  calculateProducts(transactionHistory: StocksEvent[], stockPrices): any {
+    const products = [];
+    const quotasDictionary = this.calculateQuotas(transactionHistory);
+    for (const [key, value] of Object.entries(quotasDictionary)){
+      console.log(key, value);
+      const [stockInfo] = stockPrices.filter(stock => stock.ticker === key);
+      // @ts-ignore
+      const position = stockInfo.currentPrice * value;
+      products.push({
+        productId: key,
+        position
+      });
+    }
+    return products;
   }
 
 

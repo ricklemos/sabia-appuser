@@ -22,6 +22,7 @@ import { InvestmentWalletPizzaComponent } from './components/investment-wallet-p
 import { ChartsModule } from 'ng2-charts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '../forms/forms.module';
+import { InvestmentWalletMyproductsCardComponent } from './components/investment-wallet-myproducts-card/investment-wallet-myproducts-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FormsModule } from '../forms/forms.module';
     InvestmentWalletProductVariableIncomeComponent,
     InvestmentWalletProductFixedIncomeComponent,
     InvestmentWalletPizzaComponent,
+    InvestmentWalletMyproductsCardComponent,
   ],
   imports: [
     CommonModule,

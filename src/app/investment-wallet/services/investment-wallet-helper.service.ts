@@ -23,11 +23,11 @@ export class InvestmentWalletHelperService {
 
   getModuleIdFromSlug(moduleLabel: string): InvestmentModule['moduleName'] {
     switch (moduleLabel) {
-      case 'renda-variavel:':
+      case 'renda-variavel':
         return 'VARIABLE_INCOME';
-      case 'renda-fixa:':
+      case 'renda-fixa':
         return 'FIXED_INCOME';
-      case 'tesouro-direto:':
+      case 'tesouro-direto':
         return 'TREASURE';
     }
   }

@@ -9,7 +9,7 @@
   <div clCardTitle>
     <h2>Produtos</h2>
   </div>
-  <ng-container *ngFor="let title of treasureList; let i = index">
+  <ng-container *ngFor="let title of filteredList; let i = index">
     <cl-list-item [divider]="i !== treasureList.length - 1 ? 'middle' : null" [action]="true" [routerLink]="getTitleUrl(title)">
       <div fxFlex="60" left>
         <h3>{{ title.tipoTitulo }}</h3>

@@ -11,6 +11,7 @@ import {UrlService} from '../../../services/url.service';
 })
 export class InvestmentWalletTreasureListComponent implements OnInit {
   @Input() treasureList: InvestmentTreasure[] = [];
+  filteredList: InvestmentTreasure[] = [];
   moduleId: InvestmentModule['moduleName'];
 
   constructor(
@@ -20,10 +21,18 @@ export class InvestmentWalletTreasureListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.filteredList = this.treasureList;
   }
 
   getChanges($event: any): void {
-    console.log($event);
+    if ($event === ''){
+      this.filteredList = this.treasureList;
+      return;
+    }
+    const textToSearch = $event.toUpperCase();
+    this.filteredList = this.treasureList.filter(
+      title => title.id.toUpperCase().includes(textToSearch)
+    );
   }
   getTitleUrl(title: InvestmentTreasure): string {
     this.moduleId = this.investmentWalletHelperService.getModuleIdFromSlug(this.route.snapshot.paramMap.get('moduleSlug'));

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {InvestmentProduct} from '../../model/investment-wallet.model';
 
 @Component({
   selector: 'investment-wallet-myproducts-card',
@@ -6,21 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./investment-wallet-myproducts-card.component.scss']
 })
 export class InvestmentWalletMyproductsCardComponent implements OnInit {
-  @Input() products;
-  // products = [
-  //   {
-  //     ticker: 'ITSA4',
-  //     position: 1000,
-  //   },
-  //   {
-  //     ticker: 'ABEV3',
-  //     position: 1000,
-  //   },
-  //   {
-  //     ticker: 'ARML3',
-  //     position: 1000,
-  //   }
-  // ];
+  @Input() products: InvestmentProduct[];
   total = 0;
   constructor() { }
 

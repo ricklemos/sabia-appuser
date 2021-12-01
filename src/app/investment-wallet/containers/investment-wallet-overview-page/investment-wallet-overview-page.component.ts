@@ -39,34 +39,34 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
       {
         moduleName: 'VARIABLE_INCOME',
         invested: 0, // in Reais
-        variation: -0.2, // between 0 and 1
+        variation: 0, // between 0 and 1
         label: 'Renda Variável',
         color: '#2B8B87',
-        percentage: 0.1,
+        percentage: 0,
       },
       {
         moduleName: 'TREASURE',
         invested: 0, // in Reais
-        variation: 0.2, // between 0 and 1
+        variation: 0, // between 0 and 1
         label: 'Tesouro Direto',
         color: '#39C0BA',
-        percentage: 0.1,
+        percentage: 0,
       },
       {
         moduleName: 'FIXED_INCOME',
         invested: 0, // in Reais
-        variation: 0.2, // between 0 and 1
+        variation: 0, // between 0 and 1
         label: 'Renda Fixa Privada',
         color: '#C8EAE8',
-        percentage: 0.1,
+        percentage: 0,
       },
       {
         moduleName: 'BALANCE',
         invested: 0, // in Reais
-        variation: 0.2, // between 0 and 1
+        variation: 0, // between 0 and 1
         label: 'Caixa',
         color: '#D9D9D9',
-        percentage: 0.1,
+        percentage: 0,
       },
     ];
   }
@@ -76,37 +76,30 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
       switchMap(docs => {
         this.wallet = docs[0];
         this.investmentModules[3].invested = this.wallet.balance;
-        this.pizzaGraphData.push(
-          {
-            name: this.investmentModules[3].label,
-            balance: this.investmentModules[3].invested,
-            color: this.investmentModules[3].color
-          }
-        );
         return this.stocksService.fetchSheetStocks(); // Pega o preço atual das ações para calcular a posição
       }),
       tap((stocks) => {
         const stockPrices = stocks.data().stocks;
         const quotasDic = this.walletHelperService.calculateQuotas(this.wallet.stocksEvents);
         this.investmentModules[0].invested = this.walletHelperService.calculatePosition(quotasDic, stockPrices);
-        this.pizzaGraphData.push(
-          {
-            name: this.investmentModules[0].label,
-            balance: this.investmentModules[0].invested,
-            color: this.investmentModules[0].color
-          }
-        );
       }),
       tap(() => {
         // TODO: Antes de fazer essa conta tem que pegar os dados de tesouro direto e renda fixa privada
-        this.totalWithoutBalance =
-            this.investmentModules[0].invested
-          + this.investmentModules[1].invested
-          + this.investmentModules[2].invested;
-        const total = this.wallet.balance + this.totalWithoutBalance;
+        this.totalWithoutBalance = 0;
+        this.investmentModules.forEach(investmentModule => {
+          this.totalWithoutBalance += investmentModule.invested;
+        });
+        const total = this.totalWithoutBalance;
         this.investmentModules.forEach(investmentModule => {
           investmentModule.percentage = investmentModule.invested / total;
+          this.pizzaGraphData.push({
+            name: investmentModule.label,
+            balance: investmentModule.invested,
+            color: investmentModule.color,
+            percentage: investmentModule.percentage
+          });
         });
+        this.totalWithoutBalance -= this.investmentModules[3].invested;
         this.loading = false;
       })
     ).subscribe(noop);

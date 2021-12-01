@@ -10,6 +10,7 @@ export interface InvestmentModule {
 export interface InvestmentProduct {
   id: string;
   label?: string;
+  position?: number;
   module: InvestmentModule['moduleName'];
 
   // Renda Fixa
@@ -80,5 +81,6 @@ export interface InvestmentWalletPizzaGraphProduct {
   name: string;
   balance: number;
   color: string;
+  percentage: number;
 }
 

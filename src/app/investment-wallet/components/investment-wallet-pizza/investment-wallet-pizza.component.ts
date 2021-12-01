@@ -32,7 +32,7 @@ export class InvestmentWalletPizzaComponent implements OnInit {
       }
     };
     this.data.map((product) => {
-      this.pieChartLabels.push(product.name);
+      this.pieChartLabels.push((product.percentage * 100).toFixed(0) + '% ' + product.name);
       this.pieChartData.push(product.balance);
       this.colorArray.push(product.color);
     });

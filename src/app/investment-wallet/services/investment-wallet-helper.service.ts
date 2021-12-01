@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {InvestmentModule, StocksEvent} from '../model/investment-wallet.model';
+import {InvestmentModule, InvestmentProduct, StocksEvent} from '../model/investment-wallet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +68,7 @@ export class InvestmentWalletHelperService {
     }
     return position;
   }
-  calculateProducts(transactionHistory: StocksEvent[], stockPrices): any {
+  calculateProducts(transactionHistory: StocksEvent[], stockPrices): InvestmentProduct[] {
     const products = [];
     const quotasDictionary = this.calculateQuotas(transactionHistory);
     for (const [key, value] of Object.entries(quotasDictionary)){
@@ -77,8 +77,9 @@ export class InvestmentWalletHelperService {
       // @ts-ignore
       const position = stockInfo.currentPrice * value;
       products.push({
-        productId: key,
-        position
+        id: key,
+        position,
+        label: stockInfo.companyName
       });
     }
     return products;

@@ -9,7 +9,7 @@
         <ng-container *ngFor="let product of products; let i = index">
           <cl-list-item [divider]="i !== products.length - 1 ? 'middle' : null">
             <div fxFlex="50" left>
-              <p>{{product.productId}}</p>
+              <p>{{product.id}}</p>
             </div>
             <div fxFlex="50" fxLayout="row" fxLayoutAlign="end" right>
               <p>R$ {{product.position | numeral: 'currency'}}</p>

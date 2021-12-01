@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UrlService } from '../../../services/url.service';
 import { Router } from '@angular/router';
-import {InvestmentStock, InvestmentWallet} from '../../model/investment-wallet.model';
+import {InvestmentProduct, InvestmentStock, InvestmentWallet} from '../../model/investment-wallet.model';
 import {switchMap, tap} from 'rxjs/operators';
 import {noop} from 'rxjs';
 import {StocksService} from '../../../services/stocks.service';
@@ -17,7 +17,7 @@ export class InvestmentWalletProductsPageComponent implements OnInit {
 
   productList: InvestmentStock[];
   wallet: InvestmentWallet;
-  products;
+  products: InvestmentProduct[];
   loading = true;
   constructor(
     private urlService: UrlService,

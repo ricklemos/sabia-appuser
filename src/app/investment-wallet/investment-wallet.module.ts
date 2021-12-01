@@ -23,6 +23,8 @@ import { ChartsModule } from 'ng2-charts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '../forms/forms.module';
 import { InvestmentWalletMyproductsCardComponent } from './components/investment-wallet-myproducts-card/investment-wallet-myproducts-card.component';
+import { InvestmentWalletVariableIncomeListComponent } from './components/investment-wallet-variable-income-list/investment-wallet-variable-income-list.component';
+import { InvestmentWalletTreasureListComponent } from './components/investment-wallet-treasure-list/investment-wallet-treasure-list.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { InvestmentWalletMyproductsCardComponent } from './components/investment
     InvestmentWalletProductFixedIncomeComponent,
     InvestmentWalletPizzaComponent,
     InvestmentWalletMyproductsCardComponent,
+    InvestmentWalletVariableIncomeListComponent,
+    InvestmentWalletTreasureListComponent,
   ],
   imports: [
     CommonModule,

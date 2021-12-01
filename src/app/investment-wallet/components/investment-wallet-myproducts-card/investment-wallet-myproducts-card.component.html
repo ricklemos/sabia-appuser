@@ -1,10 +1,12 @@
 <div clCard>
   <div clCardContent fxLayout="column" fxLayoutGap="16px">
-    <div fxLayout="column" fxLayoutAlign="start start">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
       <h2>Meus Investimentos</h2>
+      <p *ngIf="products.length === 0">Você ainda não possui investimentos desse tipo.</p>
+      <p *ngIf="products.length === 0">Escolha um produto abaixo para começar.</p>
     </div>
 <!--    <h3>Variação</h3>-->
-    <div clCardOutline>
+    <div clCardOutline *ngIf="products.length !== 0">
       <div clCardContentList>
         <ng-container *ngFor="let product of products; let i = index">
           <cl-list-item [divider]="i !== products.length - 1 ? 'middle' : null">
@@ -21,7 +23,7 @@
       </div>
     </div>
 
-    <div fxLayout="column" fxLayoutGap="8px">
+    <div fxLayout="column" fxLayoutGap="8px" *ngIf="products.length !== 0">
       <p class="black-alpha-500">Posição total</p>
       <h3>R$ {{ total | numeral: 'currency' }}</h3>
     </div>

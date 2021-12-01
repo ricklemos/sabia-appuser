@@ -1,0 +1,27 @@
+<div clCard fxLayout="column" fxLayoutGap="16px">
+  <cl-search
+    placeholder="Digite para pesquisar"
+    [initOpen]="true"
+    [forceOpen]="true"
+    [autoFocus]="false"
+    (cbSearch)="getChanges($event)"
+  ></cl-search>
+  <div clCardTitle>
+    <h2>Produtos</h2>
+  </div>
+  <ng-container *ngFor="let title of treasureList; let i = index">
+    <cl-list-item [divider]="i !== treasureList.length - 1 ? 'middle' : null" [action]="true" [routerLink]="getTitleUrl(title)">
+      <div fxFlex="60" left>
+        <h3>{{ title.tipoTitulo }}</h3>
+        <h3>{{ title.vencimento.substr(0,4) }}</h3>
+      </div>
+      <div fxFlex="30" fxLayout="column" fxLayoutAlign="end" fxLayoutGap="8px" right>
+        <p>Rentabilidade</p>
+        <p>+ {{ title.txVendaManha }} %</p>
+      </div>
+      <div fxFlex="10" right>
+        <i clIconSmall name="cl-chevron-right"></i>
+      </div>
+    </cl-list-item>
+  </ng-container>
+</div>

@@ -26,24 +26,6 @@ export class WalletService {
   setWallet(wallet): void {
     this.wallet = wallet;
   }
-  // Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
-  buyStocks(ticker: string, quotas: number, price: number): Promise<any> {
-    return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
-      {
-        balance: this.wallet.balance - price * quotas,
-        stocksEvents: firebase.default.firestore.FieldValue.arrayUnion(
-          {
-            type: 'BUY',
-            dateTime: new Date(),
-            ticker,
-            quotas,
-            price
-          }
-        )
-      }
-    );
-  }
-
 
   // Atualiza documento da carteira com informações de COMPRA e VENDA de ações. Demora para atualizar.
   tradeStocks(ticker: string, quotas: number, price: number, type: 'BUY' | 'SELL'): Promise<any> {

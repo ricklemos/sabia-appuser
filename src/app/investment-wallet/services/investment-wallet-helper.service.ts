@@ -18,6 +18,8 @@ export class InvestmentWalletHelperService {
         return 'renda-fixa';
       case 'TREASURE':
         return 'tesouro-direto';
+      default:
+        return '';
     }
   }
 

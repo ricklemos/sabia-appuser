@@ -1,0 +1,27 @@
+<div clCard fxLayout="column" fxLayoutGap="16px">
+  <cl-search
+    placeholder="Digite para pesquisar"
+    [initOpen]="true"
+    [forceOpen]="true"
+    [autoFocus]="false"
+    (cbSearch)="getChanges($event)"
+  ></cl-search>
+  <div clCardTitle>
+    <h2>Produtos</h2>
+  </div>
+  <cl-list-item *ngFor="let stock of filteredList" [action]="true" [routerLink]="getStockUrl(stock)">
+    <div fxFlex="60" left>
+      <p>{{ stock.ticker }}</p>
+    </div>
+    <div *ngIf="stock.varDay" fxFlex="40" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px" right>
+      <p
+        [ngClass]="stock.varDay < 0 ? 'red-700' : 'green-700'">{{ stock.varDay | numeral: 'percentage' }}
+      </p>
+      <i clIconSmall name="cl-chevron-right"></i>
+    </div>
+    <!--    <div *ngIf="product.yield" fxFlex="40" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px" right>-->
+    <!--      <p>{{ product.yield }}</p>-->
+    <!--      <i clIconSmall name="cl-chevron-right"></i>-->
+    <!--    </div>-->
+  </cl-list-item>
+</div>

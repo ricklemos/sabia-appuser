@@ -36,6 +36,24 @@ export interface InvestmentStock {
   currentPrice?: number;
 }
 
+export interface InvestmentTreasure {
+  dataBase: number;
+  puBaseManha: number;
+  puCompraManha: number;
+  puVendaManha: number;
+  tipoTitulo: string;
+  txCompraManha: number;
+  txVendaManha: number;
+  vencimento: string;
+  id: string;
+}
+
+export interface InvestmentProductList {
+  type: InvestmentModule['moduleName'];
+  stockList?: InvestmentStock[];
+  treasureList?: InvestmentTreasure[];
+}
+
 export interface InvestmentWallet {
   userId: string;
   walletId: string;

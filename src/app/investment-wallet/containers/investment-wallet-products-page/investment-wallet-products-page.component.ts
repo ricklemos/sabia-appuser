@@ -3,8 +3,7 @@ import { UrlService } from '../../../services/url.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {
   InvestmentModule,
-  InvestmentProduct,
-  InvestmentStock,
+  InvestmentProduct, InvestmentProductList,
   InvestmentWallet
 } from '../../model/investment-wallet.model';
 import {switchMap, tap} from 'rxjs/operators';
@@ -12,6 +11,7 @@ import {noop, Observable, of} from 'rxjs';
 import {StocksService} from '../../../services/stocks.service';
 import {WalletService} from '../../services/wallet.service';
 import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
+import {TreasureService} from '../../../services/treasure.service';
 
 @Component({
   selector: 'investment-wallet-products-page',
@@ -20,19 +20,27 @@ import {InvestmentWalletHelperService} from '../../services/investment-wallet-he
 })
 export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy {
 
-  productList: InvestmentStock[];
+  productList: InvestmentProductList;
   wallet: InvestmentWallet;
-  products: InvestmentProduct[];
+  myProducts: InvestmentProduct[] = [];
   loading = true;
   moduleId: InvestmentModule['moduleName'];
   subscribes = [];
+  titleName = {
+    VARIABLE_INCOME: 'Renda Variável',
+    TREASURE: 'Tesouro Direto',
+    FIXED_INCOME: 'Renda Fixa Privada',
+    BALANCE: 'Caixa'
+  };
+
   constructor(
     private urlService: UrlService,
     private router: Router,
     private route: ActivatedRoute,
     private stocksService: StocksService,
     private walletService: WalletService,
-    private investmentWalletHelperService: InvestmentWalletHelperService
+    private investmentWalletHelperService: InvestmentWalletHelperService,
+    private treasureService: TreasureService
   ) {
   }
 
@@ -44,6 +52,8 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
         switch (this.moduleId) {
           case 'VARIABLE_INCOME':
             return this.fetchVariableIncome();
+          case 'TREASURE':
+            return this.fetchTreasure();
           default:
             return of(null);
         }
@@ -56,9 +66,26 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
     return this.stocksService.fetchSheetStocks().pipe(
       tap((req) => {
         if (req !== null){
-          this.productList = req.data().stocks;
-          this.products = this.investmentWalletHelperService.calculateProducts(this.wallet.stocksEvents, this.productList);
+          this.productList = {
+            stockList: req.data().stocks,
+            type: this.moduleId
+          };
+          console.log(this.productList);
+          this.myProducts = this.investmentWalletHelperService.calculateProducts(this.wallet.stocksEvents, this.productList.stockList);
         }
+      })
+    );
+  }
+  private fetchTreasure(): Observable<any>{
+    return this.treasureService.fetchAvailableTitles().pipe(
+      tap((doc) => {
+        Object.keys(doc.titles).forEach(key => {
+          doc.titles[key].id = key;
+        });
+        this.productList = {
+          treasureList: Object.values(doc.titles),
+          type: this.moduleId
+        };
       })
     );
   }

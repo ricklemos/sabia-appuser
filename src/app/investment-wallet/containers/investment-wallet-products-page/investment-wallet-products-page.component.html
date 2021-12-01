@@ -1,4 +1,4 @@
-<navbar barTitle="Carteira de Investimentos" [disableNavigation]="true">
+<navbar [barTitle]="titleName[moduleId]" [disableNavigation]="true">
 
   <div class="left">
     <button (click)="goBack()" clButtonIcon>
@@ -7,8 +7,9 @@
   </div>
   <div class="products-page" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
     <ng-container *ngIf="!loading">
-      <investment-wallet-myproducts-card [products]="products"></investment-wallet-myproducts-card>
+      <investment-wallet-myproducts-card [products]="myProducts"></investment-wallet-myproducts-card>
+      <investment-wallet-variable-income-list *ngIf="productList.stockList" [stockList]="productList.stockList"></investment-wallet-variable-income-list>
+      <investment-wallet-treasure-list *ngIf="productList.treasureList" [treasureList]="productList.treasureList"></investment-wallet-treasure-list>
     </ng-container>
-    <investment-wallet-product-list></investment-wallet-product-list>
   </div>
 </navbar>

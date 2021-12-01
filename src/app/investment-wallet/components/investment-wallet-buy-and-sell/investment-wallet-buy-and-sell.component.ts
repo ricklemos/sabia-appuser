@@ -14,11 +14,10 @@ export class InvestmentWalletBuyAndSellComponent implements OnInit {
 
   formConfig = [{
     type: 'input',
-    inputType: 'tel',
+    inputType: 'number',
     label: 'Cotas',
     placeholder: '0',
     name: 'cotas',
-    value: '',
     hint: 'Número de cotas a comprar ou vender',
   }];
 

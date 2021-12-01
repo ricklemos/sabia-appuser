@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
-import {noop, Observable, Subscription} from 'rxjs';
-import { tap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
+import {InvestmentWallet} from '../model/investment-wallet.model';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WalletService {
   uId: string;
-  investmentWalletSubscription: Subscription;
-  wallet: any;
-  walletId: string;
+  wallet: InvestmentWallet;
 
   constructor(
     private firestore: AngularFirestore,
@@ -25,32 +23,12 @@ export class WalletService {
     return this.firestore.collection('simulatorWallet', ref => ref.where('userId', '==', this.uId)).valueChanges();
   }
 
-  // Dá subscribe na carteira do aluno para que leituras e alterações sejam feitas futuramente
-  getWallet(): void {
-    this.uId = this.sessionService.getUserId();
-
-    this.investmentWalletSubscription = this.firestore
-      .collection('simulatorWallet', ref => ref.where('userId', '==', this.uId))
-      .get()
-      .pipe(
-        tap(
-          (snap) => {
-            this.wallet = snap.docs[0].data();
-            this.walletId = snap.docs[0].id;
-            console.log(this.wallet);
-          }
-        )
-      ).subscribe(noop);
+  setWallet(wallet): void {
+    this.wallet = wallet;
   }
-
-  closeWallet(): void {
-    this.investmentWalletSubscription.unsubscribe();
-  }
-
-
   // Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
   buyStocks(ticker: string, quotas: number, price: number): Promise<any> {
-    return this.firestore.doc(`simulatorWallet/${ this.walletId }`).update(
+    return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
       {
         balance: this.wallet.balance - price * quotas,
         stocksEvents: firebase.default.firestore.FieldValue.arrayUnion(
@@ -67,14 +45,14 @@ export class WalletService {
   }
 
 
-  // Atualiza documento da carteira com informações de COMPRA de ações. Demora para atualizar.
-  sellStocks(ticker: string, quotas: number, price: number): Promise<any> {
-    return this.firestore.doc(`simulatorWallet/${ this.walletId }`).update(
+  // Atualiza documento da carteira com informações de COMPRA e VENDA de ações. Demora para atualizar.
+  tradeStocks(ticker: string, quotas: number, price: number, type: 'BUY' | 'SELL'): Promise<any> {
+    return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
       {
-        balance: this.wallet.balance + price * quotas,
+        balance: type === 'BUY' ? this.wallet.balance - price * quotas : this.wallet.balance + price * quotas,
         stocksEvents: firebase.default.firestore.FieldValue.arrayUnion(
           {
-            type: 'SELL',
+            type,
             dateTime: new Date(),
             ticker,
             quotas,

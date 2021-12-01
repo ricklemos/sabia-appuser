@@ -8,6 +8,7 @@ import { noop, Subscription } from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
 import {WalletService} from '../../services/wallet.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'investment-wallet-trade-page',
@@ -22,7 +23,8 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   subscribes: Subscription[] = [];
   balance: number;
   productBalance: number;
-  quotasToSell: number;
+  quotasAvailableToSell: number;
+  walletId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +33,8 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     private router: Router,
     private stocksService: StocksService,
     private investmentWalletHelperService: InvestmentWalletHelperService,
-    private walletService: WalletService
+    private walletService: WalletService,
+    private matSnackBar: MatSnackBar
   ) {
   }
 
@@ -50,12 +53,13 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
         return this.walletService.fetchUserWallets();
       }),
       tap((docs) => {
-        console.log(docs[0]);
         const wallet = docs[0];
+        this.walletService.setWallet(wallet);
         this.balance = wallet.balance;
         const stockTransactions = wallet.stocksEvents.filter(stock => stock.ticker === this.productId);
-        this.quotasToSell = this.investmentWalletHelperService.calculateTickerQuotas(stockTransactions);
-        this.productBalance = this.product.variableIncomeData.currentPrice * this.quotasToSell;
+        this.quotasAvailableToSell = this.investmentWalletHelperService.calculateTickerQuotas(stockTransactions);
+        console.log('count', this.quotasAvailableToSell);
+        this.productBalance = this.product.variableIncomeData.currentPrice * this.quotasAvailableToSell;
         this.loading = false;
       })
     ).subscribe(noop);
@@ -67,20 +71,40 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   }
 
   trade($event): any{
-    // TODO: Trade request for database + verifications (if there is balance to buy or sell)
-    const value = $event.quota * this.product.variableIncomeData.currentPrice;
-    if ($event.type === 'buy'){
-      if (this.balance < value){
-        // TODO: Show Dialog with not enough funds
-        return;
-      }
-      // TODO: Buy Product
-    } else if ($event.type === 'sell'){
-      // TODO: se quer vender mais cotas do que tem disponível, não permitir
-      // TODO: Sell Product
+    if (!$event.quota || $event.quota <= 0){
+      this.matSnackBar.open('Insira um número de cotas maior que zero', 'OK', { duration: 3000 });
+      return;
     }
-    // TODO: No caso de renda variável barrar se o número de cotas não for inteiro
-    console.log('trade', $event);
+    if ($event.quota.includes(',')){
+      this.matSnackBar.open('Use o ponto como separador decimal', 'OK', { duration: 3000 });
+      return;
+    }
+    if (parseFloat($event.quota) * 10 % 10 !== 0) {
+      this.matSnackBar.open('Não é possível comprar cotas fracionadas', 'OK', { duration: 3000 });
+      return;
+    }
+    const quotas = parseInt($event.quota, 10);
+    const value = quotas * this.product.variableIncomeData.currentPrice;
+    if ($event.type === 'BUY'){
+      if (this.balance < value){
+        this.matSnackBar.open('Sem saldo disponível para investir', 'OK', { duration: 3000 });
+        return;
+      } else {
+        this.walletService.tradeStocks(this.productId, quotas, this.product.variableIncomeData.currentPrice, $event.type)
+          .then(() => {
+            this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
+          });
+      }
+    } else if ($event.type === 'SELL'){
+      if (this.quotasAvailableToSell >= quotas) {
+        this.walletService.tradeStocks(this.productId, quotas, this.product.variableIncomeData.currentPrice, $event.type)
+          .then(() => {
+            this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
+          });
+      } else {
+        this.matSnackBar.open(`Só há ${this.quotasAvailableToSell} cotas disponíveis para venda`, 'OK', { duration: 3000 });
+      }
+    }
   }
 
   goBack(): void {

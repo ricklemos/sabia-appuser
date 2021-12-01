@@ -37,6 +37,7 @@ export interface InvestmentStock {
 
 export interface InvestmentWallet {
   userId: string;
+  walletId: string;
   balance: number;
   stocksEvents: StocksEvent[];
   publicFixesIncomeEvents: PublicFixedIncomeEvent[];

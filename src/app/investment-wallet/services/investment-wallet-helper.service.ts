@@ -45,7 +45,6 @@ export class InvestmentWalletHelperService {
         dic[transaction.ticker] = transaction.quotas;
       }
     });
-    console.log('dic', dic);
     return dic;
   }
 

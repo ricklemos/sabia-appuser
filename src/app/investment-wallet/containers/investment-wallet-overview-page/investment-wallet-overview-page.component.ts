@@ -10,6 +10,7 @@ import { InvestmentWalletHelperService } from '../../services/investment-wallet-
 import {switchMap, tap} from 'rxjs/operators';
 import {noop} from 'rxjs';
 import {StocksService} from '../../../services/stocks.service';
+import {TreasureService} from '../../../services/treasure.service';
 
 @Component({
   selector: 'investment-wallet-overview-page',
@@ -33,7 +34,8 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
     private router: Router,
     private urlService: UrlService,
     private investmentWalletHelperService: InvestmentWalletHelperService,
-    private stocksService: StocksService
+    private stocksService: StocksService,
+    private treasureService: TreasureService
   ) {
     this.investmentModules = [
       {
@@ -78,10 +80,22 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
         this.investmentModules[3].invested = this.wallet.balance;
         return this.stocksService.fetchSheetStocks(); // Pega o preço atual das ações para calcular a posição
       }),
-      tap((stocks) => {
+      switchMap((stocks) => {
         const stockPrices = stocks.data().stocks;
         const quotasDic = this.walletHelperService.calculateQuotas(this.wallet.stocksEvents);
         this.investmentModules[0].invested = this.walletHelperService.calculatePosition(quotasDic, stockPrices);
+        return this.treasureService.fetchAvailableTitles();
+      }),
+      tap((doc) => {
+        Object.keys(doc.titles).forEach(key => {
+          doc.titles[key].id = key;
+        });
+        const treasureQuotas = this.investmentWalletHelperService.calculateTreasureQuotas(this.wallet.publicFixedIncomeEvents);
+        let treasurePosition = 0;
+        Object.keys(treasureQuotas).forEach(key => {
+          treasurePosition += treasureQuotas[key] * doc.titles[key].puVendaManha;
+        });
+        this.investmentModules[1].invested = treasurePosition;
       }),
       tap(() => {
         // TODO: Antes de fazer essa conta tem que pegar os dados de tesouro direto e renda fixa privada

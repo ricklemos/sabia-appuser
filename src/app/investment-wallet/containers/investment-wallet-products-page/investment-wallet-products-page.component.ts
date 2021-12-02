@@ -54,6 +54,8 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
             return this.fetchVariableIncome();
           case 'TREASURE':
             return this.fetchTreasure();
+          case 'FIXED_INCOME':
+            return this.fetchTreasure();
           default:
             return of(null);
         }
@@ -86,6 +88,14 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
           treasureList: Object.values(doc.titles),
           type: this.moduleId
         };
+        const treasureQuotas = this.investmentWalletHelperService.calculateTreasureQuotas(this.wallet.publicFixedIncomeEvents);
+        Object.keys(treasureQuotas).forEach(key => {
+          this.myProducts.push({
+            id: doc.titles[key].tipoTitulo + ' ' +  doc.titles[key].vencimento.substr(0, 4),
+            position: treasureQuotas[key] * doc.titles[key].puVendaManha,
+            module: 'TREASURE'
+          });
+        });
       })
     );
   }

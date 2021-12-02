@@ -7,7 +7,7 @@ import {InvestmentProduct} from '../../model/investment-wallet.model';
   styleUrls: ['./investment-wallet-myproducts-card.component.scss']
 })
 export class InvestmentWalletMyproductsCardComponent implements OnInit {
-  @Input() products: InvestmentProduct[] = [];
+  @Input() products: InvestmentProduct[];
   total = 0;
   constructor() { }
 

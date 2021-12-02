@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import {InvestmentModule, InvestmentProduct, StocksEvent} from '../model/investment-wallet.model';
+import {
+  InvestmentModule,
+  InvestmentProduct,
+  PublicFixedIncomeEvent,
+  StocksEvent
+} from '../model/investment-wallet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -74,19 +79,33 @@ export class InvestmentWalletHelperService {
     const products = [];
     const quotasDictionary = this.calculateQuotas(transactionHistory);
     for (const [key, value] of Object.entries(quotasDictionary)){
-      console.log(key, value);
       const [stockInfo] = stockPrices.filter(stock => stock.ticker === key);
       // @ts-ignore
       const position = stockInfo.currentPrice * value;
-      products.push({
-        id: key,
-        position,
-        label: stockInfo.companyName
-      });
+      if (position !== 0){
+        products.push({
+          id: key,
+          position,
+          label: stockInfo.companyName
+        });
+      }
     }
     return products;
   }
-
-
+  calculateTreasureQuotas(transactionHistory: PublicFixedIncomeEvent[]): any {
+    const dic = {};
+    transactionHistory.forEach(transaction => {
+      if (dic[transaction.id]) {
+        if (transaction.type === 'BUY') {
+          dic[transaction.id] += transaction.quotas;
+        } else {
+          dic[transaction.id] -= transaction.quotas;
+        }
+      } else {
+        dic[transaction.id] = transaction.quotas;
+      }
+    });
+    return dic;
+  }
 }
 

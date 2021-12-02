@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 import * as firebase from 'firebase/app';
-import {InvestmentWallet} from '../model/investment-wallet.model';
+import {InvestmentProduct, InvestmentTreasure, InvestmentWallet} from '../model/investment-wallet.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -39,6 +39,27 @@ export class WalletService {
             ticker,
             quotas,
             price
+          }
+        )
+      }
+    );
+  }
+
+  tradeTreasure(type: 'BUY' | 'SELL', product: InvestmentTreasure, quotas: number, productId: string): Promise<any>{
+    console.log(product);
+    return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
+      {
+        balance: type === 'BUY' ? this.wallet.balance - product.puVendaManha * quotas : this.wallet.balance + product.puVendaManha * quotas,
+        publicFixedIncomeEvents: firebase.default.firestore.FieldValue.arrayUnion(
+          {
+            type,
+            dateTime: new Date(),
+            id: productId,
+            quotas,
+            productType: product.tipoTitulo,
+            tax: product.txVendaManha,
+            unitPrice: product.puVendaManha,
+            due: product.vencimento
           }
         )
       }

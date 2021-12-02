@@ -14,6 +14,9 @@ export interface InvestmentProduct {
   module: InvestmentModule['moduleName'];
   unitPrice?: number;
 
+  // Tesouro Direto
+  treasureData?: InvestmentTreasure;
+
   // Renda Fixa
   seller?: string;
   yield?: string; // Rendimento
@@ -60,7 +63,7 @@ export interface InvestmentWallet {
   walletId: string;
   balance: number;
   stocksEvents: StocksEvent[];
-  publicFixesIncomeEvents: PublicFixedIncomeEvent[];
+  publicFixedIncomeEvents: PublicFixedIncomeEvent[];
   privateFixedIncomeEvents: PrivateFixedIncomeEvent[];
 }
 

@@ -66,12 +66,14 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     return this.stocksService.fetchSheetStocks().pipe(
       tap(req => {
         const data = req.data();
+        console.log(this.productId);
         const [obj] = data.stocks.filter(stock => stock.ticker === this.productId);
+        console.log(obj);
         this.product = {
           id: this.productId,
           module: 'VARIABLE_INCOME',
           variableIncomeData: obj,
-          unitPrice: this.product.variableIncomeData.currentPrice
+          unitPrice: obj.currentPrice
         };
         const stockTransactions = this.wallet.stocksEvents.filter(stock => stock.ticker === this.productId);
         this.quotasAvailableToSell = this.investmentWalletHelperService.calculateTickerQuotas(stockTransactions);
@@ -85,8 +87,8 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
       switchMap((availableTitles) => {
         const titleDetails: InvestmentTreasure = availableTitles.titles[this.productId];
         console.log(titleDetails);
-        const dueDate =  titleDetails.vencimento.substr(8, 2) + ' / '
-          + titleDetails.vencimento.substr(5, 2) + ' / '
+        const dueDate =  titleDetails.vencimento.substr(8, 2) + '/'
+          + titleDetails.vencimento.substr(5, 2) + '/'
           + titleDetails.vencimento.substr(0, 4);
         this.product = {
           id: this.productId,
@@ -95,12 +97,16 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
           yield: titleDetails.txVendaManha.toString(10),
           unitPrice: titleDetails.puVendaManha,
           dueDate,
-          minimumInvestment: titleDetails.puVendaManha * 0.01
+          minimumInvestment: titleDetails.puVendaManha * 0.01,
+          treasureData: titleDetails
         };
-        this.productBalance = 0;
+        const dic = this.investmentWalletHelperService.calculateTreasureQuotas(this.wallet.publicFixedIncomeEvents);
+        this.productBalance = dic[this.productId] * titleDetails.puVendaManha;
+        this.quotasAvailableToSell = dic[this.productId]; // TODO: Mostrar dados de cotas disponíveis pro usuário?
         return this.treasureService.fetchTitle(this.productId);
       }),
       tap((title) => {
+        // TODO: aqui podemos usar os dados históricos do título pra mostrar em um gráfico .
         console.log(title);
       })
     );
@@ -111,6 +117,9 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   }
 
   trade($event): any{
+    const quotas = parseFloat($event.quota);
+    const value = quotas * this.product.unitPrice;
+    // Condições para realizar o trade
     if (!$event.quota || $event.quota <= 0){
       this.matSnackBar.open('Insira um número de cotas maior que zero', 'OK', { duration: 3000 });
       return;
@@ -119,31 +128,33 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
       this.matSnackBar.open('Use o ponto como separador decimal', 'OK', { duration: 3000 });
       return;
     }
-    if (parseFloat($event.quota) * 10 % 10 !== 0) {
+    if (this.moduleId === 'VARIABLE_INCOME' && parseFloat($event.quota) * 10 % 10 !== 0) {
       this.matSnackBar.open('Não é possível comprar cotas fracionadas', 'OK', { duration: 3000 });
       return;
     }
-    const quotas = parseInt($event.quota, 10);
-    const value = quotas * this.product.variableIncomeData.currentPrice;
-    if ($event.type === 'BUY'){
-      if (this.balance < value){
-        this.matSnackBar.open('Sem saldo disponível para investir', 'OK', { duration: 3000 });
-        return;
-      } else {
-        this.walletService.tradeStocks(this.productId, quotas, this.product.variableIncomeData.currentPrice, $event.type)
+    if ($event.type === 'BUY' && this.balance < value){
+      this.matSnackBar.open('Sem saldo disponível para investir', 'OK', {duration: 3000});
+      return;
+    } else if ($event.type === 'SELL' && this.quotasAvailableToSell < quotas){
+      this.matSnackBar.open(`Só há ${this.quotasAvailableToSell} cotas disponíveis para venda`, 'OK', { duration: 3000 });
+      return;
+    }
+    // Trade acontece se passar por todas as condições acima
+    switch (this.moduleId) {
+      case 'VARIABLE_INCOME':
+        this.walletService.tradeStocks(this.productId, quotas, this.product.unitPrice, $event.type)
           .then(() => {
             this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
           });
-      }
-    } else if ($event.type === 'SELL'){
-      if (this.quotasAvailableToSell >= quotas) {
-        this.walletService.tradeStocks(this.productId, quotas, this.product.variableIncomeData.currentPrice, $event.type)
+        break;
+      case 'TREASURE':
+        this.walletService.tradeTreasure($event.type, this.product.treasureData, quotas, this.productId)
           .then(() => {
             this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
           });
-      } else {
-        this.matSnackBar.open(`Só há ${this.quotasAvailableToSell} cotas disponíveis para venda`, 'OK', { duration: 3000 });
-      }
+        break; // ????
+      default:
+        console.log('erro');
     }
   }
 

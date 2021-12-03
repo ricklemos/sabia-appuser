@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   InvestmentModule,
-  InvestmentProduct,
+  InvestmentProduct, PrivateFixedIncomeEvent,
   PublicFixedIncomeEvent,
   StocksEvent
 } from '../model/investment-wallet.model';
@@ -106,6 +106,25 @@ export class InvestmentWalletHelperService {
       }
     });
     return dic;
+  }
+  calculatePrivateFixedIncomePosition(transactionHistory: PrivateFixedIncomeEvent[]): any {
+    const amountDic = {};
+    transactionHistory.forEach(transaction => {
+      if (amountDic[transaction.name]) {
+        if (transaction.type === 'BUY') {
+          amountDic[transaction.name] += transaction.amount;
+        } else {
+          amountDic[transaction.name] -= transaction.amount;
+        }
+      } else {
+        amountDic[transaction.name] = transaction.amount;
+      }
+    });
+    let position = 0;
+    Object.keys(amountDic).forEach(productKey => {
+      position += amountDic[productKey];
+    });
+    return position;
   }
 }
 

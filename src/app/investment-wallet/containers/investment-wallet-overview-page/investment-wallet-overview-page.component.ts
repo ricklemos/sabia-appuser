@@ -3,7 +3,7 @@ import { WalletService } from '../../services/wallet.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import {
-  InvestmentModule,
+  InvestmentModule, InvestmentWallet,
   InvestmentWalletPizzaGraphProduct
 } from '../../model/investment-wallet.model';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
@@ -23,7 +23,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
   loading = true;
 
   investmentModules: InvestmentModule[];
-  wallet;
+  wallet: InvestmentWallet;
   totalWithoutBalance: number;
 
   subscribes = [];
@@ -98,6 +98,9 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
         this.investmentModules[1].invested = treasurePosition;
       }),
       tap(() => {
+        // Cálculo da posição em renda fixa privada:
+        this.investmentModules[2].invested =
+          this.investmentWalletHelperService.calculatePrivateFixedIncomePosition(this.wallet.privateFixedIncomeEvents);
         // TODO: Antes de fazer essa conta tem que pegar os dados de tesouro direto e renda fixa privada
         this.totalWithoutBalance = 0;
         this.investmentModules.forEach(investmentModule => {

@@ -155,8 +155,16 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
       this.matSnackBar.open('Use o ponto como separador decimal', 'OK', { duration: 3000 });
       return;
     }
-    if (this.moduleId === 'VARIABLE_INCOME' && parseFloat($event.quota) * 10 % 10 !== 0) {
+    if (this.moduleId === 'VARIABLE_INCOME'  && parseFloat($event.quota) * 10 % 10 !== 0) {
       this.matSnackBar.open('Não é possível comprar cotas fracionadas', 'OK', { duration: 3000 });
+      return;
+    }
+    if (value < this.product.minimumInvestment) {
+      this.matSnackBar
+        .open(`Não é possível investir um valor menor que o mínimo de R$ ${this.product.minimumInvestment}`,
+          'OK',
+          { duration: 3000 }
+        );
       return;
     }
     if ($event.type === 'BUY' && this.balance < value){
@@ -176,6 +184,13 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
         break;
       case 'TREASURE':
         this.walletService.tradeTreasure($event.type, this.product.treasureData, quotas, this.productId)
+          .then(() => {
+            this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
+          });
+        break; // ????
+      case 'FIXED_INCOME':
+        // TODO: aqui talvez tenha que alterar da onde vem o produto
+        this.walletService.tradePrivateFixedIncomeProduct($event.type, this.privateFixedIncomeService.getProduct(), quotas)
           .then(() => {
             this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
           });

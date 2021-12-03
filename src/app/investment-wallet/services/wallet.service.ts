@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 import * as firebase from 'firebase/app';
-import {InvestmentProduct, InvestmentTreasure, InvestmentWallet} from '../model/investment-wallet.model';
+import {
+  InvestmentPrivateFixedIncome,
+  InvestmentProduct,
+  InvestmentTreasure,
+  InvestmentWallet
+} from '../model/investment-wallet.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -46,7 +51,6 @@ export class WalletService {
   }
 
   tradeTreasure(type: 'BUY' | 'SELL', product: InvestmentTreasure, quotas: number, productId: string): Promise<any>{
-    console.log(product);
     return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
       {
         balance: type === 'BUY' ? this.wallet.balance - product.puVendaManha * quotas : this.wallet.balance + product.puVendaManha * quotas,
@@ -60,6 +64,27 @@ export class WalletService {
             tax: product.txVendaManha,
             unitPrice: product.puVendaManha,
             due: product.vencimento
+          }
+        )
+      }
+    );
+  }
+  tradePrivateFixedIncomeProduct(type: 'BUY' | 'SELL', product: InvestmentPrivateFixedIncome, quotas: number): Promise<any>{
+    console.log('produto pro trade', product);
+    return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
+      {
+        balance: type === 'BUY' ? this.wallet.balance - product.minimumInput * quotas : this.wallet.balance + product.minimumInput * quotas,
+        privateFixedIncomeEvents: firebase.default.firestore.FieldValue.arrayUnion(
+          {
+            type,
+            dateTime: new Date(),
+            bank: product.bank,
+            name: product.name,
+            amount: product.minimumInput * quotas,
+            productType: product.productType,
+            yield: product.yield,
+            liquidity: product.liquidity,
+            due: product.due
           }
         )
       }

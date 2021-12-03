@@ -107,7 +107,7 @@ export class InvestmentWalletHelperService {
     });
     return dic;
   }
-  calculatePrivateFixedIncomePosition(transactionHistory: PrivateFixedIncomeEvent[]): any {
+  getPrivateFixedIncomeProductsPosition(transactionHistory: PrivateFixedIncomeEvent[]): any {
     const amountDic = {};
     transactionHistory.forEach(transaction => {
       if (amountDic[transaction.name]) {
@@ -120,6 +120,10 @@ export class InvestmentWalletHelperService {
         amountDic[transaction.name] = transaction.amount;
       }
     });
+    return amountDic;
+  }
+  calculatePrivateFixedIncomePosition(transactionHistory: PrivateFixedIncomeEvent[]): any {
+    const amountDic = this.getPrivateFixedIncomeProductsPosition(transactionHistory);
     let position = 0;
     Object.keys(amountDic).forEach(productKey => {
       position += amountDic[productKey];

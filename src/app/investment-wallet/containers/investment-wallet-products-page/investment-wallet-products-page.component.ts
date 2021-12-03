@@ -112,6 +112,15 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
           privateFixedIncomeList: array,
           type: this.moduleId
         };
+        const productDic =
+          this.investmentWalletHelperService.getPrivateFixedIncomeProductsPosition(this.wallet.privateFixedIncomeEvents);
+        Object.keys(productDic).forEach(productKey => {
+          this.myProducts.push({
+            id: productKey,
+            module: 'FIXED_INCOME',
+            position: productDic[productKey]
+          });
+        });
       })
     );
   }

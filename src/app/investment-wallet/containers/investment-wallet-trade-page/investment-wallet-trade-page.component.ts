@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {InvestmentProduct, InvestmentTreasure, InvestmentWallet} from '../../model/investment-wallet.model';
+import {
+  InvestmentPrivateFixedIncome,
+  InvestmentProduct,
+  InvestmentTreasure,
+  InvestmentWallet
+} from '../../model/investment-wallet.model';
 import { InvestmentWalletMockService } from '../../services/investment-wallet-mock.service';
 import { UrlService } from '../../../services/url.service';
 import { StocksService } from '../../../services/stocks.service';
@@ -10,6 +15,7 @@ import { InvestmentWalletHelperService } from '../../services/investment-wallet-
 import {WalletService} from '../../services/wallet.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TreasureService} from '../../../services/treasure.service';
+import {PrivateFixedIncomeService} from '../../../services/private-fixed-income.service';
 
 @Component({
   selector: 'investment-wallet-trade-page',
@@ -35,6 +41,7 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     private router: Router,
     private stocksService: StocksService,
     private treasureService: TreasureService,
+    private privateFixedIncomeService: PrivateFixedIncomeService,
     private investmentWalletHelperService: InvestmentWalletHelperService,
     private walletService: WalletService,
     private matSnackBar: MatSnackBar
@@ -54,6 +61,8 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
             return this.fetchStockInfo();
           case 'TREASURE':
             return this.fetchTreasureInfo();
+          case 'FIXED_INCOME':
+            return this.fetchPrivateFixedIncomeProduct();
           default:
             return of('erro');
         }
@@ -108,6 +117,24 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
       tap((title) => {
         // TODO: aqui podemos usar os dados históricos do título pra mostrar em um gráfico .
         console.log(title);
+      })
+    );
+  }
+
+  private fetchPrivateFixedIncomeProduct(): Observable<any>{
+    return of(this.privateFixedIncomeService.getProduct()).pipe(
+      tap((product: InvestmentPrivateFixedIncome) => {
+        console.log('produto', product);
+        this.product = {
+          id: product.name,
+          label: product.name,
+          module: 'FIXED_INCOME',
+          minimumInvestment: product.minimumInput,
+          seller: product.bank,
+          yield: product.yield,
+          unitPrice: product.minimumInput,
+          dueDate: product.due
+        };
       })
     );
   }

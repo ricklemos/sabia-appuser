@@ -1,0 +1,26 @@
+@import "~collact-design-system/styles/colors";
+
+:host {
+  width: 100%;
+}
+
+.cl-card {
+  padding-bottom: 16px;
+}
+
+h2 {
+  font-family: ProximaNovaBold, sans-serif;
+  font-size: 20px;
+  color: $black-alpha-700;
+}
+
+h3 {
+  font-family: ProximaNovaSemiBold, sans-serif;
+  font-size: 16px;
+  color: $black-alpha-500;
+}
+
+p {
+  font-family: ProximaNova, sans-serif;
+  font-size: 14px;
+}

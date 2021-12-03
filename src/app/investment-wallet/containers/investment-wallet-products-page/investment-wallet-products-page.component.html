@@ -8,8 +8,15 @@
   <div class="products-page" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="24px" fxLayoutGap.lt-md="16px">
     <ng-container *ngIf="!loading">
       <investment-wallet-myproducts-card [products]="myProducts"></investment-wallet-myproducts-card>
-      <investment-wallet-variable-income-list *ngIf="productList.stockList" [stockList]="productList.stockList"></investment-wallet-variable-income-list>
-      <investment-wallet-treasure-list *ngIf="productList.treasureList" [treasureList]="productList.treasureList"></investment-wallet-treasure-list>
+      <investment-wallet-variable-income-list
+        *ngIf="productList.stockList" [stockList]="productList.stockList">
+      </investment-wallet-variable-income-list>
+      <investment-wallet-treasure-list
+        *ngIf="productList.treasureList" [treasureList]="productList.treasureList">
+      </investment-wallet-treasure-list>
+      <investment-wallet-private-fixed-income-list
+        *ngIf="productList.privateFixedIncomeList" [privateFixedIncomeList]="productList.privateFixedIncomeList">
+      </investment-wallet-private-fixed-income-list>
     </ng-container>
   </div>
 </navbar>

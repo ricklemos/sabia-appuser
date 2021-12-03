@@ -12,6 +12,7 @@ import {StocksService} from '../../../services/stocks.service';
 import {WalletService} from '../../services/wallet.service';
 import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
 import {TreasureService} from '../../../services/treasure.service';
+import {PrivateFixedIncomeService} from '../../../services/private-fixed-income.service';
 
 @Component({
   selector: 'investment-wallet-products-page',
@@ -40,7 +41,8 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
     private stocksService: StocksService,
     private walletService: WalletService,
     private investmentWalletHelperService: InvestmentWalletHelperService,
-    private treasureService: TreasureService
+    private treasureService: TreasureService,
+    private  privateFixedIncomeService: PrivateFixedIncomeService
   ) {
   }
 
@@ -55,7 +57,7 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
           case 'TREASURE':
             return this.fetchTreasure();
           case 'FIXED_INCOME':
-            return this.fetchTreasure();
+            return this.fetchPrivateFixedIncome();
           default:
             return of(null);
         }
@@ -96,6 +98,20 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
             module: 'TREASURE'
           });
         });
+      })
+    );
+  }
+  private fetchPrivateFixedIncome(): Observable<any> {
+    return this.privateFixedIncomeService.fetchPrivateFixedIncomeProducts().pipe(
+      tap(query => {
+        let array = [];
+        query.forEach((doc) => {
+          array = array.concat(doc.data().data);
+        });
+        this.productList = {
+          privateFixedIncomeList: array,
+          type: this.moduleId
+        };
       })
     );
   }

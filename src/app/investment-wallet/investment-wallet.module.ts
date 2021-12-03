@@ -24,6 +24,7 @@ import { FormsModule } from '../forms/forms.module';
 import { InvestmentWalletMyproductsCardComponent } from './components/investment-wallet-myproducts-card/investment-wallet-myproducts-card.component';
 import { InvestmentWalletVariableIncomeListComponent } from './components/investment-wallet-variable-income-list/investment-wallet-variable-income-list.component';
 import { InvestmentWalletTreasureListComponent } from './components/investment-wallet-treasure-list/investment-wallet-treasure-list.component';
+import { InvestmentWalletPrivateFixedIncomeListComponent } from './components/investment-wallet-private-fixed-income-list/investment-wallet-private-fixed-income-list.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { InvestmentWalletTreasureListComponent } from './components/investment-w
     InvestmentWalletMyproductsCardComponent,
     InvestmentWalletVariableIncomeListComponent,
     InvestmentWalletTreasureListComponent,
+    InvestmentWalletPrivateFixedIncomeListComponent,
   ],
   imports: [
     CommonModule,

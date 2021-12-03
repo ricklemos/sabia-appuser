@@ -52,10 +52,25 @@ export interface InvestmentTreasure {
   id: string;
 }
 
+export interface InvestmentPrivateFixedIncome {
+  bank: string;
+  due: string;
+  index?: number;
+  liquidity: string;
+  minimumInput: number;
+  name: string;
+  productType: string;
+  rating: string;
+  ratingAgency: string;
+  relativeToPoupanca: string;
+  yield: string;
+}
+
 export interface InvestmentProductList {
   type: InvestmentModule['moduleName'];
   stockList?: InvestmentStock[];
   treasureList?: InvestmentTreasure[];
+  privateFixedIncomeList?: InvestmentPrivateFixedIncome[];
 }
 
 export interface InvestmentWallet {

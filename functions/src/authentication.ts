@@ -1,12 +1,24 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
+async function createUserWallet(userId: string): Promise<any> {
+  return admin.firestore().collection('simulatorWallet').add({
+    balance: 1000,
+    privateFixedIncomeEvents: [],
+    publicFixedIncomeEvents: [],
+    stocksEvents: [],
+    userId
+  });
+}
+
 // Essa função atribui o papel de estudante para todos os novos usuários
 export const setStudentRoleOnCreate = functions.region('southamerica-east1')
   .auth.user().onCreate((user) => {
-  return admin.auth().setCustomUserClaims(user.uid, {
-    role: 'STUDENT'
-  });
+    const p1 = createUserWallet(user.uid);
+    const p2 = admin.auth().setCustomUserClaims(user.uid, {
+      role: 'STUDENT'
+    });
+    return Promise.all([p1, p2]);
 });
 
 // Essa função atribui o papel enviado pela rquisição para o email enviado pela requisição se o usuário tiver o correto privilégio.

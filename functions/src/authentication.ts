@@ -1,5 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+// const region = 'southamerica-east1';
+const region = 'us-central1';
 
 async function createUserWallet(userId: string): Promise<any> {
   return admin.firestore().collection('simulatorWallet').add({
@@ -12,7 +14,7 @@ async function createUserWallet(userId: string): Promise<any> {
 }
 
 // Essa função atribui o papel de estudante para todos os novos usuários
-export const setStudentRoleOnCreateAndCreateWallet = functions.region('southamerica-east1')
+export const setStudentRoleOnCreateAndCreateWallet = functions.region(region)
   .auth.user().onCreate((user) => {
     const p1 = createUserWallet(user.uid);
     const p2 = admin.auth().setCustomUserClaims(user.uid, {
@@ -22,7 +24,7 @@ export const setStudentRoleOnCreateAndCreateWallet = functions.region('southamer
 });
 
 // Essa função atribui o papel enviado pela rquisição para o email enviado pela requisição se o usuário tiver o correto privilégio.
-export const setRole = functions.region('southamerica-east1').https.onCall((data, context) => {
+export const setRole = functions.region(region).https.onCall((data, context) => {
   if (context.auth) {
     if (context.auth.token.role !== 'SCHOOL_ADMIN' && context.auth.token.role !== 'MASTER' && context.auth.uid !== '9lurqQ9nTcUdeCP2cjQmzoUKgdE2') {
       return {
@@ -52,7 +54,7 @@ async function grantRole(email: string, role: string): Promise<void> {
   return admin.auth().setCustomUserClaims(user.uid, { role });
 }
 
-export const setRoleOnUpdateUsers = functions.region('southamerica-east1').firestore
+export const setRoleOnUpdateUsers = functions.region(region).firestore
   .document('users/{userId}')
   .onUpdate(snap => {
     const email = snap.after.data().email;

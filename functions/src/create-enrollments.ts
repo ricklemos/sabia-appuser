@@ -4,6 +4,9 @@ import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
 import WriteResult = firestore.WriteResult;
 
+// const region = 'southamerica-east1';
+const region = 'us-central1';
+
 async function createEnrollmentFromPreEnrollment(preEnrollment: PreEnrollment, userId: string): Promise<WriteResult> {
   return admin.firestore().doc(`/enrollments/${ userId + '-' + preEnrollment.classroomId }`)
     .create({
@@ -89,7 +92,7 @@ async function createQuestionnaire(
     });
 }
 
-export const createEnrollmentWhenCreateUserData = functions.region('southamerica-east1').firestore
+export const createEnrollmentWhenCreateUserData = functions.region(region).firestore
   .document('userData/{userId}')
   .onCreate(async (snap) => {
     const userData: UserData = {
@@ -116,7 +119,7 @@ export const createEnrollmentWhenCreateUserData = functions.region('southamerica
     }
   });
 
-export const createEnrollmentsWhenCreateClassroom = functions.region('southamerica-east1').firestore
+export const createEnrollmentsWhenCreateClassroom = functions.region(region).firestore
   .document('classrooms/{classroomId}')
   .onCreate(async (snap) => {
     const data = snap.data();
@@ -183,7 +186,7 @@ export const createEnrollmentsWhenCreateClassroom = functions.region('southameri
     }
   });
 
-export const createEnrollmentsWhenUpdateClassroom = functions.region('southamerica-east1').firestore
+export const createEnrollmentsWhenUpdateClassroom = functions.region(region).firestore
   .document('classrooms/{classroomId}')
   .onUpdate(async (change) => {
     const data = change.after.data();
@@ -239,7 +242,7 @@ export const createEnrollmentsWhenUpdateClassroom = functions.region('southameri
     }
   });
 
-export const createmoduleProgressWhenCreateEnrollment = functions.region('southamerica-east1').firestore
+export const createmoduleProgressWhenCreateEnrollment = functions.region(region).firestore
   .document('enrollments/{enrollmentId}')
   .onCreate(async (snap) => {
     const enrollment = snap.data();
@@ -274,7 +277,7 @@ export const createmoduleProgressWhenCreateEnrollment = functions.region('southa
     }
   });
 
-export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.region('southamerica-east1').firestore
+export const createQuestionnaireAnswerWhenCreateModuleProgress = functions.region(region).firestore
   .document('moduleProgress/{moduleProgressId}')
   .onCreate(async (snap) => {
     const promises = [];

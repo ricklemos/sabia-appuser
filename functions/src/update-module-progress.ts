@@ -1,8 +1,10 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { Lesson } from './models';
+// const region = 'southamerica-east1';
+const region = 'us-central1';
 
-export const updateModuleProgressPercentageWhenUpdateModuleProgress = functions.region('southamerica-east1').firestore
+export const updateModuleProgressPercentageWhenUpdateModuleProgress = functions.region(region).firestore
   .document('moduleProgress/{moduleProgressId}')
   .onUpdate((snap) => {
     const moduleProgressId = snap.after.id;

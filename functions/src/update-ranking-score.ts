@@ -1,7 +1,9 @@
 // Atualiza o Score do enrollment e do moduleProgress quando termina de responder o questionário pela primeira vez
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-export const questionnaireUpdated = functions.region('southamerica-east1').firestore.document('/questionnaireAnswers/{questionnaireId}')
+// const region = 'southamerica-east1';
+const region = 'us-central1';
+export const questionnaireUpdated = functions.region(region).firestore.document('/questionnaireAnswers/{questionnaireId}')
   .onUpdate((snap) => {
     const data = snap.after.data();
     if (data) {
@@ -29,7 +31,7 @@ export const questionnaireUpdated = functions.region('southamerica-east1').fires
   });
 
 // Atualiza o Score do Ranking quando atualiza o enrollment
-export const updateRanking = functions.region('southamerica-east1').firestore.document('/enrollments/{enrollmentId}')
+export const updateRanking = functions.region(region).firestore.document('/enrollments/{enrollmentId}')
   .onUpdate(async (snap) => {
     const data = snap.after.data();
     if (data) {

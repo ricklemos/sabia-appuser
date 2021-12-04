@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {InvestmentModule, InvestmentTreasure} from '../../model/investment-wallet.model';
-import {ActivatedRoute} from '@angular/router';
-import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
-import {UrlService} from '../../../services/url.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { InvestmentModule, InvestmentTreasure } from '../../model/investment-wallet.model';
+import { ActivatedRoute } from '@angular/router';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'investment-wallet-treasure-list',
@@ -13,6 +13,7 @@ export class InvestmentWalletTreasureListComponent implements OnInit {
   @Input() treasureList: InvestmentTreasure[] = [];
   filteredList: InvestmentTreasure[] = [];
   moduleId: InvestmentModule['moduleName'];
+  searchOpen: boolean;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {InvestmentModule, InvestmentPrivateFixedIncome} from '../../model/investment-wallet.model';
-import {ActivatedRoute} from '@angular/router';
-import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
-import {UrlService} from '../../../services/url.service';
-import {PrivateFixedIncomeService} from '../../../services/private-fixed-income.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { InvestmentModule, InvestmentPrivateFixedIncome } from '../../model/investment-wallet.model';
+import { ActivatedRoute } from '@angular/router';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
+import { UrlService } from '../../../services/url.service';
+import { PrivateFixedIncomeService } from '../../../services/private-fixed-income.service';
 
 @Component({
   selector: 'investment-wallet-private-fixed-income-list',
@@ -17,6 +17,7 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
   showList: InvestmentPrivateFixedIncome[] = [];
   moduleId: InvestmentModule['moduleName'];
   productsShowing = 10;
+  searchOpen: boolean;
 
   constructor(
     private route: ActivatedRoute,

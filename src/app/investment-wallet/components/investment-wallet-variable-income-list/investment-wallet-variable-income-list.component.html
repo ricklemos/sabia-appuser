@@ -1,13 +1,13 @@
 <div clCard fxLayout="column" fxLayoutGap="16px">
-  <cl-search
-    placeholder="Digite para pesquisar"
-    [initOpen]="true"
-    [forceOpen]="true"
-    [autoFocus]="false"
-    (cbSearch)="getChanges($event)"
-  ></cl-search>
-  <div clCardTitle>
-    <h2>Produtos</h2>
+  <div clCardTitle fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="16px">
+    <h2 *ngIf="!searchOpen">Produtos</h2>
+    <cl-search
+      (cbSearch)="getChanges($event)"
+      (isOpen)="searchOpen = $event"
+      [autoFocus]="false"
+      fxFlex="100"
+      placeholder="Digite para pesquisar"
+    ></cl-search>
   </div>
   <cl-list-item *ngFor="let stock of filteredList" [action]="true" [routerLink]="getStockUrl(stock)">
     <div fxFlex="60" left>
@@ -19,9 +19,5 @@
       </p>
       <i clIconSmall name="cl-chevron-right"></i>
     </div>
-    <!--    <div *ngIf="product.yield" fxFlex="40" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px" right>-->
-    <!--      <p>{{ product.yield }}</p>-->
-    <!--      <i clIconSmall name="cl-chevron-right"></i>-->
-    <!--    </div>-->
   </cl-list-item>
 </div>

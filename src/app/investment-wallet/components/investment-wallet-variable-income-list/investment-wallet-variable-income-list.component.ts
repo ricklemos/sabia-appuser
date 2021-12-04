@@ -1,12 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {
-  InvestmentModule,
-  InvestmentStock,
-} from '../../model/investment-wallet.model';
-import {UrlService} from '../../../services/url.service';
-import {StocksService} from '../../../services/stocks.service';
-import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
-import {ActivatedRoute} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { InvestmentModule, InvestmentStock, } from '../../model/investment-wallet.model';
+import { UrlService } from '../../../services/url.service';
+import { StocksService } from '../../../services/stocks.service';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'investment-wallet-variable-income-list',
@@ -15,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class InvestmentWalletVariableIncomeListComponent implements OnInit {
   @Input() stockList: InvestmentStock[];
+  searchOpen: boolean;
   filteredList: InvestmentStock[] = [];
   moduleId: InvestmentModule['moduleName'];
 

@@ -1,16 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WalletService } from '../../services/wallet.service';
 import { Router } from '@angular/router';
 import { UrlService } from '../../../services/url.service';
 import {
-  InvestmentModule, InvestmentWallet,
+  InvestmentModule,
+  InvestmentWallet,
   InvestmentWalletPizzaGraphProduct
 } from '../../model/investment-wallet.model';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
-import {switchMap, tap} from 'rxjs/operators';
-import {noop} from 'rxjs';
-import {StocksService} from '../../../services/stocks.service';
-import {TreasureService} from '../../../services/treasure.service';
+import { switchMap, tap } from 'rxjs/operators';
+import { noop } from 'rxjs';
+import { StocksService } from '../../../services/stocks.service';
+import { TreasureService } from '../../../services/treasure.service';
 
 @Component({
   selector: 'investment-wallet-overview-page',
@@ -39,6 +40,14 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
   ) {
     this.investmentModules = [
       {
+        moduleName: 'BALANCE',
+        invested: 0, // in Reais
+        variation: 0, // between 0 and 1
+        label: 'Caixa',
+        color: '#D9D9D9',
+        percentage: 0,
+      },
+      {
         moduleName: 'VARIABLE_INCOME',
         invested: 0, // in Reais
         variation: 0, // between 0 and 1
@@ -62,14 +71,6 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
         color: '#C8EAE8',
         percentage: 0,
       },
-      {
-        moduleName: 'BALANCE',
-        invested: 0, // in Reais
-        variation: 0, // between 0 and 1
-        label: 'Caixa',
-        color: '#D9D9D9',
-        percentage: 0,
-      },
     ];
   }
 
@@ -77,13 +78,13 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
     const fetchSub = this.walletService.fetchUserWallets().pipe(
       switchMap(docs => {
         this.wallet = docs[0];
-        this.investmentModules[3].invested = this.wallet.balance;
+        this.investmentModules[0].invested = this.wallet.balance;
         return this.stocksService.fetchSheetStocks(); // Pega o preço atual das ações para calcular a posição
       }),
       switchMap((stocks) => {
         const stockPrices = stocks.data().stocks;
         const quotasDic = this.walletHelperService.calculateQuotas(this.wallet.stocksEvents);
-        this.investmentModules[0].invested = this.walletHelperService.calculatePosition(quotasDic, stockPrices);
+        this.investmentModules[1].invested = this.walletHelperService.calculatePosition(quotasDic, stockPrices);
         return this.treasureService.fetchAvailableTitles();
       }),
       tap((doc) => {
@@ -95,11 +96,11 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
         Object.keys(treasureQuotas).forEach(key => {
           treasurePosition += treasureQuotas[key] * doc.titles[key].puVendaManha;
         });
-        this.investmentModules[1].invested = treasurePosition;
+        this.investmentModules[2].invested = treasurePosition;
       }),
       tap(() => {
         // Cálculo da posição em renda fixa privada:
-        this.investmentModules[2].invested =
+        this.investmentModules[3].invested =
           this.investmentWalletHelperService.calculatePrivateFixedIncomePosition(this.wallet.privateFixedIncomeEvents);
         // TODO: Antes de fazer essa conta tem que pegar os dados de tesouro direto e renda fixa privada
         this.totalWithoutBalance = 0;
@@ -116,7 +117,7 @@ export class InvestmentWalletOverviewPageComponent implements OnInit, OnDestroy 
             percentage: investmentModule.percentage
           });
         });
-        this.totalWithoutBalance -= this.investmentModules[3].invested;
+        this.totalWithoutBalance -= this.investmentModules[0].invested;
         this.loading = false;
       })
     ).subscribe(noop);

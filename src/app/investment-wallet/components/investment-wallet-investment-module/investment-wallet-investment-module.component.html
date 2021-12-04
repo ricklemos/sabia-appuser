@@ -1,6 +1,6 @@
 <div clCard class="investment-topic__box">
 
-  <div clCardContent fxLayout="row" fxLayoutAlign="space-between center">
+  <div clCardContent fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
 
     <div class="investment-topic__ex-icon" fxLayout="column" fxLayoutAlign="center stretch"
          fxLayoutGap="16px">
@@ -14,14 +14,12 @@
 
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <p>Posição:</p>
-<!--        <div [ngClass]="investmentModule.percentage< 0 ? 'red-700' : 'green-700'"> {{investmentModule.percentage | numeral: 'percentage'}}</div>-->
-        <div [ngClass]="'green-700'"> R$ {{investmentModule.invested | numeral: 'currency'}}</div>
-<!--        <div [ngClass]="'green-700'"> {{investmentModule.percentage | numeral: 'percentage'}}</div>-->
+        <p class="black-alpha-500"> R$ {{investmentModule.invested | numeral: 'currency'}}</p>
       </div>
 
     </div>
 
-    <i clIcon name="cl-chevron-right"></i>
+    <i clIcon class="bg-black-alpha-500-force" name="cl-chevron-right"></i>
 
   </div>
 

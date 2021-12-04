@@ -1,0 +1,17 @@
+<div clCard class="width-100">
+  <div clCardContent fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p>Total Investido</p>
+      <p class="black-alpha-500"> R$ {{invested | numeral: 'currency'}}</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p>Caixa</p>
+      <p class="black-alpha-500"> R$ {{balance | numeral: 'currency'}}</p>
+    </div>
+
+  </div>
+</div>

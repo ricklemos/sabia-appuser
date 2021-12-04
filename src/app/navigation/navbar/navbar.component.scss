@@ -10,8 +10,6 @@
   width: calc(100% - 32px);
 }
 
-p, h3, span{
+p, h3, span, .nav-drawer-link--active .nav-drawer-link__aux {
   font-family: ProximaNova, sans-serif;
 }
-
-

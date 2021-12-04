@@ -38,9 +38,8 @@ export class InvestmentWalletPizzaComponent implements OnInit {
     });
     this.pieChartColors = [
       {
-        // backgroundColor: ['rgba(43,139,135,1)', 'rgba(57,192,186,1)', 'rgba(200,234,232,1)', 'rgba(255,255,255,1)'],
         backgroundColor: this.colorArray,
-        borderColor: 'rgba(0,0,0,1)'
+        borderColor: 'rgba(0,0,0,0.5)'
       }
     ];
   }

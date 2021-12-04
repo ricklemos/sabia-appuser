@@ -13,6 +13,13 @@
   }
 }
 
+.investment-modules {
+  width: 512px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
 h3 {
   font-size: 16px;
   font-family: ProximaNovaSemiBold, sans-serif;

@@ -26,6 +26,7 @@ import { InvestmentWalletVariableIncomeListComponent } from './components/invest
 import { InvestmentWalletTreasureListComponent } from './components/investment-wallet-treasure-list/investment-wallet-treasure-list.component';
 import { InvestmentWalletPrivateFixedIncomeListComponent } from './components/investment-wallet-private-fixed-income-list/investment-wallet-private-fixed-income-list.component';
 import { InvestmentWalletProductPrivateFixedIncomeComponent } from './components/investment-wallet-product-private-fixed-income/investment-wallet-product-private-fixed-income.component';
+import { InvestmentWalletBalanceCardComponent } from './components/investment-wallet-balance-card/investment-wallet-balance-card.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { InvestmentWalletProductPrivateFixedIncomeComponent } from './components
     InvestmentWalletTreasureListComponent,
     InvestmentWalletPrivateFixedIncomeListComponent,
     InvestmentWalletProductPrivateFixedIncomeComponent,
+    InvestmentWalletBalanceCardComponent,
   ],
   imports: [
     CommonModule,

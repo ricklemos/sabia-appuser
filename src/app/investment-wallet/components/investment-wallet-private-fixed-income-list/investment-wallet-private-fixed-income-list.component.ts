@@ -47,12 +47,13 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
     );
     this.showList = this.filteredList.slice(0, this.productsShowing);
   }
-  getProductUrl(product: InvestmentPrivateFixedIncome): string {
+  getProductUrl(): string {
     this.moduleId = this.investmentWalletHelperService.getModuleIdFromSlug(this.route.snapshot.paramMap.get('moduleSlug'));
-    // const productId = product.name.replace(' ', '_');
-    // console.log(productId);
-    this.privateFixedIncomeService.setProduct(product);
     return this.urlService.getInvestmentWalletProductDetails(this.route.snapshot.paramMap.get('moduleSlug'), 'produto-de-banco');
+  }
+  setProduct(product): void {
+    console.log(product);
+    this.privateFixedIncomeService.setProduct(product);
   }
 
   loadMore(): void {

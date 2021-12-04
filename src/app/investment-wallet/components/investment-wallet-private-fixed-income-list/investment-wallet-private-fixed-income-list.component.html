@@ -11,7 +11,7 @@
   </div>
   <div>
     <ng-container *ngFor="let product of showList; let i = index">
-      <cl-list-item [divider]="'middle'" [action]="true" [routerLink]="getProductUrl(product)">
+      <cl-list-item [divider]="'middle'" [action]="true" [routerLink]="getProductUrl()" (click)="setProduct(product)">
         <div fxFlex="60" left>
           <h3>{{ product.name }}</h3>
         </div>

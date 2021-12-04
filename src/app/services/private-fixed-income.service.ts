@@ -7,19 +7,7 @@ import {InvestmentPrivateFixedIncome} from '../investment-wallet/model/investmen
   providedIn: 'root'
 })
 export class PrivateFixedIncomeService {
-  product: InvestmentPrivateFixedIncome = {
-    bank: 'BANCO ABC ',
-    due: '29/01/2023',
-    index: 90,
-    liquidity: 'No Vencimento',
-    minimumInput: 1000,
-    name: 'LCI BANCO ABC - JAN/2023',
-    productType: 'LCI',
-    rating: 'AAA',
-    ratingAgency: null,
-    relativeToPoupanca: '-',
-    yield: 'IPCA + 0.7%',
-  };
+  product: InvestmentPrivateFixedIncome;
   constructor(
     private angularFirestore: AngularFirestore
   ) { }

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  InvestmentPrivateFixedIncome,
   InvestmentProduct,
   InvestmentTreasure,
   InvestmentWallet
@@ -122,35 +121,39 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
   }
 
   private fetchPrivateFixedIncomeProduct(): Observable<any>{
-    return of(this.privateFixedIncomeService.getProduct()).pipe(
-      tap((product: InvestmentPrivateFixedIncome) => {
-        console.log('produto', product);
-        // Calcula o quanto tem do produto sem considerar o rendimento
-        const transactions = this.wallet.privateFixedIncomeEvents.filter(productFilter => productFilter.name === product.name);
-        if (transactions.length > 0){
-          let productBalance = 0;
-          transactions.forEach(transaction => {
-            if (transaction.type === 'BUY'){
-              productBalance += transaction.amount;
-            } else {
-              productBalance -= transaction.amount;
-            }
-          });
-          this.productBalance = productBalance;
-        }
-        // Atribui os dados do produto para visualização
-        this.product = {
-          id: product.name,
-          label: product.name,
-          module: 'FIXED_INCOME',
-          minimumInvestment: product.minimumInput,
-          seller: product.bank,
-          yield: product.yield,
-          unitPrice: product.minimumInput,
-          dueDate: product.due
-        };
-      })
-    );
+    if (this.privateFixedIncomeService.getProduct()) {
+      return of(this.privateFixedIncomeService.getProduct()).pipe(
+        tap(product => {
+          console.log('produto', product);
+          // Calcula o quanto tem do produto sem considerar o rendimento
+          const transactions = this.wallet.privateFixedIncomeEvents.filter(productFilter => productFilter.name === product.name);
+          if (transactions.length > 0) {
+            let productBalance = 0;
+            transactions.forEach(transaction => {
+              if (transaction.type === 'BUY') {
+                productBalance += transaction.amount;
+              } else {
+                productBalance -= transaction.amount;
+              }
+            });
+            this.productBalance = productBalance;
+          }
+          // Atribui os dados do produto para visualização
+          this.product = {
+            id: product.name,
+            label: product.name,
+            module: 'FIXED_INCOME',
+            minimumInvestment: product.minimumInput,
+            seller: product.bank,
+            yield: product.yield,
+            unitPrice: product.minimumInput,
+            dueDate: product.due
+          };
+        })
+      );
+    } else {
+      this.router.navigate([this.urlService.getInvestmentWalletModule('renda-fixa')]);
+    }
   }
 
   ngOnDestroy(): void {

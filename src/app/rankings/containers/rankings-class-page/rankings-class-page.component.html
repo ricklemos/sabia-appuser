@@ -6,13 +6,13 @@
   </div>
 
   <div class="ranking-page" *ngIf="loading" fxLayout="column" fxLayoutAlign="center stretch">
-    <mat-spinner></mat-spinner>
+    <mat-spinner diameter="40"></mat-spinner>
   </div>
 
   <div *ngIf="!loading" class="ranking-page" fxLayout="column" fxLayoutGap="16px">
     <div fxLayout="column" fxLayoutGap="8px">
       <h1>{{ classRanking.courseName }}</h1>
-      <h2>{{ classRanking.schoolName }}</h2>
+      <h2>{{ classRanking.institutionName }}</h2>
       <p>{{ classRanking.classroomName }}</p>
     </div>
     <div clCard class="course-box" fxLayout="column" fxLayoutAlign="center stretch">

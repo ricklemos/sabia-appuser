@@ -5,7 +5,7 @@
       <i clIcon name="cl-plus"></i>
     </button>
     <div fxLayout="column" fxLayoutAlign="center center" *ngIf="loadingClassrooms">
-      <mat-spinner></mat-spinner>
+      <mat-spinner diameter="40"></mat-spinner>
     </div>
     <div *ngIf="!loadingClassrooms" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="16px">
       <div *ngFor="let classroom of classrooms">

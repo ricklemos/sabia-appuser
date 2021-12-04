@@ -1,8 +1,5 @@
 <navbar barTitle="Carteira de Investimentos">
-
-  <div *ngIf="loading" class="width-100 height-100" fxLayout="column" fxLayoutAlign="center">
-    <mat-spinner></mat-spinner>
-  </div>
+  <mat-spinner *ngIf="loading" diameter="40"></mat-spinner>
 
   <div *ngIf="!loading" class="investment-topic__background" fxLayout="column" fxLayoutAlign="center center"
        fxLayoutGap="16px">

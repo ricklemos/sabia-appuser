@@ -7,6 +7,7 @@
   </div>
   <div class="products-page" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="24px"
        fxLayoutGap.lt-md="16px">
+    <mat-spinner *ngIf="loading" diameter="40"></mat-spinner>
     <ng-container *ngIf="!loading">
       <investment-wallet-myproducts-card [products]="myProducts"></investment-wallet-myproducts-card>
       <investment-wallet-variable-income-list

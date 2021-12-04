@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { InvestmentWalletDialogService } from '../../services/investment-wallet-dialog.service';
 
 @Component({
   selector: 'investiment-wallet-buy-and-sell',
@@ -12,29 +13,45 @@ export class InvestmentWalletBuyAndSellComponent implements OnInit {
   quota: number;
   @Output() transactionRequired = new EventEmitter<any>();
 
-  formConfig = [{
-    type: 'input',
-    inputType: 'number',
-    label: 'Cotas',
-    placeholder: '0',
-    name: 'cotas',
-    hint: 'Número de cotas a comprar ou vender',
-  }];
+  formConfig;
 
-  constructor() {
+  constructor(
+    private investmentWalletDialogService: InvestmentWalletDialogService
+  ) {
+    this.setForm();
     this.result = 0;
   }
 
   ngOnInit(): void {
   }
+
   changes($event: any): void {
     this.quota = $event.cotas;
     this.result = this.price * this.quota;
   }
-  sell(): void {
-    this.transactionRequired.emit({type: 'SELL', quota: this.quota});
+
+  trade(type: 'SELL' | 'BUY'): void {
+    const tradeInfo = { type, quota: this.quota };
+    if (!this.quota) {
+      this.transactionRequired.emit(tradeInfo);
+    } else {
+      const confirmDialog = this.investmentWalletDialogService.openConfirmTradeDialog(tradeInfo);
+      confirmDialog.afterClosed().subscribe(response => {
+        if (response) {
+          this.transactionRequired.emit(tradeInfo);
+        }
+      });
+    }
   }
-  buy(): void {
-    this.transactionRequired.emit({type: 'BUY', quota: this.quota});
+
+  private setForm(): void {
+    this.formConfig = [{
+      type: 'input',
+      inputType: 'number',
+      label: 'Cotas',
+      placeholder: '0',
+      name: 'cotas',
+      hint: 'Número de cotas a comprar ou vender',
+    }];
   }
 }

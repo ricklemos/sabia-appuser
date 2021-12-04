@@ -12,10 +12,10 @@
       <h3>R$ {{ result | numeral: 'currency' }}</h3>
     </div>
     <div class="buy-sell__buttons" fxLayout="row" fxLayoutGap="8px">
-      <div clButtonContainedSecondary class="buy-sell__redeem" (click)="sell()">
+      <div (click)="trade('SELL')" clButtonContainedSecondary class="buy-sell__redeem">
         <span>Resgatar</span>
       </div>
-      <div clButtonContained class="buy-sell__invest" (click)="buy()">
+      <div (click)="trade('BUY')" clButtonContained class="buy-sell__invest">
         <span>Investir</span>
       </div>
     </div>

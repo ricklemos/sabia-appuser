@@ -28,6 +28,7 @@ import { InvestmentWalletPrivateFixedIncomeListComponent } from './components/in
 import { InvestmentWalletProductPrivateFixedIncomeComponent } from './components/investment-wallet-product-private-fixed-income/investment-wallet-product-private-fixed-income.component';
 import { InvestmentWalletBalanceCardComponent } from './components/investment-wallet-balance-card/investment-wallet-balance-card.component';
 import { InvestmentWalletSeriesGraphComponent } from './components/investment-wallet-series-graph/investment-wallet-series-graph.component';
+import { InvestmentWalletDialogConfirmTradeComponent } from './dialogs/investment-wallet-dialog-confirm-trade/investment-wallet-dialog-confirm-trade.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { InvestmentWalletSeriesGraphComponent } from './components/investment-wa
     InvestmentWalletProductPrivateFixedIncomeComponent,
     InvestmentWalletBalanceCardComponent,
     InvestmentWalletSeriesGraphComponent,
+    InvestmentWalletDialogConfirmTradeComponent,
   ],
   imports: [
     CommonModule,

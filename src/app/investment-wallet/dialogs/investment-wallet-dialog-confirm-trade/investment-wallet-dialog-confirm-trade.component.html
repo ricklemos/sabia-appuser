@@ -1,0 +1,18 @@
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <h3>Confirmar</h3>
+      <p>Você quer mesmo
+        {{ data.type === 'BUY' ? 'comprar' : 'vender' }} {{ data.quota }} {{ data.quota === 1 ? 'cota' : 'cotas' }}
+        desse produto?</p>
+    </div>
+    <div class="buttons" fxLayout="row" fxLayoutGap="8px">
+      <button (click)="onClose(true)" clButtonContainedSecondary class="confirm">
+        <span>Confirmar</span>
+      </button>
+      <button (click)="onClose()" clButtonContainedSecondary class="cancel">
+        <span>Cancelar</span>
+      </button>
+    </div>
+  </div>
+</div>

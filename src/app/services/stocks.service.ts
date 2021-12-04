@@ -78,8 +78,8 @@ export class StocksService {
   // Retorna um objeto com os dados históricos da ação (preço, volume, variação diária)
   // Em tese, não deve ser utilizado, pois esses dados devem vir do firebase
   fetchStockHistoryByTicker(ticker: string): Observable<any>{
-    return this.httpClient.get(`${this.alphaVantageBaseURL}
-    /query?=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}.SAO&apikey=${this.API_KEY}`);
+    const url = `${this.alphaVantageBaseURL}/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=compact&symbol=${ticker}.SAO&apikey=${this.API_KEY}`;
+    return this.httpClient.get(url);
   }
   // Retorna um objeto com os dados atuais da ação (preço, volume, variação diária)
   fetchStockStatusByTicker(ticker: string): Observable<any>{

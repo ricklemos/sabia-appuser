@@ -1,0 +1,19 @@
+<div *ngIf="lineChartData[0].data.length !== 0" fxLayout="column" fxLayoutAlign="stretch center" fxLayoutGap="16px">
+  <canvas baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+  </canvas>
+  <cl-form-component
+    [formConfig]="chipConfig"
+    (changes)="changePeriod($event)">
+  </cl-form-component>
+</div>
+
+
+
+

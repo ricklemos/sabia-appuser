@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InvestmentModule, InvestmentPrivateFixedIncome, InvestmentTreasure} from '../../model/investment-wallet.model';
+import {InvestmentModule, InvestmentPrivateFixedIncome} from '../../model/investment-wallet.model';
 import {ActivatedRoute} from '@angular/router';
 import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
 import {UrlService} from '../../../services/url.service';
@@ -14,7 +14,9 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
 
   @Input() privateFixedIncomeList: InvestmentPrivateFixedIncome[] = [];
   filteredList: InvestmentPrivateFixedIncome[] = [];
+  showList: InvestmentPrivateFixedIncome[] = [];
   moduleId: InvestmentModule['moduleName'];
+  productsShowing = 10;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +26,15 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showList = this.privateFixedIncomeList.slice(0, this.productsShowing);
     this.filteredList = this.privateFixedIncomeList;
   }
 
   getChanges($event: any): void {
     if ($event === ''){
       this.filteredList = this.privateFixedIncomeList;
+      this.showList = this.privateFixedIncomeList.slice(0, this.productsShowing);
+      this.productsShowing = 10;
       return;
     }
     const textToSearch = $event.toUpperCase();
@@ -40,6 +45,7 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
         || title.productType.toUpperCase().includes(textToSearch)
       )
     );
+    this.showList = this.filteredList.slice(0, this.productsShowing);
   }
   getProductUrl(product: InvestmentPrivateFixedIncome): string {
     this.moduleId = this.investmentWalletHelperService.getModuleIdFromSlug(this.route.snapshot.paramMap.get('moduleSlug'));
@@ -49,4 +55,8 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
     return this.urlService.getInvestmentWalletProductDetails(this.route.snapshot.paramMap.get('moduleSlug'), 'produto-de-banco');
   }
 
+  loadMore(): void {
+    this.productsShowing += 10;
+    this.showList = this.filteredList.slice(0, this.productsShowing);
+  }
 }

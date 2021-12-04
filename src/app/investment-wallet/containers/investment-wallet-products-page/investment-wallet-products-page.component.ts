@@ -20,7 +20,6 @@ import {PrivateFixedIncomeService} from '../../../services/private-fixed-income.
   styleUrls: ['./investment-wallet-products-page.component.scss']
 })
 export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy {
-
   productList: InvestmentProductList;
   wallet: InvestmentWallet;
   myProducts: InvestmentProduct[] = [];

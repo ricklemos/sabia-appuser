@@ -9,18 +9,24 @@
   <div clCardTitle>
     <h2>Produtos</h2>
   </div>
-  <ng-container *ngFor="let product of filteredList; let i = index">
-    <cl-list-item [divider]="i !== filteredList.length - 1 ? 'middle' : null" [action]="true" [routerLink]="getProductUrl(product)">
-      <div fxFlex="60" left>
-        <h3>{{ product.name }}</h3>
-      </div>
-      <div fxFlex="30" fxLayout="column" fxLayoutAlign="end" fxLayoutGap="8px" right>
-        <p>Rentabilidade</p>
-        <p>+ {{ product.yield }}</p>
-      </div>
-      <div fxFlex="10" right>
-        <i clIconSmall name="cl-chevron-right"></i>
-      </div>
-    </cl-list-item>
-  </ng-container>
+  <div>
+    <ng-container *ngFor="let product of showList; let i = index">
+      <cl-list-item [divider]="'middle'" [action]="true" [routerLink]="getProductUrl(product)">
+        <div fxFlex="60" left>
+          <h3>{{ product.name }}</h3>
+        </div>
+        <div fxFlex="30" fxLayout="column" fxLayoutAlign="end" fxLayoutGap="8px" right>
+          <p>Rentabilidade</p>
+          <p>+ {{ product.yield }}</p>
+        </div>
+        <div fxFlex="10" right>
+          <i clIconSmall name="cl-chevron-right"></i>
+        </div>
+      </cl-list-item>
+    </ng-container>
+    <button clButton *ngIf="productsShowing < filteredList.length" (click)="loadMore()">
+      <span>Carregar mais</span>
+    </button>
+    <h3 class="product-list-info" *ngIf="productsShowing >= filteredList.length">{{ filteredList.length }} produtos encontrados</h3>
+  </div>
 </div>

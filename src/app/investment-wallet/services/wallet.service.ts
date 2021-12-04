@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionsLoginService } from '../../sessions/services/sessions-login.service';
 import * as firebase from 'firebase/app';
-import {
-  InvestmentPrivateFixedIncome,
-  InvestmentProduct,
-  InvestmentTreasure,
-  InvestmentWallet
-} from '../model/investment-wallet.model';
-import {Observable} from 'rxjs';
+import { InvestmentPrivateFixedIncome, InvestmentTreasure, InvestmentWallet } from '../model/investment-wallet.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +65,6 @@ export class WalletService {
     );
   }
   tradePrivateFixedIncomeProduct(type: 'BUY' | 'SELL', product: InvestmentPrivateFixedIncome, quotas: number): Promise<any>{
-    console.log('produto pro trade', product);
     return this.firestore.doc(`simulatorWallet/${ this.wallet.walletId }`).update(
       {
         balance: type === 'BUY' ? this.wallet.balance - product.minimumInput * quotas : this.wallet.balance + product.minimumInput * quotas,

@@ -53,7 +53,6 @@ export class InvestmentWalletPrivateFixedIncomeListComponent implements OnInit {
     return this.urlService.getInvestmentWalletProductDetails(this.route.snapshot.paramMap.get('moduleSlug'), 'produto-de-banco');
   }
   setProduct(product): void {
-    console.log(product);
     this.privateFixedIncomeService.setProduct(product);
   }
 

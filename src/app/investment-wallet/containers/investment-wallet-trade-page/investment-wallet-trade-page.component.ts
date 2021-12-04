@@ -1,20 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  InvestmentProduct,
-  InvestmentTreasure,
-  InvestmentWallet
-} from '../../model/investment-wallet.model';
+import { InvestmentProduct, InvestmentTreasure, InvestmentWallet } from '../../model/investment-wallet.model';
 import { InvestmentWalletMockService } from '../../services/investment-wallet-mock.service';
 import { UrlService } from '../../../services/url.service';
 import { StocksService } from '../../../services/stocks.service';
-import {noop, Observable, of, Subscription} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
+import { noop, Observable, of, Subscription } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
-import {WalletService} from '../../services/wallet.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {TreasureService} from '../../../services/treasure.service';
-import {PrivateFixedIncomeService} from '../../../services/private-fixed-income.service';
+import { WalletService } from '../../services/wallet.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TreasureService } from '../../../services/treasure.service';
+import { PrivateFixedIncomeService } from '../../../services/private-fixed-income.service';
 
 @Component({
   selector: 'investment-wallet-trade-page',
@@ -74,9 +70,7 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     return this.stocksService.fetchSheetStocks().pipe(
       tap(req => {
         const data = req.data();
-        console.log(this.productId);
         const [obj] = data.stocks.filter(stock => stock.ticker === this.productId);
-        console.log(obj);
         this.product = {
           id: this.productId,
           module: 'VARIABLE_INCOME',
@@ -85,7 +79,6 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
         };
         const stockTransactions = this.wallet.stocksEvents.filter(stock => stock.ticker === this.productId);
         this.quotasAvailableToSell = this.investmentWalletHelperService.calculateTickerQuotas(stockTransactions);
-        console.log('count', this.quotasAvailableToSell);
         this.productBalance = this.product.variableIncomeData.currentPrice * this.quotasAvailableToSell;
       })
     );
@@ -94,7 +87,6 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     return this.treasureService.fetchAvailableTitles().pipe(
       switchMap((availableTitles) => {
         const titleDetails: InvestmentTreasure = availableTitles.titles[this.productId];
-        console.log(titleDetails);
         const dueDate =  titleDetails.vencimento.substr(8, 2) + '/'
           + titleDetails.vencimento.substr(5, 2) + '/'
           + titleDetails.vencimento.substr(0, 4);
@@ -115,7 +107,6 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
       }),
       tap((title) => {
         // TODO: aqui podemos usar os dados históricos do título pra mostrar em um gráfico .
-        console.log(title);
       })
     );
   }
@@ -124,7 +115,6 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
     if (this.privateFixedIncomeService.getProduct()) {
       return of(this.privateFixedIncomeService.getProduct()).pipe(
         tap(product => {
-          console.log('produto', product);
           // Calcula o quanto tem do produto sem considerar o rendimento
           const transactions = this.wallet.privateFixedIncomeEvents.filter(productFilter => productFilter.name === product.name);
           if (transactions.length > 0) {
@@ -204,14 +194,14 @@ export class InvestmentWalletTradePageComponent implements OnInit, OnDestroy {
           .then(() => {
             this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
           });
-        break; // ????
+        break;
       case 'FIXED_INCOME':
         // TODO: aqui talvez tenha que alterar da onde vem o produto
         this.walletService.tradePrivateFixedIncomeProduct($event.type, this.privateFixedIncomeService.getProduct(), quotas)
           .then(() => {
             this.matSnackBar.open('Operação realizada com sucesso', 'OK', { duration: 3000 });
           });
-        break; // ????
+        break;
       default:
         console.log('erro');
     }

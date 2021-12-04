@@ -1,18 +1,19 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UrlService } from '../../../services/url.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   InvestmentModule,
-  InvestmentProduct, InvestmentProductList,
+  InvestmentProduct,
+  InvestmentProductList,
   InvestmentWallet
 } from '../../model/investment-wallet.model';
-import {switchMap, tap} from 'rxjs/operators';
-import {noop, Observable, of} from 'rxjs';
-import {StocksService} from '../../../services/stocks.service';
-import {WalletService} from '../../services/wallet.service';
-import {InvestmentWalletHelperService} from '../../services/investment-wallet-helper.service';
-import {TreasureService} from '../../../services/treasure.service';
-import {PrivateFixedIncomeService} from '../../../services/private-fixed-income.service';
+import { switchMap, tap } from 'rxjs/operators';
+import { noop, Observable, of } from 'rxjs';
+import { StocksService } from '../../../services/stocks.service';
+import { WalletService } from '../../services/wallet.service';
+import { InvestmentWalletHelperService } from '../../services/investment-wallet-helper.service';
+import { TreasureService } from '../../../services/treasure.service';
+import { PrivateFixedIncomeService } from '../../../services/private-fixed-income.service';
 
 @Component({
   selector: 'investment-wallet-products-page',
@@ -73,7 +74,6 @@ export class InvestmentWalletProductsPageComponent implements OnInit, OnDestroy 
             stockList: req.data().stocks,
             type: this.moduleId
           };
-          console.log(this.productList);
           this.myProducts = this.investmentWalletHelperService.calculateProducts(this.wallet.stocksEvents, this.productList.stockList);
         }
       })

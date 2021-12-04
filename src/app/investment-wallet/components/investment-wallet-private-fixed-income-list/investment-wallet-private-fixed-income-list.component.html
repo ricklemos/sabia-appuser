@@ -9,24 +9,32 @@
       placeholder="Digite para pesquisar"
     ></cl-search>
   </div>
-  <div>
-    <ng-container *ngFor="let product of showList; let i = index">
-      <cl-list-item [divider]="'middle'" [action]="true" [routerLink]="getProductUrl()" (click)="setProduct(product)">
-        <div fxFlex="60" left>
-          <h3>{{ product.name }}</h3>
-        </div>
-        <div fxFlex="30" fxLayout="column" fxLayoutAlign="end" fxLayoutGap="8px" right>
-          <p>Rentabilidade</p>
-          <p>+ {{ product.yield }}</p>
-        </div>
-        <div fxFlex="10" right>
-          <i clIconSmall name="cl-chevron-right"></i>
-        </div>
-      </cl-list-item>
-    </ng-container>
-    <button clButton *ngIf="productsShowing < filteredList.length" (click)="loadMore()">
-      <span>Carregar mais</span>
-    </button>
-    <h3 class="product-list-info" *ngIf="productsShowing >= filteredList.length">{{ filteredList.length }} produtos encontrados</h3>
+  <div fxLayout="column" fxLayoutAlign="start">
+    <cl-list-item (click)="setProduct(product)"
+                  *ngFor="let product of showList; let i = index"
+                  [action]="true"
+                  [divider]="'middle'"
+                  [routerLink]="getProductUrl()">
+      <div fxFlex="60" left>
+        <h3>{{ product.name }}</h3>
+      </div>
+      <div fxFlex="30" fxLayout="column" fxLayoutAlign="end" fxLayoutGap="8px" right>
+        <p>Rentabilidade</p>
+        <p>+ {{ product.yield }}</p>
+      </div>
+      <div fxFlex="10" right>
+        <i clIconSmall name="cl-chevron-right"></i>
+      </div>
+    </cl-list-item>
+    <div class="load-more" fxLayout="row" fxLayoutAlign="center">
+      <button (click)="loadMore()"
+              *ngIf="productsShowing < filteredList.length"
+              clButton>
+        <span>Carregar mais</span>
+      </button>
+    </div>
+    <h3 *ngIf="productsShowing >= filteredList.length" class="product-list-info">
+      {{ filteredList.length }} produtos encontrados
+    </h3>
   </div>
 </div>

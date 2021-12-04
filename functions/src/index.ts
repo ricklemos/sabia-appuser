@@ -23,8 +23,8 @@ export const createQuestionnaireAnswerWhenCreateModuleProgress = createEnrollmen
 export const questionnaireUpdated = updateRankingScore.questionnaireUpdated;
 export const updateRanking = updateRankingScore.updateRanking;
 
-// Funções de administração de papéis
-export const setStudentRole = authentication.setStudentRoleOnCreate;
+// Funções de administração de papéis e gatilhos de quando há criação de conta
+export const setStudentRoleAndCreateWallet = authentication.setStudentRoleOnCreateAndCreateWallet;
 export const setRole = authentication.setRole;
 export const setRoleOnUpdateUsers = authentication.setRoleOnUpdateUsers;
 

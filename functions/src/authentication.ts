@@ -12,7 +12,7 @@ async function createUserWallet(userId: string): Promise<any> {
 }
 
 // Essa função atribui o papel de estudante para todos os novos usuários
-export const setStudentRoleOnCreate = functions.region('southamerica-east1')
+export const setStudentRoleOnCreateAndCreateWallet = functions.region('southamerica-east1')
   .auth.user().onCreate((user) => {
     const p1 = createUserWallet(user.uid);
     const p2 = admin.auth().setCustomUserClaims(user.uid, {

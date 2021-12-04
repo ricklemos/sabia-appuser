@@ -1,6 +1,11 @@
 @import "~collact-design-system/styles/colors";
 @import "/src/assets/styles/profile.style";
 
+:host {
+  width: 100%;
+  max-width: 512px;
+}
+
 .buy-sell {
   padding: 8px;
 

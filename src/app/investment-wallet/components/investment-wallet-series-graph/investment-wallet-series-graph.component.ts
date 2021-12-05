@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Color} from 'ng2-charts';
-import {StocksService} from '../../../services/stocks.service';
-import {noop} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import { Component, Input, OnInit } from '@angular/core';
+import { Color } from 'ng2-charts';
+import { StocksService } from '../../../services/stocks.service';
+import { noop } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { ChartType } from 'chart.js';
 
 @Component({
   selector: 'investment-wallet-series-graph',
@@ -15,13 +16,10 @@ export class InvestmentWalletSeriesGraphComponent implements OnInit {
   prices = [];
   lineChartData = [
     { data: [], label: '' },
-    // { data: [], label: '' , yAxisID: 'y-axis-1'},
   ];
   lineChartLabels = [];
   lineChartOptions = {
     responsive: true,
-    // borderJoinStyle: 'bevel',
-    // borderCapStyle: 'square',
     scales: {
       xAxes: [{
         display: false,
@@ -37,31 +35,18 @@ export class InvestmentWalletSeriesGraphComponent implements OnInit {
             drawOnChartArea: false
           }
         },
-        // {
-        //   id: 'y-axis-1',
-        //   position: 'right',
-        //   gridLines: {
-        //     drawOnChartArea: false
-        //   },
-        //   ticks: {
-        //     fontColor: 'red',
-        //   }
-        // }
       ]
     }
   };
   lineChartColors: Color[] = [
     {
-      // borderColor: '#2E3037',
       borderColor: 'rgba(57,192,186,1)',
       backgroundColor: 'rgba(57,192,186,0.5)',
-      // pointBorderColor: 'rgba(0,0,0,0)',
-      // pointBackgroundColor: 'rgba(0,0,0,0)'
     },
   ];
   lineChartLegend = false;
   lineChartPlugins = [];
-  lineChartType = 'line';
+  lineChartType: ChartType = 'line';
   chipConfig = [
     {
       type: 'chip',

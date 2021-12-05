@@ -1,0 +1,14 @@
+<div clCard>
+  <div clCardContent fxLayout="column" fxLayoutGap="16px">
+    <h3>Previsão:</h3>
+    <canvas [chartType]="lineChartType"
+            [colors]="lineChartColors"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [legend]="lineChartLegend"
+            [options]="lineChartOptions"
+            [plugins]="lineChartPlugins"
+            baseChart>
+    </canvas>
+  </div>
+</div>

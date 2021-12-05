@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InvestmentWalletDialogService } from '../../services/investment-wallet-dialog.service';
+import { InvestmentProduct } from '../../model/investment-wallet.model';
 
 @Component({
   selector: 'investiment-wallet-buy-and-sell',
@@ -8,7 +9,8 @@ import { InvestmentWalletDialogService } from '../../services/investment-wallet-
 })
 export class InvestmentWalletBuyAndSellComponent implements OnInit {
 
-  @Input() price: number;
+  @Input() product: InvestmentProduct;
+  prediction = false;
   result: number;
   quota: number;
   @Output() transactionRequired = new EventEmitter<any>();
@@ -23,11 +25,12 @@ export class InvestmentWalletBuyAndSellComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.prediction = this.product.label.includes('Prefixado');
   }
 
   changes($event: any): void {
     this.quota = $event.cotas;
-    this.result = this.price * this.quota;
+    this.result = this.product.unitPrice * this.quota;
   }
 
   trade(type: 'SELL' | 'BUY'): void {

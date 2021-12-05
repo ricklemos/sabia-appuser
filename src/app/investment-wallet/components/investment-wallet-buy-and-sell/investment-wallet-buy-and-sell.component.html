@@ -11,6 +11,8 @@
       <h3>Valor resultante: </h3>
       <h3>R$ {{ result | numeral: 'currency' }}</h3>
     </div>
+    <investment-wallet-fixed-income-prediction *ngIf="prediction && quota" [product]="product"
+                                               [quota]="quota"></investment-wallet-fixed-income-prediction>
     <div class="buy-sell__buttons" fxLayout="row" fxLayoutGap="8px">
       <div (click)="trade('SELL')" clButtonContainedSecondary class="buy-sell__redeem">
         <span>Resgatar</span>

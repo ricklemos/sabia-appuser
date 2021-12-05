@@ -4,8 +4,8 @@ import * as admin from 'firebase-admin';
 const region = 'us-central1';
 
 async function createUserWallet(userId: string): Promise<any> {
-  return admin.firestore().collection('simulatorWallet').add({
-    balance: 1000,
+  return admin.firestore().collection('simulatorWallet').doc(userId).create({
+    balance: 100000,
     privateFixedIncomeEvents: [],
     publicFixedIncomeEvents: [],
     stocksEvents: [],

@@ -25,6 +25,7 @@ export class WalletService {
 
   setWallet(wallet): void {
     this.wallet = wallet;
+    this.wallet.walletId = this.sessionService.getUserId();
   }
 
   // Atualiza documento da carteira com informações de COMPRA e VENDA de ações. Demora para atualizar.

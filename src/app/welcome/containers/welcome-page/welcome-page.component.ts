@@ -38,6 +38,6 @@ export class WelcomePageComponent implements OnInit {
     ).subscribe(noop);
   }
   start(): void {
-    this.router.navigate([this.urlService.getWelcomeCoursesPage()]);
+    this.router.navigate([this.urlService.getHome()]);
   }
 }

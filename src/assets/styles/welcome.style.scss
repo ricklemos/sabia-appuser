@@ -22,15 +22,25 @@ p {
 }
 
 .welcome {
-  &__loading{
+  margin-top: 32px;
+  padding: 16px;
+  height: 400px;
+  width: 100%;
+
+  &__loading {
     padding: 16px;
   }
-  &__courses{
+
+  &__button {
+    max-width: 375px;
+  }
+
+  &__courses {
     height: 100vh;
     padding: 16px;
     background-color: #39C0BA;
 
-    &__header{
+    &__header {
       text-align: center;
       margin-top: 32px;
       max-width: 600px;
@@ -42,9 +52,6 @@ p {
       max-width: 600px;
     }
   }
-  margin-top: 32px;
-  padding: 16px;
-  max-width: 600px;
 }
 
 

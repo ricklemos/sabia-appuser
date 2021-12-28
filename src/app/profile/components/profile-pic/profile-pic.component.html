@@ -2,7 +2,7 @@
   <img [src]="pictureLink | async"
        [style.width.px]="width"
        [style.height.px]="width"
-       [style.border-radius.px]="borderRadius"
+       [style.border-radius.%]="borderRadius"
        alt="foto de perfil"
        onerror="this.src='./../../../assets/img/profile-pic-std.png'"
   >

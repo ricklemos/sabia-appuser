@@ -5,7 +5,7 @@
       <div>
         <label for="updatePicInput">
           <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
-          <profile-pic *ngIf="!uploading && !deleting"></profile-pic>
+          <profile-pic *ngIf="!uploading && !deleting" [width]="130"></profile-pic>
           <span *ngIf="!uploading" class="edit-pic" fxLayout="row" fxLayoutAlign="center center">
             <i clIcon color="rgba(255, 255, 255, 0.7)" name="cl-edit"></i>
           </span>

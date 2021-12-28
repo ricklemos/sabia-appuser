@@ -4,7 +4,7 @@
     <div class="profilePicContainer" fxLayout="column" fxLayoutAlign="center center" padding="2px">
       <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
       <!--Caso queira carregar somente a foto do usuário logado, não é necessário passar nenhum parâmetro -->
-      <profile-pic></profile-pic>
+      <profile-pic [width]="130"></profile-pic>
     </div>
 
     <div class="nameTitle">{{ firstName + ' ' + lastName }}</div>

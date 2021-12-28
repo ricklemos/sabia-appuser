@@ -3,3 +3,17 @@
 cl-form-component ::ng-deep {
   width: auto !important;
 }
+
+label {
+  position: relative;
+}
+
+.edit-pic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 130px;
+  width: 130px;
+  border-radius: 65px;
+}

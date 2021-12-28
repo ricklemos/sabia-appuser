@@ -6,25 +6,22 @@
         <label for="updatePicInput">
           <!--Para usar o componente profile pic, basta passar o uid do usuário como um parâmetro que ele irá carregar a foto -->
           <profile-pic *ngIf="!uploading && !deleting"></profile-pic>
+          <span *ngIf="!uploading" class="edit-pic" fxLayout="row" fxLayoutAlign="center center">
+            <i clIcon color="rgba(255, 255, 255, 0.7)" name="cl-edit"></i>
+          </span>
         </label>
         <input type="file" hidden (change)="updatePic($event)" id="updatePicInput">
 
-        <mat-progress-spinner mode="determinate" [value]="uploadProgress" *ngIf="uploading"></mat-progress-spinner>
-        <p *ngIf="uploading">{{ uploadProgress }} %</p>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <mat-progress-spinner *ngIf="uploading" [value]="uploadProgress" mode="determinate"></mat-progress-spinner>
+          <p *ngIf="uploading">{{ uploadProgress }} %</p>
+        </div>
       </div>
 
-      <div fxLayout="row" fxLayoutGap="16px" fxLayoutGap.xs="8px">
-        <label for="updatePicInput" fxFlex="50">
-          <button clButtonContainedSecondary>
-            <i clIcon name="cl-edit"></i>
-            <span>Alterar foto</span>
-          </button>
-        </label>
-        <button clButtonContainedSecondary (click)="deletePic()">
-          <i clIcon name="cl-delete"></i>
-          <span>Excluir foto</span>
-        </button>
-      </div>
+      <button (click)="deletePic()" clButtonContainedSecondary>
+        <i clIcon name="cl-delete"></i>
+        <span>Excluir foto</span>
+      </button>
 
     </div>
     <div class="Forms">

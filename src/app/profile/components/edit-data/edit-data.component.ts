@@ -20,7 +20,7 @@ export class EditDataComponent implements OnInit, OnDestroy {
   firstName: string;
   lastName: string;
   gender: string;
-  email:  string;
+  email: string;
   loading = false;
   unsubscribe = [];
 

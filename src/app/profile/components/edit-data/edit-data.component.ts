@@ -70,12 +70,14 @@ export class EditDataComponent implements OnInit, OnDestroy {
   edit(): void {
     if (this.formValid) {
       this.loading = true;
-      this.modifyUserDataService.editAll(
-        this.firstName,
-        this.lastName,
-        this.gender,
-        this.email
-      );
+      if (this.firstName || this.lastName || this.gender || this.email){
+        this.modifyUserDataService.editAll(
+          this.firstName,
+          this.lastName,
+          this.gender,
+          this.email
+        );
+      }
       this.router.navigate([this.urlService.getProfileUrl()]);
     }
   }

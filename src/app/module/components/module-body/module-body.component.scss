@@ -2,11 +2,20 @@
 
 .trackline {
   background-color: #2E3037;
-  height: 32px;
+  height: 20px;
+  width: 2px;
+  margin-left: 19px;
+}
+.trackline-hidden {
+  background-color: rgba(0,0,0,0);
+  height: 20px;
   width: 2px;
   margin-left: 19px;
 }
 
-.button_container{
+.button-container{
   cursor: pointer;
+}
+
+.badge-container{
 }

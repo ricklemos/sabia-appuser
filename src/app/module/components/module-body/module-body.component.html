@@ -13,18 +13,23 @@
     </div>
   </div>
 
-  <div class="module__path" fxLayout="column" fxLayoutAlign="space-around start">
+  <div class="module__path" fxLayout="column" fxLayoutAlign="space-around stretch">
     <div *ngFor="let lesson of lessons; let i = index">
-      <div *ngIf="i != 0" class="trackline"></div>
-      <div (click)="startLesson(lesson)" class="button_container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-        <div clBadgeOutline [diameter]="40" bgColor="#2E3037" *ngIf="lesson.complete">
-          <i clIcon name="cl-correct-focus"></i>
-        </div>
-        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'QUESTIONNAIRE'">
-          <i clIcon name="cl-edit"></i>
-        </div>
-        <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'TEXT'">
-          <i clIcon name="cl-univerity"></i>
+      <div (click)="startLesson(lesson)" class="button-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <div class="badge-container">
+          <div *ngIf="i != 0" class="trackline"></div>
+          <div *ngIf="i == 0" class="trackline-hidden"></div>
+          <div clBadgeOutline [diameter]="40" bgColor="#2E3037" *ngIf="lesson.complete">
+            <i clIcon name="cl-correct-focus"></i>
+          </div>
+          <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'QUESTIONNAIRE'">
+            <i clIcon name="cl-edit"></i>
+          </div>
+          <div clBadgeOutline [diameter]="40" bgColor="#F0F0F0" borderColor="#2E3037" *ngIf="!lesson.complete && lesson.lessonType === 'TEXT'">
+            <i clIcon name="cl-univerity"></i>
+          </div>
+          <div *ngIf="i != lessons.length-1" class="trackline"></div>
+          <div *ngIf="i == lessons.length-1" class="trackline-hidden"></div>
         </div>
         <p>{{ lesson.lessonName }}</p>
       </div>
